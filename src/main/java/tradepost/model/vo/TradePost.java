@@ -12,7 +12,7 @@ public class TradePost implements java.io.Serializable {
 	private int likeNo;
 	private int replyNO;
 	private Date postDate;
-	private Date lastModifieddate;
+	private Date lastModifiedDate;
 	public TradePost() {
 		super();
 	}
@@ -26,7 +26,7 @@ public class TradePost implements java.io.Serializable {
 		this.likeNo = likeNo;
 		this.replyNO = replyNO;
 		this.postDate = postDate;
-		this.lastModifieddate = lastModifieddate;
+		this.lastModifiedDate = lastModifieddate;
 	}
 	public int getPostSeq() {
 		return postSeq;
@@ -71,16 +71,16 @@ public class TradePost implements java.io.Serializable {
 		this.postDate = postDate;
 	}
 	public Date getLastModifieddate() {
-		return lastModifieddate;
+		return lastModifiedDate;
 	}
 	public void setLastModifieddate(Date lastModifieddate) {
-		this.lastModifieddate = lastModifieddate;
+		this.lastModifiedDate = lastModifieddate;
 	}
 	@Override
 	public String toString() {
 		return "StandardPost [postSeq=" + postSeq + ", memberSeq=" + memberSeq + ", postContent=" + postContent
 				+ ", postImg=" + postImg + ", likeNo=" + likeNo + ", replyNO=" + replyNO + ", postDate=" + postDate
-				+ ", lastModifieddate=" + lastModifieddate + "]";
+				+ ", lastModifieddate=" + lastModifiedDate + "]";
 	}
 	
 }

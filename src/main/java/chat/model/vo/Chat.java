@@ -6,6 +6,8 @@ public class Chat implements java.io.Serializable {
 	private int chatSeq;
 	private int memberSeq;
 	private int otherId;
+	private String isEnded;
+	
 	public Chat() {
 		super();
 	}
@@ -32,6 +34,12 @@ public class Chat implements java.io.Serializable {
 	}
 	public void setOtherId(int otherId) {
 		this.otherId = otherId;
+	}
+	public String getIsEnded() {
+		return isEnded;
+	}
+	public void setIsEnded(String isEnded) {
+		this.isEnded = isEnded;
 	}
 	@Override
 	public String toString() {
