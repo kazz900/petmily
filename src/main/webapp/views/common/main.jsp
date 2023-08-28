@@ -25,7 +25,7 @@
 						</div>
 					</form>
 				</li>
-				<li><a class="sub-link" href="/petmily/views/info.jsp">내주변</a></li>
+				<li><a class="sub-link" href="/petmily/mis?deptSeq=1">내주변</a></li>
 				<li><a class="sub-link" href="#">로그인</a></li>
 			</ul>
 			<label for="menuicon" class="menubtn"> <span></span> <span></span>
@@ -39,7 +39,7 @@
 			<ul>
 			<li class="sidebarmenutitle">더보기</li>
 			<li><a href="#" class="sidebarmenu">커뮤니티</a></li>
-			<li><a href="#" class="sidebarmenu">고객센터</a></li>
+			<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
 			</ul>
 			</span><br>
 			
