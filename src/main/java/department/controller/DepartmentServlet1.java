@@ -20,6 +20,10 @@ public class DepartmentServlet1 extends HttpServlet {
     public DepartmentServlet1() {
         super();
     }
+    
+    public int test () {
+    	return 0;
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
