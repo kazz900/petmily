@@ -25,8 +25,10 @@
 						</div>
 					</form>
 				</li>
-				<li><a class="sub-link" href="/petmily/mis?deptSeq=1">내주변</a></li>
-				<li><a class="sub-link" href="#">로그인</a></li>
+
+				<li><a class="sub-link" href="/petmily/views/info.jsp">내주변</a></li>
+				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
+
 			</ul>
 			<label for="menuicon" class="menubtn"> <span></span> <span></span>
 				<span></span>
