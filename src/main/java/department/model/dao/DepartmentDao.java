@@ -101,5 +101,65 @@ public class DepartmentDao {
 
 		return list;
 	}
+	
+	public int insertDepartment(Connection conn, Department dept) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "INSERT INTO DEPARTMENT "
+					 + "VALUES (TO_CHAR(ID_SEQ.NEXTVAL), ?, "
+					 + "?, ?, ?, ?, NULL, NULL, ?, ?, ?, "
+					 + "?, ?, ?, NULL, NULL)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, dept.getCommitment());
+			pstmt.setString(2, dept.getDeptType());
+			pstmt.setString(3, dept.getDeptName());
+			pstmt.setString(4, dept.getDeptAddress());
+			pstmt.setString(5, dept.getDeptPhone());
+			pstmt.setString(6, dept.getDeptTime());
+			pstmt.setString(7, dept.getDeptParking());
+			pstmt.setString(8, dept.getDeptEntrancefee());
+			pstmt.setString(9, dept.getDeptSizerestrict());
+			pstmt.setString(10, dept.getDeptRestrict());
+			pstmt.setString(11, dept.getDeptWithpetfee());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int deleteDepartment(Connection conn, Department dept) {
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "DELETE FROM DEPARTMENT "
+					 + "WHERE DEPT_NAME LIKE ? "
+					 + "AND DEPT_ADDRESS LIKE ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, "%" + dept.getDeptName() + "%");
+			pstmt.setString(2, "%" + dept.getDeptAddress() + "%");
+
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 
 }

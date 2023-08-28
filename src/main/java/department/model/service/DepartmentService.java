@@ -24,4 +24,28 @@ public class DepartmentService {
 		close(conn);
 		return list;
 	}
+	
+	public int insertDepartment(Department dept) {
+		Connection conn = getConnection();
+		int result = ddao.insertDepartment(conn, dept);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+	public int deleteDepartment(Department dept) {
+		Connection conn = getConnection();
+		int result = ddao.deleteDepartment(conn, dept);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }
