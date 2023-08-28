@@ -70,7 +70,6 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);			
 		}
-		System.out.println(member.toString());
 		
 		return member;
 	}
@@ -78,7 +77,7 @@ public class MemberDao {
 	// 회원가입 처리용
 	public int insertMember(Connection conn, Member member) {
 		int result = 0;
-		String query = "insert into member values ((member_seq.nextval),?,?,?,?,default)";
+		String query = "insert into member values ((member_seq.nextval),?,?,?,?,1)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt=conn.prepareStatement(query);
