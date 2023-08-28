@@ -8,6 +8,11 @@
 # Compiled class file
 *.class
 
+#context.xml
+context.xml
+web.xml
+.xml
+
 # Log file
 *.log
 
