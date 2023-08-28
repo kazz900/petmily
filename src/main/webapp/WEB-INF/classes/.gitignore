@@ -1,3 +1,19 @@
+<<<<<<< Updated upstream
 /member/
 /org/
 /department/
+=======
+/chat/
+/standardlike/
+/standardpost/
+/standardreply/
+/tradelike/
+/tradepost/
+/tradereply/
+/common/
+/department/
+/member/
+/mypage/
+/org/
+/servicecenter/
+>>>>>>> Stashed changes
