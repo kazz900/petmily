@@ -109,8 +109,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
     try {
       response.setContentType("text/html; charset=UTF-8");
-      pageContext = _jspxFactory.getPageContext(this, request, response,
-               null, true, 8192, true);
+      pageContext = _jspxFactory.getPageContext(this, request, response, null, true, 8192, true);
+
       _jspx_page_context = pageContext;
       application = pageContext.getServletContext();
       config = pageContext.getServletConfig();
@@ -140,43 +140,45 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<link rel=\"stylesheet\" href=\"/petmily/resources/css/main/main.css\">\r\n");
       out.write("</head>\r\n");
       out.write("<body>\r\n");
-      out.write("   <input type=\"checkbox\" id=\"menuicon\">\r\n");
-      out.write("   \r\n");
-      out.write("   <header>\r\n");
-      out.write("      <div>\r\n");
-      out.write("         <ul class=\"navi\">\r\n");
-      out.write("            <!-- style=\"top: 50px; right: 77px;\" -->\r\n");
-      out.write("            <li class=\"logo\"><a href=\"/petmily/index.jsp\">Petmily</a></li>\r\n");
-      out.write("            <li>\r\n");
-      out.write("               <form class='formSearch' style=\"margin-right: 80px;\">\r\n");
-      out.write("                  <div class='field'>\r\n");
-      out.write("                     <input class='inputSearch' id='inputSearch' name='inputSearch'\r\n");
-      out.write("                        required type='text'> <label for='inputSearch'>\r\n");
-      out.write("                        지역, 이름으로 검색 </label>\r\n");
-      out.write("                  </div>\r\n");
-      out.write("               </form>\r\n");
-      out.write("            </li>\r\n");
-      out.write("            <li><a class=\"sub-link\" href=\"/petmily/mis?deptSeq=578\">내주변</a></li>\r\n");
-      out.write("            <li><a class=\"sub-link\" href=\"#\">로그인</a></li>\r\n");
-      out.write("         </ul>\r\n");
-      out.write("         <label for=\"menuicon\" class=\"menubtn\"> <span></span> <span></span>\r\n");
-      out.write("            <span></span>\r\n");
-      out.write("         </label>\r\n");
-      out.write("      </div>\r\n");
-      out.write("   </header>\r\n");
-      out.write("   <div class=\"menu-container\">\r\n");
-      out.write("      <div class=\"sidebar\">\r\n");
-      out.write("         <span class=\"area_desc\" style=\"margin-top:25%\">\r\n");
-      out.write("         <ul>\r\n");
-      out.write("         <li class=\"sidebarmenutitle\">더보기</li>\r\n");
-      out.write("         <li><a href=\"#\" class=\"sidebarmenu\">커뮤니티</a></li>\r\n");
-      out.write("         <li><a href=\"/petmily/suggest\" class=\"sidebarmenu\">고객센터</a></li>\r\n");
-      out.write("         </ul>\r\n");
-      out.write("         </span><br>\r\n");
-      out.write("         \r\n");
-      out.write("      </div>\r\n");
-      out.write("   </div>\r\n");
-      out.write("   </header>\r\n");
+
+      out.write("	<input type=\"checkbox\" id=\"menuicon\">\r\n");
+      out.write("	\r\n");
+      out.write("	<header>\r\n");
+      out.write("		<div>\r\n");
+      out.write("			<ul class=\"navi\">\r\n");
+      out.write("				<!-- style=\"top: 50px; right: 77px;\" -->\r\n");
+      out.write("				<li class=\"logo\"><a href=\"/petmily/index.jsp\">Petmily</a></li>\r\n");
+      out.write("				<li>\r\n");
+      out.write("					<form class='formSearch' style=\"margin-right: 80px;\">\r\n");
+      out.write("						<div class='field'>\r\n");
+      out.write("							<input class='inputSearch' id='inputSearch' name='inputSearch'\r\n");
+      out.write("								required type='text'> <label for='inputSearch'>\r\n");
+      out.write("								지역, 이름으로 검색 </label>\r\n");
+      out.write("						</div>\r\n");
+      out.write("					</form>\r\n");
+      out.write("				</li>\r\n");
+      out.write("				<li><a class=\"sub-link\" href=\"/petmily/mis?deptSeq=578\">내주변</a></li>\r\n");
+      out.write("				<li><a class=\"sub-link\" href=\"#\">로그인</a></li>\r\n");
+      out.write("			</ul>\r\n");
+      out.write("			<label for=\"menuicon\" class=\"menubtn\"> <span></span> <span></span>\r\n");
+      out.write("				<span></span>\r\n");
+      out.write("			</label>\r\n");
+      out.write("		</div>\r\n");
+      out.write("	</header>\r\n");
+      out.write("	<div class=\"menu-container\">\r\n");
+      out.write("		<div class=\"sidebar\">\r\n");
+      out.write("			<span class=\"area_desc\" style=\"margin-top:25%\">\r\n");
+      out.write("			<ul>\r\n");
+      out.write("			<li class=\"sidebarmenutitle\">더보기</li>\r\n");
+      out.write("			<li><a href=\"#\" class=\"sidebarmenu\">커뮤니티</a></li>\r\n");
+      out.write("			<li><a href=\"/petmily/suggest\" class=\"sidebarmenu\">고객센터</a></li>\r\n");
+      out.write("			</ul>\r\n");
+      out.write("			</span><br>\r\n");
+      out.write("			\r\n");
+      out.write("		</div>\r\n");
+      out.write("	</div>\r\n");
+      out.write("	</header>\r\n");
+
       out.write("\r\n");
       out.write("</body>\r\n");
       out.write("</html>");
@@ -218,4 +220,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspxFactory.releasePageContext(_jspx_page_context);
     }
   }
+
 }
+

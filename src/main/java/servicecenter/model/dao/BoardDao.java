@@ -1,5 +1,6 @@
 package servicecenter.model.dao;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,9 @@ import static common.JDBCTemplate.*;
 
 import servicecenter.model.vo.Board;
 
-public class BoardDao {
+public class BoardDao implements Serializable {
+
+	private static final long serialVersionUID = -6193829464532553691L;
 
 	public int addMySuggest(Connection conn, Board board) {
 		int result = 0;
@@ -41,8 +44,8 @@ public class BoardDao {
 		ResultSet rset = null;
 
 		String query = "SELECT * "
-					 + "FROM MYLOG "
-					 + "ORDER BY BRD_NO DESC";
+					 + "FROM serv_center "
+					 + "ORDER BY serv_seq DESC";
 
 		try {
 
@@ -53,10 +56,12 @@ public class BoardDao {
 			while (rset.next()) {
 				Board board = new Board();
 
-				board.setBrdNo(rset.getInt("brd_no"));
-				board.setBrdTitle(rset.getString("brd_title"));
-				board.setBrdContent(rset.getString("brd_content"));
-				board.setBrdDate(rset.getDate("brd_date"));
+	            board.setBrdNo(rset.getInt("SERV_SEQ"));
+	            board.setBrdMemberNo(rset.getInt("MEMBER_SEQ"));
+	            board.setBrdTitle(rset.getString("TITLE"));
+	            board.setBrdContent(rset.getString("CONTENT"));
+	            board.setBrdDate(rset.getDate("UPLOAD_DATE"));
+	            board.setBrdResult(rset.getString("RESULT"));
 
 				list.add(board);
 			}
