@@ -1,6 +1,5 @@
 package department.model.dao;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +8,7 @@ import java.util.ArrayList;
 import department.model.vo.Department;
 import static common.JDBCTemplate.close;
 
-public class DepartmentDao implements Serializable{
-
-	private static final long serialVersionUID = 85103058248412049L;
+public class DepartmentDao {
 
 	public ArrayList<Department> selectList(Connection conn, String value) {
 
@@ -111,24 +108,25 @@ public class DepartmentDao implements Serializable{
 		PreparedStatement pstmt = null;
 		
 		String query = "INSERT INTO DEPARTMENT "
-					 + "VALUES (TO_CHAR(ID_SEQ.NEXTVAL), ?, "
+					 + "VALUES (TO_CHAR(DEPT_SEQ.NEXTVAL), "
 					 + "?, ?, ?, ?, NULL, NULL, ?, ?, ?, "
-					 + "?, ?, ?, NULL, NULL)";
+					 + "?, ?, ?, NULL, NULL, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setString(1, dept.getCommitment());
-			pstmt.setString(2, dept.getDeptType());
-			pstmt.setString(3, dept.getDeptName());
-			pstmt.setString(4, dept.getDeptAddress());
-			pstmt.setString(5, dept.getDeptPhone());
-			pstmt.setString(6, dept.getDeptTime());
-			pstmt.setString(7, dept.getDeptParking());
-			pstmt.setString(8, dept.getDeptEntrancefee());
-			pstmt.setString(9, dept.getDeptSizerestrict());
-			pstmt.setString(10, dept.getDeptRestrict());
-			pstmt.setString(11, dept.getDeptWithpetfee());
+			pstmt.setString(1, dept.getDeptType());
+			pstmt.setString(2, dept.getDeptName());
+			pstmt.setString(3, dept.getDeptAddress());
+			pstmt.setString(4, dept.getDeptPhone());
+			pstmt.setString(5, dept.getDeptTime());
+			pstmt.setString(6, dept.getDeptParking());
+			pstmt.setString(7, dept.getDeptEntrancefee());
+			pstmt.setString(8, dept.getDeptSizerestrict());
+			pstmt.setString(9, dept.getDeptRestrict());
+			pstmt.setString(10, dept.getDeptWithpetfee());
+			pstmt.setString(11, dept.getDeptInsertOk());
+			pstmt.setString(12, dept.getDeptDeleteOk());
 
 			result = pstmt.executeUpdate();
 
@@ -164,48 +162,48 @@ public class DepartmentDao implements Serializable{
 		}
 		return result;
 	}
+	
 	public Department selectMainInfo(Connection conn, String deptSeq) {
-		Department dptmt = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String query = "SELECT * FROM department WHERE dept_seq = ?";
-		dptmt = new Department();
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, deptSeq);
-						
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				
-				dptmt.setDeptSeq(Integer.parseInt(deptSeq));
-				dptmt.setDeptType(rset.getString("DEPT_TYPE"));
-				dptmt.setDeptName(rset.getString("DEPT_NAME"));
-				dptmt.setDeptAddress(rset.getString("DEPT_ADDRESS"));
-				dptmt.setDeptPhone(rset.getString("DEPT_PHONE"));
-				dptmt.setDeptLatitude(rset.getString("DEPT_LATITUDE"));
-				dptmt.setDeptLongitude(rset.getString("DEPT_LONGITUDE"));
-				dptmt.setDeptTime(rset.getString("DEPT_TIME"));
-				dptmt.setDeptParking(rset.getString("DEPT_PARKING"));
-				dptmt.setDeptEntrancefee(rset.getString("DEPT_ENTRANCE_FEE"));
-				dptmt.setDeptSizerestrict(rset.getString("DEPT_SIZERESTRICT"));
-				dptmt.setDeptRestrict(rset.getString("DEPT_RESTRICT"));
-				dptmt.setDeptWithpetfee(rset.getString("DEPT_WITHPETFEE"));
-				dptmt.setDeptUrl(rset.getString("DEPT_URL"));
-				dptmt.setDeptPic(rset.getString("DEPT_PIC"));
-				System.out.println(123);
-				System.out.println(dptmt);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return dptmt;
-	}
+	      Department dptmt = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rset = null;
+	      
+	      String query = "SELECT * FROM department WHERE dept_seq = ?";
+	      
+	      try {
+	         pstmt = conn.prepareStatement(query);
+	         pstmt.setString(1, deptSeq);
+	         
+	         
+	         rset = pstmt.executeQuery();
+	         
+	         if(rset.next()) {
+	            dptmt = new Department();
+	            
+	            dptmt.setDeptSeq(Integer.parseInt(deptSeq));
+	            dptmt.setDeptType(rset.getString("DEPT_TYPE"));
+	            dptmt.setDeptName(rset.getString("DEPT_NAME"));
+	            dptmt.setDeptAddress(rset.getString("DEPT_ADDRESS"));
+	            dptmt.setDeptPhone(rset.getString("DEPT_PHONE"));
+	            dptmt.setDeptLatitude(rset.getString("DEPT_LATITUDE"));
+	            dptmt.setDeptLongitude(rset.getString("DEPT_LONGITUDE"));
+	            dptmt.setDeptTime(rset.getString("DEPT_TIME"));
+	            dptmt.setDeptParking(rset.getString("DEPT_PARKING"));
+	            dptmt.setDeptEntrancefee(rset.getString("DEPT_ENTRANCE_FEE"));
+	            dptmt.setDeptSizerestrict(rset.getString("DEPT_SIZERESTRICT"));
+	            dptmt.setDeptRestrict(rset.getString("DEPT_RESTRICT"));
+	            dptmt.setDeptWithpetfee(rset.getString("DEPT_WITHPETFEE"));
+	            dptmt.setDeptUrl(rset.getString("DEPT_URL"));
+	            dptmt.setDeptPic(rset.getString("DEPT_PIC"));
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         close(rset);
+	         close(pstmt);
+	      }
+	      
+	      return dptmt;
+	   }
 
 }

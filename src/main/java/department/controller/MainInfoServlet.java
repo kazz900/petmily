@@ -57,7 +57,6 @@ public class MainInfoServlet extends HttpServlet {
 		}
 		view.forward(request, response);
 		
-	
 	}
 
 	/**

@@ -36,6 +36,7 @@ public class AddMySuggestServlet extends HttpServlet {
 		
 		board.setBrdTitle(request.getParameter("title"));
 		board.setBrdContent(request.getParameter("content"));
+		board.setBrdResult(request.getParameter("result"));
 		
 		int result = new BoardService().addMySuggest(board);
 
