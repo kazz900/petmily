@@ -18,6 +18,7 @@ public class Department implements java.io.Serializable {
 	private String deptWithpetfee;
 	private String deptUrl;
 	private String deptPic;
+	private String commitment;
 	public Department() {
 		super();
 	}
@@ -131,6 +132,15 @@ public class Department implements java.io.Serializable {
 	public void setDeptPic(String deptPic) {
 		this.deptPic = deptPic;
 	}
+	
+	
+	public String getCommitment() {
+		return commitment;
+	}
+	public void setCommitment(String commitment) {
+		this.commitment = commitment;
+	}
+	
 	@Override
 	public String toString() {
 		return "Department [deptSeq=" + deptSeq + ", deptType=" + deptType + ", deptName=" + deptName + ", deptAddress="
