@@ -39,11 +39,12 @@ public class MainInfoServlet extends HttpServlet {
 		//String deptSeq = "1";
 		String deptnum = request.getParameter("deptSeq");
 		Department dptmt = new DepartmentService().selectMainInfo(deptnum);
+		System.out.println(1);
 		dptmt.typeSelect();
 		dptmt.entranceFee();
 		dptmt.sizeSelect();
 		dptmt.parkingSelect();
-		
+
 		
 		
 		RequestDispatcher view = null;

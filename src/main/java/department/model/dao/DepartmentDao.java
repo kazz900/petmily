@@ -170,16 +170,15 @@ public class DepartmentDao implements Serializable{
 		ResultSet rset = null;
 		
 		String query = "SELECT * FROM department WHERE dept_seq = ?";
+		dptmt = new Department();
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, deptSeq);
-			
-			
+						
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				dptmt = new Department();
 				
 				dptmt.setDeptSeq(Integer.parseInt(deptSeq));
 				dptmt.setDeptType(rset.getString("DEPT_TYPE"));
@@ -196,6 +195,8 @@ public class DepartmentDao implements Serializable{
 				dptmt.setDeptWithpetfee(rset.getString("DEPT_WITHPETFEE"));
 				dptmt.setDeptUrl(rset.getString("DEPT_URL"));
 				dptmt.setDeptPic(rset.getString("DEPT_PIC"));
+				System.out.println(123);
+				System.out.println(dptmt);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
