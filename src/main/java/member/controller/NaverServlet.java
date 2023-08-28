@@ -123,12 +123,11 @@ public class NaverServlet extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		System.out.println(1);
+		
 		member = mservice.snsLogin(Nemail);
-		System.out.println(2);
 		if(member == null) {	//회원정보 없을시 sns계정정보 임의생성용 토큰생성 메소드
 			System.out.println(3);
-			Member member1 = new Member();
+			Member newMember = new Member();
 			String generatedId = "n@";			
 			String snspwdIsNull = null;
 			String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -140,17 +139,17 @@ public class NaverServlet extends HttpServlet {
 			}			
 			generatedId += token.toString();
 			
-			member1.setMemberId(generatedId);
-			member1.setMemberPwd(snspwdIsNull);
-			member1.setMemberNick(Nname);
-			member1.setMemberEmail(Nemail);	
+			newMember.setMemberId(generatedId);
+			newMember.setMemberPwd(snspwdIsNull);
+			newMember.setMemberNick(Nname);
+			newMember.setMemberEmail(Nemail);	
 			
-		int result = mservice.insertMember(member);
+		int result = mservice.insertMember(newMember);
 		
-		System.out.println(member1.getMemberId());
-		System.out.println(member1.getMemberPwd());
-		System.out.println(member1.getMemberNick());
-		System.out.println(member1.getMemberEmail());
+//		System.out.println(newMember.getMemberId());
+//		System.out.println(newMember.getMemberPwd());
+//		System.out.println(newMember.getMemberNick());
+//		System.out.println(newMember.getMemberEmail());
 		if(result > 0) {
 			member = mservice.snsLogin(Nemail);
 		} else {
