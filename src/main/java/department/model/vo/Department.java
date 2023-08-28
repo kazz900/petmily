@@ -149,4 +149,51 @@ public class Department implements java.io.Serializable {
 				+ deptEntrancefee + ", deptSizerestrict=" + deptSizerestrict + ", deptRestrict=" + deptRestrict
 				+ ", deptWithpetfee=" + deptWithpetfee + ", deptUrl=" + deptUrl + ", deptPic=" + deptPic + "]";
 	}
+	public void typeSelect() {
+		if(this.deptType.contains("1,2")) {
+			setDeptType("의료, 미용");
+		}else if(this.deptType.equals("1")){
+			setDeptType("의료");
+		}else if(this.deptType.equals("2")){
+			setDeptType("미용");
+		}else if(this.deptType.equals("3")){
+			setDeptType("용품");
+		}else if(this.deptType.equals("4")){
+			setDeptType("위탁");
+		}else if(this.deptType.equals("5")){
+			setDeptType("장묘");
+		}else if(this.deptType.equals("6")){
+			setDeptType("카페,식당");
+		}else if(this.deptType.equals("7")){
+			setDeptType("펜션/호텔");
+		}else{
+			setDeptType("여행/문화");
+		}
+	}
+	
+	public void parkingSelect() {
+		if(this.deptParking.equals("0")) {
+			setDeptParking("주차불가");
+		}else {
+			setDeptParking("주차가능");
+		}
+	}
+	public void entranceFee() {
+		if(this.deptEntrancefee.equals("0")) {
+			setDeptEntrancefee("입장료 있음");
+		}else {
+			setDeptEntrancefee("입장료 없음");
+		}
+	}
+	public void sizeSelect() {
+		if(this.deptSizerestrict.equals("0")) {
+			setDeptSizerestrict("제한사항 없음");
+		}else if(this.deptSizerestrict.equals("1")) {
+			setDeptSizerestrict("소형");
+		}else if(this.deptSizerestrict.equals("2")) {
+			setDeptSizerestrict("중형");
+		}else {
+			setDeptSizerestrict("대형");
+		}
+	}
 }
