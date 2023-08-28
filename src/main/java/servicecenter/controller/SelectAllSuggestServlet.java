@@ -46,7 +46,8 @@ public class SelectAllSuggestServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/servicecenter/addDept.jsp");
 			request.setAttribute("list", list);
 		} else {
-			response.sendRedirect("/pet/views/servicecenter/dCommon/addFailed.jsp");
+			response.sendRedirect("views/servicecenter/dCommon/addFailed.jsp");
+			System.out.println("sex");
 		}
 
 		view.forward(request, response);

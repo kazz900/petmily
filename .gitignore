@@ -8,6 +8,14 @@
 # Compiled class file
 *.class
 
+#context.xml
+context.xml
+web.xml
+.xml
+
+#driver.properties
+driver.properties
+
 # Log file
 *.log
 
