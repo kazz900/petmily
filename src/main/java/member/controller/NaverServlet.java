@@ -211,7 +211,7 @@ public class NaverServlet extends HttpServlet {
 			throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
 		} catch (IOException e) {
 			throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
-		}
+		}//TO PUSH
 	}
 
 	private static String readBody(InputStream body) {
