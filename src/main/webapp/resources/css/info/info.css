@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+@media(min-width: 1050px){
+.info-content{
+	width: 1050px;
+    margin: 98px auto 0 auto;
+    word-wrap: break-word;
+}
+}
+.info-img{
+	width: 400px;
+	height: 400px;
+	margin: 0;
+	float:left;
+	border-radius:5%;
+}
+
+.info-detail-title{
+	font-family: 'Surround';
+	src: url('/petmily/resources/font/surround.woff2') format('woff2');
+	font-size: 35px;
+	color: hsl(30.46deg 58.9% 45.68%);
+}
+.info-detail-subtitle{
+	font-family: 'Surround';
+	src: url('/petmily/resources/font/surround.woff2') format('woff2');
+	font-size: 25px;
+	color: black;
+}
+.info-detail01{
+	font-family: OhsquareAir;
+	src: url('/petmily/resources/font/OhsquareAir.woff2') format('woff2');
+	font-size: 20px;
+	color: black;
+	margin-left: 503px;
+	width: 500px;
+	height: 300px;
+}
+.info-share{
+	position:relative;
+	left: 95%;
+}
+
+.info-detail02{
+	margin-top:175px;
+	font-family: OhsquareAir;
+	src: url('/petmily/resources/font/OhsquareAir.woff2') format('woff2');
+	font-size: 20px;
+	color: black;
+}
+
+ul.tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+ul.tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+ul.tabs li.current{
+	/* background: #ededed; */
+	color: #222;
+	border-bottom: 3px solid hsl(30.46deg 58.9% 45.68%);
+}
+
+.tab-content{
+	display: none;
+	/* background: #ededed; */
+	padding: 15px;
+	
+}
+
+.tab-content.current{
+	display: inherit;
+}
+
+
+
+
+
+
+
+
+
