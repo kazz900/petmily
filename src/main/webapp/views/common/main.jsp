@@ -39,7 +39,7 @@
 			<ul>
 			<li class="sidebarmenutitle">더보기</li>
 			<li><a href="#" class="sidebarmenu">커뮤니티</a></li>
-			<li><a href="#" class="sidebarmenu">고객센터</a></li>
+			<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
 			</ul>
 			</span><br>
 			
