@@ -26,7 +26,7 @@
 					</form>
 				</li>
 
-				<li><a class="sub-link" href="/petmily/views/info.jsp">내주변</a></li>
+				<li><a class="sub-link" href="/petmily/views/info/info.jsp">내주변</a></li>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
 
 			</ul>
