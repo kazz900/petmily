@@ -60,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 		// 3. 서비스 메소드로 값 전달 실행하고 결과 받아오기
 		Member member = new MemberService().commonLogin(mid, cryptoUserpwd);
 		
-		//System.out.println(member + " is mem");
+		//System.out.println(loginMember + " is mem");
 		
 		// 4. 받은 결과를 가지고 성공/실패 페이지 내보내기
 		if(member.getMemberGrade() != null) {	// 값 있음, 로그인 성공시

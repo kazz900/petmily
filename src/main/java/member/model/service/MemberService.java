@@ -84,15 +84,4 @@ public class MemberService {
 		return result;
 	}
 	
-	//관리자가 회원 등급 변경용
-	public int managementMember(Member member) {
-		Connection conn = getConnection();
-		int result = mdao.managementMember(conn, member);
-		if(result > 0)
-			commit(conn);
-		else
-			rollback(conn);
-		close(conn);
-		return result;
-	}
 }

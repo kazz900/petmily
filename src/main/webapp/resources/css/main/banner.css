@@ -102,3 +102,10 @@
   95% {margin-left: -200%}
   100% {margin-left: -300%}
 }
+.main-icon{
+	font-family: 'Surround';
+	src: url('/pp/resources/font/surround.woff2') format('woff2');
+	font-size: 15px;
+	color: hsl(30.46deg 58.9% 45.68%);
+	
+}

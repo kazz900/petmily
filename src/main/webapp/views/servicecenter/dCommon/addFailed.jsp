@@ -35,6 +35,6 @@ a {
 </head>
 <body>
 <h2>등록 과정 중 문제가 발생하였습니다.</h2>
-<a href="/petmily/views/servicecenter/serviceCenter.jsp"><button>확인</button></a>
+<a href="/petmily/views/servicecenter/addDept.jsp"><button>확인</button></a>
 </body>
 </html>
