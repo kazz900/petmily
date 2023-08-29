@@ -35,10 +35,10 @@ public class KakaoServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		Member member = new Member();
 		MemberService mservice = new MemberService();
-		String id = request.getParameter("kakao_id_login_id");		
-		String name = request.getParameter("kakao_id_login_name");	
+		String Kemail = request.getParameter("kakao_id_login_id");		
+		String Kname = request.getParameter("kakao_id_login_name");	
 		
-		member = mservice.snsLogin(id);
+		member = mservice.snsLogin(Kemail);
 
 		if(member == null) {	//회원정보 없을시 sns계정정보 임의생성용 토큰생성 메소드
 			member = new Member();

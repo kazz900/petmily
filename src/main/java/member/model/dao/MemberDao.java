@@ -28,9 +28,14 @@ public class MemberDao {
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
+				
+				member.setMemberSeq(rset.getInt("member_seq"));
 				member.setMemberId(mid);
+				member.setMemberPwd("");
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(rset.getString("member_email"));
+				member.setMemberGrade(rset.getString("member_grade"));
+				System.out.println(member);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,7 +43,7 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);			
 		}
-		
+
 		return member;
 	}
 

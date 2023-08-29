@@ -34,6 +34,7 @@ public class EnrollServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		System.out.println(1);
 		Member member = new Member();
 		member.setMemberId(request.getParameter("mid"));
 		String mPwd = request.getParameter("mpwd");	//암호화처리를 위해 변수에 저장시킴
@@ -62,15 +63,11 @@ public class EnrollServlet extends HttpServlet {
 		
 		int result = new MemberService().insertMember(member);
 		
-		//4. 받은 결과로 내보낼 뷰 선택 처리 
 		if(result > 0) {
-			//수정 성공시 마이 페이지 뷰가 출력되게 한다면, myinfo 서블릿을 구동시킴
-			//서블릿에서 다른 서블릿을 실행시킬 수 있음
-			response.sendRedirect("/first/myinfor?userid=" + member.getMemberId());//쿼리스트링안에 절대 공백이 포함되어서는 안됨
-			//해당부분 코딩시 리다이렉트하는 서블릿 주소 변경해야함!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			response.sendRedirect("/petmily/views/member/login.jsp");
 			
-			//수정 성공시 메인페이지가 출력되게 한다면 
-			//response.sendRedirect("/first/index.jsp");
+			//메인페이지가 출력되게 한다면 `
+			//response.sendRedirect("/petmily/index.jsp");
 			
 		}else {
 			//회원가입 실패시 error.jsp 로 에러메세지를 보냄

@@ -10,6 +10,12 @@
 <title>Petmily</title>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script type="text/javascript" src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+  <% if (request.getAttribute("message") != null) { %>
+    alert("<%=request.getAttribute("message")%>");
+    location.href="/petmily/views/member/login.jsp";	//로그인 실패시 
+  <% } %>
+</script>
 <style type="text/css">
 @font-face {
 	font-family: 'Surround';
@@ -83,11 +89,11 @@ text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
 <h1 align="left">Petmily</h1> <!-- 추후 include처리 -->
 </header>
 <h2 align="center">로그인</h2> <!-- 추후 include처리 -->
-<form action="">
+<form action="/petmily/login">
 	<table>
-		<tr><td><input type="text" id="userid" name="userid" placeholder="아이디 입력" required> </td>
-		<td rowspan="2"><input type="button" value="로그인" id="logincheck" onclick="#"></td></tr>
-		<tr><td><input type="password" id="userpwd" name="userpwd" placeholder="패스워드 입력"required></td></tr>
+		<tr><td><input type="text" id="memberid" name="memberid" placeholder="아이디 입력" required> </td>
+		<td rowspan="2"><input type="submit" value="로그인" id="logincheck"></td></tr>
+		<tr><td><input type="password" id="memberpwd" name="memberpwd" placeholder="패스워드 입력"required></td></tr>
 		<tr><td colspan="2"><input type="button" value="ID/PA 조회" id="findinfo" onclick="moveFindinfoPage();">
 		<input type="button" value="회원가입" id="enroll" onclick="moveEnrollPage();"></td></tr>
 <script type="text/javascript">
@@ -101,11 +107,8 @@ function moveEnrollPage(){
 	</table>
 </form>
 
-<br>	<!-- 상단 로그인폼, 하단 sns로그인 -->
- <div id="naver_id_login" align="center"></div>
-
-
-<%
+<br>
+ <%
     String clientId = "Y4aSWVB6n8GBIwdvF73u";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http:" + "//" + "localhost:8080/petmily/naver", "UTF-8");
     SecureRandom random = new SecureRandom();
@@ -119,6 +122,7 @@ function moveEnrollPage(){
  <div align="center">
   <a href="<%=apiURL%>"><img width="200" height="60" src="http://static.nid.naver.com/oauth/small_g_in.PNG"></a>
 </div>
+
 <br>
 <%@ include file="../common/footer.jsp" %>
 </body>
