@@ -11,15 +11,15 @@ import javax.sql.DataSource;
 public class JDBCTemplate {
 		//1. 직접 값을 지정한 경우
 		//1. driver.properties 파일에서 값을 읽어와서 적용하는 경우
-		//
+//		//
 //		public static Connection getConnection() {
 //			Connection conn = null;
 //			Properties prop = new Properties();
 //			try {
-//				prop.load(new FileReader("resources/dbserver.properties"));				
+//				prop.load(new FileReader("/driver.properties"));				
 //				Class.forName("oracle.jdbc.driver.OracleDriver");
 //				conn = DriverManager.getConnection
-//						("jdbc:oracle:thin:@localhost:1521:xe", "c##testweb", "testweb");
+//						("jdbc:oracle:thin:@192.168.0.93:1521:xe", "c##petmily", "petmily");
 //				conn.setAutoCommit(false);				
 //			} catch (Exception e) {
 //				e.printStackTrace();

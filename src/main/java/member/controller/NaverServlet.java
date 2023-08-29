@@ -74,7 +74,7 @@ public class NaverServlet extends HttpServlet {
 			con.setRequestMethod("GET");
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
-			System.out.print("responseCode=" + responseCode);
+			//System.out.print("responseCode=" + responseCode);
 			if (responseCode == 200) { // 정상 호출
 				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			} else { // 에러 발생
@@ -86,7 +86,7 @@ public class NaverServlet extends HttpServlet {
 			}
 			br.close();
 			if (responseCode == 200) {
-				System.out.println(res.toString());
+				//System.out.println(res.toString());
 
 				Object obj = parsing.parse(res.toString());
 				jsonObj = (JSONObject) obj;
@@ -103,19 +103,19 @@ public class NaverServlet extends HttpServlet {
 					Map<String, String> requestHeaders = new HashMap<>();
 					requestHeaders.put("Authorization", header);
 					String responseBody = get(apiUrl, requestHeaders);
-					System.out.println(responseBody);
+					//System.out.println(responseBody);
 
 					Object obj = parsing.parse(responseBody);
 					jsonObj = (JSONObject) obj;
 					JSONObject resObj = (JSONObject) jsonObj.get("response");
-					System.out.println(resObj);
-
+					//System.out.println(resObj);
+					
 					Nemail = (String) resObj.get("email");
 					Nname = (String) resObj.get("name");
 					System.out.println("네이버 이메일은? " + Nemail);
 					System.out.println("회원의 이름은? " + Nname);
 
-					System.out.println("complete!");
+					//System.out.println("complete!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -132,7 +132,7 @@ public class NaverServlet extends HttpServlet {
 			String snspwdIsNull = null;
 			String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 			StringBuilder token = new StringBuilder();
-			Random random = new Random();		
+			Random random = new Random();
 			for (int i = 0; i < 10; i++) {
 				char randomChar = characters.charAt(random.nextInt(characters.length()));
 				token.append(randomChar);

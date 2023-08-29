@@ -150,7 +150,7 @@ public class Department implements java.io.Serializable {
 				+ ", deptWithpetfee=" + deptWithpetfee + ", deptUrl=" + deptUrl + ", deptPic=" + deptPic + "]";
 	}
 	public void typeSelect() {
-		if(this.deptType.contains("1,2")) {
+		if(this.deptType.contains("1/2")) {
 			setDeptType("의료, 미용");
 		}else if(this.deptType.equals("1")){
 			setDeptType("의료");
