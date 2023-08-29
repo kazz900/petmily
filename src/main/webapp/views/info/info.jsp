@@ -22,7 +22,7 @@ function kakaoShare() {
     objectType: 'feed',
     content: {
       title: 'Petmily',
-      description: '반려동물의 모든 것',
+      description: '반려동물의 모든 것\n <%= dptmt.getDeptName() %>',
       imageUrl: 'https://ifh.cc/g/NFnlJt.jpg',
       link: {
         mobileWebUrl: link,

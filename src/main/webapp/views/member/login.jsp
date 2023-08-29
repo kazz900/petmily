@@ -101,8 +101,11 @@ function moveEnrollPage(){
 	</table>
 </form>
 
-<br>
- <%
+<br>	<!-- 상단 로그인폼, 하단 sns로그인 -->
+ <div id="naver_id_login" align="center"></div>
+
+
+<%
     String clientId = "Y4aSWVB6n8GBIwdvF73u";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http:" + "//" + "localhost:8080/petmily/naver", "UTF-8");
     SecureRandom random = new SecureRandom();
@@ -116,8 +119,7 @@ function moveEnrollPage(){
  <div align="center">
   <a href="<%=apiURL%>"><img width="200" height="60" src="http://static.nid.naver.com/oauth/small_g_in.PNG"></a>
 </div>
-
 <br>
-<%-- <%@ include file="../common/footer.jsp" %> --%>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

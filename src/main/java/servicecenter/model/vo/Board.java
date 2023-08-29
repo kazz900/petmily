@@ -7,9 +7,11 @@ public class Board implements Serializable {
 	private static final long serialVersionUID = -7473679959559549806L;
 	
 	private int brdNo;
+	private int memberNo;
 	private String brdTitle;
 	private String brdContent;
 	private Date brdDate;
+	private String result;
 	
 	public Board() {
 		super();
@@ -21,6 +23,16 @@ public class Board implements Serializable {
 		this.brdTitle = brdTitle;
 		this.brdContent = brdContent;
 		this.brdDate = brdDate;
+	}
+
+	public Board(int brdNo, int memberNo, String brdTitle, String brdContent, Date brdDate, String result) {
+		super();
+		this.brdNo = brdNo;
+		this.memberNo = memberNo;
+		this.brdTitle = brdTitle;
+		this.brdContent = brdContent;
+		this.brdDate = brdDate;
+		this.result = result;
 	}
 
 	public int getBrdNo() {
@@ -53,6 +65,22 @@ public class Board implements Serializable {
 
 	public void setBrdDate(Date brdDate) {
 		this.brdDate = brdDate;
+	}
+
+	public int getBrdMemberNo() {
+		return memberNo;
+	}
+
+	public void setBrdMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public String getBrdResult() {
+		return result;
+	}
+
+	public void setBrdResult(String result) {
+		this.result = result;
 	}
 
 	public static long getSerialversionuid() {

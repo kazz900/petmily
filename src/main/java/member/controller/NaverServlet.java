@@ -20,8 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -74,7 +76,7 @@ public class NaverServlet extends HttpServlet {
 			con.setRequestMethod("GET");
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
-			System.out.print("responseCode=" + responseCode);
+			//System.out.print("responseCode=" + responseCode);
 			if (responseCode == 200) { // 정상 호출
 				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			} else { // 에러 발생
@@ -86,7 +88,7 @@ public class NaverServlet extends HttpServlet {
 			}
 			br.close();
 			if (responseCode == 200) {
-				System.out.println(res.toString());
+				//System.out.println(res.toString());
 
 				Object obj = parsing.parse(res.toString());
 				jsonObj = (JSONObject) obj;
@@ -103,19 +105,19 @@ public class NaverServlet extends HttpServlet {
 					Map<String, String> requestHeaders = new HashMap<>();
 					requestHeaders.put("Authorization", header);
 					String responseBody = get(apiUrl, requestHeaders);
-					System.out.println(responseBody);
+					//System.out.println(responseBody);
 
 					Object obj = parsing.parse(responseBody);
 					jsonObj = (JSONObject) obj;
 					JSONObject resObj = (JSONObject) jsonObj.get("response");
-					System.out.println(resObj);
+					//System.out.println(resObj);
 
 					Nemail = (String) resObj.get("email");
 					Nname = (String) resObj.get("name");
 					System.out.println("네이버 이메일은? " + Nemail);
 					System.out.println("회원의 이름은? " + Nname);
 
-					System.out.println("complete!");
+					//System.out.println("complete!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -123,11 +125,12 @@ public class NaverServlet extends HttpServlet {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
+		System.out.println(1);
 		member = mservice.snsLogin(Nemail);
-
+		System.out.println(2);
 		if(member == null) {	//회원정보 없을시 sns계정정보 임의생성용 토큰생성 메소드
-			member = new Member();
+			System.out.println(3);
+			Member member1 = new Member();
 			String generatedId = "n@";			
 			String snspwdIsNull = null;
 			String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -139,17 +142,17 @@ public class NaverServlet extends HttpServlet {
 			}			
 			generatedId += token.toString();
 			
-			member.setMemberId(generatedId);
-			member.setMemberPwd(snspwdIsNull);
-			member.setMemberNick(Nname);
-			member.setMemberEmail(Nemail);	
+			member1.setMemberId(generatedId);
+			member1.setMemberPwd(snspwdIsNull);
+			member1.setMemberNick(Nname);
+			member1.setMemberEmail(Nemail);	
 			
-		int result = mservice.insertMember(member);
+		int result = mservice.insertMember(member1);
 		
-		System.out.println(member.getMemberId());
-		System.out.println(member.getMemberPwd());
-		System.out.println(member.getMemberNick());
-		System.out.println(member.getMemberEmail());
+		System.out.println(member1.getMemberId());
+		System.out.println(member1.getMemberPwd());
+		System.out.println(member1.getMemberNick());
+		System.out.println(member1.getMemberEmail());
 		if(result > 0) {
 			member = mservice.snsLogin(Nemail);
 		} else {
@@ -208,7 +211,7 @@ public class NaverServlet extends HttpServlet {
 			throw new RuntimeException("API URL이 잘못되었습니다. : " + apiUrl, e);
 		} catch (IOException e) {
 			throw new RuntimeException("연결이 실패했습니다. : " + apiUrl, e);
-		}
+		}//TO PUSH
 	}
 
 	private static String readBody(InputStream body) {

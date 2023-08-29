@@ -35,10 +35,10 @@ public class GoogleServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		Member member = new Member();
 		MemberService mservice = new MemberService();
-		String Gemail = request.getParameter("google_id_login_id");		
-		String Gname = request.getParameter("google_id_login_name");	
+		String id = request.getParameter("google_id_login_id");		
+		String name = request.getParameter("google_id_login_name");	
 		
-		member = mservice.snsLogin(Gemail);
+		member = mservice.snsLogin(id);
 
 		if(member == null) {	//회원정보 없을시 sns계정정보 임의생성용 토큰생성 메소드
 			member = new Member();

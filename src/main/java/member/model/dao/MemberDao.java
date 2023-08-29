@@ -70,7 +70,6 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);			
 		}
-		System.out.println(member.toString());
 		
 		return member;
 	}
@@ -78,15 +77,15 @@ public class MemberDao {
 	// 회원가입 처리용
 	public int insertMember(Connection conn, Member member) {
 		int result = 0;
-		String query = "insert into member values ((member_seq.nextval),?,?,?,?,default)";
+		String query = "insert into member values ((member_seq.nextval),?,?,?,?,1)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt=conn.prepareStatement(query);
 			
 			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getMemberPwd());
-			pstmt.setString(3, member.getMemberNick());
-			pstmt.setString(4, member.getMemberEmail());
+			pstmt.setString(3, member.getMemberEmail());
+			pstmt.setString(4, member.getMemberNick());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -231,6 +230,26 @@ public class MemberDao {
 		return result;
 	}
 
-	
-	
+	//관리자 회원 등급 변경용
+	public int managementMember(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update member set memberGrade = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);			
+			
+			pstmt.setString(1, member.getMemberGrade());
+			
+			result = pstmt.executeUpdate();			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
