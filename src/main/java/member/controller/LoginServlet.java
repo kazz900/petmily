@@ -48,7 +48,8 @@ public class LoginServlet extends HttpServlet {
 			md.update(pwdValues);
 			// 암호화된 byte[] 을 String으로 변경시킴 : 암호문 상태가 됨
 			cryptoUserpwd = Base64.getEncoder().encodeToString(pwdValues);
-			
+			System.out.println(mid);
+			System.out.println(cryptoUserpwd);
 			//확인하기
 			//System.out.println("암호화된 패스워드 : " + cryptoUserpwd);
 			//System.out.println("글자길이 : " + cryptoUserpwd.length());
@@ -57,10 +58,12 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		// 3. 서비스 메소드로 값 전달 실행하고 결과 받아오기
-		Member loginMember = new MemberService().commonLogin(mid, cryptoUserpwd);
+		Member member = new MemberService().commonLogin(mid, cryptoUserpwd);
+		
+		//System.out.println(member + " is mem");
 		
 		// 4. 받은 결과를 가지고 성공/실패 페이지 내보내기
-		if(loginMember != null) {	// 값 있음, 로그인 성공시
+		if(member.getMemberGrade() != null) {	// 값 있음, 로그인 성공시
 				// 로그인 상태 확인용 세션 객체 생성함
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(30*60);	
@@ -69,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 			//System.out.println("생성된 Session 객체의 id : " + session.getId());
 			
 			// 로그인한 회원의 정보를 세션객체에 저장한다.
-			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("member", member);
 			
 			// 로그인 성공시 내보낼 페이지 지정
 			response.sendRedirect("index.jsp");
@@ -78,9 +81,9 @@ public class LoginServlet extends HttpServlet {
 				// 클라이언트 브라우저로 내보낼 뷰 파일과 메세지 지정
 				// 서블릿의 위치는 모두 root에서 실행되고 있다.			
 				// 상대경로만 사용할 수 있다.
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
 
-			if(loginMember == null) {
+			if(member.getMemberGrade() == null) {
 				request.setAttribute("message", "아이디 혹은 패스워드를 다시 확인해주세요.");
 			}
 				// 요청한 클라이언트로 전송처리함
