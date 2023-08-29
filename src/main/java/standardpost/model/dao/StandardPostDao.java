@@ -1,7 +1,11 @@
 package standardpost.model.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import static common.JDBCTemplate.close;
 
 import standardpost.model.vo.StandardPost;
 
@@ -14,7 +18,33 @@ public class StandardPostDao {
 	}
 
 	public ArrayList<StandardPost> getStandardPostList(Connection conn) {
-		// TODO Auto-generated method stub
+		ArrayList<StandardPost> list = new ArrayList<StandardPost>();
+		PreparedStatement pstmt = null;
+		ResultSet rest = null;
+		
+		String query = "SELECT *\r\n"
+				+ "FROM \r\n"
+				+ "    (SELECT\r\n"
+				+ "        POST_CONTENT,\r\n"
+				+ "        MEMBER_ID,\r\n"
+				+ "        LIKE_NO,\r\n"
+				+ "        REPLY_NO, \r\n"
+				+ "        POST_DATE,\r\n"
+				+ "        LAST_MODIFIED_DATE,\r\n"
+				+ "        ROWNUM RNUM\r\n"
+				+ "         FROM STANDARD_POST\r\n"
+				+ "        JOIN MEMBER USING (MEMBER_SEQ)\r\n"
+				+ "        ORDER BY POST_DATE DESC)\r\n"
+				+ "WHERE RNUM <= 5";
+		
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rest, pstmt);
+		}
+		
 		return null;
 	}
 

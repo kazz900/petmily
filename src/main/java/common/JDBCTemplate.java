@@ -140,4 +140,15 @@ public class JDBCTemplate {
 			}
 		}
 		
+		public static void close(ResultSet rset, Statement stat) {
+			try {
+				if ((rset != null && !rset.isClosed() && (stat != null && !stat.isClosed()))) {
+					rset.close();
+					stat.close();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
 }
