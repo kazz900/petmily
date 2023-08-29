@@ -70,20 +70,32 @@ justify-content: space-between; */
  white-space: pre-line;
  }
 </style>
-<script type="text/javascript"></script>
+<script type="text/javascript">
+window.onload = function(){
+	var mid = document.getElementById('mid');
+	var mpwd = document.getElementById('mpwd');
+	var mpwd2 = document.getElementById('mpwd2');
+	var notice = document.getElementById('checkpassword');
+	var mnick = document.getElementById('mnick');
+	var memail = document.getElementById('memail');
+	
+	console.log(notice);
+	
+}
+</script>
 </head>
 <body>
 <h1 align="center">Petmily</h1> <!-- 추후 include처리 -->
 <h2 align="center">회원가입</h2> <!-- 추후 include처리 -->
-<form>
+<form action="/petmily/enroll">
 <table>
-<tr><td><input type="text" id="userid" name="userid" placeholder="사용할 아이디 입력" required> 
+<tr><td><input type="text" id="mid" name="mid" placeholder="사용할 아이디 입력" required> 
 </td><td><input type="button" value="중복확인" id="dupcheck" onclick="#"></td></tr>
-<tr><td><input type="password" id="userpwd" name="userpwd" placeholder="사용할 패스워드 입력"required></td></tr>
-<tr><td><input type="password" id="userpwd2" placeholder="패스워드 확인"required></td></tr>
+<tr><td><input type="password" id="mpwd" name="mpwd" placeholder="사용할 패스워드 입력"required></td></tr>
+<tr><td><input type="password" id="mpwd2" placeholder="패스워드 확인"required></td></tr>
 <tr><td><div id="checkpassword">패스워드는 영어 대소문자와 @, !, #, $중 하나의 기호를 포함하여 6~12자로 작성해주세요.</div></td></tr>
-<tr><td><input type="text" id="nname" name="nname" placeholder="사용할 닉네임 입력" required><!--  &nbsp;  &nbsp;  -->
-<tr><td><input type="email" name="email" placeholder="Email" required><!--  &nbsp;  &nbsp;  -->
+<tr><td><input type="text" id="mnick" name="mnick" placeholder="사용할 닉네임 입력" required><!--  &nbsp;  &nbsp;  -->
+<tr><td><input type="email" id="memail" name="memail" placeholder="Email" required><!--  &nbsp;  &nbsp;  -->
 </td><td><input type="button" value="중복확인" id="dupcheck2" onclick="#"></td></tr>
 </table>
 <input type="submit" value="가입하기"> &nbsp;

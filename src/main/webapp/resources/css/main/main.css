@@ -35,6 +35,7 @@
 	width: 100%;
 	font-family: 'Surround';
 	src: url('/petmily/resources/font/surround.woff2') format('woff2');
+	font-size: 20px;
 }
 
 .formSearch .inputSearch:focus+label, .formSearch .inputSearch:valid+label
