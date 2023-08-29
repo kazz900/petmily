@@ -1,51 +1,56 @@
-package mypage.controller;
+package member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pet.model.vo.Pet;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class mypage
+ * Servlet implementation class AdminMemberManagement
  */
-@WebServlet("/insertpet")
-public class mypage extends HttpServlet {
+@WebServlet("/admmm")
+public class AdminMemberManagement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mypage() {
+    public AdminMemberManagement() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		
-		request.setCharacterEncoding("utf-8");
+		Member member = new Member();
 		
-		String petName  = request.getParameter("petName");
-		String petType  = request.getParameter("petType");
-		String petSize = request.getParameter("petSize");
-		String petImg = request.getParameter("petImg");
+		member.setMemberGrade(request.getParameter("memberGrade"));
 		
+		int result = new MemberService().managementMember(member);
 		
-		
+		if(result > 0) {
+			response.sendRedirect("/petmily/views/AdminMemberManagement.jsp" + member.getMemberGrade());
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+	    
+		 view.forward(request, response);
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -2,15 +2,13 @@ package servicecenter.model.service;
 
 import static common.JDBCTemplate.*;
 
-import java.io.Serializable;
 import java.sql.Connection;
 import java.util.ArrayList;
 
 import servicecenter.model.dao.BoardDao;
 import servicecenter.model.vo.Board;
 
-public class BoardService implements Serializable {
-	private static final long serialVersionUID = 5537854167716412519L;
+public class BoardService {
 	BoardDao bdao = new BoardDao();
 	
 	public int addMySuggest(Board board) {

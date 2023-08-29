@@ -41,14 +41,15 @@ public class SelectAllSuggestServlet extends HttpServlet {
 		
 		RequestDispatcher view = null;
 
-		if (list.size() > 0) {
-//			view = request.getRequestDispatcher("views/servicecenter/mySuggestBoard.jsp");
-			view = request.getRequestDispatcher("views/servicecenter/addDept.jsp");
-			request.setAttribute("list", list);
-		} else {
-			response.sendRedirect("views/servicecenter/dCommon/addFailed.jsp");
-			System.out.println("sex");
-		}
+		view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
+		request.setAttribute("list", list);
+	
+//		if (list.size() > 0) {
+//			view = request.getRequestDispatcher("views/servicecenter/addDept.jsp");
+//			request.setAttribute("list", list);
+//		} else {
+//			response.sendRedirect("views/servicecenter/dCommon/addFailed.jsp");
+//		}
 
 		view.forward(request, response);
 	}

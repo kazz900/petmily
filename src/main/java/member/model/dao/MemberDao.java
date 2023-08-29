@@ -28,9 +28,14 @@ public class MemberDao {
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
+				
+				member.setMemberSeq(rset.getInt("member_seq"));
 				member.setMemberId(mid);
+				member.setMemberPwd("");
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(rset.getString("member_email"));
+				member.setMemberGrade(rset.getString("member_grade"));
+				System.out.println(member);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -38,7 +43,7 @@ public class MemberDao {
 			close(rset);
 			close(pstmt);			
 		}
-		
+
 		return member;
 	}
 
@@ -84,8 +89,8 @@ public class MemberDao {
 			
 			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getMemberPwd());
-			pstmt.setString(3, member.getMemberNick());
-			pstmt.setString(4, member.getMemberEmail());
+			pstmt.setString(3, member.getMemberEmail());
+			pstmt.setString(4, member.getMemberNick());
 			
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -230,6 +235,26 @@ public class MemberDao {
 		return result;
 	}
 
-	
-	
+	//관리자 회원 등급 변경용
+	public int managementMember(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update member set memberGrade = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);			
+			
+			pstmt.setString(1, member.getMemberGrade());
+			
+			result = pstmt.executeUpdate();			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 }
