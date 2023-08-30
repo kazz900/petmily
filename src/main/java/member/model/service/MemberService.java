@@ -84,4 +84,16 @@ public class MemberService {
 		return result;
 	}
 	
+
+	public int updateMemberInfo(String userid, String nickname) {
+		Connection conn = getConnection();
+		int result = mdao.updateMemberInfo(conn, userid, nickname);
+		if (result>0) {
+			commit(conn);
+		}	else	{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
 }
