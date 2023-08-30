@@ -14,8 +14,12 @@
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js" integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
 <script type="text/javascript">
   <% if (request.getAttribute("message") != null) { %>
+  <% if (request.getAttribute("message").equals("비밀번호 변경됨.")) { %>
+  	alert("비밀번호 변경 성공! 새로운 비밀번호로 로그인해주세요.");
+  <% } else {%>
     alert("<%=request.getAttribute("message")%>");
-    location.href="/petmily/views/member/login.jsp";	//로그인 실패시 
+  <% } %>
+    location.href="/petmily/views/member/login.jsp";	
   <% } %>
 </script>
  <%	//	네이버 로그인
@@ -128,7 +132,7 @@ text-align: center;
 		<tr><td><input type="text" id="memberid" name="memberid" placeholder="아이디 입력" required> </td>
 		<td rowspan="2"><input type="submit" value="로그인" id="logincheck"></td></tr>
 		<tr><td><input type="password" id="memberpwd" name="memberpwd" placeholder="패스워드 입력"required></td></tr>
-		<tr><td colspan="2"><input type="button" value="ID/PA 조회" id="findinfo" onclick="moveFindinfoPage();">
+		<tr><td colspan="2"><input type="button" value="아이디/패스워드 조회" id="findinfo" onclick="moveFindinfoPage();">
 		<input type="button" value="회원가입" id="enroll" onclick="moveEnrollPage();"></td></tr>
 <script type="text/javascript">
 function moveFindinfoPage(){
