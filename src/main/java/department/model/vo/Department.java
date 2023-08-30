@@ -18,13 +18,17 @@ public class Department implements java.io.Serializable {
 	private String deptWithpetfee;
 	private String deptUrl;
 	private String deptPic;
-	private String commitment;
+	private String deptInsertOk;
+	private String deptDeleteOk;
+	
 	public Department() {
 		super();
 	}
+
 	public Department(int deptSeq, String deptType, String deptName, String deptAddress, String deptPhone,
 			String deptLatitude, String deptLongitude, String deptTime, String deptParking, String deptEntrancefee,
-			String deptSizerestrict, String deptRestrict, String deptWithpetfee, String deptUrl, String deptPic) {
+			String deptSizerestrict, String deptRestrict, String deptWithpetfee, String deptUrl, String deptPic,
+			String deptInsertOk, String deptDeleteOk) {
 		super();
 		this.deptSeq = deptSeq;
 		this.deptType = deptType;
@@ -41,7 +45,10 @@ public class Department implements java.io.Serializable {
 		this.deptWithpetfee = deptWithpetfee;
 		this.deptUrl = deptUrl;
 		this.deptPic = deptPic;
+		this.deptInsertOk = deptInsertOk;
+		this.deptDeleteOk = deptDeleteOk;
 	}
+
 	public int getDeptSeq() {
 		return deptSeq;
 	}
@@ -133,14 +140,28 @@ public class Department implements java.io.Serializable {
 		this.deptPic = deptPic;
 	}
 	
+
 	
-	public String getCommitment() {
-		return commitment;
+	public String getDeptInsertOk() {
+		return deptInsertOk;
 	}
-	public void setCommitment(String commitment) {
-		this.commitment = commitment;
+
+	public void setDeptInsertOk(String deptInsertOk) {
+		this.deptInsertOk = deptInsertOk;
 	}
-	
+
+	public String getDeptDeleteOk() {
+		return deptDeleteOk;
+	}
+
+	public void setDeptDeleteOk(String deptDeleteOk) {
+		this.deptDeleteOk = deptDeleteOk;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "Department [deptSeq=" + deptSeq + ", deptType=" + deptType + ", deptName=" + deptName + ", deptAddress="

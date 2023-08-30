@@ -37,7 +37,6 @@ public class AddDeptServlet extends HttpServlet {
 
 		Department dept = new Department();
 		
-		dept.setCommitment(request.getParameter("commitment"));
 		dept.setDeptName(request.getParameter("name"));
 		dept.setDeptType(request.getParameter("type"));
 		dept.setDeptAddress(request.getParameter("address"));
@@ -48,6 +47,8 @@ public class AddDeptServlet extends HttpServlet {
 		dept.setDeptEntrancefee(request.getParameter("entFee"));
 		dept.setDeptWithpetfee(request.getParameter("petFee"));
 		dept.setDeptRestrict(request.getParameter("restrict"));
+		dept.setDeptInsertOk(request.getParameter("loginOk"));
+		dept.setDeptDeleteOk(request.getParameter("deleteOk"));
 		
 		int result = new DepartmentService().insertDepartment(dept);
 		

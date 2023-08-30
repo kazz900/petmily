@@ -29,7 +29,6 @@ body {
 font-size: 25px;
 font-weight: 900;
 color: hsl(30.5, 77.6%, 29.8%);
-	background-color:  hsl(30.7, 86.9%, 70%);
     }
 body h1 {
       font-family: 'Surround', sans-serif;
@@ -37,6 +36,11 @@ body h1 {
 font-size: 35px;
 font-weight: 900;
 color: hsl(30.46deg 58.9% 45.68%);
+    }
+    body h2 {
+      font-family: 'Surround', sans-serif;
+      padding: 20px 50px;
+color: hsl(30.5, 77.6%, 29.8%);
     }
     form {
 	text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
@@ -49,38 +53,48 @@ color: hsl(30.46deg 58.9% 45.68%);
 border: 1px solid red; 
 }  */
  td input[type=text]{
- width: 250px;
- height: 30px;
- border-radius: 3px;
- background-color: #c5c5c5;
+	width: 250px;
+    height: 30px;
+    border-radius: 7px;
+    background-color: beige;
+    font-family: 'Surround';
+    border: solid;
  }
  td input[type=password]{
- width: 250px;
- height: 30px;
- border-radius: 3px;
- background-color: #c5c5c5;
+	width: 250px;
+    height: 30px;
+    border-radius: 7px;
+    background-color: beige;
+    font-family: 'Surround';
+    border: solid;
  }
 #logincheck {
-width:80px;
-height:80px;
- border-radius: 3px;
- background-color: #39f;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    color: hsl(30.5, 77.6%, 29.8%);
+    background-color: hsl(36deg 70.37% 68.61%);
+    font-family: 'Surround';
 }
 #findinfo {
-text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
-	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
-	width: 165px; /* 폼의 너비 설정 */
-	height: 30px;
-	 border-radius: 3px;
- background-color: #39f;
+text-align: center;
+    margin: 0 auto;
+    width: 165px;
+    height: 30px;
+    border-radius: 7px;
+    color: hsl(30.5, 77.6%, 29.8%);
+    background-color: hsl(36deg 70.37% 68.61%);
+    font-family: 'Surround';
 }
 #enroll {
-text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
-	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
-	width: 165px; /* 폼의 너비 설정 */
-	height: 30px;
-	 border-radius: 3px;
- background-color: #39f;
+text-align: center;
+    margin: 0 auto;
+    width: 165px;
+    height: 30px;
+    border-radius: 7px;
+    color: hsl(30.5, 77.6%, 29.8%);
+    background-color: hsl(36deg 70.37% 68.61%);
+    font-family: 'Surround';
 }
       </style>
 </head>
@@ -119,8 +133,8 @@ function moveEnrollPage(){
     apiURL += "&state=" + state;
     session.setAttribute("state", state);
  %>
- <div align="center">
-  <a href="<%=apiURL%>"><img width="200" height="60" src="http://static.nid.naver.com/oauth/small_g_in.PNG"></a>
+ <div  style="width: 120px; position: absolute; left: 530px; border:1px solid black;">
+  <a href="<%=apiURL%>"><img width="110" height="40" src="http://static.nid.naver.com/oauth/small_g_in.PNG"></a>
 </div>
 
 <br>
