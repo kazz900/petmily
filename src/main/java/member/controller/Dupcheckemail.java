@@ -32,6 +32,7 @@ public class Dupcheckemail extends HttpServlet {
 		String memail = request.getParameter("memail");
 		
 		int emc = new MemberService().selectCheckemail(memail);
+
 		String returnValue = null;	//ajax로 보낼 문자 저장용
 		
 		if(emc == 0) {

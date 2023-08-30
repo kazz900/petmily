@@ -7,6 +7,7 @@ public class StandardPost implements java.io.Serializable {
 
 	private int postSeq;
 	private int memberSeq;
+	private String memberId;
 	private String postContent;
 	private String postImg;
 	private int likeNo;
@@ -14,6 +15,7 @@ public class StandardPost implements java.io.Serializable {
 	private Date postDate;
 	private Date lastModifiedDate;
 	public StandardPost() {
+		//TOPUSH
 		super();
 	}
 	public StandardPost(int postSeq, int memberSeq, String postContent, String postImg, int likeNo, int replyNO,
@@ -27,6 +29,13 @@ public class StandardPost implements java.io.Serializable {
 		this.replyNO = replyNO;
 		this.postDate = postDate;
 		this.lastModifiedDate = lastModifieddate;
+	}
+	
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 	public int getPostSeq() {
 		return postSeq;

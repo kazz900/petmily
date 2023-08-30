@@ -57,6 +57,11 @@ text-decoration: none;
       padding: 20px 50px;
 color: hsl(30.5, 77.6%, 29.8%);
     }
+    body h2 {
+      font-family: 'Surround', sans-serif;
+      padding: 20px 50px;
+color: hsl(30.5, 77.6%, 29.8%);
+    }
     form {
 	text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
 	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
@@ -138,8 +143,10 @@ function moveEnrollPage(){
 
 
 <br>
+
 <div>
 <!-- 네이버로그인 -->
+
  <div  style="width: 120px; position: absolute; left: 530px; border:1px solid black;">
   <a href="<%=apiURL%>"><img width="110" height="40" src="http://static.nid.naver.com/oauth/small_g_in.PNG"></a>
 </div>

@@ -13,6 +13,7 @@
 	src: url('/petmily/resources/font/surround.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
+
 }
 body {
       font-family: 'Surround', sans-serif;
@@ -30,6 +31,7 @@ border: none;
 color: hsl(30.46deg 58.9% 45.68%);
 text-decoration: none;
     }
+
 form {
 	text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
 	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
@@ -106,6 +108,7 @@ justify-content: space-between; */
 }
 </style>
 <script type="text/javascript">
+
 	//회원가입 페이지 입력값 가져오기
 	window.onload = function() {
 		var mid = document.getElementById('mid');
@@ -301,5 +304,6 @@ justify-content: space-between; */
 	</form>
 	<br>
 	<%@ include file="../common/footer.jsp"%>
+
 </body>
 </html>
