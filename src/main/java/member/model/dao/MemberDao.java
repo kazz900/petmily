@@ -234,6 +234,30 @@ public class MemberDao {
 		}
 		return result;
 	}
+	//관리자 회원 등급 변경용
+	public int managementMember(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update member set memberGrade = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);			
+			
+			pstmt.setString(1, member.getMemberGrade());
+			
+			result = pstmt.executeUpdate();			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+}
+
 
 		public int updateMemberInfo(Connection conn, String userid, String nickname) {
 		int result = 0;
@@ -261,4 +285,4 @@ public class MemberDao {
 		return result;
 	}
 	
-}
+
