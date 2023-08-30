@@ -14,6 +14,7 @@ public class StandardPost implements java.io.Serializable {
 	private Date postDate;
 	private Date lastModifiedDate;
 	public StandardPost() {
+		//TOPUSH
 		super();
 	}
 	public StandardPost(int postSeq, int memberSeq, String postContent, String postImg, int likeNo, int replyNO,
