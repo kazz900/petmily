@@ -36,8 +36,7 @@ public class StandardPostDao {
 				+ "        ROWNUM RNUM\r\n"
 				+ "         FROM STANDARD_POST\r\n"
 				+ "        JOIN MEMBER USING (MEMBER_SEQ)\r\n"
-				+ "        ORDER BY POST_DATE DESC)\r\n"
-				+ "WHERE RNUM <= 5";
+				+ "        ORDER BY POST_DATE DESC)\r\n";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -53,7 +52,7 @@ public class StandardPostDao {
 				sp.setReplyNO(rset.getInt("REPLY_NO"));
 				sp.setPostDate(rset.getDate("POST_DATE"));
 				sp.setLastModifieddate(rset.getDate("LAST_MODIFIED_DATE"));
-				
+				System.out.println(sp.toString());
 				list.add(sp);
 			}
 			
