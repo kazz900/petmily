@@ -1,7 +1,6 @@
 package member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,42 +11,36 @@ import javax.servlet.http.HttpServletResponse;
 import member.model.service.MemberService;
 
 /**
- * Servlet implementation class Dupcheckemail
+ * Servlet implementation class ChangeNicknameServlet
  */
-@WebServlet("/dupemail")
-public class Dupcheckemail extends HttpServlet {
+@WebServlet("/myinfo")
+public class ChangeNicknameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Dupcheckemail() {
+    public ChangeNicknameServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memail = request.getParameter("memail");
+		request.setCharacterEncoding("UTF-8");
 		
-		int emc = new MemberService().selectCheckemail(memail);
+		String nickname = request.getParameter("nickname");
+		String userid = request.getParameter("userid");
 		
-		String returnValue = null;	//ajax로 보낼 문자 저장용
+		int result = new MemberService().updateMemberInfo(userid, nickname);
 		
-		if(emc == 0) {
-			returnValue = "사용가능한 이메일입니다.";
+		if (result > 0) {
+			response.sendRedirect("/petmily/views/servicecenter/dCommon/updateSucceed.jsp");
 		} else {
-			returnValue = "중복된 이메일입니다.";
+			System.out.println("실패");
 		}
-		
-		//ajax 통신은 네트워크 입출력임 : 별도의 스트림을 열어서 사용함
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.append(returnValue);
-		out.flush();
-		out.close();
-		
 		
 	}
 
@@ -55,6 +48,7 @@ public class Dupcheckemail extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

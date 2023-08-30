@@ -10,7 +10,8 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 <head>
 <meta charset="UTF-8">
 <title>Petmily</title>
-<link rel="stylesheet" href="/petmily/resources/css/servicecenter/serviceCenter.css">
+<link rel="stylesheet"
+	href="/petmily/resources/css/servicecenter/serviceCenter.css">
 
 <script type="text/javascript"
 	src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
@@ -18,7 +19,7 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 	src="/petmily/resources/js/info/infotap.js"></script>
 
 </head>
-<%@ include file="../common/main.jsp" %>
+<%@ include file="../common/main.jsp"%>
 
 <body>
 	<div class="info-content">
@@ -44,13 +45,30 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 						<th style="width: 110px;">Date</th>
 					</tr>
 					<%
+					if (list != null) {
+					%>
+					<%
 					for (Board b : list) {
 					%>
-					<tr style="border-top:1px solid black; border-bottom:1px solid black;">
+					<tr
+						style="border-top: 1px solid black; border-bottom: 1px solid black;">
 						<td style="font-size: 14px;"><%=b.getBrdNo()%></td>
 						<td style="padding-right: 15px; font-size: 14px;"><%=b.getBrdTitle()%></td>
 						<td style="padding-left: 15px; font-size: 14px;"><%=b.getBrdContent()%></td>
 						<td style="font-size: 14px;"><%=b.getBrdDate()%></td>
+					</tr>
+					<%
+					}
+					%>
+
+					<%
+					} else {
+					%>
+					<tr>
+						<td style="font-size: 14px;"></td>
+						<td style="padding-right: 15px; font-size: 14px;"></td>
+						<td style="padding-left: 15px; font-size: 14px;"></td>
+						<td style="font-size: 14px;"></td>
 					</tr>
 					<%
 					}
@@ -62,8 +80,9 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 			<div id="tab-2" class="tab-content">
 				<form action="/petmily/addsuggest" method="get">
-					<table width="500" align="center" cellspacing="5">
+					<input type="hidden" name="result" value="접수">
 
+					<table width="500" align="center" cellspacing="5">
 						<tr>
 							<th width="150">글 제목</th>
 							<td><input type="text" name="title" size="31" maxlength="50"
@@ -86,7 +105,8 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 			<div id="tab-3" class="tab-content">
 				<form action="/petmily/adddept" method="get" id="form">
-					<input type="hidden" name="commitment" value="N">
+					<input type="hidden" name="loginOk" value="N">
+					<input type="hidden" name="deleteOk" value="N">
 					<table width="500" align="center" cellspacing="5">
 
 						<tr>
@@ -97,14 +117,17 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 						<tr>
 							<th width="150">시설분류</th>
-							<td><select name="type" style="width:288px; height:36px;">
+							<td><select name="type" style="width: 288px; height: 36px;">
 									<option selected>시설의 분류를 선택해주세요.</option>
 									<option value="1">동물병원</option>
-									<option value="2">반려동물용품점</option>
-									<option value="3">장묘시설</option>
+									<option value="2">미용시설</option>
+									<option value="1/2">의료/미용</option>
+									<option value="3">반려동물용품점</option>
 									<option value="4">위탁관리시설</option>
-									<option value="5">문화시설</option>
-									<option value="6">카페</option>
+									<option value="5">장묘시설</option>
+									<option value="6">식당/카페</option>
+									<option value="7">호텔/펜션</option>
+									<option value="8">문화시설</option>
 							</select></td>
 						</tr>
 
@@ -124,8 +147,9 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 						<tr>
 							<th width="150">운영시간</th>
 							<td><input type="time" name="open" value="time" size="31"
-								maxlength="50" style="width:128px;"> ~ <input type="time" name="close"
-								value="time" size="31" maxlength="50" style="width:129px;"></td>
+								maxlength="50" style="width: 128px;"> ~ <input
+								type="time" name="close" value="time" size="31" maxlength="50"
+								style="width: 129px;"></td>
 						</tr>
 
 						<tr class="yes">
@@ -170,7 +194,7 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 						</tr>
 
 						<th colspan="2"><input type="submit" value="등록요청하기"
-							id="submitBtn"></th>
+							id="submitBtn" class="w-btn-neon2"></th>
 
 
 					</table>
@@ -188,19 +212,6 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 							<td><input type="text" name="name" size="31" maxlength="15"
 								placeholder="시설명을 입력해주세요." required></td>
 						</tr>
-
-						<!-- 		<tr>
-			<th width="150">시설분류</th>
-			<td><select name="type">
-					<option selected>시설의 분류를 선택해주세요.</option>
-					<option value="1">동물병원</option>
-					<option value="2">반려동물용품점</option>
-					<option value="3">장묘시설</option>
-					<option value="4">위탁관리시설</option>
-					<option value="5">문화시설</option>
-					<option value="6">카페</option>
-			</select></td>
-		</tr> -->
 
 						<tr>
 							<th width="150">주소</th>
