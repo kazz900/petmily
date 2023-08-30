@@ -30,15 +30,13 @@ public class Dupcheckid extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mid = request.getParameter("mid");
-		
 		int idc = new MemberService().selectCheckid(mid);
-		
 		String returnValue = null;	//ajax로 보낼 문자 저장용
 		
 		if(idc == 0) {
-			returnValue = "사용가능";
+			returnValue = "사용가능한 아이디입니다.";
 		} else {
-			returnValue = "duplicated";
+			returnValue = "중복된 아이디입니다.";
 		}
 		
 		//ajax 통신은 네트워크 입출력임 : 별도의 스트림을 열어서 사용함
@@ -48,13 +46,13 @@ public class Dupcheckid extends HttpServlet {
 		out.flush();
 		out.close();
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doGet(request, response);
 	}
 
