@@ -20,13 +20,15 @@ public class StandardPostDao {
 	public ArrayList<StandardPost> getStandardPostList(Connection conn) {
 		ArrayList<StandardPost> list = new ArrayList<StandardPost>();
 		PreparedStatement pstmt = null;
-		ResultSet rest = null;
+		ResultSet rset = null;
 		
 		String query = "SELECT *\r\n"
 				+ "FROM \r\n"
 				+ "    (SELECT\r\n"
-				+ "        POST_CONTENT,\r\n"
+				+ "        MEMBER_SEQ,\r\n"
+				+ "        POST_SEQ,\r\n"
 				+ "        MEMBER_ID,\r\n"
+				+ "        POST_CONTENT,\r\n"
 				+ "        LIKE_NO,\r\n"
 				+ "        REPLY_NO, \r\n"
 				+ "        POST_DATE,\r\n"
@@ -38,14 +40,30 @@ public class StandardPostDao {
 				+ "WHERE RNUM <= 5";
 		
 		try {
+			pstmt = conn.prepareStatement(query);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				StandardPost sp = new StandardPost();
+				sp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
+				sp.setPostSeq(rset.getInt("POST_SEQ"));
+				sp.setMemberId(rset.getString("MEMBER_ID"));
+				sp.setPostContent(rset.getString("POST_CONTENT"));
+				sp.setLikeNo(rset.getInt("LIKE_NO"));
+				sp.setReplyNO(rset.getInt("REPLY_NO"));
+				sp.setPostDate(rset.getDate("POST_DATE"));
+				sp.setLastModifieddate(rset.getDate("LAST_MODIFIED_DATE"));
+				
+				list.add(sp);
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			close(rest, pstmt);
+			close(rset, pstmt);
 		}
 		
-		return null;
+		return list;
 	}
 
 	public ArrayList<StandardPost> getStandardPostListFilter(Connection conn) {
