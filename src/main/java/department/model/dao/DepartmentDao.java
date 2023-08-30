@@ -1,5 +1,6 @@
 package department.model.dao;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,7 +9,9 @@ import java.util.ArrayList;
 import department.model.vo.Department;
 import static common.JDBCTemplate.close;
 
-public class DepartmentDao {
+public class DepartmentDao implements Serializable {
+
+	private static final long serialVersionUID = 85103058248412049L;
 
 	public ArrayList<Department> selectList(Connection conn, String value) {
 
@@ -17,7 +20,7 @@ public class DepartmentDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from department where adminok = 'y' and dept_name like ? and dept_address like ?";
+		String query = "select * from department where dept_insert_ok = 'y' and dept_name like ? or dept_address like ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -35,7 +38,7 @@ public class DepartmentDao {
 				dept.setDeptAddress(rset.getString("dept_address"));
 				dept.setDeptPhone(rset.getString("dept_phone"));
 				dept.setDeptLatitude(rset.getString("dept_latitude"));
-				dept.setDeptLongitude(rset.getString("dept_longtitude"));
+				dept.setDeptLongitude(rset.getString("dept_longitude"));
 				dept.setDeptTime(rset.getString("dept_time"));
 				dept.setDeptParking(rset.getString("dept_parking"));
 				dept.setDeptEntrancefee(rset.getString("dept_entrance_fee"));
@@ -44,6 +47,8 @@ public class DepartmentDao {
 				dept.setDeptWithpetfee(rset.getString("dept_withpetfee"));
 				dept.setDeptUrl(rset.getString("dept_url"));
 				dept.setDeptPic(rset.getString("dept_pic"));
+				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
+				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
 
 				list.add(dept);
 			}
@@ -63,7 +68,7 @@ public class DepartmentDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from department where adminok = 'y' and dept_type like ?";
+		String query = "select * from department where dept_insert_ok = 'y' and dept_type like ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -80,7 +85,7 @@ public class DepartmentDao {
 				dept.setDeptAddress(rset.getString("dept_address"));
 				dept.setDeptPhone(rset.getString("dept_phone"));
 				dept.setDeptLatitude(rset.getString("dept_latitude"));
-				dept.setDeptLongitude(rset.getString("dept_longtitude"));
+				dept.setDeptLongitude(rset.getString("dept_longitude"));
 				dept.setDeptTime(rset.getString("dept_time"));
 				dept.setDeptParking(rset.getString("dept_parking"));
 				dept.setDeptEntrancefee(rset.getString("dept_entrance_fee"));
@@ -89,6 +94,8 @@ public class DepartmentDao {
 				dept.setDeptWithpetfee(rset.getString("dept_withpetfee"));
 				dept.setDeptUrl(rset.getString("dept_url"));
 				dept.setDeptPic(rset.getString("dept_pic"));
+				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
+				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
 
 				list.add(dept);
 			}
