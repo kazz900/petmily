@@ -1,8 +1,8 @@
 package member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class Dupcheckemail
+ * Servlet implementation class AdminMemberManagement
  */
-@WebServlet("/dupemail")
-public class Dupcheckemail extends HttpServlet {
+@WebServlet("/admmm")
+public class AdminMemberManagement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Dupcheckemail() {
+    public AdminMemberManagement() {
         super();
     }
 
@@ -29,26 +30,21 @@ public class Dupcheckemail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memail = request.getParameter("memail");
+		request.setCharacterEncoding("UTF-8");
 		
-		int emc = new MemberService().selectCheckemail(memail);
+		Member member = new Member();
 		
-		String returnValue = null;	//ajax로 보낼 문자 저장용
+		member.setMemberGrade(request.getParameter("memberGrade"));
 		
-		if(emc == 0) {
-			returnValue = "사용가능한 이메일입니다.";
-		} else {
-			returnValue = "중복된 이메일입니다.";
+		int result = new MemberService().managementMember(member);
+		
+		if(result > 0) {
+			response.sendRedirect("/petmily/views/AdminMemberManagement.jsp" + member.getMemberGrade());
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+	    
+		 view.forward(request, response);
 		}
-		
-		//ajax 통신은 네트워크 입출력임 : 별도의 스트림을 열어서 사용함
-		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.append(returnValue);
-		out.flush();
-		out.close();
-		
-		
 	}
 
 	/**

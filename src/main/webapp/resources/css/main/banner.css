@@ -1,10 +1,10 @@
 .banner-container{
-  width:100vw;
+  width:50vw;
   height:300px;
   overflow:hidden;
 }
 .banner{
-  width:calc(100vw*4);
+  width:calc(50vw*4);
   height:100%;
   display:flex;
   animation: animation1 10s infinite;
@@ -38,7 +38,7 @@
   background-color:#A9C6D9;
 }
 .list-button{
-  width:100%;
+  width:700%;
   height:10px;
   display:flex;
   justify-content:center;
