@@ -10,6 +10,8 @@
 <script type="text/javascript" src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <script type="text/javascript" src="/petmily/resources/js/info/infotap.js"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4ace05793ac4808782136fb0eaaad83b&libraries=services,clusterer"></script>
+</head>
 <script type="text/javascript">
 //SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
 Kakao.init('4ace05793ac4808782136fb0eaaad83b');
@@ -68,11 +70,11 @@ function kakaoShare() {
 <div class="info-detail02">
 
  <ul class="tabs">
-            <li class="tab-link current" data-tab="tab-1">상세내역</li>
-            <li class="tab-link" data-tab="tab-2">위 치</li>
+            <li class="tab-link current" data-tab="tab-1">위 치</li>
+            <li class="tab-link" data-tab="tab-2">상세내역</li>
         </ul>
 <hr style="opacity:0.5; margin-top:0px;">
-        <div id="tab-1" class="tab-content current"><ul>
+        <div id="tab-2" class="tab-content"><ul>
         	<li>＊영업 시간</li>
         	<li>&nbsp;&nbsp;&nbsp;<%= dptmt.getDeptTime() %></li><br>
         	<li>＊<%= dptmt.getDeptParking() %></li><br>
@@ -81,13 +83,37 @@ function kakaoShare() {
         	<li>＊제한 사항</li>
         	<li>&nbsp;&nbsp;&nbsp; <%= dptmt.getDeptRestrict()%></li><br>
         </ul></div>
-        <div id="tab-2" class="tab-content"><ul>
-        		<li>tab2입니다.</li>
-        		<li>tab2입니다.</li>
-        		<li>tab2입니다.</li>
+        <div id="tab-1" class="tab-content current"><ul>
+        		<li><div id="map2" style="width:100%;height:350px;"></div></li>
         	</ul>
         </div>
     </div>
 </div>
+<script>
+var lat = '<%= dptmt.getDeptLatitude() %>';
+var lon = '<%= dptmt.getDeptLongitude() %>';
+console.log(typeof(lat));
+console.log(typeof(lon));//string
+var json = JSON.parse(lat);
+var json = JSON.parse(lon);
+var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div 
+mapOption2 = {
+    center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
+    level: 3 // 지도의 확대 레벨
+};
+
+var map2 = new kakao.maps.Map(mapContainer2, mapOption2); // 지도를 생성합니다
+
+// 마커가 표시될 위치입니다 
+var markerPosition = new kakao.maps.LatLng(lat, lon);
+
+// 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+position: markerPosition
+});
+
+// 마커가 지도 위에 표시되도록 설정합니다
+marker.setMap(map2);
+</script>
 </body>
 </html>
