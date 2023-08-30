@@ -37,6 +37,9 @@ public class DeptTypeServlet extends HttpServlet {
 		
 		DepartmentService dservice = new DepartmentService();
 		String value = request.getParameter("selecttype");
+		String search = request.getParameter("typename");
+		
+
 		ArrayList<Department> list = dservice.selectType(value);
 		
 		//받은 결과에 따라 성공 또는 실패 페이지 내보내기
@@ -45,6 +48,7 @@ public class DeptTypeServlet extends HttpServlet {
 		if(list.size() > 0) {
 			view = request.getRequestDispatcher("views/department/deptsearch.jsp");
 			request.setAttribute("list", list);
+			request.setAttribute("search", search);
 		} else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
 			
