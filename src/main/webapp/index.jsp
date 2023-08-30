@@ -36,14 +36,14 @@
 <ul style="display: flex;
     justify-content: center;
     align-items: center;">
-<span style="margin-right:50px; "><a href="#"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/veterinary.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">병원</li></ul></a></span>
-<span style="margin-right:50px;"><a href="#"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/miyong.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">미용</li></ul></a></span>
-<span style="margin-right:50px;"><a href="#"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/shop.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">용품</li></ul></a></span>
-<span style="margin-right:50px;"><a href="#"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/witac.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">위탁</li></ul></a></span>
-<span style="margin-right:50px;"><a href="#" ><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/hosp.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">카페, 식당</li></ul></a></span>
-<span style="margin-right:50px;"><a href="#"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/hotel.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">호텔</li></ul></a></span>
-<span style="margin-right:50px;"><a href="#"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/muhwa.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">문화</li></ul></a></span>
-<span style="margin-right:50px;"><a href="#"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/dead.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">장묘</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=1&typename=의료"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/veterinary.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">병원</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=2&typename=미용"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/miyong.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">미용</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=3&typename=용품"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/shop.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">용품</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=4&typename=위탁"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/witac.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">위탁</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=6&typename=카페/식당" ><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/hosp.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">카페, 식당</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=7&typename=호텔"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/hotel.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">호텔</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=8&typename=문화"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/muhwa.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">문화</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=5&typename=장묘"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/dead.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">장묘</li></ul></a></span>
 </ul>
 
 

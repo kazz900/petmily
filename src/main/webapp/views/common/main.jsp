@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Petmily</title>
 <script type="text/javascript" src="/petmily/resources/js/main/main.js"></script>
 <link rel="stylesheet" href="/petmily/resources/css/main/main.css">
 </head>
@@ -18,13 +18,13 @@
 				<!-- style="top: 50px; right: 77px;" -->
 				<li class="logo"><a href="/petmily/index.jsp">Petmily</a></li>
 				<li>
-					<form class='formSearch' style="margin-right: 80px;">
-						<div class='field'>
-							<input class='inputSearch' id='inputSearch' name='inputSearch'
-								required type='text'> <label for='inputSearch'>
-								지역, 이름으로 검색 </label>
-						</div>
-					</form>
+               <form action="/petmily/selectdepartment" method="get" class='formSearch' style="margin-right: 80px;">
+                  <div class='field'>
+                     <input class='inputSearch' id='inputSearch' name='inputSearch'
+                        required type='text'><label for='inputSearch'>
+                        지역, 이름으로 검색 </label>
+                  </div>
+               </form>
 				</li>
 				<li><a class="sub-link" href="/petmily/mis?deptSeq=578">내주변</a></li>
 				<li><a class="sub-link" href="/petmily/views/common/waiting.jsp">커뮤니티</a></li>
