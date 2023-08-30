@@ -1,11 +1,17 @@
 package standardpost.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import standardpost.model.service.StandardPostService;
+import standardpost.model.vo.StandardPost;
 
 /**
  * Servlet implementation class StandardPostListViewServlet
@@ -13,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/splist")
 public class StandardPostListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -24,8 +29,26 @@ public class StandardPostListServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void getStandardPostList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		StandardPostService spSerivce = new StandardPostService();
+		ArrayList<StandardPost> list = new ArrayList<StandardPost>();
+		list = spSerivce.getStandardPostList();
+		
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).toString());
+		}
+		
+		RequestDispatcher view = null;
+		
+		if(list.size() > 0) {
+			view = request.getRequestDispatcher("views/post/postList.jsp");
+			
+			request.setAttribute("list", list);
+		} else {
+			view = request.getRequestDispatcher("views/common/waiting.jsp");
+		}
+		
+		view.forward(request, response);
 	}
 
 }
