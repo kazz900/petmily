@@ -256,7 +256,7 @@ public class MemberDao {
 		
 		return result;
 	}
-}
+
 
 
 		public int updateMemberInfo(Connection conn, String userid, String nickname) {
@@ -285,4 +285,4 @@ public class MemberDao {
 		return result;
 	}
 	
-
+}
