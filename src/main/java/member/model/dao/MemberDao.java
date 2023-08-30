@@ -1,10 +1,11 @@
 package member.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import member.model.vo.Member;
 
@@ -64,10 +65,12 @@ public class MemberDao {
 			
 			if(rset.next()) {
 				member = new Member();
-				
+				member.setMemberSeq(rset.getInt("member_seq"));
 				member.setMemberId(rset.getString("member_id"));
+				member.setMemberPwd("");
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(memail);
+				member.setMemberGrade(rset.getString("member_grade"));
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -283,6 +286,35 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+		
+	public ArrayList<Member> selectList(Connection conn){
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from member where member_grade = '1'";
+				
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberPwd(rset.getString("member_pwd"));
+				member.setMemberNick(rset.getString("member_nick"));
+				member.setMemberEmail(rset.getString("member_email"));
+			}
+		} catch (Exception e) {
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 }

@@ -244,6 +244,8 @@ public class DepartmentDao implements Serializable {
 				dept.setDeptPic(rset.getString("dept_pic"));
 				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
 				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
+				
+				dept.typeSelect();
 
 				list.add(dept);
 			}
@@ -315,6 +317,8 @@ public class DepartmentDao implements Serializable {
 				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
 				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
 
+				dept.typeSelect();	
+				
 				list.add(dept);
 			}
 		} catch (Exception e) {
