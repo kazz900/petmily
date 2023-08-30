@@ -30,6 +30,11 @@ border: none;
 color: hsl(30.46deg 58.9% 45.68%);
 text-decoration: none;
     }
+    body h2 {
+    font-family: 'Surround', sans-serif;
+    padding: 20px 50px;
+    color: hsl(30.5, 77.6%, 29.8%);
+}
 form {
 	text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
 	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
