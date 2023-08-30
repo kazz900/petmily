@@ -1,8 +1,10 @@
 /admin/
+
 /chat/
 /common/
 /department/
 /member/
+/org/
 /pet/
 /servicecenter/
 /standardlike/
@@ -11,4 +13,4 @@
 /tradelike/
 /tradepost/
 /tradereply/
-/org/
+
