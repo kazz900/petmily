@@ -1,4 +1,4 @@
-package department.controller;
+package admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,16 +14,16 @@ import department.model.service.DepartmentService;
 import department.model.vo.Department;
 
 /**
- * Servlet implementation class SelectRequestTerminateDept
+ * Servlet implementation class DeptManageServlet
  */
-@WebServlet("/srtd")
-public class SelectRequestTerminateDept extends HttpServlet {
+@WebServlet("/adminmain")
+public class AdminMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public SelectRequestTerminateDept() {
+	public AdminMainServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,15 +34,17 @@ public class SelectRequestTerminateDept extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		ArrayList<Department> list = new DepartmentService().selectRequestTerminateDept();
-
 		
+		
+		ArrayList<Department> list = new DepartmentService().selectNotInsertedDept();
+		
+		System.out.println("adminmain size =" + list.size());
 		RequestDispatcher view = null;
 
-		System.out.println(list.size());
-		view = request.getRequestDispatcher("views/admin/AdminMain.jsp");
+		view = request.getRequestDispatcher("views/admin/AdminDeptInsert.jsp");
 		request.setAttribute("list", list);
 		view.forward(request, response);
+		
 	}
 
 	/**
@@ -51,7 +53,7 @@ public class SelectRequestTerminateDept extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

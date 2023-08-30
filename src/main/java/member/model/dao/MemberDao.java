@@ -1,10 +1,11 @@
 package member.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import member.model.vo.Member;
 
@@ -35,7 +36,6 @@ public class MemberDao {
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(rset.getString("member_email"));
 				member.setMemberGrade(rset.getString("member_grade"));
-				System.out.println(member);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,10 +64,12 @@ public class MemberDao {
 			
 			if(rset.next()) {
 				member = new Member();
-				
+				member.setMemberSeq(rset.getInt("member_seq"));
 				member.setMemberId(rset.getString("member_id"));
+				member.setMemberPwd("");
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(memail);
+				member.setMemberGrade(rset.getString("member_grade"));
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -106,7 +108,7 @@ public class MemberDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      
-	      String query = "select count(member_id) from member where member_id = ?";
+	      String query = "select * from member where member_id = ?";
 	      try {
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setString(1, mid);
@@ -114,7 +116,7 @@ public class MemberDao {
 	         rset = pstmt.executeQuery();
 	         
 	         if(rset.next()) {
-	            idc = rset.getInt(1);   //select 절의 항목 순번으로도 값 추출할 수 있음
+	            idc = 1;   //select 절의 항목 순번으로도 값 추출할 수 있음
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -131,7 +133,7 @@ public class MemberDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      
-	      String query = "select count(member_email) from member where member_email = ?";
+	      String query = "select * from member where member_email = ?";
 	      try {
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setString(1, memail);
@@ -139,7 +141,7 @@ public class MemberDao {
 	         rset = pstmt.executeQuery();
 	         
 	         if(rset.next()) {
-	            emc = rset.getInt(1);   //select 절의 항목 순번으로도 값 추출할 수 있음
+	            emc = 1;   //select 절의 항목 순번으로도 값 추출할 수 있음
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -283,6 +285,35 @@ public class MemberDao {
 			close(pstmt);
 		}
 		return result;
+	}
+		
+	public ArrayList<Member> selectList(Connection conn){
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from member where member_grade = '1'";
+				
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberPwd(rset.getString("member_pwd"));
+				member.setMemberNick(rset.getString("member_nick"));
+				member.setMemberEmail(rset.getString("member_email"));
+			}
+		} catch (Exception e) {
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 	}
 	
 }
