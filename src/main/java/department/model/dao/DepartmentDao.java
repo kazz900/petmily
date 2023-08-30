@@ -107,9 +107,12 @@ public class DepartmentDao {
 
 		PreparedStatement pstmt = null;
 
-		String query = "INSERT INTO DEPARTMENT " + "VALUES (TO_CHAR(DEPT_SEQ.NEXTVAL), "
-				+ "?, ?, ?, ?, NULL, NULL, ?, ?, ?, " + "?, ?, ?, NULL, NULL, ?, ?)";
-
+		
+		String query = "INSERT INTO DEPARTMENT "
+					 + "VALUES (TO_CHAR(DEPT_SEQ.NEXTVAL), "
+					 + "?, ?, ?, ?, NULL, NULL, ?, ?, ?, "
+					 + "?, ?, ?, NULL, NULL, ?, ?)";
+		
 		try {
 			pstmt = conn.prepareStatement(query);
 
