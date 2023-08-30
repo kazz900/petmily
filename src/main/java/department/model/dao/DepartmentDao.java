@@ -111,24 +111,25 @@ public class DepartmentDao implements Serializable{
 		PreparedStatement pstmt = null;
 		
 		String query = "INSERT INTO DEPARTMENT "
-					 + "VALUES (TO_CHAR(ID_SEQ.NEXTVAL), ?, "
+					 + "VALUES (TO_CHAR(DEPT_SEQ.NEXTVAL), "
 					 + "?, ?, ?, ?, NULL, NULL, ?, ?, ?, "
-					 + "?, ?, ?, NULL, NULL)";
+					 + "?, ?, ?, NULL, NULL, ?, ?)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 
-			pstmt.setString(1, dept.getCommitment());
-			pstmt.setString(2, dept.getDeptType());
-			pstmt.setString(3, dept.getDeptName());
-			pstmt.setString(4, dept.getDeptAddress());
-			pstmt.setString(5, dept.getDeptPhone());
-			pstmt.setString(6, dept.getDeptTime());
-			pstmt.setString(7, dept.getDeptParking());
-			pstmt.setString(8, dept.getDeptEntrancefee());
-			pstmt.setString(9, dept.getDeptSizerestrict());
-			pstmt.setString(10, dept.getDeptRestrict());
-			pstmt.setString(11, dept.getDeptWithpetfee());
+			pstmt.setString(1, dept.getDeptType());
+			pstmt.setString(2, dept.getDeptName());
+			pstmt.setString(3, dept.getDeptAddress());
+			pstmt.setString(4, dept.getDeptPhone());
+			pstmt.setString(5, dept.getDeptTime());
+			pstmt.setString(6, dept.getDeptParking());
+			pstmt.setString(7, dept.getDeptEntrancefee());
+			pstmt.setString(8, dept.getDeptSizerestrict());
+			pstmt.setString(9, dept.getDeptRestrict());
+			pstmt.setString(10, dept.getDeptWithpetfee());
+			pstmt.setString(11, dept.getDeptInsertOk());
+			pstmt.setString(12, dept.getDeptDeleteOk());
 
 			result = pstmt.executeUpdate();
 
