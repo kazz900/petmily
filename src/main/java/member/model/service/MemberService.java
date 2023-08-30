@@ -6,6 +6,9 @@ import member.model.vo.Member;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+
+import department.model.vo.Department;
 
 public class MemberService {
 	private MemberDao mdao = new MemberDao();
@@ -106,5 +109,12 @@ public class MemberService {
 		}
 		close(conn);
 		return result;
+	}
+
+	public ArrayList<Member> selectList() {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectList(conn);
+		close(conn);
+		return list;
 	}
 }
