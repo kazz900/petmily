@@ -28,7 +28,6 @@ public class StandardPostService {
 	public ArrayList<StandardPost> getStandardPostList() {
 		ArrayList<StandardPost> list = null;
 		Connection conn = getConnection();
-		// TODO Auto-generated method stub
 
 		list = spDao.getStandardPostList(conn);
 		close(conn);

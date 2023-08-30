@@ -27,7 +27,7 @@
                </form>
 				</li>
 				<li><a class="sub-link" href="/petmily/mis?deptSeq=578">내주변</a></li>
-				<li><a class="sub-link" href="/petmily/views/common/waiting.jsp">커뮤니티</a></li>
+				<li><a class="sub-link" href="/petmily/splist" method="get">커뮤니티</a></li>
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
 				<% }else{ %>
@@ -49,14 +49,24 @@
 		<div class="sidebar">
 			<span class="area_desc" style="margin-top: 25%">
 				<ul>
-					<% if(member == null){ %>
+					<% if(member == null) { %>
 					<li class="sidebarmenutitle">더보기</li>
 					
 					<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
-					<% }else{ %>
+					<% }else if(member.getMemberGrade().equals("1")){ %>
 					<li class="sidebarmenutitle">더보기</li>
 					<li><a href="#" class="sidebarmenu">마이페이지</a></li>
 					<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
+					<% }else if(member.getMemberGrade().equals("0")){ %>
+					<li class="sidebarmenutitle">더보기</li>
+					<li><a href="#" class="sidebarmenu">마이페이지</a></li>
+					<li><a href="/petmily/adminmain" class="sidebarmenu">업체등록</a></li>
+					<li><a href="/petmily/srtd" class="sidebarmenu">업체삭제</a></li>
+					<li><a href="#" class="sidebarmenu">회원등급변경</a></li>
+					<li><a href="#" class="sidebarmenu">일반게시판관리</a></li>
+					<li><a href="#" class="sidebarmenu">거래게시판관리</a></li>
+					<% }else if(member.getMemberGrade().equals("2")){ %>
+					
 					<% } %>
 				</ul>
 			</span><br>
