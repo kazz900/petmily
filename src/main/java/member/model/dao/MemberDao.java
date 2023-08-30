@@ -199,10 +199,12 @@ public class MemberDao {
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
-				mem.setMemberId(rset.getString(mid));
+				mem.setMemberSeq(rset.getInt("member_seq"));
+				mem.setMemberId(mid);
 				mem.setMemberPwd(rset.getString("member_pwd"));
 				mem.setMemberNick(rset.getString("member_nick"));
-				mem.setMemberEmail(rset.getString(memail));
+				mem.setMemberEmail(memail);
+				mem.setMemberGrade(rset.getString("member_grade"));
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
