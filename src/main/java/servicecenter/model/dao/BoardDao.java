@@ -1,5 +1,6 @@
 package servicecenter.model.dao;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,9 @@ import static common.JDBCTemplate.*;
 
 import servicecenter.model.vo.Board;
 
-public class BoardDao {
+public class BoardDao implements Serializable {
+
+	private static final long serialVersionUID = -6193829464532553691L;
 
 	public int addMySuggest(Connection conn, Board board) {
 		int result = 0;
