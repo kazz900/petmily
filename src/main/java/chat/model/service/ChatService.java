@@ -3,12 +3,17 @@ package chat.model.service;
 import static common.JDBCTemplate.close;
 import static common.JDBCTemplate.getConnection;
 
+import java.io.Serializable;
 import java.sql.Connection;
 
 import chat.model.dao.ChatDao;
 import chat.model.vo.Chat;
 
-public class ChatService {
+public class ChatService implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2999408131763681326L;
 	private ChatDao cDao = new ChatDao();
 	
 	public ChatService() {}

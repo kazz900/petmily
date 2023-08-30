@@ -20,6 +20,7 @@ public class StandardPostDeleteServlet extends HttpServlet {
     public StandardPostDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
+        // TEST COMMIT
     }
 
 	/**

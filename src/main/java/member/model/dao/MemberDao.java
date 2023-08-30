@@ -36,7 +36,6 @@ public class MemberDao {
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(rset.getString("member_email"));
 				member.setMemberGrade(rset.getString("member_grade"));
-				System.out.println(member);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,7 +108,7 @@ public class MemberDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      
-	      String query = "select count(member_id) from member where member_id = ?";
+	      String query = "select * from member where member_id = ?";
 	      try {
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setString(1, mid);
@@ -117,7 +116,7 @@ public class MemberDao {
 	         rset = pstmt.executeQuery();
 	         
 	         if(rset.next()) {
-	            idc = rset.getInt(1);   //select 절의 항목 순번으로도 값 추출할 수 있음
+	            idc = 1;   //select 절의 항목 순번으로도 값 추출할 수 있음
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -134,7 +133,7 @@ public class MemberDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      
-	      String query = "select count(member_email) from member where member_email = ?";
+	      String query = "select * from member where member_email = ?";
 	      try {
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setString(1, memail);
@@ -142,7 +141,7 @@ public class MemberDao {
 	         rset = pstmt.executeQuery();
 	         
 	         if(rset.next()) {
-	            emc = rset.getInt(1);   //select 절의 항목 순번으로도 값 추출할 수 있음
+	            emc = 1;   //select 절의 항목 순번으로도 값 추출할 수 있음
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();

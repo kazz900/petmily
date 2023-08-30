@@ -30,9 +30,7 @@ public class Dupcheckid extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String mid = request.getParameter("mid");
-		
 		int idc = new MemberService().selectCheckid(mid);
-		
 		String returnValue = null;	//ajax로 보낼 문자 저장용
 		
 		if(idc == 0) {
@@ -54,6 +52,7 @@ public class Dupcheckid extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doGet(request, response);
 	}
 
