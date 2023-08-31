@@ -35,9 +35,9 @@ public class PwdupdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 회원정보가 db에 있을때 새로운 패스워드를 입력받아 암호화한 뒤 DB 업데이트를 위한 컨트롤러
 		Member member = new Member();
-		
+		RequestDispatcher view = null;
 		member.setMemberId(request.getParameter("mid"));
-		String newPwd = request.getParameter("newpwd");
+		String newPwd = request.getParameter("mpwd");
 		member.setMemberEmail(request.getParameter("memail"));
 
 		String cryptoUserpwd = null;
@@ -61,14 +61,13 @@ public class PwdupdateServlet extends HttpServlet {
 		member.setMemberPwd(cryptoUserpwd);
 		int result = new MemberService().updatePwd(member);
 		if(result > 0) {
-			//변경 성공시 변경완료 페이지로 이동
-			response.sendRedirect("/first/views/member/changePwdComp.html");
+			request.setAttribute("message", "비밀번호 변경됨.");			
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "비밀번호 변경 에러.");			
-			view.forward(request, response);	
+			request.setAttribute("message", "Error! 비밀번호 변경 실패.");			
 		}		
 		
+		view = request.getRequestDispatcher("views/member/login.jsp");
+		view.forward(request, response);	
 	}
 
 	/**

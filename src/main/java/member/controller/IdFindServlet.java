@@ -33,27 +33,23 @@ public class IdFindServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String memail = request.getParameter("memail");
-		
-		Member findMember = new MemberService().findMemberid(memail);
+		Member member = new MemberService().findMemberid(memail);
 		
 		String returnValue = null;	//ajax로 보낼 문자 저장용
-		
-		if(findMember != null) {
-			returnValue = findMember.getMemberId();
+		RequestDispatcher view = null;
+		if(member.getMemberId() != null) {
+			returnValue = member.getMemberId();
 					//ajax 통신은 네트워크 입출력임 : 별도의 스트림을 열어서 사용함
 		response.setContentType("text/html; charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.append(returnValue);
-		out.flush();
-		out.close();		
+		
+		
+		request.setAttribute("member", member);
+		request.setAttribute("message", "성공메세지보냄");
 		} else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-
-			request.setAttribute("message", memail + "로 가입된 회원정보 없음");
-			
-			//뷰를 포워딩함
-			view.forward(request, response);
+			request.setAttribute("message", memail + "로 가입된 회원정보 없음");			
 		}
+		view = request.getRequestDispatcher("views/member/findinfoPage.jsp");
+		view.forward(request, response);
 	}
 
 	/**

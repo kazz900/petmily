@@ -27,7 +27,7 @@
                </form>
 				</li>
 				<li><a class="sub-link" href="/petmily/mis?deptSeq=578">내주변</a></li>
-				<li><a class="sub-link" href="/petmily/splist" method="get">커뮤니티</a></li>
+				<li><a class="sub-link" href="/petmily/splist" method="post">커뮤니티</a></li>
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
 				<% }else{ %>
