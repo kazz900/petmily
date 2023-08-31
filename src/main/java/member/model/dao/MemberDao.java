@@ -200,10 +200,12 @@ public class MemberDao {
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
-				mem.setMemberId(rset.getString(mid));
+				mem.setMemberSeq(rset.getInt("member_seq"));
+				mem.setMemberId(mid);
 				mem.setMemberPwd(rset.getString("member_pwd"));
 				mem.setMemberNick(rset.getString("member_nick"));
-				mem.setMemberEmail(rset.getString(memail));
+				mem.setMemberEmail(memail);
+				mem.setMemberGrade(rset.getString("member_grade"));
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -286,13 +288,39 @@ public class MemberDao {
 		}
 		return result;
 	}
-		
+
+
+		public int updateMemberpwd(Connection conn, Member member) {
+			
+			int result = 0;
+
+			PreparedStatement pstmt = null;
+			
+			String query = "UPDATE MEMBER SET MEMBER_PWD = ? "
+						 + "WHERE MEMBER_ID = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1, member.getMemberPwd());
+				pstmt.setString(2, member.getMemberId());
+
+				result = pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
+
+	//관리자 제외 전체 멤버 리스트 표시
 	public ArrayList<Member> selectList(Connection conn){
 		ArrayList<Member> list = new ArrayList<Member>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "select * from member where member_grade = '1'";
+		String query = "select * from member where not member_grade = '0'";
 				
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -303,11 +331,15 @@ public class MemberDao {
 			while(rset.next()) {
 				Member member = new Member();
 				
+				member.setMemberSeq(rset.getInt("member_seq"));
 				member.setMemberId(rset.getString("member_id"));
 				member.setMemberPwd(rset.getString("member_pwd"));
-				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(rset.getString("member_email"));
-			}
+				member.setMemberNick(rset.getString("member_nick"));
+				member.setMemberGrade(rset.getString("member_grade"));
+				
+				list.add(member);
+				}
 		} catch (Exception e) {
 		} finally {
 			close(rset);
@@ -315,5 +347,6 @@ public class MemberDao {
 		}
 		return list;
 	}
+
 	
 }

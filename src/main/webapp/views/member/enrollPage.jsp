@@ -124,7 +124,6 @@ justify-content: space-between; */
 		var cemail = /^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]{2,}$/;
 
 		notice.hidden = true;
-		console.log(mid.value);
 		mid.addEventListener('keyup', function() {
 			if (!cid.test(mid.value)) {
 				notice.hidden = false;
@@ -134,13 +133,11 @@ justify-content: space-between; */
 			}
 		});
 
-		mpwd
-				.addEventListener(
-						'keyup',
-						function() {
+		mpwd.addEventListener('keyup',function() {
 							if (!cpwd.test(mpwd.value)) {
 								notice.hidden = false;
 								notice.textContent = '패스워드는 영어 대,소문자와 숫자를 포함하고,!@#$기호중 하나를 포함시켜 6~12글자로 사용해주세요.';
+								notice.style.color = '#ff6633';
 							} else {
 								notice.hidden = true;
 							}
@@ -153,6 +150,7 @@ justify-content: space-between; */
 				notice.hidden = true;
 			} else {
 				notice.textContent = '패스워드와 같은 값을 입력해주세요.';
+				notice.style.color = '#ff6633';
 				mpwd2.focus();
 			}
 		});
@@ -160,6 +158,7 @@ justify-content: space-between; */
 			if (!cnick.test(mnick.value)) {
 				notice.hidden = false;
 				notice.textContent = '닉네임은 8자 이하로 작성해주세요.';
+				notice.style.color = '#ff6633';
 			} else {
 				notice.hidden = true;
 			}
@@ -168,6 +167,7 @@ justify-content: space-between; */
 			if (!cemail.test(memail.value)) {
 				notice.hidden = false;
 				notice.textContent = '이메일은 test@enroll.com 형태로 작성해주세요.';
+				notice.style.color = '#ff6633';
 			} else {
 				notice.hidden = true;
 			}
