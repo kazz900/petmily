@@ -9,14 +9,14 @@
 <script type="text/javascript">
   <% String message = (String) request.getAttribute("message"); %>
   <% if (message != null && message.equals("성공메세지보냄")) { %>
-    <!-- 메세지 값이 "성공메세지보냄"인 경우에 대한 코드 작성 -->
+    <!-- 메세지 값이 "성공메세지보냄"인 경우 -->
     <% Member m = (Member) request.getAttribute("member"); %>
-    alert("가입하신 아이디는 [<%= m.getMemberId() %>] 입니다.");
+    	alert("가입하신 아이디는 [<%= m.getMemberId() %>] 입니다.");
+	  	location.href="/petmily/views/member/login.jsp";
   <% } else if (message != null) { %>
-    <!-- 메세지 값이 "성공메세지보냄"이 아닌 경우에 대한 코드 작성 -->
+    <!-- 메세지 값이 "성공메세지보냄"이 아닌 경우 -->
     alert("<%= message %>");
   <% } %>
-  location.href="/petmily/views/member/findinfoPage.jsp";
 </script>
 <style type="text/css">
 @font-face {
@@ -52,9 +52,9 @@ body h2 {
 }
 
 form {
-	text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
-	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
-	width: 350px; /* 폼의 너비 설정 */
+	text-align: center; 
+	margin: 0 auto; 
+	width: 350px; 
 	height: auto;
 	background-color: #FFE4B5;
 	border-radius: 25px;

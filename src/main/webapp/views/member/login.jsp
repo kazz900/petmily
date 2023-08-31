@@ -12,9 +12,6 @@
 <script type="text/javascript" src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script>
-  Kakao.init('fa414bb9d343a627b76d4f12f380c22c'); 
-</script>
 <script type="text/javascript">
   <% if (request.getAttribute("message") != null) { %>
   <% if (request.getAttribute("message").equals("비밀번호 변경됨.")) { %>
@@ -123,6 +120,9 @@ text-align: center;
     background-color: hsl(36deg 70.37% 68.61%);
     font-family: 'Surround';
 }
+td a {
+left: 0px;
+}
       </style>
 </head>
 <body>
@@ -145,30 +145,19 @@ function moveEnrollPage(){
 	location.href="/petmily/views/member/enrollPage.jsp";
 }
 </script>
+<tr>
+<td colspan="2"><a id="kakao-login-btn" href="javascript:loginWithKakao()">
+  <img src="/petmily/resources/images/kakaologo.png" width="60" height="60" alt="카카오 로그인 버튼" /></a>
+<a href="<%=apiURL%>"><img width="60" height="60" src="/petmily/resources/images/naverlogo.png"></a></td>
+  </tr>
 	</table>
-</form>
 
-
-<br>
-
-<div>
-<!-- 네이버로그인 -->
-
- <div  style="width: 120px; position: absolute; left: 530px; border:1px solid black;">
-  <a href="<%=apiURL%>"><img width="110" height="40" src="http://static.nid.naver.com/oauth/small_g_in.PNG"></a>
-</div>
-<!-- 카카오로그인 -->
-<div>
-<a id="kakao-login-btn" href="javascript:loginWithKakao()">
-  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
-    alt="카카오 로그인 버튼" />
-</a>
-<p id="token-result"></p>
-</div>
+<!-- 네이버로그인버튼 -->
+<!-- 카카오로그인버튼 -->
 <!-- 구글로그인 -->
 
 </div>
-
+</form>
  
 <script>
 Kakao.init('fa414bb9d343a627b76d4f12f380c22c');
@@ -193,7 +182,7 @@ function getInfo() {
         url: '/v2/user/me',
         success: function (res) {
             console.log(res);
-            // 이메일, 닉네임
+            // 이메일, 닉네임 저장
             var email = res.kakao_account.email; 
             var nickname = res.kakao_account.profile.nickname;
             var userInfo = {
@@ -201,7 +190,7 @@ function getInfo() {
                     nickname: nickname
                 };
 
-                // 서버로 정보 전송
+                // 서버로 정보 전송 후 메인페이지로 리다이렉트
                 $.ajax({
                     type: 'POST',
                     url: '/petmily/kakao', 
