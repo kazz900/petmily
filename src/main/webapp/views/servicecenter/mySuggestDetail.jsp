@@ -10,7 +10,9 @@
 <meta charset="UTF-8">
 <title>나의 건의사항</title>
 <script type="text/javascript">
-
+function toEdit(){
+	location.href="/petmily/suggestDetail?bno=<%=board.getBrdNo()%>";
+}
 </script>
 <style type="text/css">
 div.upper {
@@ -33,15 +35,13 @@ div.upper {
 	<h5 style="margin:0">작성일자 : <%=board.getBrdDate() %></h5>
 	<h5 style="margin:5px auto">처리현황 : <%=board.getBrdResult() %></h5>
 	<hr>
-	<div class="content" style=" height:500px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px;">
+	<div class="content" style=" height:500px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px; text-align:left;">
 		<p><%=board.getBrdContent()%></p>
 	</div>
-	<button class="editText" style="margin-top:20px;" onclick="toEdit();">수정하기</button>
 	<button class="toListBtn" onclick="history.go(-1);" style="margin-top:20px;">목록으로</button>
+	<button class="editText" style="margin-top:20px;" onclick="toEdit();">수정하기</button>
 	
 </div>
-
-
 
 </body>
 </html>

@@ -147,14 +147,12 @@ function changePwd(){
 <body>
 <%@ include file="../common/main.jsp"%>
 
-
-
 <div class="info-content">
 		<div class="info-detail02">
 
 			<ul class="tabs">
 				<li class="tab-link current" data-tab="tab-1">나의 정보</li>
-				<li class="tab-link" data-tab="tab-2">건의사항 작성</li>
+				<li class="tab-link" data-tab="tab-2">나의 정보</li>
 				<li class="tab-link" data-tab="tab-3">업체 등록요청</li>
 				<li class="tab-link" data-tab="tab-4">업체 삭제요청</li>
 			</ul>
@@ -170,18 +168,7 @@ function changePwd(){
 		<p style="font-size:15px; margin-top:3px;">닉네임만 변경 가능합니다.</p>
 		<form action="/petmily/myinfo" method="get">
 			<table>
-				
-<!-- 				<tr>
-					<th>프로필사진</th>
-					<td>
-						<label for="uploadProfile" style="cursor:pointer;">
-						<img src="/petmily/resources/images/girl.jpg" 
-						id="profile" name="profile" style=" width:160px;">
-						</label>
-						<input type="file" id="uploadProfile" onchange="loadImage(this);">
-					</td>
-				</tr> -->
-			
+
 				<tr>
 					<th>아이디</th>
 					<td><input type="text" name="userid" value="<%=member.getMemberId()%>" readonly></td>
@@ -196,16 +183,42 @@ function changePwd(){
 				</tr>
 			</table>
 			
-			<input type="submit" value="변경하기" style="margin-bottom:15px;">
 			<input type="button" value="비밀번호 변경" onclick="changePwd();">
+			<input type="submit" value="변경하기" style="margin-bottom:15px;">
 		</form>
 	</div>
 </div>
 
 
-			<div id="tab-2" class="tab-content">
-
-			</div>
+<div id="tab-2" class="tab-content">
+<div style="text-align:center;">
+	<p style="margin-bottom:2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
+	<p style="font-size:15px; margin-top:3px;">닉네임만 변경 가능합니다.</p>
+</div>
+	<table id="outer" align="center" width="500" cellspacing="5"
+		cellpadding="0">
+		
+		<tr>
+			<th width="140">아이디</th>
+			<td><input type="text" name="userid" value="<%=member.getMemberId()%>"
+				readonly>
+		<tr>
+			<th width="140">이메일</th>
+			<td><input type="email" name="email" value="<%=member.getMemberEmail()%>">
+			</td>
+		</tr>
+		
+		<tr>
+			<th width="140">(*)닉네임</th>
+			<td><input type="text" name="nickname" value="<%=member.getMemberEmail()%>">
+			</td>
+		</tr>
+	</table>
+	<div style="text-align:center; margin-top:10px;">
+	<input type="button" value="비밀번호 변경" onclick="changePwd();">
+	<input type="submit" value="변경하기" style="margin-bottom:15px;">
+	</div>
+</div>
 
 
 

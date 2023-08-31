@@ -25,7 +25,7 @@ public class BoardDao implements Serializable {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-// 값 받아서 하는거로 수정
+
 			pstmt.setInt(1, board.getBrdMemberNo());
 			pstmt.setString(2, board.getBrdTitle());
 			pstmt.setString(3, board.getBrdContent());
@@ -41,7 +41,7 @@ public class BoardDao implements Serializable {
 		return result;
 	}
 
-	public ArrayList<Board> selectAllSuggest(Connection conn) {
+	public ArrayList<Board> selectAllSuggest(Connection conn, int mseq) {
 		ArrayList<Board> list = new ArrayList<Board>();
 
 		PreparedStatement pstmt = null;
@@ -49,14 +49,17 @@ public class BoardDao implements Serializable {
 
 		String query = "SELECT * "
 					 + "FROM SERV_CENTER "
+					 + "WHERE MEMBER_SEQ = ? "
 					 + "ORDER BY SERV_SEQ DESC";
 
 		try {
 
 			pstmt = conn.prepareStatement(query);
 
+			pstmt.setInt(1, mseq);
+			
 			rset = pstmt.executeQuery();
-
+			
 			while (rset.next()) {
 
 				Board board = new Board();
@@ -67,7 +70,7 @@ public class BoardDao implements Serializable {
 				board.setBrdContent(rset.getString("CONTENT"));
 				board.setBrdDate(rset.getDate("UPLOAD_DATE"));
 				board.setBrdResult(rset.getString("RESULT"));
-
+				
 				list.add(board);
 			}
 
@@ -121,6 +124,34 @@ public class BoardDao implements Serializable {
 		}
 
 		return board;
+	}
+
+	public int updateMySuggest(Connection conn, int userid, String title, String content, int boardNo, String result) {
+		int eResult = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "UPDATE SERV_CENTER "
+					 + "SET TITLE = ?, CONTENT = ?, UPLOAD_DATE = SYSDATE, RESULT = ? "
+					 + "WHERE MEMBER_SEQ = ? AND SERV_SEQ = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, title);
+			pstmt.setString(2, content);
+			pstmt.setString(3, result);
+			pstmt.setInt(4, userid);
+			pstmt.setInt(5, boardNo);
+			
+			eResult = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return eResult;
 	}
 
 }

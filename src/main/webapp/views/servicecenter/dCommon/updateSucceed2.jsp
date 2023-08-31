@@ -35,7 +35,7 @@ a {
 </style>
 </head>
 <body>
-<h2>등록 과정 중 문제가 발생하였습니다.</h2>
+<h2>성공적으로 변경되었습니다.</h2>
 <a href="/petmily/suggest?mseq=<%=member.getMemberSeq()%>"><button>확인</button></a>
 </body>
 </html>

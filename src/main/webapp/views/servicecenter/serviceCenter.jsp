@@ -4,6 +4,7 @@
 
 <%
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+	Board board = (Board)request.getAttribute("board");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,14 @@
 	src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <script type="text/javascript"
 	src="/petmily/resources/js/info/infotap.js"></script>
+	
+<script type="text/javascript">
+
+<%if (request.getAttribute("message") != null) { %>
+	alert("건의사항이 수정되었습니다.");
+<% } %>
+
+</script>
 
 </head>
 <%@ include file="../common/main.jsp"%>

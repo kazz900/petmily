@@ -58,13 +58,6 @@ public class DepartmentService implements Serializable{
 		return result;
 	}
 
-	public Department selectMainInfo(String deptSeq) {
-		Connection conn = getConnection();
-		Department dptmt = ddao.selectMainInfo(conn, deptSeq);
-		close(conn);
-		return dptmt;
-	}
-
 
 	public ArrayList<Department> selectNotInsertedDept() {
 		Connection conn = getConnection();
