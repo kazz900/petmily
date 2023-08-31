@@ -22,50 +22,50 @@ public class PostDao {
 
 	public ArrayList<Post> getPostList(Connection conn) {
 		ArrayList<Post> list = new ArrayList<Post>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String query = "SELECT *\r\n"
-				+ "FROM \r\n"
-				+ "    (SELECT\r\n"
-				+ "        MEMBER_SEQ,\r\n"
-				+ "        POST_SEQ,\r\n"
-				+ "        MEMBER_ID,\r\n"
-				+ "        POST_CONTENT,\r\n"
-				+ "        LIKE_NO,\r\n"
-				+ "        REPLY_NO, \r\n"
-				+ "        POST_DATE,\r\n"
-				+ "        LAST_MODIFIED_DATE,\r\n"
-				+ "        TRADE_RESULT\r\n"
-				+ "        FROM STANDARD_POST\r\n"
-				+ "        FULL OUTER JOIN TRADE_POST USING (POST_SEQ)\r\n"
-				+ "        JOIN MEMBER USING (MEMBER_SEQ)\r\n"
-				+ "        ORDER BY POST_DATE DESC)\r\n";
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				Post sp = new Post();
-				sp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
-				sp.setPostSeq(rset.getInt("POST_SEQ"));
-				sp.setMemberId(rset.getString("MEMBER_ID"));
-				sp.setPostContent(rset.getString("POST_CONTENT"));
-				sp.setLikeNo(rset.getInt("LIKE_NO"));
-				sp.setReplyNO(rset.getInt("REPLY_NO"));
-				sp.setPostDate(rset.getDate("POST_DATE"));
-				sp.setLastModifieddate(rset.getDate("LAST_MODIFIED_DATE"));
-				System.out.println(sp.toString());
-				list.add(sp);
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(rset, pstmt);
-		}
-		
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String query = "SELECT *\r\n"
+//				+ "FROM \r\n"
+//				+ "    (SELECT\r\n"
+//				+ "        MEMBER_SEQ,\r\n"
+//				+ "        POST_SEQ,\r\n"
+//				+ "        MEMBER_ID,\r\n"
+//				+ "        POST_CONTENT,\r\n"
+//				+ "        LIKE_NO,\r\n"
+//				+ "        REPLY_NO, \r\n"
+//				+ "        POST_DATE,\r\n"
+//				+ "        LAST_MODIFIED_DATE,\r\n"
+//				+ "        TRADE_RESULT\r\n"
+//				+ "        FROM STANDARD_POST\r\n"
+//				+ "        FULL OUTER JOIN TRADE_POST USING (POST_SEQ)\r\n"
+//				+ "        JOIN MEMBER USING (MEMBER_SEQ)\r\n"
+//				+ "        ORDER BY POST_DATE DESC)\r\n";
+//		
+//		try {
+//			pstmt = conn.prepareStatement(query);
+//			rset = pstmt.executeQuery();
+//			
+//			while(rset.next()) {
+//				Post sp = new Post();
+//				sp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
+//				sp.setPostSeq(rset.getInt("POST_SEQ"));
+//				sp.setMemberId(rset.getString("MEMBER_ID"));
+//				sp.setPostContent(rset.getString("POST_CONTENT"));
+//				sp.setLikeNo(rset.getInt("LIKE_NO"));
+//				sp.setReplyNO(rset.getInt("REPLY_NO"));
+//				sp.setPostDate(rset.getDate("POST_DATE"));
+//				sp.setLastModifieddate(rset.getDate("LAST_MODIFIED_DATE"));
+//				System.out.println(sp.toString());
+//				list.add(sp);
+//			}
+//			
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rset, pstmt);
+//		}
+//		
 		return list;
 	}
 
