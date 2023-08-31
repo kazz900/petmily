@@ -49,6 +49,7 @@ public class NaverServlet extends HttpServlet {
 		MemberService mservice = new MemberService();
 		JSONParser parsing = new JSONParser();
 		JSONObject jsonObj = new JSONObject();
+		String checkNaveremail = "naver";			
 		String Nemail =null;
 		String Nname = null;
 		String clientId = "Y4aSWVB6n8GBIwdvF73u";// 애플리케이션 클라이언트 아이디값";
@@ -110,10 +111,10 @@ public class NaverServlet extends HttpServlet {
 					JSONObject resObj = (JSONObject) jsonObj.get("response");
 					//System.out.println(resObj);
 					
-					Nemail = (String) resObj.get("email");
-					Nname = (String) resObj.get("name");
-					System.out.println("네이버 이메일은? " + Nemail);
-					System.out.println("회원의 이름은? " + Nname);
+					Nname = (String)resObj.get("name");
+					Nemail = checkNaveremail + (String)resObj.get("email");
+//					System.out.println("회원의 이름은? " + Nname);
+//					System.out.println("네이버 이메일은? " + Nemail);
 
 					//System.out.println("complete!");
 				} catch (Exception e) {
@@ -125,10 +126,10 @@ public class NaverServlet extends HttpServlet {
 		}
 		
 		member = mservice.snsLogin(Nemail);
+		
 		if(member == null) {	//회원정보 없을시 sns계정정보 임의생성용 토큰생성 메소드
-			System.out.println(3);
 			Member newMember = new Member();
-			String generatedId = "n@";			
+			String generatedId = "n@";	
 			String snspwdIsNull = null;
 			String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 			StringBuilder token = new StringBuilder();
@@ -146,24 +147,13 @@ public class NaverServlet extends HttpServlet {
 			
 		int result = mservice.insertMember(newMember);
 		
-//		System.out.println(newMember.getMemberId());
-//		System.out.println(newMember.getMemberPwd());
-//		System.out.println(newMember.getMemberNick());
-//		System.out.println(newMember.getMemberEmail());
 		if(result > 0) {
 			member = mservice.snsLogin(Nemail);
-		} else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-
-			request.setAttribute("message", member.getMemberEmail() + "회원가입 실패");
-							
-			view.forward(request, response);
-			}
+		} 
 		}	//회원정보생성및 로그인, 멤버반환처리
 		// 세션생성
 		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(30*60);	
-		//초단위 지정임 30분 지정	>	30분동안 활동 없을시 자동 파기(로그아웃)처리됨.
+		session.setMaxInactiveInterval(30*60);	//세션수명은 30분
 
 		session.setAttribute("member", member);
 		
