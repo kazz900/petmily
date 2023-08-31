@@ -1,4 +1,4 @@
-package member.controller;
+package servicecenter.controller;
 
 import java.io.IOException;
 
@@ -9,48 +9,49 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
-import member.model.vo.Member;
+import servicecenter.model.service.BoardService;
+import servicecenter.model.vo.Board;
 
 /**
- * Servlet implementation class AdminMemberManagement
+ * Servlet implementation class BoardDetailPageServlet
  */
-@WebServlet("/admmm")
-public class AdminMemberManagement extends HttpServlet {
+@WebServlet("/bdetail")
+public class BoardDetailPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberManagement() {
+    public BoardDetailPageServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		Member member = new Member();
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		
-		member.setMemberGrade(request.getParameter("memberGrade"));
+		Board board = new BoardService().selectBoard(bnum);
 		
-		int result = new MemberService().managementMember(member);
-		
-		if(result > 0) {
-			response.sendRedirect("/petmily/views/AdminMemberManagement.jsp" + member.getMemberGrade());
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-	    
-		 view.forward(request, response);
+		RequestDispatcher view = null;
+		if (board != null) {
+			view = request.getRequestDispatcher("views/servicecenter/mySuggestDetail.jsp");
+			request.setAttribute("board", board);
+		} else {
+			response.sendRedirect("/petmily/views/servicecenter/dCommon/readFailed.jsp");
 		}
+		
+		view.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

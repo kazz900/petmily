@@ -34,10 +34,6 @@ public class StandardPostListServlet extends HttpServlet {
 		ArrayList<StandardPost> list = new ArrayList<StandardPost>();
 		list = spSerivce.getStandardPostList();
 		
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).toString());
-		}
-		
 		RequestDispatcher view = null;
 		
 		if(list.size() > 0) {
@@ -50,5 +46,12 @@ public class StandardPostListServlet extends HttpServlet {
 		
 		view.forward(request, response);
 	}
-
+	
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
 }

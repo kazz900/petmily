@@ -1,23 +1,28 @@
-package pet.controller;
+package admin.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import member.model.service.MemberService;
+import member.model.vo.Member;
+
 /**
- * Servlet implementation class PetServlet1
+ * Servlet implementation class AdminMemberManagement
  */
-@WebServlet("/pet1")
-public class PetServlet1 extends HttpServlet {
+@WebServlet("/admmm")
+public class AdminMemberManagement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PetServlet1() {
+    public AdminMemberManagement() {
         super();
     }
 
@@ -25,9 +30,16 @@ public class PetServlet1 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+		request.setCharacterEncoding("UTF-8");
+		
+		String memberSeq = request.getParameter("memberSeq");
+		String memberGrade = request.getParameter("memberGrade");
+		
+		int result = new MemberService().managementMember(memberSeq, memberGrade);
+		
+		response.sendRedirect("/petmily/memli");
+		}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

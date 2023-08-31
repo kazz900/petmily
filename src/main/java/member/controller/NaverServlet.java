@@ -31,6 +31,7 @@ import member.model.vo.Member;
  */
 @WebServlet("/naver")
 public class NaverServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     /**

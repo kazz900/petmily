@@ -1,4 +1,4 @@
-package department.controller;
+package admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,16 +14,16 @@ import department.model.service.DepartmentService;
 import department.model.vo.Department;
 
 /**
- * Servlet implementation class DeptDeleteServlet
+ * Servlet implementation class DeptManageServlet
  */
-@WebServlet("/deptter")
-public class DeptTerminateServlet extends HttpServlet {
+@WebServlet("/deptins")
+public class DeptInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeptTerminateServlet() {
+	public DeptInsertServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -34,11 +34,14 @@ public class DeptTerminateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String value = request.getParameter("deptSeq");
-
-		int result = new DepartmentService().terminateDept(value);
 		
-		response.sendRedirect("/petmily/adminmain2");
+		String value = request.getParameter("deptSeq");
+		
+		int result = new DepartmentService().approveDept(value);
+		
+		response.sendRedirect("/petmily/adminmain");
+		
+	
 	}
 
 	/**
@@ -47,7 +50,6 @@ public class DeptTerminateServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

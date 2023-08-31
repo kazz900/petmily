@@ -145,3 +145,19 @@
 		height:30px;
 	}
 }
+
+.my_pet_tab {
+	display: flex;
+    justify-content: space-around;
+}
+
+.my_pet_table {
+	display :flex;
+}
+
+#button1 {
+	width:70px;
+	height: 70px;
+	background-color: #dfdfdf;
+}
+

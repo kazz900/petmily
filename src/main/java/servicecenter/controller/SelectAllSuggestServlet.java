@@ -45,10 +45,10 @@ public class SelectAllSuggestServlet extends HttpServlet {
 //			view = request.getRequestDispatcher("views/servicecenter/mySuggestBoard.jsp");
 			view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
 			request.setAttribute("list", list);
-			System.out.println("succeed");
+
 		} else {
 			response.sendRedirect("views/servicecenter/dCommon/addFailed.jsp");
-			System.out.println("Failed");
+
 		}
 
 		view.forward(request, response);

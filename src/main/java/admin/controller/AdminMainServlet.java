@@ -1,4 +1,4 @@
-package department.controller;
+package admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ import department.model.vo.Department;
 /**
  * Servlet implementation class DeptManageServlet
  */
-@WebServlet("/deptins")
-public class DeptInsertServlet extends HttpServlet {
+@WebServlet("/adminmain")
+public class AdminMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public DeptInsertServlet() {
+	public AdminMainServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,13 +35,16 @@ public class DeptInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		String value = request.getParameter("deptSeq");
 		
-		int result = new DepartmentService().approveDept(value);
+		ArrayList<Department> list = new DepartmentService().selectNotInsertedDept();
 		
-		response.sendRedirect("/petmily/adminmain");
+		System.out.println("adminmain size =" + list.size());
+		RequestDispatcher view = null;
+
+		view = request.getRequestDispatcher("views/admin/AdminDeptInsert.jsp");
+		request.setAttribute("list", list);
+		view.forward(request, response);
 		
-	
 	}
 
 	/**
