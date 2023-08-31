@@ -1,48 +1,57 @@
-package standardpost.controller;
+package pet.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import standardpost.model.service.StandardPostService;
+import pet.model.service.PetService;
+import pet.model.vo.Pet;
 
 /**
- * Servlet implementation class StandardPostDeleteServlet
+ * Servlet implementation class petMoverServlet
  */
-@WebServlet("/spdelete")
-public class StandardPostDeleteServlet extends HttpServlet {
+@WebServlet("/moveup")
+public class petMoverServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public StandardPostDeleteServlet() {
+    public petMoverServlet() {
         super();
         // TODO Auto-generated constructor stub
-        // TEST COMMIT
     }
-    
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int postSeq = Integer.parseInt(request.getParameter("postSeq"));
-		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
-		int result = 0;
-		StandardPostService spService = new StandardPostService();
-		result = spService.deleteStrandardPost(memberSeq, postSeq);
 		
-		if (result > 0) {
-			//insert successful
-			response.sendRedirect("/petmily/splist");
-		} else {
-			//insert fail
-			// TODO : MAKE INSERT FAIL HTML
+		request.setCharacterEncoding("utf-8");
+		
+		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
+		int petSeq = Integer.parseInt(request.getParameter("petseq"));
+		//ArrayList<Pet> list = new PetService().selectPet(memberSeq);		
+		
+		Pet pet = new PetService().selectPetmily(petSeq, memberSeq);
+				
+		//4. 받은 결과로 성공/실패 페이지 내보내기
+		
+		RequestDispatcher view = null;
+		System.out.println(pet);
+		if(pet != null) {
+			view = request.getRequestDispatcher("views/mypage/PetUpdate.jsp");
+			request.setAttribute("pet", pet);
+		}else {
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", "펫밀리 전체 조회 실패!");
 		}
+		view.forward(request, response);
 	}
 
 	/**
@@ -52,4 +61,5 @@ public class StandardPostDeleteServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

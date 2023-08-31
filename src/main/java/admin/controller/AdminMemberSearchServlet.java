@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,38 +14,49 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class AdminMemberManagement
+ * Servlet implementation class AdminMemberSearchServlet
  */
-@WebServlet("/admmm")
-public class AdminMemberManagement extends HttpServlet {
+@WebServlet("/amss")
+public class AdminMemberSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberManagement() {
+    public AdminMemberSearchServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("utf-8");
 		
-		String memberSeq = request.getParameter("memberSeq");
-		String memberGrade = request.getParameter("memberGrade");
+		String action = request.getParameter("action");
+		String keyword = null;
 		
-		int result = new MemberService().managementMember(memberSeq, memberGrade);
-		
-		response.sendRedirect("/petmily/memli");
-		}
+		keyword = request.getParameter("keyword");
+		System.out.println(keyword);
 	
+		MemberService mservice = new MemberService();
+		ArrayList<Member> list = mservice.selectSearchMemberId(keyword);
+		
+		RequestDispatcher view = null;
+		
+		System.out.println(list.size());
 
+		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
+		request.setAttribute("list", list);
+
+		view.forward(request, response);
+}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
