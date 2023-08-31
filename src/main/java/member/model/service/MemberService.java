@@ -87,9 +87,9 @@ public class MemberService {
 		return result;
 	}
 	//관리자가 회원 등급 변경용
-	public int managementMember(Member member) {
+	public int managementMember(String memberSeq, String memberGrade) {
 		Connection conn = getConnection();
-		int result = mdao.managementMember(conn, member);
+		int result = mdao.managementMember(conn, memberSeq, memberGrade);
 		if(result > 0)
 			commit(conn);
 		else
@@ -114,6 +114,12 @@ public class MemberService {
 	public ArrayList<Member> selectList() {
 		Connection conn = getConnection();
 		ArrayList<Member> list = mdao.selectList(conn);
+		close(conn);
+		return list;
+	}
+	public ArrayList<Member> selectSearchMemberId(String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchMemberId(conn, keyword);
 		close(conn);
 		return list;
 	}
