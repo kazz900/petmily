@@ -1,10 +1,11 @@
 package member.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import member.model.vo.Member;
 
@@ -107,7 +108,7 @@ public class MemberDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      
-	      String query = "select count(member_id) from member where member_id = ?";
+	      String query = "select * from member where member_id = ?";
 	      try {
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setString(1, mid);
@@ -115,7 +116,7 @@ public class MemberDao {
 	         rset = pstmt.executeQuery();
 	         
 	         if(rset.next()) {
-	            idc = rset.getInt(1);   //select 절의 항목 순번으로도 값 추출할 수 있음
+	            idc = 1;   //select 절의 항목 순번으로도 값 추출할 수 있음
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -132,7 +133,7 @@ public class MemberDao {
 	      PreparedStatement pstmt = null;
 	      ResultSet rset = null;
 	      
-	      String query = "select count(member_email) from member where member_email = ?";
+	      String query = "select * from member where member_email = ?";
 	      try {
 	         pstmt = conn.prepareStatement(query);
 	         pstmt.setString(1, memail);
@@ -140,7 +141,7 @@ public class MemberDao {
 	         rset = pstmt.executeQuery();
 	         
 	         if(rset.next()) {
-	            emc = rset.getInt(1);   //select 절의 항목 순번으로도 값 추출할 수 있음
+	            emc = 1;   //select 절의 항목 순번으로도 값 추출할 수 있음
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -199,10 +200,12 @@ public class MemberDao {
 			rset=pstmt.executeQuery();
 			
 			if(rset.next()) {
-				mem.setMemberId(rset.getString(mid));
+				mem.setMemberSeq(rset.getInt("member_seq"));
+				mem.setMemberId(mid);
 				mem.setMemberPwd(rset.getString("member_pwd"));
 				mem.setMemberNick(rset.getString("member_nick"));
-				mem.setMemberEmail(rset.getString(memail));
+				mem.setMemberEmail(memail);
+				mem.setMemberGrade(rset.getString("member_grade"));
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -235,6 +238,30 @@ public class MemberDao {
 		}
 		return result;
 	}
+	//관리자 회원 등급 변경용
+	public int managementMember(Connection conn, Member member) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String query = "update member set memberGrade = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);			
+			
+			pstmt.setString(1, member.getMemberGrade());
+			
+			result = pstmt.executeUpdate();			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 
 		public int updateMemberInfo(Connection conn, String userid, String nickname) {
 		int result = 0;
@@ -262,6 +289,7 @@ public class MemberDao {
 		return result;
 	}
 
+
 		public int updateMemberpwd(Connection conn, Member member) {
 			
 			int result = 0;
@@ -285,5 +313,40 @@ public class MemberDao {
 			}
 			return result;
 		}
+
+	//관리자 제외 전체 멤버 리스트 표시
+	public ArrayList<Member> selectList(Connection conn){
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select * from member where not member_grade = '0'";
+				
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				Member member = new Member();
+				
+				member.setMemberSeq(rset.getInt("member_seq"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberPwd(rset.getString("member_pwd"));
+				member.setMemberEmail(rset.getString("member_email"));
+				member.setMemberNick(rset.getString("member_nick"));
+				member.setMemberGrade(rset.getString("member_grade"));
+				
+				list.add(member);
+				}
+		} catch (Exception e) {
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
 	
 }

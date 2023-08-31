@@ -32,13 +32,13 @@ public class Dupcheckemail extends HttpServlet {
 		String memail = request.getParameter("memail");
 		
 		int emc = new MemberService().selectCheckemail(memail);
-		
+
 		String returnValue = null;	//ajax로 보낼 문자 저장용
 		
 		if(emc == 0) {
 			returnValue = "사용가능한 이메일입니다.";
 		} else {
-			returnValue = "중복된 이메일입니다.";
+			returnValue = "이미 가입된 이메일입니다.";
 		}
 		
 		//ajax 통신은 네트워크 입출력임 : 별도의 스트림을 열어서 사용함
@@ -55,6 +55,7 @@ public class Dupcheckemail extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
 		doGet(request, response);
 	}
 
