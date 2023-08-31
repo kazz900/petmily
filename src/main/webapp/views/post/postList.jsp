@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-	<%@ page import="java.util.ArrayList, standardpost.model.vo.StandardPost, java.sql.Date" %>
+	<%@ page import="java.util.ArrayList, standardpost.model.vo.StandardPost, java.sql.Date, member.model.vo.Member" %>
 		<% ArrayList<StandardPost> list = (ArrayList<StandardPost>)request.getAttribute("list");
 				int count = list.size();
+				Member m = (Member)session.getAttribute("member");
 				%>
 				<!DOCTYPE html>
 				<html>
@@ -241,8 +242,10 @@
 									</tr>
 									<tr id="postbottom">
 										<td id="posteditdate">작성일자 &nbsp;:&nbsp; <%= sp.getLastModifieddate() %></td>
+										<% if (m.getMemberSeq() == sp.getMemberSeq()){ %>>
 										<td id="posteditbutton"><button>수정</button></td>
 										<td id="postdeletebutton"><button onclick="deletePost(<%= sp.getPostSeq() %>);">삭제</button></td>
+										<% } %>>
 									</tr>
 									<br>
 								</table>
