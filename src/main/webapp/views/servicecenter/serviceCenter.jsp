@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="servicecenter.model.vo.Board, java.util.ArrayList"%>
+	import="servicecenter.model.vo.Board, member.model.vo.Member, java.util.ArrayList"%>
 
 <%
-ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
@@ -39,9 +39,10 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 			<div id="tab-1" class="tab-content current">
 				<table id="outer" align="center" cellspacing="5" cellpadding="0">
 					<tr>
-						<th style="width: 100px;">No.</th>
+						<th style="width: 80px;">No.</th>
 						<th style="width: 200px;">Title</th>
 						<th style="width: 310px;">Content</th>
+						<th>Progress</th>
 						<th style="width: 110px;">Date</th>
 					</tr>
 					<%
@@ -50,12 +51,16 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 					<%
 					for (Board b : list) {
 					%>
-					<tr
-						style="border-top: 1px solid black; border-bottom: 1px solid black;">
+					<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
 						<td style="font-size: 14px;"><%=b.getBrdNo()%></td>
 						<td style="padding-right: 15px; font-size: 14px;"><%=b.getBrdTitle()%></td>
-						<td style="padding-left: 15px; font-size: 14px;"><%=b.getBrdContent()%></td>
-						<td style="font-size: 14px;"><%=b.getBrdDate()%></td>
+						
+						<td style="padding-left: 15px; font-size: 14px;">
+						<a href="/petmily/bdetail?bnum=<%=b.getBrdNo()%>">
+						<%=b.getBrdContent()%></a></td>
+						
+						<td style="font-size:12px;"><%=b.getBrdResult()%></td>
+						<td style="font-size: 10px;"><%=b.getBrdDate()%></td>
 					</tr>
 					<%
 					}
@@ -81,7 +86,8 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 			<div id="tab-2" class="tab-content">
 				<form action="/petmily/addsuggest" method="get">
 					<input type="hidden" name="result" value="접수">
-
+					<input type="hidden" name="mNo" value="<%=member.getMemberSeq()%>">
+					
 					<table width="500" align="center" cellspacing="5">
 						<tr>
 							<th width="150">글 제목</th>
@@ -157,10 +163,10 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 							<td>
 								<table>
 									<tr>
-										<td><input type="radio" name="animalSize" value="small">소형</td>
-										<td><input type="radio" name="animalSize" value="regular">중형</td>
-										<td><input type="radio" name="animalSize" value="big">대형</td>
-										<td><input type="radio" name="animalSize" value="noLimit"
+										<td><input type="radio" name="animalSize" value="1">소형</td>
+										<td><input type="radio" name="animalSize" value="2">중형</td>
+										<td><input type="radio" name="animalSize" value="3">대형</td>
+										<td><input type="radio" name="animalSize" value="0"
 											checked>제한없음</td>
 									</tr>
 								</table>
@@ -169,23 +175,23 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 						<tr class="yes">
 							<th width="150">주차여부</th>
-							<td><input type="radio" name="parking" value="Y"
+							<td><input type="radio" name="parking" value="1"
 								style="margin-left: 78px;"> 가능 <input type="radio"
-								name="parking" value="N"> 불가능</td>
+								name="parking" value="0"> 불가능</td>
 						</tr>
 
 						<tr class="yes">
 							<th width="150">입장료여부</th>
-							<td><input type="radio" name="entFee" value="Y"
+							<td><input type="radio" name="entFee" value="1"
 								style="margin-left: 78px;"> 있음 <input type="radio"
-								name="entFee" value="N"> 없음</td>
+								name="entFee" value="0"> 없음</td>
 						</tr>
 
 						<tr>
 							<th width="150">애견동반추가요금</th>
-							<td><input type="radio" name="petFee" value="Y"
+							<td><input type="radio" name="petFee" value="1"
 								style="margin-left: 78px;"> 있음 <input type="radio"
-								name="petFee" value="N"> 없음</td>
+								name="petFee" value="0"> 없음</td>
 						</tr>
 
 						<tr>
@@ -205,6 +211,7 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 			<div id="tab-4" class="tab-content">
 				<form action="/petmily/deldept" method="get">
+				<input type="hidden" name="deleteOk" value="Y">
 					<table width="500" align="center" cellspacing="5">
 
 						<tr>

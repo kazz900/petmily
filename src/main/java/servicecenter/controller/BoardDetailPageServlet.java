@@ -1,27 +1,28 @@
-package department.controller;
+package servicecenter.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import department.model.service.DepartmentService;
-import department.model.vo.Department;
+import servicecenter.model.service.BoardService;
+import servicecenter.model.vo.Board;
 
 /**
- * Servlet implementation class DelDeptServlet
+ * Servlet implementation class BoardDetailPageServlet
  */
-@WebServlet("/deldept")
-public class DelDeptServlet extends HttpServlet {
+@WebServlet("/bdetail")
+public class BoardDetailPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DelDeptServlet() {
+    public BoardDetailPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +31,20 @@ public class DelDeptServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		Department dept = new Department();
 		
-		dept.setDeptName(request.getParameter("name"));
-		dept.setDeptAddress(request.getParameter("address"));
+		int bnum = Integer.parseInt(request.getParameter("bnum"));
 		
-		int result = new DepartmentService().deleteDepartment(dept);
-		System.out.println(result);
-		if (result > 0) {
-			response.sendRedirect("/petmily/views/servicecenter/dCommon/delSucceed.jsp");
+		Board board = new BoardService().selectBoard(bnum);
+		
+		RequestDispatcher view = null;
+		if (board != null) {
+			view = request.getRequestDispatcher("views/servicecenter/mySuggestDetail.jsp");
+			request.setAttribute("board", board);
 		} else {
-			response.sendRedirect("/petmily/views/servicecenter/dCommon/delFailed.jsp");
+			response.sendRedirect("/petmily/views/servicecenter/dCommon/readFailed.jsp");
 		}
+		
+		view.forward(request, response);
 	}
 
 	/**

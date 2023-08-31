@@ -32,4 +32,11 @@ public class BoardService implements Serializable {
 		return list;
 	}
 
+	public Board selectBoard(int bnum) {
+		Connection conn = getConnection();
+		Board board = bdao.selectBoard(conn, bnum);
+		close(conn);
+		return board;
+	}
+
 }

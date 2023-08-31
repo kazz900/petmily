@@ -2,6 +2,7 @@ package member.model.service;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
+import pet.model.vo.Pet;
 
 import static common.JDBCTemplate.*;
 
@@ -86,6 +87,7 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
 	//관리자가 회원 등급 변경용
 	public int managementMember(String memberSeq, String memberGrade) {
 		Connection conn = getConnection();
@@ -97,7 +99,6 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
-	
 
 	public int updateMemberInfo(String userid, String nickname) {
 		Connection conn = getConnection();
@@ -111,16 +112,32 @@ public class MemberService {
 		return result;
 	}
 
+
+	public int updateMemberpwd(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMemberpwd(conn, member);
+		if (result>0) {
+			commit(conn);
+		}	else	{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
 	public ArrayList<Member> selectList() {
 		Connection conn = getConnection();
 		ArrayList<Member> list = mdao.selectList(conn);
 		close(conn);
 		return list;
 	}
+
 	public ArrayList<Member> selectSearchMemberId(String keyword) {
 		Connection conn = getConnection();
 		ArrayList<Member> list = mdao.selectSearchMemberId(conn, keyword);
 		close(conn);
 		return list;
 	}
+
 }
