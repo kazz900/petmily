@@ -1,10 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="member.model.vo.Member"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Petmily</title>
+<script type="text/javascript" src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
+<script type="text/javascript">
+  <% String message = (String) request.getAttribute("message"); %>
+  <% if (message != null && message.equals("성공메세지보냄")) { %>
+    <!-- 메세지 값이 "성공메세지보냄"인 경우에 대한 코드 작성 -->
+    <% Member m = (Member) request.getAttribute("member"); %>
+    alert("가입하신 아이디는 [<%= m.getMemberId() %>] 입니다.");
+  <% } else if (message != null) { %>
+    <!-- 메세지 값이 "성공메세지보냄"이 아닌 경우에 대한 코드 작성 -->
+    alert("<%= message %>");
+  <% } %>
+  location.href="/petmily/views/member/findinfoPage.jsp";
+</script>
 <style type="text/css">
 @font-face {
 	font-family: 'Surround';
@@ -101,7 +114,7 @@ input[type="text"]:focus {
 					<ul style="padding: 0px;">
 						<li style="margin-top: 17px; color: black;">아이디 찾기</li>
 
-						<li><input type="text" placeholder="회원가입시 입력한 Email 입력"
+						<li><input type="text" name="memail" placeholder="회원가입시 입력한 Email 입력"
 							required
 							style="height: 33px; width: 222px; margin-top: 28px; border-radius: 13px; font-family: 'Surround', sans-serif; font-size: 16px; border: solid 3px black;"></li>
 						<li><input type="submit" value="아이디 조회"
@@ -115,9 +128,9 @@ input[type="text"]:focus {
 				<form action="/petmily/pwdfind">
 					<ul style="padding: 0px;">
 						<li style="margin-top: 17px; color: black;">비밀번호 찾기</li>
-						<li><input type="text" placeholder="아이디 입력" required
+						<li><input type="text" name="pmid" placeholder="아이디 입력" required
 							style="height: 33px; width: 222px; margin-top: 15px; border-radius: 13px; font-family: 'Surround', sans-serif; font-size: 16px; border: solid 3px;"></li>
-						<li><input type="text" placeholder="회원가입시 입력한 Email 입력"
+						<li><input type="text" name="pmemail" placeholder="회원가입시 입력한 Email 입력"
 							required
 							style="height: 33px; width: 222px; margin-top: 5px; border-radius: 13px; font-family: 'Surround', sans-serif; font-size: 16px; border: solid 3px;"></li>
 						<li><input type="submit" value="비밀번호 찾기"
