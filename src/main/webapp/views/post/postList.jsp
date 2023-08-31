@@ -222,8 +222,8 @@
 							<div class="newPostformBox">
 								<input id="newpost" type="text" placeholder="오늘 무슨 일이 있었나요?" onclick="openNewPostForm();">
 								<div class="new-post-form-popup" id="newPostForm">
-									<!-- TEST MEMBER SEQ : NEED TO CHANGE LATER -->
-									<form action="/petmily/spnewpost" class="form-container" method="post">
+									<!-- TEST CREATE NEW POST : NEED TO CHANGE LATER -->
+									<form action="/petmily/spnewpost?memberseq=16" class="form-container" method="post">
 										<input type="text" id="testpostcontent" name="post-content" placeholder="내용을 입력해주세요">
 										<button type="submit" id="postsubmit">게시글 추가</button>
 									</form>

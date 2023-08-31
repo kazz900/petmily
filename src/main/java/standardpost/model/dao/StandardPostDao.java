@@ -3,6 +3,7 @@ package standardpost.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static common.JDBCTemplate.close;
@@ -71,8 +72,24 @@ public class StandardPostDao {
 	}
 
 	public int insertStandardPost(Connection conn, int memberSeq, StandardPost standardPost) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO STANDARD_POST (POST_SEQ, MEMBER_SEQ, POST_CONTENT) VALUES (POST_SEQ.NEXTVAL, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberSeq);
+			pstmt.setString(2, standardPost.getPostContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public StandardPost selectStandardPost(Connection conn, int postSeq) {
