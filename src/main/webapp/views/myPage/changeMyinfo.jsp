@@ -73,17 +73,22 @@ input[type=text] {
 	height:30px;
 }
 
+input[type=email] {
+	width:280px;
+	height:30px;
+}
+
 input[type=time] {
 	height:30px;
 	width:132px;
 }
 
-input[type=submit] {
+/* input[type=submit] {
 	margin-top:15px;
 	width:200px;
 	height:35px;
 	border-radius:30px;
-}
+} */
 
 input[type=tel] {
 	width:280px;
@@ -114,7 +119,30 @@ div.wrapper {
 	text-align:center;
 }
 
+div.wrapper form {
+	text-align:center;
+}
+
 </style>
+
+<script type="text/javascript">
+function loadImage(input){
+	const imgElement = document.getElementById("profile");
+	if (input.files && input.files[0]) {
+		const reader = new FileReader();
+		reader.onload = function(e){
+			imgElement.setAttribute("src", e.target.result);
+		}
+		
+		reader.readAsDataURL(input.files[0]);
+	}
+}
+
+function changePwd(){
+	location.href="/petmily/views/myPage/changePwd.jsp";
+}
+</script>
+
 </head>
 <body>
 <%@ include file="../common/main.jsp"%>
@@ -138,16 +166,40 @@ div.wrapper {
 <div id="tab-1" class="tab-content current">
 
 	<div class="wrapper">
-		<p>고객님께서 가입하신 펫밀리 계정정보입니다.</p>
+		<p style="margin-bottom:2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
+		<p style="font-size:15px; margin-top:3px;">닉네임만 변경 가능합니다.</p>
 		<form action="/petmily/myinfo" method="get">
-			<input type="text" name="userid" value="<%=member.getMemberId()%>">
-			<input type="text" name="nickname" value="<%=member.getMemberNick()%>">
-			<input type="email" name="email" value="<%=member.getMemberEmail()%>">
+			<table>
+				
+<!-- 				<tr>
+					<th>프로필사진</th>
+					<td>
+						<label for="uploadProfile" style="cursor:pointer;">
+						<img src="/petmily/resources/images/girl.jpg" 
+						id="profile" name="profile" style=" width:160px;">
+						</label>
+						<input type="file" id="uploadProfile" onchange="loadImage(this);">
+					</td>
+				</tr> -->
 			
-			<input type="submit" value="변경하기">
+				<tr>
+					<th>아이디</th>
+					<td><input type="text" name="userid" value="<%=member.getMemberId()%>" readonly></td>
+				</tr>
+				<tr>
+					<th>이메일</th>
+					<td><input type="email" name="email" value="<%=member.getMemberEmail()%>" readonly></td>
+				</tr>
+				<tr>
+					<th>(*)닉네임</th>
+					<td><input type="text" name="nickname" value="<%=member.getMemberNick()%>"></td>
+				</tr>
+			</table>
+			
+			<input type="submit" value="변경하기" style="margin-bottom:15px;">
+			<input type="button" value="비밀번호 변경" onclick="changePwd();">
 		</form>
 	</div>
-	
 </div>
 
 

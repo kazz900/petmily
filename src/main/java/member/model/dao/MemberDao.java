@@ -288,6 +288,32 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+
+		public int updateMemberpwd(Connection conn, Member member) {
+			
+			int result = 0;
+
+			PreparedStatement pstmt = null;
+			
+			String query = "UPDATE MEMBER SET MEMBER_PWD = ? "
+						 + "WHERE MEMBER_ID = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1, member.getMemberPwd());
+				pstmt.setString(2, member.getMemberId());
+
+				result = pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
+
 	//관리자 제외 전체 멤버 리스트 표시
 	public ArrayList<Member> selectList(Connection conn){
 		ArrayList<Member> list = new ArrayList<Member>();
@@ -321,5 +347,6 @@ public class MemberDao {
 		}
 		return list;
 	}
+
 	
 }
