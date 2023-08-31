@@ -2,7 +2,9 @@ package tradepost.model.vo;
 
 import java.sql.Date;
 
-public class TradePost implements java.io.Serializable {
+import post.model.vo.Post;
+
+public final class TradePost extends Post implements java.io.Serializable {
 	private static final long serialVersionUID = 3591915937329788194L;
 
 	private int postSeq;
@@ -13,6 +15,7 @@ public class TradePost implements java.io.Serializable {
 	private int replyNO;
 	private Date postDate;
 	private Date lastModifiedDate;
+	
 	public TradePost() {
 		super();
 	}
