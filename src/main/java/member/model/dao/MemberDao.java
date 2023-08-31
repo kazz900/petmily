@@ -48,7 +48,9 @@ public class MemberDao {
 		return member;
 	}
 
-	// sns계정 로그인(네이버 구글 카카오)
+
+	//sns계정 로그인(네이버 카카오)
+
 	public Member snsLogin(Connection conn, String memail) {
 		Member member = null;
 		PreparedStatement pstmt = null;
