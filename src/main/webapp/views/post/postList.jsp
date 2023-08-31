@@ -15,21 +15,8 @@
 					<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">\
 					<script type="text/javascript">
 						$(function () {
-							// $.ajax({
-							// 	url: "/petmily/"
-							// })
+
 							const popup = document.getElementById('newPostForm');
-							// window.onclick = e => {
-							// 	if (e.target === popup) {
-							// 		// console.log('clicked else where');
-							// 		popup.style.display = 'block';
-
-							// 	}else{
-							// 		console.log('clicked else where');
-							// 		popup.style.display = 'none';
-							// 	}
-							// }
-
 
 							$('html').click(function (e) {
 								if ($(e.target).parents('.newPostformBox').length < 1) {
@@ -42,17 +29,17 @@
 							});
 						});
 
-						// function openNewPostForm() {
-						// 	document.getElementById("newPostForm").style.display = "block";
-						// }
-						// function closeNewPostForm() {
-						// 	document.getElementById("newPostForm").style.display = "none";
-						// }
-
 
 						function openNewPostForm() {
 							console.log("new post input field clicked");
 							document.getElementById("newPostForm").style.display = "block";
+						}
+
+						function deletePost(postSeq) {
+							// TEST DELETEPOST TODO : CHAMGE MEMBERSEQ
+							var seq = postSeq;
+							var path = "/petmily/spdelete?memberseq=16&postSeq=" + postSeq;
+							location.href = path;
 						}
 
 					</script>
@@ -137,10 +124,16 @@
 							padding-left: 20px;
 						}
 
-						table tr td#postbuttons {
-							float: right;
-							position: sticky;
-							left: 70%;
+						/* POST EDIT BUTTON POSITION */
+						table tr td#posteditbutton {
+							position: relative;
+							right: -370px;
+						}
+
+						/* POST DELETE BUTTON POSITION */
+						table tr td#postdeletebutton {
+							position: relative;
+							right: -380px;
 						}
 
 						table tr#postbottom {
@@ -185,7 +178,7 @@
 							transition: 0.5s;
 						}
 
-						button#postsubmit{
+						button#postsubmit {
 							position: fixed;
 							bottom: 10px;
 							right: 10px;
@@ -220,11 +213,13 @@
 
 						<div class="block" align="center">
 							<div class="newPostformBox">
-								<input id="newpost" type="text" placeholder="오늘 무슨 일이 있었나요?" onclick="openNewPostForm();">
+								<input id="newpost" type="text" placeholder="오늘 무슨 일이 있었나요?"
+									onclick="openNewPostForm();">
 								<div class="new-post-form-popup" id="newPostForm">
-									<!-- TEST MEMBER SEQ : NEED TO CHANGE LATER -->
-									<form action="/petmily/spnewpost" class="form-container" method="post">
-										<input type="text" id="testpostcontent" name="post-content" placeholder="내용을 입력해주세요">
+									<!-- TEST CREATE NEW POST : NEED TO CHANGE LATER -->
+									<form action="/petmily/spnewpost?memberseq=16" class="form-container" method="post">
+										<input type="text" id="testpostcontent" name="post-content"
+											placeholder="내용을 입력해주세요">
 										<button type="submit" id="postsubmit">게시글 추가</button>
 									</form>
 								</div>
@@ -233,21 +228,21 @@
 							<% for(StandardPost sp : list) { %>
 								<table id="post">
 									<tr id="postmemberid">
-										<td colspan="2" style="height:30px; padding-left: 20px;">
+										<td colspan="3" style="height:30px; padding-left: 20px;">
 											<b>
 												<%= sp.getMemberId() %>
 											</b>
 										</td>
 									</tr>
 									<tr id="postcontent" style="text-align: center; padding: 30px;">
-										<td colspan="2" style="padding: 30px; text-align: center;">
+										<td colspan="3" style="padding: 30px; text-align: center;">
 											<%= sp.getPostContent() %>
 										</td>
 									</tr>
 									<tr id="postbottom">
-										<td id="posteditdate">수정일자 &nbsp;:&nbsp; <%= sp.getPostDate() %>
-										</td>
-										<td id="postbuttons"><button>수정하기</button></td>
+										<td id="posteditdate">작성일자 &nbsp;:&nbsp; <%= sp.getLastModifieddate() %></td>
+										<td id="posteditbutton"><button>수정</button></td>
+										<td id="postdeletebutton"><button onclick="deletePost(<%= sp.getPostSeq() %>);">삭제</button></td>
 									</tr>
 									<br>
 								</table>
