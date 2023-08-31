@@ -11,7 +11,10 @@
 <title>Petmily</title>
 <script type="text/javascript" src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.3.0/kakao.min.js" integrity="sha384-70k0rrouSYPWJt7q9rSTKpiTfX6USlMYjZUtr1Du+9o4cGvhPAWxngdtVZDdErlh" crossorigin="anonymous"></script>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+  Kakao.init('fa414bb9d343a627b76d4f12f380c22c'); 
+</script>
 <script type="text/javascript">
   <% if (request.getAttribute("message") != null) { %>
   <% if (request.getAttribute("message").equals("비밀번호 변경됨.")) { %>
@@ -155,13 +158,70 @@ function moveEnrollPage(){
   <a href="<%=apiURL%>"><img width="110" height="40" src="http://static.nid.naver.com/oauth/small_g_in.PNG"></a>
 </div>
 <!-- 카카오로그인 -->
-
+<div>
+<a id="kakao-login-btn" href="javascript:loginWithKakao()">
+  <img src="https://k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg" width="222"
+    alt="카카오 로그인 버튼" />
+</a>
+<p id="token-result"></p>
+</div>
 <!-- 구글로그인 -->
 
 </div>
 
  
+<script>
+Kakao.init('fa414bb9d343a627b76d4f12f380c22c');
 
+// 3. 데모버전으로 들어가서 카카오로그인 코드를 확인.
+function loginWithKakao() {
+    Kakao.Auth.login({
+        success: function (authObj) {
+            console.log(authObj); // access토큰 값
+            Kakao.Auth.setAccessToken(authObj.access_token); // access토큰값 저장
+            getInfo();
+        },
+        fail: function (err) {
+            console.log(err);
+        }
+    });
+}
+
+// 4. 엑세스 토큰을 발급받고, 아래 함수를 호출시켜서 사용자 정보를 받아옴.
+function getInfo() {
+    Kakao.API.request({
+        url: '/v2/user/me',
+        success: function (res) {
+            console.log(res);
+            // 이메일, 닉네임
+            var email = res.kakao_account.email; 
+            var nickname = res.kakao_account.profile.nickname;
+            var userInfo = {
+                    email: email,
+                    nickname: nickname
+                };
+
+                // 서버로 정보 전송
+                $.ajax({
+                    type: 'POST',
+                    url: '/petmily/kakao', 
+                    data: JSON.stringify(userInfo),
+                    contentType: 'application/json',
+                    success: function(response) {
+                    console.log('Data sent successfully');
+                    location.href="http://localhost:8080/petmily"; 
+                    },
+                    error: function(error) {
+                        console.log('Data sending failed');
+                    }
+                });
+        },
+        fail: function (error) {
+            alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error));
+        }
+    });
+}
+</script>
 <br>
 <%@ include file="../common/footer.jsp" %>
 </body>
