@@ -43,6 +43,8 @@ public class DepartmentServlet extends HttpServlet {
 		view = request.getRequestDispatcher("views/department/deptsearch.jsp");
 		request.setAttribute("search", value);
 		request.setAttribute("list", list);
+		request.setAttribute("type", "1");
+
 		// 내보내기
 		view.forward(request, response);
 

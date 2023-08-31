@@ -6,6 +6,9 @@ import member.model.vo.Member;
 import static common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
+
+import department.model.vo.Department;
 
 public class MemberService {
 	private MemberDao mdao = new MemberDao();
@@ -107,4 +110,26 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
+
+	public int updateMemberpwd(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMemberpwd(conn, member);
+		if (result>0) {
+			commit(conn);
+		}	else	{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
+
+	public ArrayList<Member> selectList() {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectList(conn);
+		close(conn);
+		return list;
+	}
+
 }

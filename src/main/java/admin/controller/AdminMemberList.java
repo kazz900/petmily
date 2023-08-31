@@ -1,7 +1,7 @@
-package member.controller;
+package admin.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,48 +14,41 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberFindServlet
+ * Servlet implementation class AdminMemberList
  */
-@WebServlet("/idfind")
-public class IdFindServlet extends HttpServlet {
+@WebServlet("/memli")
+public class AdminMemberList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IdFindServlet() {
+    public AdminMemberList() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		String memail = request.getParameter("memail");
-		Member member = new MemberService().findMemberid(memail);
 		
-		String returnValue = null;	//ajax로 보낼 문자 저장용
+		ArrayList<Member> list = new MemberService().selectList();
+		
+		System.out.println("size =" + list.size());
 		RequestDispatcher view = null;
-		if(member.getMemberId() != null) {
-			returnValue = member.getMemberId();
-					//ajax 통신은 네트워크 입출력임 : 별도의 스트림을 열어서 사용함
-		response.setContentType("text/html; charset=utf-8");
-		
-		
-		request.setAttribute("member", member);
-		request.setAttribute("message", "성공메세지보냄");
-		} else {
-			request.setAttribute("message", memail + "로 가입된 회원정보 없음");			
-		}
-		view = request.getRequestDispatcher("views/member/findinfoPage.jsp");
+
+		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
+		request.setAttribute("list", list);
 		view.forward(request, response);
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

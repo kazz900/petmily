@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="java.util.ArrayList, member.model.vo.Member, java.sql.Date"%>
+	import="java.util.ArrayList, department.model.vo.Department, java.sql.Date"%>
 <%
-ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
+ArrayList<Department> list = (ArrayList<Department>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,11 +17,6 @@ ArrayList<Member> list = (ArrayList<Member>) request.getAttribute("list");
 		margin: 98px auto 0 auto;
 		word-wrap: break-word;
 	}
-}
-div#tab-1 {
-	width: 1050px;
-	height: 720px;
-	overflow : auto;
 }
 </style>
 <link rel="stylesheet" href="/petmily/resources/css/admin/adminmain.css">
@@ -38,31 +33,28 @@ div#tab-1 {
 			cellpadding="3">
 			<tr>
 				<th>등록번호</th>
-				<th>아이디</th>
-				<th>이메일</th>
-				<th>닉네임</th>
-				<th>회원등급</th>
-				<th>변경</th>
+				<th>시설종류</th>
+				<th>시설명</th>
+				<th>주소</th>
+				<th>등록</th>
 			</tr>
 			<%
-			for (Member mem : list) {
+			for (Department dept : list) {
 			%>
 			<tr>
-				<td><%= mem.getMemberSeq()%></td>
-				<td><%= mem.getMemberId() %></td>
-				<td><%= mem.getMemberEmail()%></td>
-				<td><%= mem.getMemberNick()%></td>
-				<td><%= mem.getMemberGrade()%></td>
-				<td><input type="button" value="변경"
-					onclick="location.href='/petmily/admmm?memberSeq=<%= mem.getMemberSeq()%>';
+				<td><%=dept.getDeptSeq()%></td>
+				<td><%=dept.getDeptType()%></td>
+				<td><%=dept.getDeptName()%></td>
+				<td><%=dept.getDeptAddress()%></td>
+				<td><input type="button" value="등록"
+					onclick="location.href='/petmily/deptins?deptSeq=<%=dept.getDeptSeq()%>';
 							return false;"></td>
 			</tr>
 			<%
 			}
 			%>
 		</table>
+
 	</div>
-
-
 </body>
 </html>

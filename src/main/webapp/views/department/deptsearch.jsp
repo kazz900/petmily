@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, department.model.vo.Department, com.google.gson.Gson"%>
+<%@ page
+	import="java.util.ArrayList, department.model.vo.Department, com.google.gson.Gson"%>
 <%
 ArrayList<Department> list = (ArrayList<Department>) request.getAttribute("list");
-String searhInfo = (String) request.getAttribute("search");
+String searchInfo = (String) request.getAttribute("search");
+String type = (String)request.getAttribute("type");
 %>
 <!DOCTYPE html>
 <html>
@@ -54,6 +56,12 @@ div#info {
 	overflow: auto;
 }
 
+.markerDeptName {
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+
 h1#searchvalue {
 	
 }
@@ -72,23 +80,16 @@ img#searchImg {
 		<div id="top">
 			<h1 id="searchvalue">
 				검색 정보 :
-				<%=searhInfo%></h1>
-			<h3>
-				내위치 : 위도 = <span id="lat"></span>, 경도 = <span id="lng"></span>
-			</h3>
-
+				<%=searchInfo%></h1>
 
 			<script type="text/javascript">
 				var lat = 0;
 				var lng = 0;
-
 				//실행시 권한 요청을 수락하여야 함.
 				navigator.geolocation.getCurrentPosition(function(position) {
 					lat = position.coords.latitude;
 					lng = position.coords.longitude;
 
-					document.getElementById("lat").innerHTML = lat;
-					document.getElementById("lng").innerHTML = lng;
 				});
 			</script>
 			<hr>
@@ -98,7 +99,8 @@ img#searchImg {
 				<script type="text/javascript"
 					src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47b2dcffee9e1b18c1d5105786e522b7"></script>
 				<script>
-					var dept = <%=new Gson().toJson(list)%>;
+					var dept =
+				<%=new Gson().toJson(list)%>;
 					console.log(dept);
 
 					if (
@@ -106,11 +108,7 @@ img#searchImg {
 					> 0) {
 						lat = dept[0].deptLatitude;
 						lng = dept[0].deptLongitude;
-					} else {
-
-						lat = 33.451475;
-						lng = 126.570528;
-					}
+					}  
 
 					var container = document.getElementById('map');
 					var options = {
@@ -121,6 +119,40 @@ img#searchImg {
 					var imageSrc = null;
 
 					var map = new kakao.maps.Map(container, options);
+					var infowindow = null; // infowindow 변수 미리 선언
+				
+					//위치정보 동의가 있으면	 
+					//0이 select name
+					if(<%= type %> == "0") {
+						if (navigator.geolocation) {
+							navigator.geolocation
+									.getCurrentPosition(function(position) {
+										var userLat = position.coords.latitude;
+										var userLng = position.coords.longitude;
+
+										var userMarker = new kakao.maps.Marker(
+												{
+													map : map,
+													position : new kakao.maps.LatLng(
+															userLat, userLng),
+													title : '현재 위치',
+													image : new kakao.maps.MarkerImage(
+															"/petmily/resources/images/marker/myloc.png",
+															new kakao.maps.Size(34,
+																	45))
+												});
+
+										// 내 위치를 중심으로 지도 표시
+										map.setCenter(new kakao.maps.LatLng(
+												userLat, userLng));
+									});
+						} else {
+							alert("내 위치 정보를 가져올 수 없습니다");
+						}
+					}
+	
+					var infowindow = new kakao.maps.InfoWindow(); // 인포윈도우 객체 생성
+
 					for (var i = 0; i < dept.length; i++) {
 						var type = dept[i].deptType;
 						if (type == 1) {
@@ -138,7 +170,7 @@ img#searchImg {
 						} else if (type == 7) {
 							imageSrc = "/petmily/resources/images/marker/hotel.png";
 						} else if (type == 8) {
-							imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+							imageSrc = "/petmily/resources/images/marker/culture.png";
 						}
 
 						var imageSize = new kakao.maps.Size(34, 45);
@@ -157,22 +189,18 @@ img#searchImg {
 									image : markerImage
 								});
 
-						var content = '<div style="padding:10px;">' + '<h4>'
-								+ dept[i].deptName + '</h4>' + '</div>';
-								
+						var deptSeq = dept[i].deptSeq;
 						
-						var infowindow = new kakao.maps.InfoWindow({
-					    	position : new kakao.maps.LatLng(
-									dept[i].deptLatitude,
-									dept[i].deptLongitude), 
-					    	content : content
-					    });
-
+						// 클로저를 이용하여 인포윈도우에 표시할 정보를 제공
+						(function(marker, deptName, deptSeq) {
+						    kakao.maps.event.addListener(marker, 'click', function() {
+						        var content = '<div class="markerDeptName"><a href="/petmily/mis?deptSeq=' + deptSeq + '">' + deptName + '</a></div>';
+						        infowindow.setContent(content); // 가게 이름 설정
+						        infowindow.open(map, marker);
+						    });
+						})(marker, dept[i].deptName, deptSeq);
 						marker.setMap(map);
 					}
-					
-					 infowindow.open(map,marker);
-					
 				</script>
 			</div>
 			<div id="info">

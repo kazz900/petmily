@@ -1,7 +1,6 @@
-package member.controller;
+package admin.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MemberFindServlet
+ * Servlet implementation class AdminMemberManagement
  */
-@WebServlet("/idfind")
-public class IdFindServlet extends HttpServlet {
+@WebServlet("/admmm")
+public class AdminMemberManagement extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public IdFindServlet() {
+    public AdminMemberManagement() {
         super();
     }
 
@@ -32,24 +31,20 @@ public class IdFindServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String memail = request.getParameter("memail");
-		Member member = new MemberService().findMemberid(memail);
 		
-		String returnValue = null;	//ajax로 보낼 문자 저장용
-		RequestDispatcher view = null;
-		if(member.getMemberId() != null) {
-			returnValue = member.getMemberId();
-					//ajax 통신은 네트워크 입출력임 : 별도의 스트림을 열어서 사용함
-		response.setContentType("text/html; charset=utf-8");
+		Member member = new Member();
 		
+		member.setMemberGrade(request.getParameter("memberGrade"));
 		
-		request.setAttribute("member", member);
-		request.setAttribute("message", "성공메세지보냄");
-		} else {
-			request.setAttribute("message", memail + "로 가입된 회원정보 없음");			
+		int result = new MemberService().managementMember(member);
+		
+		if(result > 0) {
+			response.sendRedirect("/petmily/views/AdminMemberManagement.jsp" + member.getMemberGrade());
+		}else {
+			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+	    
+		 view.forward(request, response);
 		}
-		view = request.getRequestDispatcher("views/member/findinfoPage.jsp");
-		view.forward(request, response);
 	}
 
 	/**

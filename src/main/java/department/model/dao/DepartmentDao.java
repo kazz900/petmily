@@ -68,11 +68,20 @@ public class DepartmentDao implements Serializable {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from department where dept_insert_ok = 'y' and dept_type like ?";
+		String query = null;
+
+		if (value.equals("9")) {
+			query = "select * from department where dept_insert_ok = 'y'";
+		} else {
+			query = "select * from department where dept_insert_ok = 'y' and dept_type like ?";
+		}
 
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, "%" + value + "%");
+
+			if (!value.equals("9")) {
+				pstmt.setString(1, "%" + value + "%");
+			}
 
 			rset = pstmt.executeQuery();
 
@@ -114,12 +123,9 @@ public class DepartmentDao implements Serializable {
 
 		PreparedStatement pstmt = null;
 
-		
-		String query = "INSERT INTO DEPARTMENT "
-					 + "VALUES (TO_CHAR(DEPT_SEQ.NEXTVAL), "
-					 + "?, ?, ?, ?, NULL, NULL, ?, ?, ?, "
-					 + "?, ?, ?, NULL, NULL, ?, ?)";
-		
+		String query = "INSERT INTO DEPARTMENT " + "VALUES (TO_CHAR(DEPT_SEQ.NEXTVAL), "
+				+ "?, ?, ?, ?, NULL, NULL, ?, ?, ?, " + "?, ?, ?, NULL, NULL, ?, ?)";
+
 		try {
 			pstmt = conn.prepareStatement(query);
 
@@ -135,29 +141,6 @@ public class DepartmentDao implements Serializable {
 			pstmt.setString(10, dept.getDeptWithpetfee());
 			pstmt.setString(11, dept.getDeptInsertOk());
 			pstmt.setString(12, dept.getDeptDeleteOk());
-
-			result = pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-
-	public int deleteDepartment(Connection conn, Department dept) {
-		int result = 0;
-
-		PreparedStatement pstmt = null;
-
-		String query = "DELETE FROM DEPARTMENT " + "WHERE DEPT_NAME LIKE ? " + "AND DEPT_ADDRESS LIKE ?";
-
-		try {
-			pstmt = conn.prepareStatement(query);
-
-			pstmt.setString(1, "%" + dept.getDeptName() + "%");
-			pstmt.setString(2, "%" + dept.getDeptAddress() + "%");
 
 			result = pstmt.executeUpdate();
 
@@ -211,6 +194,33 @@ public class DepartmentDao implements Serializable {
 		return dptmt;
 	}
 
+	public int requestDeleteDept(Connection conn, Department dept) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "UPDATE DEPARTMENT "
+					 + "SET DEPT_DELETE_OK = ? "
+					 + "WHERE DEPT_NAME = ? AND DEPT_ADDRESS = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, dept.getDeptDeleteOk());
+			pstmt.setString(2, dept.getDeptName());
+			pstmt.setString(3, dept.getDeptAddress());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
 	public ArrayList<Department> selectNotInsertedDept(Connection conn) {
 		ArrayList<Department> list = new ArrayList<Department>();
 
@@ -244,6 +254,8 @@ public class DepartmentDao implements Serializable {
 				dept.setDeptPic(rset.getString("dept_pic"));
 				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
 				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
+
+				dept.typeSelect();
 
 				list.add(dept);
 			}
@@ -280,7 +292,7 @@ public class DepartmentDao implements Serializable {
 		return result;
 
 	}
-	
+
 	public ArrayList<Department> selectRequestTerminateDept(Connection conn) {
 		ArrayList<Department> list = new ArrayList<Department>();
 
@@ -315,6 +327,8 @@ public class DepartmentDao implements Serializable {
 				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
 				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
 
+				dept.typeSelect();
+
 				list.add(dept);
 			}
 		} catch (Exception e) {
@@ -326,6 +340,7 @@ public class DepartmentDao implements Serializable {
 
 		return list;
 	}
+
 	public int terminateDept(Connection conn, String value) {
 
 		int result = 0;
@@ -338,6 +353,7 @@ public class DepartmentDao implements Serializable {
 			pstmt = conn.prepareStatement(query);
 
 			pstmt.setInt(1, Integer.parseInt(value));
+
 
 			result = pstmt.executeUpdate();
 

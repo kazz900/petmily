@@ -15,13 +15,13 @@ import department.model.vo.Department;
  * Servlet implementation class DelDeptServlet
  */
 @WebServlet("/deldept")
-public class DelDeptServlet extends HttpServlet {
+public class RequestDeleteDeptServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DelDeptServlet() {
+    public RequestDeleteDeptServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,10 +33,11 @@ public class DelDeptServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		Department dept = new Department();
 		
+		dept.setDeptDeleteOk(request.getParameter("deleteOk"));
 		dept.setDeptName(request.getParameter("name"));
 		dept.setDeptAddress(request.getParameter("address"));
 		
-		int result = new DepartmentService().deleteDepartment(dept);
+		int result = new DepartmentService().requestDeleteDept(dept);
 		System.out.println(result);
 		if (result > 0) {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/delSucceed.jsp");
