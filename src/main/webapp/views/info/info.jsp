@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Petmily</title>
 <link rel="stylesheet" href="/petmily/resources/css/info/info.css">
 <script type="text/javascript" src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <script type="text/javascript" src="/petmily/resources/js/info/infotap.js"></script>
