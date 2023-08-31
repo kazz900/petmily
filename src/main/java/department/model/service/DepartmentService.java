@@ -39,9 +39,16 @@ public class DepartmentService implements Serializable{
 		return result;
 	}
 
-	public int deleteDepartment(Department dept) {
+	public Department selectMainInfo(String deptSeq) {
 		Connection conn = getConnection();
-		int result = ddao.deleteDepartment(conn, dept);
+		Department dptmt = ddao.selectMainInfo(conn, deptSeq);
+		close(conn);
+		return dptmt;
+	}
+
+	public int requestDeleteDept(Department dept) {
+		Connection conn = getConnection();
+		int result = ddao.requestDeleteDept(conn, dept);
 		if (result > 0) {
 			commit(conn);
 		} else {
@@ -50,10 +57,44 @@ public class DepartmentService implements Serializable{
 		close(conn);
 		return result;
 	}
-	public Department selectMainInfo(String deptSeq) {
+
+	public ArrayList<Department> selectNotInsertedDept() {
 		Connection conn = getConnection();
-		Department dptmt = ddao.selectMainInfo(conn, deptSeq);
+		ArrayList<Department> list = ddao.selectNotInsertedDept(conn);
 		close(conn);
-		return dptmt;
+		return list;
 	}
+
+	public int approveDept(String value) {
+		Connection conn = getConnection();
+		int result = ddao.approveDept(conn, value);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+		
+		
+	}
+	public ArrayList<Department> selectRequestTerminateDept() {
+		Connection conn = getConnection();
+		ArrayList<Department> list = ddao.selectRequestTerminateDept(conn);
+		close(conn);
+		return list;
+	}
+	public int terminateDept(String value) {
+		Connection conn = getConnection();
+		int result = ddao.terminateDept(conn, value);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }
+

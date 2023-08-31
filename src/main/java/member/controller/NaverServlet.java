@@ -31,6 +31,7 @@ import member.model.vo.Member;
  */
 @WebServlet("/naver")
 public class NaverServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
        
     /**
@@ -55,7 +56,7 @@ public class NaverServlet extends HttpServlet {
 		String clientSecret = "oWbuQ2K3Ut";// 애플리케이션 클라이언트 시크릿값";
 		String code = request.getParameter("code");
 		String state = request.getParameter("state");
-		String redirectURI = URLEncoder.encode("http:" + "//" + "localhost:8080/petmily/views/member/callback.jsp",
+		String redirectURI = URLEncoder.encode("http:" + "//" + "localhost:8080/petmily/naver",
 				"UTF-8");
 		String apiURL;
 		apiURL = "https:" + "//" + "nid.naver.com/oauth2.0/token?grant_type=authorization_code&";

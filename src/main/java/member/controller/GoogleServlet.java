@@ -35,42 +35,44 @@ public class GoogleServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		Member member = new Member();
 		MemberService mservice = new MemberService();
-		String Gemail = request.getParameter("google_id_login_id");		
-		String Gname = request.getParameter("google_id_login_name");	
-		
-		member = mservice.snsLogin(Gemail);
-
-		if(member == null) {	//회원정보 없을시 sns계정정보 임의생성용 토큰생성 메소드
-			member = new Member();
-			String generatedId = "g@";	
-			
-			String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-			StringBuilder token = new StringBuilder();
-			Random random = new Random();		
-			for (int i = 0; i < 10; i++) {
-				char randomChar = characters.charAt(random.nextInt(characters.length()));
-				token.append(randomChar);
-			}
-			
-			generatedId += token.toString();
-			
-			member.setMemberId(generatedId);
-			member.setMemberPwd(generatedId);
-			member.setMemberNick(request.getParameter("google_id_login_name"));
-			member.setMemberEmail(request.getParameter("google_id_login_id"));	
-			
-			int result = mservice.insertMember(member);
-			
-			//4. 받은 결과로 내보낼 뷰 선택 처리 
-			if(result == 0) {
-				//회원가입 실패시 error.jsp 로 에러메세지를 보냄
-				RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-
-				request.setAttribute("message", member.getMemberEmail() + "회원가입 실패");
-								
-				view.forward(request, response);
-			}			
-		}		
+		String code = request.getParameter("code");
+		System.out.println(code);
+//		String Gemail = request.getParameter("google_id_login_id");		
+//		String Gname = request.getParameter("google_id_login_name");	
+//		
+//		member = mservice.snsLogin(Gemail);
+//
+//		if(member == null) {	//회원정보 없을시 sns계정정보 임의생성용 토큰생성 메소드
+//			member = new Member();
+//			String generatedId = "g@";	
+//			
+//			String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//			StringBuilder token = new StringBuilder();
+//			Random random = new Random();		
+//			for (int i = 0; i < 10; i++) {
+//				char randomChar = characters.charAt(random.nextInt(characters.length()));
+//				token.append(randomChar);
+//			}
+//			
+//			generatedId += token.toString();
+//			
+//			member.setMemberId(generatedId);
+//			member.setMemberPwd(generatedId);
+//			member.setMemberNick(request.getParameter("google_id_login_name"));
+//			member.setMemberEmail(request.getParameter("google_id_login_id"));	
+//			
+//			int result = mservice.insertMember(member);
+//			
+//			//4. 받은 결과로 내보낼 뷰 선택 처리 
+//			if(result == 0) {
+//				//회원가입 실패시 error.jsp 로 에러메세지를 보냄
+//				RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
+//
+//				request.setAttribute("message", member.getMemberEmail() + "회원가입 실패");
+//								
+//				view.forward(request, response);
+//			}			
+//		}		
 		
 		HttpSession session = request.getSession();
 		session.setMaxInactiveInterval(30*60);	

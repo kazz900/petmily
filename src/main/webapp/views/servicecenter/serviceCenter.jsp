@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="servicecenter.model.vo.Board, java.util.ArrayList"%>
+	import="servicecenter.model.vo.Board, member.model.vo.Member, java.util.ArrayList"%>
 
 <%
-ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Petmily</title>
-<link rel="stylesheet" href="/petmily/resources/css/servicecenter/serviceCenter.css">
+<link rel="stylesheet"
+	href="/petmily/resources/css/servicecenter/serviceCenter.css">
 
 <script type="text/javascript"
 	src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
@@ -18,7 +19,7 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 	src="/petmily/resources/js/info/infotap.js"></script>
 
 </head>
-<%@ include file="../common/main.jsp" %>
+<%@ include file="../common/main.jsp"%>
 
 <body>
 	<div class="info-content">
@@ -38,19 +39,41 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 			<div id="tab-1" class="tab-content current">
 				<table id="outer" align="center" cellspacing="5" cellpadding="0">
 					<tr>
-						<th style="width: 100px;">No.</th>
+						<th style="width: 80px;">No.</th>
 						<th style="width: 200px;">Title</th>
 						<th style="width: 310px;">Content</th>
+						<th>Progress</th>
 						<th style="width: 110px;">Date</th>
 					</tr>
 					<%
+					if (list != null) {
+					%>
+					<%
 					for (Board b : list) {
 					%>
-					<tr style="border-top:1px solid black; border-bottom:1px solid black;">
+					<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
 						<td style="font-size: 14px;"><%=b.getBrdNo()%></td>
 						<td style="padding-right: 15px; font-size: 14px;"><%=b.getBrdTitle()%></td>
-						<td style="padding-left: 15px; font-size: 14px;"><%=b.getBrdContent()%></td>
-						<td style="font-size: 14px;"><%=b.getBrdDate()%></td>
+						
+						<td style="padding-left: 15px; font-size: 14px;">
+						<a href="/petmily/bdetail?bnum=<%=b.getBrdNo()%>">
+						<%=b.getBrdContent()%></a></td>
+						
+						<td style="font-size:12px;"><%=b.getBrdResult()%></td>
+						<td style="font-size: 10px;"><%=b.getBrdDate()%></td>
+					</tr>
+					<%
+					}
+					%>
+
+					<%
+					} else {
+					%>
+					<tr>
+						<td style="font-size: 14px;"></td>
+						<td style="padding-right: 15px; font-size: 14px;"></td>
+						<td style="padding-left: 15px; font-size: 14px;"></td>
+						<td style="font-size: 14px;"></td>
 					</tr>
 					<%
 					}
@@ -62,8 +85,10 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 			<div id="tab-2" class="tab-content">
 				<form action="/petmily/addsuggest" method="get">
+					<input type="hidden" name="result" value="접수">
+					<input type="hidden" name="mNo" value="<%=member.getMemberSeq()%>">
+					
 					<table width="500" align="center" cellspacing="5">
-
 						<tr>
 							<th width="150">글 제목</th>
 							<td><input type="text" name="title" size="31" maxlength="50"
@@ -86,7 +111,8 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 			<div id="tab-3" class="tab-content">
 				<form action="/petmily/adddept" method="get" id="form">
-					<input type="hidden" name="commitment" value="N">
+					<input type="hidden" name="loginOk" value="N">
+					<input type="hidden" name="deleteOk" value="N">
 					<table width="500" align="center" cellspacing="5">
 
 						<tr>
@@ -97,14 +123,17 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 						<tr>
 							<th width="150">시설분류</th>
-							<td><select name="type" style="width:288px; height:36px;">
+							<td><select name="type" style="width: 288px; height: 36px;">
 									<option selected>시설의 분류를 선택해주세요.</option>
 									<option value="1">동물병원</option>
-									<option value="2">반려동물용품점</option>
-									<option value="3">장묘시설</option>
+									<option value="2">미용시설</option>
+									<option value="1/2">의료/미용</option>
+									<option value="3">반려동물용품점</option>
 									<option value="4">위탁관리시설</option>
-									<option value="5">문화시설</option>
-									<option value="6">카페</option>
+									<option value="5">장묘시설</option>
+									<option value="6">식당/카페</option>
+									<option value="7">호텔/펜션</option>
+									<option value="8">문화시설</option>
 							</select></td>
 						</tr>
 
@@ -124,8 +153,9 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 						<tr>
 							<th width="150">운영시간</th>
 							<td><input type="time" name="open" value="time" size="31"
-								maxlength="50" style="width:128px;"> ~ <input type="time" name="close"
-								value="time" size="31" maxlength="50" style="width:129px;"></td>
+								maxlength="50" style="width: 128px;"> ~ <input
+								type="time" name="close" value="time" size="31" maxlength="50"
+								style="width: 129px;"></td>
 						</tr>
 
 						<tr class="yes">
@@ -133,10 +163,10 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 							<td>
 								<table>
 									<tr>
-										<td><input type="radio" name="animalSize" value="small">소형</td>
-										<td><input type="radio" name="animalSize" value="regular">중형</td>
-										<td><input type="radio" name="animalSize" value="big">대형</td>
-										<td><input type="radio" name="animalSize" value="noLimit"
+										<td><input type="radio" name="animalSize" value="1">소형</td>
+										<td><input type="radio" name="animalSize" value="2">중형</td>
+										<td><input type="radio" name="animalSize" value="3">대형</td>
+										<td><input type="radio" name="animalSize" value="0"
 											checked>제한없음</td>
 									</tr>
 								</table>
@@ -145,23 +175,23 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 						<tr class="yes">
 							<th width="150">주차여부</th>
-							<td><input type="radio" name="parking" value="Y"
+							<td><input type="radio" name="parking" value="1"
 								style="margin-left: 78px;"> 가능 <input type="radio"
-								name="parking" value="N"> 불가능</td>
+								name="parking" value="0"> 불가능</td>
 						</tr>
 
 						<tr class="yes">
 							<th width="150">입장료여부</th>
-							<td><input type="radio" name="entFee" value="Y"
+							<td><input type="radio" name="entFee" value="1"
 								style="margin-left: 78px;"> 있음 <input type="radio"
-								name="entFee" value="N"> 없음</td>
+								name="entFee" value="0"> 없음</td>
 						</tr>
 
 						<tr>
 							<th width="150">애견동반추가요금</th>
-							<td><input type="radio" name="petFee" value="Y"
+							<td><input type="radio" name="petFee" value="1"
 								style="margin-left: 78px;"> 있음 <input type="radio"
-								name="petFee" value="N"> 없음</td>
+								name="petFee" value="0"> 없음</td>
 						</tr>
 
 						<tr>
@@ -170,7 +200,7 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 						</tr>
 
 						<th colspan="2"><input type="submit" value="등록요청하기"
-							id="submitBtn"></th>
+							id="submitBtn" class="w-btn-neon2"></th>
 
 
 					</table>
@@ -181,6 +211,7 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 
 			<div id="tab-4" class="tab-content">
 				<form action="/petmily/deldept" method="get">
+				<input type="hidden" name="deleteOk" value="Y">
 					<table width="500" align="center" cellspacing="5">
 
 						<tr>
@@ -188,19 +219,6 @@ ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 							<td><input type="text" name="name" size="31" maxlength="15"
 								placeholder="시설명을 입력해주세요." required></td>
 						</tr>
-
-						<!-- 		<tr>
-			<th width="150">시설분류</th>
-			<td><select name="type">
-					<option selected>시설의 분류를 선택해주세요.</option>
-					<option value="1">동물병원</option>
-					<option value="2">반려동물용품점</option>
-					<option value="3">장묘시설</option>
-					<option value="4">위탁관리시설</option>
-					<option value="5">문화시설</option>
-					<option value="6">카페</option>
-			</select></td>
-		</tr> -->
 
 						<tr>
 							<th width="150">주소</th>
