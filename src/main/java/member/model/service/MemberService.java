@@ -96,4 +96,17 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
+	public int updateMemberpwd(Member member) {
+		Connection conn = getConnection();
+		int result = mdao.updateMemberpwd(conn, member);
+		if (result>0) {
+			commit(conn);
+		}	else	{
+			rollback(conn);
+		}
+		close(conn);
+		return result;
+	}
+
 }

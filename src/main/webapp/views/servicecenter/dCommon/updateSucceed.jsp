@@ -34,7 +34,7 @@ a {
 </style>
 </head>
 <body>
-<h2>삭제 요청이 전송되었습니다.</h2>
-<a href="/petmily/suggest"><button>확인</button></a>
+<h2>성공적으로 변경되었습니다.</h2>
+<a href="/petmily/views/myPage/changeMyinfo.jsp"><button>확인</button></a>
 </body>
 </html>

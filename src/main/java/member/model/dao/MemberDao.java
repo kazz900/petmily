@@ -35,7 +35,6 @@ public class MemberDao {
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(rset.getString("member_email"));
 				member.setMemberGrade(rset.getString("member_grade"));
-				System.out.println(member);
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -64,10 +63,12 @@ public class MemberDao {
 			
 			if(rset.next()) {
 				member = new Member();
-				
+				member.setMemberSeq(rset.getInt("member_seq"));
 				member.setMemberId(rset.getString("member_id"));
+				member.setMemberPwd("");
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberEmail(memail);
+				member.setMemberGrade(rset.getString("member_grade"));
 				}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -260,5 +261,29 @@ public class MemberDao {
 		}
 		return result;
 	}
+
+		public int updateMemberpwd(Connection conn, Member member) {
+			
+			int result = 0;
+
+			PreparedStatement pstmt = null;
+			
+			String query = "UPDATE MEMBER SET MEMBER_PWD = ? "
+						 + "WHERE MEMBER_ID = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				
+				pstmt.setString(1, member.getMemberPwd());
+				pstmt.setString(2, member.getMemberId());
+
+				result = pstmt.executeUpdate();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(pstmt);
+			}
+			return result;
+		}
 	
 }

@@ -1,8 +1,9 @@
 package member.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.util.Base64;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,23 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class ChangeNicknameServlet
+ * Servlet implementation class ChangePwdServlet
  */
-@WebServlet("/myinfo")
-public class ChangeNicknameServlet extends HttpServlet {
+@WebServlet("/changePwd")
+public class ChangePwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ChangeNicknameServlet() {
+    public ChangePwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,29 +34,42 @@ public class ChangeNicknameServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-
-		String userid = request.getParameter("userid");
-		String nickname = request.getParameter("nickname");
-		String memail = request.getParameter("email");
 		
-		int result = new MemberService().updateMemberInfo(userid, nickname);
+		Member member = new Member();
+		
+		
+		member.setMemberId(request.getParameter("userid"));
+		String userpwd = request.getParameter("userpwd");
+		
+		String cryptoUserpwd = null;
+		
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-512");
+			
+			byte[] pwdValues = userpwd.getBytes(Charset.forName("UTF-8"));
+			
+			md.update(pwdValues);
+			
+			cryptoUserpwd = Base64.getEncoder().encodeToString(pwdValues);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		member.setMemberPwd(cryptoUserpwd);
+		
+		int result = new MemberService().updateMemberpwd(member);
 		
 		if (result > 0) {
 			
-			Member member = new MemberService().snsLogin(memail);
-			
 			HttpSession session = request.getSession();
-//			session.invalidate();
+			session.invalidate();
 			
-			session.setMaxInactiveInterval(30 * 60);
-			session.setAttribute("member", member);
-			
-			response.sendRedirect("/petmily/views/servicecenter/dCommon/updateSucceed.jsp");
+			response.sendRedirect("/petmily/views/member/login.jsp");
 		} else {
-			System.out.println("실패");
+			System.out.println("비밀번호 변경 실패.");
 		}
-
+		
 	}
 
 	/**

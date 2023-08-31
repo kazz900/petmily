@@ -1,29 +1,27 @@
-package servicecenter.controller;
+package department.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import servicecenter.model.service.BoardService;
-import servicecenter.model.vo.Board;
+import department.model.service.DepartmentService;
+import department.model.vo.Department;
 
 /**
- * Servlet implementation class SelectAllSuggest
+ * Servlet implementation class DelDeptServlet
  */
-@WebServlet("/suggest")
-public class SelectAllSuggestServlet extends HttpServlet {
+@WebServlet("/deldept")
+public class RequestDeleteDeptServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectAllSuggestServlet() {
+    public RequestDeleteDeptServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +30,22 @@ public class SelectAllSuggestServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		request.setCharacterEncoding("UTF-8");
+		Department dept = new Department();
 		
-		BoardService bserv = new BoardService();
-		ArrayList<Board> list = null;
-		list = bserv.selectAllSuggest();
+		dept.setDeptDeleteOk(request.getParameter("deleteOk"));
+		dept.setDeptName(request.getParameter("name"));
+		dept.setDeptAddress(request.getParameter("address"));
 		
-		RequestDispatcher view = null;
-
-		if (list.size() > 0) {
-//			view = request.getRequestDispatcher("views/servicecenter/mySuggestBoard.jsp");
-			view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
-			request.setAttribute("list", list);
-
+		int result = new DepartmentService().requestDeleteDept(dept);
+		System.out.println(result);
+		if (result > 0) {
+			response.sendRedirect("/petmily/views/servicecenter/dCommon/delSucceed.jsp");
 		} else {
-			response.sendRedirect("views/servicecenter/dCommon/addFailed.jsp");
-
+			response.sendRedirect("/petmily/views/servicecenter/dCommon/delFailed.jsp");
 		}
-
-		view.forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

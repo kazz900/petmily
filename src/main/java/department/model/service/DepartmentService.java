@@ -39,9 +39,16 @@ public class DepartmentService implements Serializable{
 		return result;
 	}
 
-	public int deleteDepartment(Department dept) {
+	public Department selectMainInfo(String deptSeq) {
 		Connection conn = getConnection();
-		int result = ddao.deleteDepartment(conn, dept);
+		Department dptmt = ddao.selectMainInfo(conn, deptSeq);
+		close(conn);
+		return dptmt;
+	}
+
+	public int requestDeleteDept(Department dept) {
+		Connection conn = getConnection();
+		int result = ddao.requestDeleteDept(conn, dept);
 		if (result > 0) {
 			commit(conn);
 		} else {
@@ -49,11 +56,5 @@ public class DepartmentService implements Serializable{
 		}
 		close(conn);
 		return result;
-	}
-	public Department selectMainInfo(String deptSeq) {
-		Connection conn = getConnection();
-		Department dptmt = ddao.selectMainInfo(conn, deptSeq);
-		close(conn);
-		return dptmt;
 	}
 }
