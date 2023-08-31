@@ -2,6 +2,7 @@ package member.model.service;
 
 import member.model.dao.MemberDao;
 import member.model.vo.Member;
+import pet.model.vo.Pet;
 
 import static common.JDBCTemplate.*;
 
@@ -83,5 +84,7 @@ public class MemberService {
 		close(conn);
 		return result;
 	}
+
+	
 	
 }
