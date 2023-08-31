@@ -108,8 +108,23 @@ public class StandardPostDao {
 	}
 
 	public int deleteStrandardPost(Connection conn, int memberSeq, int postSeq) {
-		// TODO Auto-generated method stub
-		return 0;
+		// TODO : ADD MEMBER VALDIATION 
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM STANDARD_POST WHERE POST_SEQ = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postSeq);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public int updateStandardPostLikeNo(Connection conn, int memberSeq, int postSeq) {
