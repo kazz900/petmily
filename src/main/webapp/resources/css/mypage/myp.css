@@ -161,3 +161,19 @@
 	background-color: #dfdfdf;
 }
 
+#add{
+	text-align:center;
+	color: #B97630;
+}
+
+#addpet{
+	text-align:center;
+}
+
+#cancel{
+	
+	margin-top: 15px;
+    width: 200px;
+    height: 35px;
+    border-radius: 30px;
+}

@@ -101,6 +101,9 @@
 							border-radius: 5px;
 							outline: none;
 						}
+						div input#newpost:hover{
+							background-color: #cca670;
+						}
 
 						table#post {
 							height: auto;
@@ -242,10 +245,10 @@
 									</tr>
 									<tr id="postbottom">
 										<td id="posteditdate">작성일자 &nbsp;:&nbsp; <%= sp.getLastModifieddate() %></td>
-										<% if (m.getMemberSeq() == sp.getMemberSeq()){ %>>
+										<% if (m.getMemberSeq() == sp.getMemberSeq()){ %>
 										<td id="posteditbutton"><button>수정</button></td>
 										<td id="postdeletebutton"><button onclick="deletePost(<%= sp.getPostSeq() %>);">삭제</button></td>
-										<% } %>>
+										<% } %>
 									</tr>
 									<br>
 								</table>
