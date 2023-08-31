@@ -32,20 +32,14 @@ public class AdminMemberManagement extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		Member member = new Member();
+		String memberSeq = request.getParameter("memberSeq");
+		String memberGrade = request.getParameter("memberGrade");
 		
-		member.setMemberGrade(request.getParameter("memberGrade"));
+		int result = new MemberService().managementMember(memberSeq, memberGrade);
 		
-		int result = new MemberService().managementMember(member);
-		
-		if(result > 0) {
-			response.sendRedirect("/petmily/views/AdminMemberManagement.jsp" + member.getMemberGrade());
-		}else {
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-	    
-		 view.forward(request, response);
+		response.sendRedirect("/petmily/memli");
 		}
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -63,19 +63,4 @@ public class PetService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
-
-//	public Pet selectPetmily(int petSeq, int memberSeq) {
-//		
-//		Connection conn = getConnection();
-//		petSeq = pdao.selectPetmily(conn, petSeq, memberSeq);
-//		close(conn);
-//		return petSeq;
-//		
-//		
-//	}
-
-	
-
 }

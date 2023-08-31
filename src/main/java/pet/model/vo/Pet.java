@@ -1,8 +1,12 @@
 package pet.model.vo;
 
 public class Pet implements java.io.Serializable {
-	private static final long serialVersionUID = 1313275459825387673L;
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7499976768809950717L;
+	
 	private int petSeq;
 	private int memberSeq;
 	private String petName;
