@@ -358,40 +358,6 @@ public ArrayList<Member> selectList(Connection conn) {
 			return result;
 		}
 
-	//관리자 제외 전체 멤버 리스트 표시
-	public ArrayList<Member> selectList(Connection conn){
-
-		ArrayList<Member> list = new ArrayList<Member>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String query = "select * from member where not member_grade = '0'";
-
-		try {
-			pstmt = conn.prepareStatement(query);
-
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Member member = new Member();
-
-				member.setMemberSeq(rset.getInt("member_seq"));
-				member.setMemberId(rset.getString("member_id"));
-				member.setMemberPwd(rset.getString("member_pwd"));
-				member.setMemberEmail(rset.getString("member_email"));
-				member.setMemberNick(rset.getString("member_nick"));
-				member.setMemberGrade(rset.getString("member_grade"));
-								
-				list.add(member);
-			}
-		} catch (Exception e) {
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
-
 	// 회원 검색
 	public ArrayList<Member> selectSearchMemberId(Connection conn, String keyword) {
 		ArrayList<Member> list = new ArrayList<Member>();
