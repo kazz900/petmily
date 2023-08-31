@@ -37,7 +37,10 @@ form {
 	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
 	width: 350px; /* 폼의 너비 설정 */
 	height: auto;
-	border: 1px solid black;
+		background-color: #FFE4B5;
+	border: 3px solid hsl(30.5, 77.6%, 29.8%);
+	border-radius: 15px;
+	justify-content: center;
 }
 
 td input:not(#checkpassword) {
@@ -123,7 +126,7 @@ justify-content: space-between; */
 		var cpwd = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$])[a-zA-Z\d@!#$]{6,12}[a-zA-Z\d@!#$]$/;
 		var cnick = /^[A-Za-z0-9가-힣ㄱ-ㅎㅏ-ㅣ]{0,8}$/;
 		var cemail = /^[A-Za-z0-9]+@[A-Za-z0-9]+\.[A-Za-z0-9]{2,}$/;
-
+		//키 입력시 유효성검사하는 이벤트 추가
 		notice.hidden = true;
 		mid.addEventListener('keyup', function() {
 			cbug = 0;
@@ -140,7 +143,7 @@ justify-content: space-between; */
 							if (!cpwd.test(mpwd.value)) {
 								notice.hidden = false;
 								notice.textContent = '패스워드는 영어 대,소문자와 숫자를 포함하고,!@#$기호중 하나를 포함시켜 6~12글자로 사용해주세요.';
-								notice.style.color = '#ff6633';
+								notice.style.color = '#ff5151';
 							} else {
 								notice.hidden = true;
 							}
@@ -154,7 +157,7 @@ justify-content: space-between; */
 				notice.hidden = true;
 			} else {
 				notice.textContent = '패스워드와 같은 값을 입력해주세요.';
-				notice.style.color = '#ff6633';
+				notice.style.color = '#ff5151';
 				mpwd2.focus();
 			}
 		});
@@ -163,7 +166,7 @@ justify-content: space-between; */
 			if (!cnick.test(mnick.value)) {
 				notice.hidden = false;
 				notice.textContent = '닉네임은 8자 이하로 작성해주세요.';
-				notice.style.color = '#ff6633';
+				notice.style.color = '#ff5151';
 			} else {
 				notice.hidden = true;
 			}
@@ -173,13 +176,13 @@ justify-content: space-between; */
 			if (!cemail.test(memail.value)) {
 				notice.hidden = false;
 				notice.textContent = '이메일은 test@enroll.com 형태로 작성해주세요.';
-				notice.style.color = '#ff6633';
+				notice.style.color = '#ff5151';
 			} else {
 				notice.hidden = true;
 			}
 		});
 	};
-	
+	//회원가입시 유효성 체크용 함수
 	function validateCheck() {
 		var mid = document.getElementById('mid');
 		var mpwd = document.getElementById('mpwd');
@@ -223,7 +226,7 @@ justify-content: space-between; */
 		}
 		
 	}
-	
+	//아이디 중복검사용 Ajax 사용 함수
 	function dupcheckId() {
 		var mid = $('#mid').val();
 		if (mid === "" || mid == null || mid.length === 0) {
@@ -245,7 +248,7 @@ justify-content: space-between; */
 		    }
 		});
 	}
-
+	//이메일 중복검사용 Ajax 사용 힘수
 	function dupcheckemail() {
 		var memail = $('#memail').val();
 		if (memail === "" || memail == null || memail.length === 0) {
@@ -268,7 +271,7 @@ justify-content: space-between; */
 		});
 
 	}
-	
+	// 아이디와 이메일 중복검사 이후 회원가입 버튼 처리
 	function setSignupButtonState(isDuplicate) {
 		var signupButton = document.getElementById('submit');
 		  if (isDuplicate) {
