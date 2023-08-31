@@ -2,7 +2,9 @@ package standardpost.model.vo;
 
 import java.sql.Date;
 
-public class StandardPost implements java.io.Serializable {
+import post.model.vo.Post;
+
+public final class StandardPost extends Post implements java.io.Serializable {
 	private static final long serialVersionUID = -2455094323948180247L;
 
 	private int postSeq;

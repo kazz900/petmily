@@ -361,4 +361,9 @@ public class MemberDao {
 
 		return list;
 	}
+
+	public ArrayList<Member> selectList(Connection conn) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
