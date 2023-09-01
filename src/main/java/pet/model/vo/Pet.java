@@ -79,14 +79,7 @@ public class Pet implements java.io.Serializable {
 	}
 	
 	
-	public void typeinsert(String size) {
-		if(this.petSize.equals("small")) {
-			setPetSize("소형");
-		}else if(this.petSize.equals("regular")){
-			setPetSize("중형");
-		}else if(this.petSize.equals("big")){
-			setPetSize("대형");
-		}
-	}
+
+	
 	
 }

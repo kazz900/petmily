@@ -27,9 +27,9 @@ public class PetService {
 
 	
 
-	public int insertPet(Pet pet, int memberSeq ) {
+	public int insertPet(Pet pet) {
 		Connection conn = getConnection();
-		int result = pdao.insertPet(conn, pet, memberSeq);
+		int result = pdao.insertPet(conn, pet);
 		if(result > 0)
 			commit(conn);
 		else
@@ -63,4 +63,6 @@ public class PetService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 }
