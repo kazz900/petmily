@@ -35,7 +35,7 @@ public class PostListServlet extends HttpServlet {
 		PostSerivce spSerivce = new PostSerivce();
 		ArrayList<Post> list = new ArrayList<Post>();
 		list = spSerivce.getPostList();
-
+		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
 		
 		RequestDispatcher view = null;
 		
