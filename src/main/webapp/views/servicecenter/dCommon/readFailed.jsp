@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.model.vo.Member"%>
+<% Member member = (Member)session.getAttribute("member"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +36,6 @@ a {
 </head>
 <body>
 <h2>건의사항을 읽어오는 중 문제가 발생하였습니다.</h2>
-<a href="/petmily/suggest"><button>확인</button></a>
+<a href="/petmily/suggest?mseq=<%=member.getMemberSeq()%>"><button>확인</button></a>
 </body>
 </html>
