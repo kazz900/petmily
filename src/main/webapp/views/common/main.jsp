@@ -58,7 +58,7 @@
 					<% }else if(member.getMemberGrade().equals("1")){ %>
 					<li class="sidebarmenutitle">더보기</li>
 
-					<li><a href="/petmily/views/myPage/changeMyinfo.jsp" class="sidebarmenu">마이페이지</a></li>
+					<li><a href="/petmily/mypet?memberSeq=<%= member.getMemberSeq() %>" class="sidebarmenu">마이페이지</a></li>
 
 					<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
 					<% }else if(member.getMemberGrade().equals("0")){ %>

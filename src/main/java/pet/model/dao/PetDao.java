@@ -37,7 +37,7 @@ public class PetDao {
 				pet.setPetImg(rset.getString("pet_img"));
 				
 				pet.typeSelect(pet.getPetType());
-				pet.typeinsert(pet.getPetSize());
+			
 				
 				list.add(pet);
 				
@@ -53,7 +53,7 @@ public class PetDao {
 		return list;
 	}
 
-	public int insertPet(Connection conn, Pet pet, int memberSeq) {
+	public int insertPet(Connection conn, Pet pet) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -63,8 +63,7 @@ public class PetDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			
-			pstmt.setInt(1, memberSeq);
+			pstmt.setInt(1, pet.getMemberSeq());
 			pstmt.setString(2, pet.getPetName());
 			pstmt.setString(3, pet.getPetType());
 			pstmt.setString(4, pet.getPetSize());
@@ -139,7 +138,7 @@ public class PetDao {
 				pet.setPetImg(rset.getString("pet_img"));
 				
 				pet.typeSelect(pet.getPetType());
-				pet.typeinsert(pet.getPetSize());
+				
 				
 				
 				
@@ -155,6 +154,8 @@ public class PetDao {
 		return pet;
 		
 	}
+
+	
 
 		
 	}

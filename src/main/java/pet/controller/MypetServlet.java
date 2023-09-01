@@ -63,7 +63,7 @@ public class MypetServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		System.out.println(list.size());
 		if(list.size() > 0) {
-			view = request.getRequestDispatcher("views/mypage/myPageOfficial.jsp");
+			view = request.getRequestDispatcher("views/myPage/changeMyinfo.jsp");
 			request.setAttribute("list", list);
 		}else {
 			view = request.getRequestDispatcher("views/common/error.jsp");
