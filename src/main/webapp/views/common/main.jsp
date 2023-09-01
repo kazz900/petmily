@@ -49,6 +49,7 @@ function toggleDropdown() {
                   </div>
                </form>
 				</li>
+        
 				<li class="sub-link" onclick="toggleDropdown()"><a href="#">내주변</a>
 				<ul class="dropdown" id="dropdown">
 				<li><a href="/petmily/selectdepttype?selecttype=1&typename=의료" style="color : hsl(30.46deg 58.9% 45.68%)">의료</a></li>
@@ -90,8 +91,12 @@ function toggleDropdown() {
 					<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
 					<% }else if(member.getMemberGrade().equals("1")){ %>
 					<li class="sidebarmenutitle">더보기</li>
-					<li><a href="#" class="sidebarmenu">마이페이지</a></li>
+
+
+					<li><a href="/petmily/mypet?memberSeq=<%= member.getMemberSeq() %>" class="sidebarmenu">마이페이지</a></li>
+
 					<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
+
 					<% }else if(member.getMemberGrade().equals("0")){ %>
 					<li class="sidebarmenutitle">더보기</li>
 					<li><a href="#" class="sidebarmenu">마이페이지</a></li>
@@ -100,6 +105,7 @@ function toggleDropdown() {
 					<li><a href="/petmily/memli" class="sidebarmenu">회원등급변경</a></li>
 					<li><a href="#" class="sidebarmenu">일반게시판관리</a></li>
 					<li><a href="#" class="sidebarmenu">거래게시판관리</a></li>
+					<li><a href="/petmily/suggestAdmin?mseq=<%=member.getMemberSeq()%>, mGrade=<%=member.getMemberGrade()%>" class="sidebarmenu">관리자 고객센터</a></li>
 					<% }else if(member.getMemberGrade().equals("2")){ %>
 					
 					<% } %>

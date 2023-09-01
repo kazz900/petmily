@@ -3,6 +3,7 @@ package standardpost.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import static common.JDBCTemplate.close;
@@ -51,7 +52,7 @@ public class StandardPostDao {
 				sp.setLikeNo(rset.getInt("LIKE_NO"));
 				sp.setReplyNO(rset.getInt("REPLY_NO"));
 				sp.setPostDate(rset.getDate("POST_DATE"));
-				sp.setLastModifieddate(rset.getDate("LAST_MODIFIED_DATE"));
+				sp.setLastModifiedDate(rset.getDate("LAST_MODIFIED_DATE"));
 				System.out.println(sp.toString());
 				list.add(sp);
 			}
@@ -71,8 +72,24 @@ public class StandardPostDao {
 	}
 
 	public int insertStandardPost(Connection conn, int memberSeq, StandardPost standardPost) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		String query = "INSERT INTO STANDARD_POST (POST_SEQ, MEMBER_SEQ, POST_CONTENT) VALUES (POST_SEQ.NEXTVAL, ?, ?)";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, memberSeq);
+			pstmt.setString(2, standardPost.getPostContent());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public StandardPost selectStandardPost(Connection conn, int postSeq) {
@@ -91,8 +108,23 @@ public class StandardPostDao {
 	}
 
 	public int deleteStrandardPost(Connection conn, int memberSeq, int postSeq) {
-		// TODO Auto-generated method stub
-		return 0;
+		// TODO : ADD MEMBER VALDIATION 
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "DELETE FROM STANDARD_POST WHERE POST_SEQ = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postSeq);
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public int updateStandardPostLikeNo(Connection conn, int memberSeq, int postSeq) {

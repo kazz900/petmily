@@ -152,29 +152,6 @@ public class DepartmentDao implements Serializable {
 		return result;
 	}
 
-	public int deleteDepartment(Connection conn, Department dept) {
-		int result = 0;
-
-		PreparedStatement pstmt = null;
-
-		String query = "DELETE FROM DEPARTMENT " + "WHERE DEPT_NAME LIKE ? " + "AND DEPT_ADDRESS LIKE ?";
-
-		try {
-			pstmt = conn.prepareStatement(query);
-
-			pstmt.setString(1, "%" + dept.getDeptName() + "%");
-			pstmt.setString(2, "%" + dept.getDeptAddress() + "%");
-
-			result = pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
-	}
-
 	public Department selectMainInfo(Connection conn, String deptSeq) {
 		Department dptmt = null;
 		PreparedStatement pstmt = null;
@@ -215,6 +192,33 @@ public class DepartmentDao implements Serializable {
 		}
 
 		return dptmt;
+	}
+
+	public int requestDeleteDept(Connection conn, Department dept) {
+		
+		int result = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "UPDATE DEPARTMENT "
+					 + "SET DEPT_DELETE_OK = ? "
+					 + "WHERE DEPT_NAME = ? AND DEPT_ADDRESS = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, dept.getDeptDeleteOk());
+			pstmt.setString(2, dept.getDeptName());
+			pstmt.setString(3, dept.getDeptAddress());
+
+			result = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 	public ArrayList<Department> selectNotInsertedDept(Connection conn) {
@@ -349,6 +353,7 @@ public class DepartmentDao implements Serializable {
 			pstmt = conn.prepareStatement(query);
 
 			pstmt.setInt(1, Integer.parseInt(value));
+
 
 			result = pstmt.executeUpdate();
 

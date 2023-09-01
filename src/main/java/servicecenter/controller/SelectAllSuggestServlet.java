@@ -35,21 +35,26 @@ public class SelectAllSuggestServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
+		int mseq = Integer.parseInt(request.getParameter("mseq"));
+		
+//		String message = request.getParameter("message");
+		
 		BoardService bserv = new BoardService();
 		ArrayList<Board> list = null;
-		list = bserv.selectAllSuggest();
-		
+		list = bserv.selectAllSuggest(mseq);
+
 		RequestDispatcher view = null;
 
-		if (list.size() > 0) {
-//			view = request.getRequestDispatcher("views/servicecenter/mySuggestBoard.jsp");
-			view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
-			request.setAttribute("list", list);
-			System.out.println("succeed");
-		} else {
-			response.sendRedirect("views/servicecenter/dCommon/addFailed.jsp");
-			System.out.println("Failed");
-		}
+		view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
+		request.setAttribute("list", list);
+		
+//		if (list.size() > 0) {
+//			view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
+//			request.setAttribute("list", list);
+//		} else {
+//			System.out.println("여기로옴");
+//			response.sendRedirect("views/servicecenter/dCommon/addFailed.jsp");
+//		}
 
 		view.forward(request, response);
 	}
