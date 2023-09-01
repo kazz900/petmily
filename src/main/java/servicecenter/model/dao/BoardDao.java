@@ -21,7 +21,7 @@ public class BoardDao implements Serializable {
 		
 		String query = "INSERT INTO SERV_CENTER "
 					 + "VALUES (TO_CHAR(SERV_SEQ.NEXTVAL), "
-					 + "?, ?, ?, SYSDATE, ?)";
+					 + "?, ?, ?, SYSDATE, ?, DEFAULT)";
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -59,7 +59,7 @@ public class BoardDao implements Serializable {
 			pstmt.setInt(1, mseq);
 			
 			rset = pstmt.executeQuery();
-			
+
 			while (rset.next()) {
 
 				Board board = new Board();
@@ -70,7 +70,8 @@ public class BoardDao implements Serializable {
 				board.setBrdContent(rset.getString("CONTENT"));
 				board.setBrdDate(rset.getDate("UPLOAD_DATE"));
 				board.setBrdResult(rset.getString("RESULT"));
-				
+				board.setBrdReply(rset.getString("REPLY"));
+
 				list.add(board);
 			}
 
@@ -112,6 +113,7 @@ public class BoardDao implements Serializable {
 				board.setBrdContent(rset.getString("CONTENT"));
 				board.setBrdDate(rset.getDate("UPLOAD_DATE"));
 				board.setBrdResult(rset.getString("RESULT"));
+				board.setBrdReply(rset.getString("REPLY"));
 
 			}
 
@@ -143,6 +145,75 @@ public class BoardDao implements Serializable {
 			pstmt.setString(3, result);
 			pstmt.setInt(4, userid);
 			pstmt.setInt(5, boardNo);
+			
+			eResult = pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return eResult;
+	}
+
+	public ArrayList<Board> allSuggestAdmin(Connection conn) {
+		ArrayList<Board> list = new ArrayList<Board>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "SELECT * "
+					 + "FROM SERV_CENTER "
+					 + "ORDER BY SERV_SEQ DESC";
+
+		try {
+
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+
+				Board board = new Board();
+
+				board.setBrdNo(rset.getInt("SERV_SEQ"));
+				board.setBrdMemberNo(rset.getInt("MEMBER_SEQ"));
+				board.setBrdTitle(rset.getString("TITLE"));
+				board.setBrdContent(rset.getString("CONTENT"));
+				board.setBrdDate(rset.getDate("UPLOAD_DATE"));
+				board.setBrdResult(rset.getString("RESULT"));
+				board.setBrdReply(rset.getString("REPLY"));
+
+				list.add(board);
+			}
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	public int updateMySuggest(Connection conn, String reply, int boardNo, String result) {
+		int eResult = 0;
+		
+		PreparedStatement pstmt = null;
+		
+		String query = "UPDATE SERV_CENTER "
+					 + "SET REPLY = ?, RESULT = ? "
+					 + "WHERE SERV_SEQ = ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			pstmt.setString(1, reply);
+			pstmt.setString(2, result);
+			pstmt.setInt(3, boardNo);
+			
 			
 			eResult = pstmt.executeUpdate();
 

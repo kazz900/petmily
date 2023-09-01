@@ -46,4 +46,18 @@ public class BoardService implements Serializable {
 		return eResult;
 	}
 
+	public ArrayList<Board> allSuggestAdmin() {
+		Connection conn = getConnection();
+		ArrayList<Board> list = bdao.allSuggestAdmin(conn);
+		close(conn);
+		return list;
+	}
+
+	public int addAdminReply(String reply, int boardNo, String result) {
+		Connection conn = getConnection();
+		int eResult = bdao.updateMySuggest(conn, reply, boardNo, result);
+		close(conn);
+		return eResult;
+	}
+
 }

@@ -30,10 +30,10 @@ div.content p textarea {
 <body>
 <%@ include file="../common/main.jsp"%>
 <div class="upper">
-<form action="/petmily/editSuggest">
+<form action="/petmily/addAdminReply">
 	<input type="hidden" name="userid" value="<%=member.getMemberSeq()%>">
 	<input type="hidden" name="boardNo" value="<%=board.getBrdNo()%>">
-	<input type="hidden" name="result" value="<%=board.getBrdResult() %>">
+	<input type="hidden" name="result" value="Y">
 	
 	<h1 style="margin-bottom:10px;">제목 : 
 		<input type="text" name="title" value="<%=board.getBrdTitle()%>" style="height:35px; font-size:20px; font-weight:bold; text-align:center;">
@@ -47,15 +47,22 @@ div.content p textarea {
 	
 	<hr>
 	
-	<div class="content" style=" height:500px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px;">
+	<div class="content" style=" height:300px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px;">
 		<p>
-			<textarea name="content" style=" width:430px; height:450px; 
-			padding:10px 15px 5px 15px; text-size:20px;"><%=board.getBrdContent()%></textarea>
+			<textarea name="content" style=" width:430px; height:250px; 
+			padding:10px 15px 5px 15px; text-size:20px;" readonly><%=board.getBrdContent()%></textarea>
+		</p>
+	</div>
+	
+	<div class="content" style=" height:200px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px;">
+		<p>
+			<textarea name="reply" style=" width:430px; height:150px; 
+			padding:10px 15px 5px 15px; text-size:20px;" placeholder="답변을 작성하세요."></textarea>
 		</p>
 	</div>
 	
 	<input type="button" onclick="history.go(-1);" value="수정취소">
-	<input type="submit" value="수정하기">
+	<input type="submit" value="답변하기">
 </form>
 </div>
 

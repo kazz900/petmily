@@ -46,55 +46,53 @@
 
 
 			<div id="tab-1" class="tab-content current">
+				<% if (list != null) { %>
 				<table id="outer" align="center" cellspacing="5" cellpadding="0">
 					<tr>
-						<th style="width: 80px;">No.</th>
-						<th style="width: 200px;">Title</th>
-						<th style="width: 310px;">Content</th>
-						<th>Progress</th>
-						<th style="width: 110px;">Date</th>
+						<th style="width: 80px;">번호</th>
+						<th style="width: 200px;">제목</th>
+						<th style="width: 310px;">글 내용</th>
+						<th>현황</th>
+						<th style="width: 110px;">작성일자</th>
 					</tr>
-					<%
-					if (list != null) {
-					%>
-					<%
-					for (Board b : list) {
-					%>
+
+					
+					<% for (Board b : list) { %>
 					<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
 						<td style="font-size: 14px;"><%=b.getBrdNo()%></td>
 						<td style="padding-right: 15px; font-size: 14px;"><%=b.getBrdTitle()%></td>
 						
 						<td style="padding-left: 15px; font-size: 14px;">
+						<% if (b.getBrdReply() != null) { %>
+						&nbsp; &nbsp; (답변완료)
+						<% } %>
 						<a href="/petmily/bdetail?bnum=<%=b.getBrdNo()%>">
 						<%=b.getBrdContent()%></a></td>
 						
-						<td style="font-size:12px;"><%=b.getBrdResult()%></td>
+						<td style="font-size:12px;">
+						<% if (b.getBrdResult().equals("N")) { %>
+						접수
+						<% } else if (b.getBrdResult().equals("Y")) { %>
+						답변완료
+						<% } %>
+						</td>
+						
+						
 						<td style="font-size: 10px;"><%=b.getBrdDate()%></td>
 					</tr>
-					<%
-					}
-					%>
+					<% } %>
 
-					<%
-					} else {
-					%>
-					<tr>
-						<td style="font-size: 14px;"></td>
-						<td style="padding-right: 15px; font-size: 14px;"></td>
-						<td style="padding-left: 15px; font-size: 14px;"></td>
-						<td style="font-size: 14px;"></td>
-					</tr>
-					<%
-					}
-					%>
 				</table>
+					<% } else { %>
+					    <h1>아직 문의사항이 없습니다.</h1>
+					<% } %>
 			</div>
 
 
 
 			<div id="tab-2" class="tab-content">
 				<form action="/petmily/addsuggest" method="get">
-					<input type="hidden" name="result" value="접수">
+					<input type="hidden" name="result" value="N">
 					<input type="hidden" name="mNo" value="<%=member.getMemberSeq()%>">
 					
 					<table width="500" align="center" cellspacing="5">
@@ -115,8 +113,6 @@
 					</table>
 				</form>
 			</div>
-
-
 
 			<div id="tab-3" class="tab-content">
 				<form action="/petmily/adddept" method="get" id="form">
