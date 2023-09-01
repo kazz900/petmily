@@ -56,15 +56,17 @@
 						<div class="block">
 							<div class="snsbuttonswrap">
 								<button id="newpost" type="text"onclick="openNewPostForm();">오늘 무슨 일이 있었나요?</button>
-							</div>
-							<div class="newPostformBox">
-								<div class="new-post-form-popup" id="newPostForm">
-									<form action="/petmily/spnewpost?memberseq=16" class="form-container" method="post">
-										<textarea name="post-content" id="post-content-textarea" cols="30" rows="10" autofocus required onfocus="clearTextArea(this);">tell us your story :</textarea>
-										<button type="submit" id="postsubmit">게시글 추가</button>
-									</form>
+
+								<div class="newPostformBox">
+									<div class="new-post-form-popup" id="newPostForm">
+										<form action="/petmily/spnewpost?memberseq=16" class="form-container" method="post">
+											<textarea name="post-content" id="post-content-textarea" cols="30" rows="10" autofocus required onfocus="clearTextArea(this);">tell us your story :</textarea>
+											<button type="submit" id="postsubmit">게시글 추가</button>
+										</form>
+									</div>
 								</div>
 							</div>
+							
 							<br><br><br>
 
 							<% for(Post p : list) { %>
