@@ -147,6 +147,7 @@ justify-content: space-between; */
 			idc = 0;
 			if (!cid.test(mid.value)) {
 				notice.hidden = false;
+				notice.textContent = '아이디는 영어 대소문자와 숫자를 포함해서 8~12글자로 작성해주세요.';
 				notice.style.color = '#ff6633';
 			} else {
 				notice.hidden = true;
