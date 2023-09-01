@@ -28,7 +28,7 @@
 				</li>
 
 				<li><a class="sub-link" href="/petmily/selectdepttype?selecttype=9&typename=내주변">내주변</a></li>
-				<li><a class="sub-link" href="/petmily/splist" method="get">커뮤니티</a></li>
+				<li><a class="sub-link" href="/petmily/plist" method="post">커뮤니티</a></li>
 
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>

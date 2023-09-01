@@ -52,7 +52,7 @@ public class StandardPostDao {
 				sp.setLikeNo(rset.getInt("LIKE_NO"));
 				sp.setReplyNO(rset.getInt("REPLY_NO"));
 				sp.setPostDate(rset.getDate("POST_DATE"));
-				sp.setLastModifieddate(rset.getDate("LAST_MODIFIED_DATE"));
+				sp.setLastModifiedDate(rset.getDate("LAST_MODIFIED_DATE"));
 				System.out.println(sp.toString());
 				list.add(sp);
 			}
