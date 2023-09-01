@@ -121,6 +121,8 @@ div.wrapper {
 	background-color:#fafafa;
 	box-shadow:2px 2px 5px 2px #cfcfcf;
 
+
+
 }
 
 div.wrapper form {
@@ -197,6 +199,10 @@ height: 200px;
 
 	<div class="info-content">
 
+
+	<div class="info-content">
+
+
 		<div class="info-detail02">
 
 			<ul class="tabs">
@@ -212,24 +218,49 @@ height: 200px;
 
 
 
-			<div id="tab-1" class="tab-content current">
-
-				<div class="wrapper">
-					<p style="margin-bottom: 2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
-					<p style="font-size: 15px; margin-top: 3px;">닉네임만 변경 가능합니다.</p>
-					<form action="/petmily/myinfo" method="get">
-						<table>
-
-							<!-- 				<tr>
-					<th>프로필사진</th>
-					<td>
-						<label for="uploadProfile" style="cursor:pointer;">
-						<img src="/petmily/resources/images/girl.jpg" 
-						id="profile" name="profile" style=" width:160px;">
-						</label>
-						<input type="file" id="uploadProfile" onchange="loadImage(this);">
+<div id="tab-1" class="tab-content current">
+	<div class="wrapper">
+	<div style="text-align:center;">
+		<p style="margin-bottom:2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
+		<p style="font-size:15px; margin-top:3px;">닉네임만 변경 가능합니다.</p>
+	</div>
+		<form action="/petmily/myinfo" method="get">
+			<table id="outer" align="center" width="500" cellspacing="5"
+				cellpadding="0">
+				
+				<tr>
+					<th width="140">아이디</th>
+					<td><input type="text" name="userid" value="<%=member.getMemberId()%>"
+						readonly>
+				<tr>
+					<th width="140">이메일</th>
+					<td><input type="email" name="email" value="<%=member.getMemberEmail()%>">
 					</td>
-				</tr> -->
+				</tr>
+				
+				<tr>
+					<th width="140">(*)닉네임</th>
+					<td><input type="text" name="nickname" value="<%=member.getMemberNick()%>">
+					</td>
+				</tr>
+			</table>
+			<div style="text-align:center; margin-top:10px;">
+			
+				<input type="button" value="비밀번호 변경" onclick="changePwd();" 
+				style="margin-bottom:15px; width:150px; height:30px; 
+				border-radius:5px; border:1px solid black;
+				box-shadow:1px 1px 0px 1px #cfcfcf;">
+				&nbsp; 
+				<input type="submit" value="변경하기" 
+				style="margin-bottom:15px; width:150px; height:30px; 
+				border-radius:5px; border:1px solid black;
+				box-shadow:1px 1px 0px 1px #cfcfcf;">
+			
+			</div>
+		</form>
+	</div>
+</div>
+
 
 							<tr>
 								<th>아이디</th>
@@ -254,6 +285,13 @@ height: 200px;
 				</div>
 			</div>
 
+
+
+<div id="tab-2" class="tab-content">
+	<div class="wrapper">
+		<h1><a href="/petmily/loadPetPic">프로필 변경하기</a></h1>
+	</div>
+</div>
 
 
 			<div id="tab-2" class="tab-content">
@@ -326,6 +364,38 @@ height: 200px;
 			<div id="tab-3" class="tab-content"></div>
 
 
+
+
+			<div id="tab-4" class="tab-content">
+				
+				
+				<% for(Pet p : pet){  %>
+				<div class="pet">
+				<div class="petimg">
+				<img src="/petmily/resources/images/petImg/<%= p.getPetImg() %>" style="width: 300px;">
+				</div>
+				<div class="petinfo">
+				이름:<%= p.getPetName() %>
+				종류:<%= p.getPetType() %>
+				크기:<%= p.getPetSize() %>
+				
+				</div>
+				<div>
+				
+				<form>
+				<input type="submit"value="수정">
+				</form>
+				<form>
+				<input type="submit"value="삭제">
+				</form>
+				</div>
+				</div>
+				<% } %> 
+			</div> 
+
+
+
+			<div id="tab-3" class="tab-content"></div>
 
 			<div id="tab-4" class="tab-content"></div>
 		</div>

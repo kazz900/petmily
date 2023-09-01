@@ -11,13 +11,12 @@
 
 div.wrapper {
 	width:600px;
-	height:300px;
-	margin-top:250px;
-/* 	position:relative; */
+	height:33.px;
 	border: 2px solid #cfcfcf;
-	font-family: OhsquareAir;
 	text-align:center;
-	left:40%;
+	background-color:#fafafa;
+	box-shadow:2px 2px 5px 2px #cfcfcf;
+	font-family: OhsquareAir;
 }
 
 input[type=password] {
@@ -31,7 +30,13 @@ input[type=text] {
 	height:30px;
 	margin-bottom:10px;
 }
-
+@media(min-width: 1050px){
+.block{
+	width: 1050px;
+    margin: 98px auto 0 auto;
+    word-wrap: break-word;
+}
+}
 </style>
 <script type="text/javascript">
 $(function(){
@@ -60,18 +65,52 @@ function toMyPage(){
 </head>
 <body>
 <%@ include file="../common/main.jsp"%>
-<div class="wrapper">
 
-<form action="/petmily/changePwd" method="post" onsubmit="return validate();">
-	<h3>비밀번호 변경하기</h3>
-	<p style="font-size:14px;" id="notice">비밀번호는 영어 대/소문자, 특수문자, 숫자를 포함하여 최소 6자리 이상으로 설정해주세요.</p>
-	아이디 : <input type="text" name="userid" value="<%=member.getMemberId()%>" readonly><br>
-	비밀번호 : <input type="password" name="userpwd" id="userpwd1" required><br>
-	비밀번호 확인 : <input type="password" id="userpwd2" required><br>
-	
-	<input type="submit" value="변경하기"> &nbsp; <input type="reset" value="취소하기" onclick="toMyPage();">
-</form>
 
+<div class="block" style="display:flex; justify-content:center;">
+	<div class="wrapper" style="margin-top:100px;">
+	<div style="text-align:center;">
+		<p style="margin-bottom:10px; font-size:24px; font-weight:bold;">비밀번호 변경 페이지</p>
+	</div>
+		<form action="/petmily/changePwd" method="post" onsubmit="return validate();">
+		<p style="font-size:14px;" id="notice">비밀번호는 영어 대/소문자, 특수문자, 숫자를 포함하여 최소 6자리 이상으로 설정해주세요.</p>
+			<table id="outer" align="center" width="500" cellspacing="5"
+				cellpadding="0">
+				
+				
+				
+				<tr>
+					<th width="140">아이디</th>
+					<td><input type="text" name="userid" value="<%=member.getMemberId()%>"
+						readonly>
+				<tr>
+					<th width="140">비밀번호</th>
+					<td><input type="password" name="userpwd" id="userpwd1" required>
+					</td>
+				</tr>
+				
+				<tr>
+					<th width="140">비밀번호 확인</th>
+					<td><input type="password" id="userpwd2" required>
+					</td>
+				</tr>
+			</table>
+			<div style="text-align:center; margin-top:10px;">
+			
+				<input type="reset" value="취소하기" onclick="changePwd();" 
+				style="margin-bottom:15px; width:150px; height:30px; 
+				border-radius:5px; border:1px solid black;
+				box-shadow:1px 1px 0px 1px #cfcfcf;">
+				&nbsp; 
+				<input type="submit" value="변경하기" 
+				style="margin-bottom:15px; width:150px; height:30px; 
+				border-radius:5px; border:1px solid black;
+				box-shadow:1px 1px 0px 1px #cfcfcf;">
+			
+			</div>
+		</form>
+
+</div>
 </div>
 </body>
 </html>

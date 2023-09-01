@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import post.model.service.PostSerivce;
 import post.model.vo.Post;
 import standardpost.model.vo.StandardPost;
+import tradepost.model.vo.TradePost;
 
 /**
  * Servlet implementation class StandardPostListViewServlet
@@ -34,6 +35,7 @@ public class PostListServlet extends HttpServlet {
 		PostSerivce spSerivce = new PostSerivce();
 		ArrayList<Post> list = new ArrayList<Post>();
 		list = spSerivce.getPostList();
+		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
 		
 		RequestDispatcher view = null;
 		
