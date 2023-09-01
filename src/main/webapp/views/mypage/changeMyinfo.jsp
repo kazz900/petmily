@@ -120,6 +120,9 @@ div.wrapper {
 	text-align:center;
 	background-color:#fafafa;
 	box-shadow:2px 2px 5px 2px #cfcfcf;
+
+
+
 }
 
 div.wrapper form {
@@ -196,6 +199,10 @@ height: 200px;
 
 	<div class="info-content">
 
+
+	<div class="info-content">
+
+
 		<div class="info-detail02">
 
 			<ul class="tabs">
@@ -255,6 +262,30 @@ height: 200px;
 </div>
 
 
+							<tr>
+								<th>아이디</th>
+								<td><input type="text" name="userid"
+									value="<%=member.getMemberId()%>" readonly></td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td><input type="email" name="email"
+									value="<%=member.getMemberEmail()%>" readonly></td>
+							</tr>
+							<tr>
+								<th>(*)닉네임</th>
+								<td><input type="text" name="nickname"
+									value="<%=member.getMemberNick()%>"></td>
+							</tr>
+						</table>
+
+						<input type="submit" value="변경하기" style="margin-bottom: 15px;">
+						<input type="button" value="비밀번호 변경" onclick="changePwd();">
+					</form>
+				</div>
+			</div>
+
+
 
 <div id="tab-2" class="tab-content">
 	<div class="wrapper">
@@ -263,10 +294,75 @@ height: 200px;
 </div>
 
 
+			<div id="tab-2" class="tab-content">
+				<div>
+					<form action="/petmily/peten" method="post" enctype="multipart/form-data">
+						<table style="border: 1px solid black;">
+							<tr>
+								<td colspan="3">나의 petmily 이름은 무엇인가요?</td>
+							</tr>
+							<tr>
+								<td colspan="3"><input type="text" name="petName" id="petName"></td>
+							</tr>
+							<tr>
+								<td colspan="3">나의 petmily는 누구 인가요?</td>
+							</tr>
+							<tr>
+								<td><input type="radio" name="petType" id="petType" value="0">강아지</td>
+								<td><input type="radio" name="petType" id="petType" value="1">고양이</td>
+								<td><input type="radio" name="petType" id="petType" value="2">기타
+							</tr>
+							<tr>
+								<td><input type="radio" name="petSize" id="petSize" value="소형">소형(10kg
+									미만)</td>
+								<td><input type="radio" name="petSize" id="petSize" value="중형">중형(10~25kg
+									미만)</td>
+								<td><input type="radio" name="petSize" id="petSize" value="대형">대형(25kg
+									이상)</td>
+							</tr>
+							<tr>
+								<td colspan="2"><img name="preview-image" id="preview-image" src="/petmily/resources/images/mainbanner/882.jpg" style="width: 500px;">
+								</td>
+								<td id="image_container"><input type="file" id="input-image" name="input-image" onchange="readImage(this);" style="display:block;">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><input type="submit" value="추가"></td>
+								<td><input type="reset" value="삭제"></td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				
+				
+				<% for(Pet p : pet){  %>
+				<div class="pet">
+				<div class="petimg">
+				<img src="/petmily/resources/images/petImg/<%= p.getPetImg() %>" style="width: 300px;">
+				</div>
+				<div class="petinfo">
+				이름:<%= p.getPetName() %>
+				종류:<%= p.getPetType() %>
+				크기:<%= p.getPetSize() %>
+				
+				</div>
+				<div>
+				
+				<form>
+				<input type="submit"value="수정">
+				</form>
+				<form>
+				<input type="submit"value="삭제">
+				</form>
+				</div>
+				</div>
+				<% } %> 
+			</div> 
 
-			<div id="tab-3" class="tab-content">
 
-			</div>
+
+			<div id="tab-3" class="tab-content"></div>
+
 
 
 
@@ -300,8 +396,6 @@ height: 200px;
 
 
 			<div id="tab-3" class="tab-content"></div>
-
-
 
 			<div id="tab-4" class="tab-content"></div>
 		</div>
