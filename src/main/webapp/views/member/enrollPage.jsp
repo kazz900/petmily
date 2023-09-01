@@ -13,7 +13,18 @@
 	src: url('/petmily/resources/font/surround.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
-
+}
+@font-face{
+	font-family: 'forgedm';
+	src: url('/petmily/resources/font/forged-Medium.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face{
+	font-family: 'forgedl';
+	src: url('/petmily/resources/font/forged-Light.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
 }
 body {
       font-family: 'Surround', sans-serif;
@@ -51,9 +62,17 @@ td input:not(#checkpassword) {
 	/* display: flex;
 justify-content: space-between; */
 }
-
+td input {
+	font-family: 'forgedm', sans-serif;
+	font-size: 16px;
+	color: hsl(30.5, 77.6%, 29.8%);
+	width: 250px;
+	height: 30px;
+	border-radius: 7px;
+	background-color: #FFE4B5;
+}
 td input#dupcheck {
-      font-family: 'Surround', sans-serif;
+    font-family: 'Surround', sans-serif;
 	width: 80px;
 	height: 34px;
 	border-radius: 7px;
@@ -83,14 +102,7 @@ input[type=submit] {
 	color: hsl(30.5, 77.6%, 29.8%);
     background-color: hsl(36deg 70.37% 68.61%);
 }
-/*      ::placeholder {
-      color: red; /* 힌트 텍스트의 색상을 빨간색으로 설정 */
-font-style
-:
- 
-italic
-; /* 힌트 텍스트의 글꼴을 기울임체로 설정 */
-}*/
+
  input[type=password] {
 	width: 400px;
 	height: 30px;
@@ -101,18 +113,21 @@ justify-content: space-between; */
 }
 
 #checkenroll {
+	font-family: 'forgedl', sans-serif;
 	font-size: 10pt;
-	width: auto;
+	width: 300px;
 	height: auto;
 	border: none;
 	margin: 0px;
 	padding: 0px;
 	white-space: pre-line;
+	overflow: auto;
 }
 </style>
 <script type="text/javascript">
 	//버그 잡아[줘]
-	var cbug = 1;
+	var idc = 1;
+	var emc = 1;
 	//회원가입 페이지 입력값 가져오기
 	window.onload = function() {
 		var mid = document.getElementById('mid');
@@ -129,7 +144,7 @@ justify-content: space-between; */
 		//키 입력시 유효성검사하는 이벤트 추가
 		notice.hidden = true;
 		mid.addEventListener('keyup', function() {
-			cbug = 0;
+			idc = 0;
 			if (!cid.test(mid.value)) {
 				notice.hidden = false;
 				notice.style.color = '#ff6633';
@@ -139,7 +154,6 @@ justify-content: space-between; */
 		});
 
 		mpwd.addEventListener('keyup',function() {
-			cbug = 0;
 							if (!cpwd.test(mpwd.value)) {
 								notice.hidden = false;
 								notice.textContent = '패스워드는 영어 대,소문자와 숫자를 포함하고,!@#$기호중 하나를 포함시켜 6~12글자로 사용해주세요.';
@@ -150,7 +164,6 @@ justify-content: space-between; */
 						});
 
 		mpwd2.addEventListener('keyup', function() {
-			cbug = 0;
 			notice.hidden = false;
 			if (mpwd.value === mpwd2.value) {
 				/* notice.textContent = '유효한 패스워드입니다.'; */
@@ -162,7 +175,6 @@ justify-content: space-between; */
 			}
 		});
 		mnick.addEventListener('keyup', function() {
-			cbug = 0;
 			if (!cnick.test(mnick.value)) {
 				notice.hidden = false;
 				notice.textContent = '닉네임은 8자 이하로 작성해주세요.';
@@ -172,7 +184,7 @@ justify-content: space-between; */
 			}
 		});
 		memail.addEventListener('keyup', function() {
-			cbug = 0;
+			emc = 0;
 			if (!cemail.test(memail.value)) {
 				notice.hidden = false;
 				notice.textContent = '이메일은 test@enroll.com 형태로 작성해주세요.';
@@ -218,12 +230,17 @@ justify-content: space-between; */
 			memail.focus();
 			return false;
 		}
-		if(cbug === 1) {
-		return true;
-		} else {
-		alert("아이디/이메일 중복확인 해주세요!");
+		if(idc === 0) {
+		alert("아이디 중복확인 해주세요!");
 		return false;
 		}
+		if(emc === 0) {
+		alert("이메일 중복확인 해주세요!");
+		return false;
+		}
+		if(idc === 1 && emc === 1) {
+		return true;
+		} 
 		
 	}
 	//아이디 중복검사용 Ajax 사용 함수
@@ -242,6 +259,11 @@ justify-content: space-between; */
 		        alert(response);
 		        var isDuplicate = (response === "중복된 아이디입니다.");
 		        setSignupButtonState(isDuplicate);
+		        if(isDuplicate){
+		        	idc = 0;
+		        } else {
+		        	idc = 1;
+		        }
 		    },
 		    error: function() {
 		        alert("오류가 발생했습니다. 다시 시도해주세요.");
@@ -264,6 +286,11 @@ justify-content: space-between; */
 		        alert(response);
 		        var isDuplicate = (response === "이미 가입된 이메일입니다.");
 		        setSignupButtonState(isDuplicate);
+		        if(isDuplicate){
+		        	emc = 0;
+		        } else {
+		        	emc = 1;
+		        }
 		    },
 		    error: function() {
 		        alert("오류가 발생했습니다. 다시 시도해주세요.");
@@ -276,10 +303,8 @@ justify-content: space-between; */
 		var signupButton = document.getElementById('submit');
 		  if (isDuplicate) {
 		    signupButton.disabled = true; // 중복이면 버튼 비활성화
-		    cbug = 0;
-		  } else {
+		  } else if(idc == 1 && emc == 1) {
 		    signupButton.disabled = false; // 중복이 아니면 버튼 활성화
-		    cbug = 1;
 		  }
 		}
 </script>
@@ -291,6 +316,7 @@ justify-content: space-between; */
 	<!-- 추후 include처리 -->
 	<form action="/petmily/enroll" id="myForm" onsubmit="return validateCheck();">
 		<table>
+		<tr><td><div style="width:auto; height:5px; border:2px;"></div></td></tr>
 			<tr>
 				<td><input type="text" id="mid" name="mid"
 					placeholder="사용할 아이디 입력" required></td>
