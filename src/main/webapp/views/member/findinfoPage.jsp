@@ -12,7 +12,6 @@
     <!-- 메세지 값이 "성공메세지보냄"인 경우 -->
     <% Member m = (Member) request.getAttribute("member"); %>
     	alert("가입하신 아이디는 [<%= m.getMemberId() %>] 입니다.");
-	  	location.href="/petmily/views/member/login.jsp";
   <% } else if (message != null) { %>
     <!-- 메세지 값이 "성공메세지보냄"이 아닌 경우 -->
     alert("<%= message %>");
@@ -106,11 +105,11 @@ input[type="text"]:focus {
 		</h1>
 	</header>
 	<h2 align="center">
-		ID/PASSWORD 조회
+		아이디/패스워드 찾기
 		</h1>
 		<div class="find-all">
 			<div class="find">
-				<form action="/petmily/idfind">
+				<form action="/petmily/idfind" method="post">
 					<ul style="padding: 0px;">
 						<li style="margin-top: 17px; color: black;">아이디 찾기</li>
 
@@ -125,7 +124,7 @@ input[type="text"]:focus {
 			</div>
 			<div style="margin: 50px;"></div>
 			<div class="find">
-				<form action="/petmily/pwdfind">
+				<form action="/petmily/pwdfind" method="post">
 					<ul style="padding: 0px;">
 						<li style="margin-top: 17px; color: black;">비밀번호 찾기</li>
 						<li><input type="text" name="pmid" placeholder="아이디 입력" required

@@ -64,23 +64,10 @@ public class EnrollServlet extends HttpServlet {
 		int result = new MemberService().insertMember(member);
 		
 		if(result > 0) {
-			response.sendRedirect("/petmily/views/member/login.jsp");
-			
-			//메인페이지가 출력되게 한다면 `
-			//response.sendRedirect("/petmily/index.jsp");
-			
-		}else {
-			//회원가입 실패시 error.jsp 로 에러메세지를 보냄
-			RequestDispatcher view = request.getRequestDispatcher("views/common/error.jsp");
-			//상대경로만 사용할 수 있음
-			
-			//지정한 뷰로 내보낼 정보나 객체가 있으면 request 에 기록 저장함
-			//request.setAttribute(String name, Object value);
-			request.setAttribute("message", member.getMemberId() + "회원가입 실패");
-			
-			//뷰를 포워딩함
-			view.forward(request, response);
+			request.setAttribute("message", "회원가입 성공. 로그인해주세요.");
 		}
+		RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
+		view.forward(request, response);
 		
 	}
 
