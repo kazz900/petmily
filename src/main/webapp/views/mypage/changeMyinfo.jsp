@@ -120,7 +120,6 @@ div.wrapper {
 	text-align:center;
 	background-color:#fafafa;
 	box-shadow:2px 2px 5px 2px #cfcfcf;
-
 }
 
 div.wrapper form {
@@ -212,89 +211,66 @@ height: 200px;
 
 
 
-			<div id="tab-1" class="tab-content current">
-
-				<div class="wrapper">
-					<p style="margin-bottom: 2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
-					<p style="font-size: 15px; margin-top: 3px;">닉네임만 변경 가능합니다.</p>
-					<form action="/petmily/myinfo" method="get">
-						<table>
-
-							<!-- 				<tr>
-					<th>프로필사진</th>
-					<td>
-						<label for="uploadProfile" style="cursor:pointer;">
-						<img src="/petmily/resources/images/girl.jpg" 
-						id="profile" name="profile" style=" width:160px;">
-						</label>
-						<input type="file" id="uploadProfile" onchange="loadImage(this);">
+<div id="tab-1" class="tab-content current">
+	<div class="wrapper">
+	<div style="text-align:center;">
+		<p style="margin-bottom:2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
+		<p style="font-size:15px; margin-top:3px;">닉네임만 변경 가능합니다.</p>
+	</div>
+		<form action="/petmily/myinfo" method="get">
+			<table id="outer" align="center" width="500" cellspacing="5"
+				cellpadding="0">
+				
+				<tr>
+					<th width="140">아이디</th>
+					<td><input type="text" name="userid" value="<%=member.getMemberId()%>"
+						readonly>
+				<tr>
+					<th width="140">이메일</th>
+					<td><input type="email" name="email" value="<%=member.getMemberEmail()%>">
 					</td>
-				</tr> -->
+				</tr>
+				
+				<tr>
+					<th width="140">(*)닉네임</th>
+					<td><input type="text" name="nickname" value="<%=member.getMemberNick()%>">
+					</td>
+				</tr>
+			</table>
+			<div style="text-align:center; margin-top:10px;">
+			
+				<input type="button" value="비밀번호 변경" onclick="changePwd();" 
+				style="margin-bottom:15px; width:150px; height:30px; 
+				border-radius:5px; border:1px solid black;
+				box-shadow:1px 1px 0px 1px #cfcfcf;">
+				&nbsp; 
+				<input type="submit" value="변경하기" 
+				style="margin-bottom:15px; width:150px; height:30px; 
+				border-radius:5px; border:1px solid black;
+				box-shadow:1px 1px 0px 1px #cfcfcf;">
+			
+			</div>
+		</form>
+	</div>
+</div>
 
-							<tr>
-								<th>아이디</th>
-								<td><input type="text" name="userid"
-									value="<%=member.getMemberId()%>" readonly></td>
-							</tr>
-							<tr>
-								<th>이메일</th>
-								<td><input type="email" name="email"
-									value="<%=member.getMemberEmail()%>" readonly></td>
-							</tr>
-							<tr>
-								<th>(*)닉네임</th>
-								<td><input type="text" name="nickname"
-									value="<%=member.getMemberNick()%>"></td>
-							</tr>
-						</table>
 
-						<input type="submit" value="변경하기" style="margin-bottom: 15px;">
-						<input type="button" value="비밀번호 변경" onclick="changePwd();">
-					</form>
-				</div>
+
+<div id="tab-2" class="tab-content">
+	<div class="wrapper">
+		<h1><a href="/petmily/loadPetPic">프로필 변경하기</a></h1>
+	</div>
+</div>
+
+
+
+			<div id="tab-3" class="tab-content">
+
 			</div>
 
 
 
-			<div id="tab-2" class="tab-content">
-				<div>
-					<form action="/petmily/peten" method="post" enctype="multipart/form-data">
-						<table style="border: 1px solid black;">
-							<tr>
-								<td colspan="3">나의 petmily 이름은 무엇인가요?</td>
-							</tr>
-							<tr>
-								<td colspan="3"><input type="text" name="petName" id="petName"></td>
-							</tr>
-							<tr>
-								<td colspan="3">나의 petmily는 누구 인가요?</td>
-							</tr>
-							<tr>
-								<td><input type="radio" name="petType" id="petType" value="0">강아지</td>
-								<td><input type="radio" name="petType" id="petType" value="1">고양이</td>
-								<td><input type="radio" name="petType" id="petType" value="2">기타
-							</tr>
-							<tr>
-								<td><input type="radio" name="petSize" id="petSize" value="소형">소형(10kg
-									미만)</td>
-								<td><input type="radio" name="petSize" id="petSize" value="중형">중형(10~25kg
-									미만)</td>
-								<td><input type="radio" name="petSize" id="petSize" value="대형">대형(25kg
-									이상)</td>
-							</tr>
-							<tr>
-								<td colspan="2"><img name="preview-image" id="preview-image" src="/petmily/resources/images/mainbanner/882.jpg" style="width: 500px;">
-								</td>
-								<td id="image_container"><input type="file" id="input-image" name="input-image" onchange="readImage(this);" style="display:block;">
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2"><input type="submit" value="추가"></td>
-								<td><input type="reset" value="삭제"></td>
-							</tr>
-						</table>
-					</form>
-				</div>
+			<div id="tab-4" class="tab-content">
 				
 				
 				<% for(Pet p : pet){  %>
