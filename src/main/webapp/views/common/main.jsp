@@ -28,7 +28,7 @@
 				</li>
 
 				<li><a class="sub-link" href="/petmily/selectdepttype?selecttype=9&typename=내주변">내주변</a></li>
-				<li><a class="sub-link" href="/petmily/plist" method="post">커뮤니티</a></li>
+				<li><a class="sub-link" href="/petmily/splist" method="get">커뮤니티</a></li>
 
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
@@ -58,11 +58,9 @@
 					<% }else if(member.getMemberGrade().equals("1")){ %>
 					<li class="sidebarmenutitle">더보기</li>
 
-
-					<li><a href="/petmily/mypet?memberSeq=<%= member.getMemberSeq() %>" class="sidebarmenu">마이페이지</a></li>
-
-					<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
-
+					<li><a href="/petmily/views/myPage/changeMyinfo.jsp" class="sidebarmenu">마이페이지</a></li>
+					<li><a href="/petmily/suggest?mseq=<%=member.getMemberSeq()%>" class="sidebarmenu">고객센터</a></li>
+					<%-- mseq를 들고가야됩니다. --%>
 					<% }else if(member.getMemberGrade().equals("0")){ %>
 					<li class="sidebarmenutitle">더보기</li>
 					<li><a href="#" class="sidebarmenu">마이페이지</a></li>
