@@ -131,8 +131,8 @@ public final class postList_jsp extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write("\r\n");
-      out.write("	\r\n");
+      out.write("\n");
+      out.write("	\n");
       out.write("		");
  ArrayList<Post> list = (ArrayList<Post>)request.getAttribute("list");
 				int count = list.size();
@@ -187,9 +187,9 @@ public final class postList_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("				<body>\r\n");
       out.write("\r\n");
       out.write("					");
-      out.write('\r');
       out.write('\n');
  Member member = (Member)session.getAttribute("member"); 
+
       out.write("\r\n");
       out.write("<!DOCTYPE html>\r\n");
       out.write("<html>\r\n");
@@ -222,33 +222,33 @@ public final class postList_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\r\n");
       out.write("				");
 if(member == null){ 
-      out.write("\r\n");
-      out.write("				<li><a class=\"sub-link\" href=\"/petmily/views/member/login.jsp\">로그인</a></li>\r\n");
+      out.write("\n");
+      out.write("				<li><a class=\"sub-link\" href=\"/petmily/views/member/login.jsp\">로그인</a></li>\n");
       out.write("				");
  }else{ 
-      out.write("\r\n");
-      out.write("				\r\n");
-      out.write("				<li\r\n");
+      out.write("\n");
+      out.write("				\n");
+      out.write("				<li\n");
       out.write("					style=\"display: inline-block; font-size: 15px; width: 90px; height: 20px; position: absolute; top: 25px; margin-left: 20px;\">");
       out.print( member.getMemberNick() );
-      out.write("님</li>\r\n");
-      out.write("				<li\r\n");
-      out.write("					style=\"display: inline-block; font-size: 15px; width: 90px; height: 20px;\"><a\r\n");
-      out.write("					href=\"/petmily/logout\"\r\n");
-      out.write("					style=\"padding-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; margin-left: 45px; position: relative; top: 12px;\">logout</a></li>\r\n");
+      out.write("님</li>\n");
+      out.write("				<li\n");
+      out.write("					style=\"display: inline-block; font-size: 15px; width: 90px; height: 20px;\"><a\n");
+      out.write("					href=\"/petmily/logout\"\n");
+      out.write("					style=\"padding-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; margin-left: 45px; position: relative; top: 12px;\">logout</a></li>\n");
       out.write("				");
  } 
-      out.write("\r\n");
-      out.write("			</ul>\r\n");
-      out.write("			<label for=\"menuicon\" class=\"menubtn\"> <span></span> <span></span>\r\n");
-      out.write("				<span></span>\r\n");
-      out.write("			</label>\r\n");
-      out.write("		</div>\r\n");
-      out.write("	</header>\r\n");
-      out.write("	<div class=\"menu-container\">\r\n");
-      out.write("		<div class=\"sidebar\">\r\n");
-      out.write("			<span class=\"area_desc\" style=\"margin-top: 25%\">\r\n");
-      out.write("				<ul>\r\n");
+      out.write("\n");
+      out.write("			</ul>\n");
+      out.write("			<label for=\"menuicon\" class=\"menubtn\"> <span></span> <span></span>\n");
+      out.write("				<span></span>\n");
+      out.write("			</label>\n");
+      out.write("		</div>\n");
+      out.write("	</header>\n");
+      out.write("	<div class=\"menu-container\">\n");
+      out.write("		<div class=\"sidebar\">\n");
+      out.write("			<span class=\"area_desc\" style=\"margin-top: 25%\">\n");
+      out.write("				<ul>\n");
       out.write("					");
  if(member == null) { 
       out.write("\r\n");
@@ -279,16 +279,17 @@ if(member == null){
       out.write("					\r\n");
       out.write("					");
  } 
-      out.write("\r\n");
-      out.write("				</ul>\r\n");
-      out.write("			</span><br>\r\n");
-      out.write("\r\n");
-      out.write("		</div>\r\n");
-      out.write("	</div>\r\n");
-      out.write("	</header>\r\n");
-      out.write("\r\n");
-      out.write("</body>\r\n");
+      out.write("\n");
+      out.write("				</ul>\n");
+      out.write("			</span><br>\n");
+      out.write("\n");
+      out.write("		</div>\n");
+      out.write("	</div>\n");
+      out.write("	</header>\n");
+      out.write("\n");
+      out.write("</body>\n");
       out.write("</html>");
+
       out.write("\r\n");
       out.write("\r\n");
       out.write("						<div class=\"block\">\r\n");
