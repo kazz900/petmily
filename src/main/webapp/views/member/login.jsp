@@ -123,6 +123,11 @@ text-align: center;
 td a {
 left: 0px;
 }
+.social {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
       </style>
 </head>
 <body>
@@ -135,7 +140,7 @@ left: 0px;
 		<tr><td><input type="text" id="memberid" name="memberid" placeholder="아이디 입력" required> </td>
 		<td rowspan="2"><input type="submit" value="로그인" id="logincheck"></td></tr>
 		<tr><td><input type="password" id="memberpwd" name="memberpwd" placeholder="패스워드 입력"required></td></tr>
-		<tr><td colspan="2"><input type="button" value="아이디/패스워드 조회" id="findinfo" onclick="moveFindinfoPage();">
+		<tr><td colspan="2"><input type="button" value="아이디/패스워드 찾기" id="findinfo" onclick="moveFindinfoPage();">
 		<input type="button" value="회원가입" id="enroll" onclick="moveEnrollPage();"></td></tr>
 <script type="text/javascript">
 function moveFindinfoPage(){
@@ -146,10 +151,18 @@ function moveEnrollPage(){
 }
 </script>
 <tr>
-<td colspan="2"><a id="kakao-login-btn" href="javascript:loginWithKakao()">
+<td colspan="2">
+		<div class="social">
+			<div style="width:170px;">
+<a id="kakao-login-btn" href="javascript:loginWithKakao()">
   <img src="/petmily/resources/images/kakaologo.png" width="60" height="60" alt="카카오 로그인 버튼" /></a>
-<a href="<%=apiURL%>"><img width="60" height="60" src="/petmily/resources/images/naverlogo.png"></a></td>
-  </tr>
+  </div>
+  <div style="width:170px;">
+<a href="<%=apiURL%>"><img width="60" height="60" src="/petmily/resources/images/naverlogo.png"></a>
+</div></div>
+</td>
+</tr>
+  
 	</table>
 
 <!-- 네이버로그인버튼 -->
