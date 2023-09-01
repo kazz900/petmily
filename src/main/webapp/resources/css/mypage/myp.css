@@ -1,0 +1,179 @@
+@charset "UTF-8";
+
+@media(min-width: 1050px){
+	.info-content{
+		width: 900px;
+	    margin: 98px auto 0 auto;
+	    word-wrap: break-word;
+	}
+	
+	.info-share{
+		position:relative;
+		left: 95%;
+	}
+	
+	.info-detail02{
+		margin-top:120px;
+		font-family: OhsquareAir;
+		src: url('/petmily/resources/font/OhsquareAir.woff2') format('woff2');
+		font-size: 18px;
+		color: black;
+	}
+	
+	ul.tabs{
+		margin: 0px;
+		padding: 0px;
+		list-style: none;
+	}
+	ul.tabs li{
+		background: none;
+		color: #222;
+		display: inline-block;
+		padding: 10px 15px;
+		cursor: pointer;
+	}
+	
+	ul.tabs li.current{
+		/* background: #ededed; */
+		color: #222;
+		border-bottom: 3px solid hsl(30.46deg 58.9% 45.68%);
+	}
+	
+	.tab-content{
+		display: none;
+		/* background: #ededed; */
+		padding: 15px;
+		
+	}
+	
+	.tab-content.current{
+		display: inherit;
+	}
+	
+	.tabs {
+		text-align:center;
+	}
+	
+	
+	
+	
+	#tab-1 table {
+		width: 100%;
+		border-collapse: collapse;
+		table-layout: fixed;
+		line-height: 24px;
+	}
+	
+	#tab-1 table td, th {
+		border-collapse: collapse;
+		text-align: center;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	
+	#tab-1 th {
+		background: rgb(221, 221, 221);
+		margin:0;
+	}
+	
+	#tab-1 a {
+		text-decoration: none;
+		color: black;
+	}
+	
+	#tab-1 a:hover {
+		text-decoration: underline;
+	}
+	
+	#tab-1 tr:hover {
+		background-color:#dfdfdf;
+	}
+	
+	#tab-1 #outer {
+		width: 800px;
+		margin: auto;
+	}
+	
+	#tab-1 tr {
+		height: 30px;
+	}
+	
+	#tab-1 .content {
+		width:310px;
+	}
+	
+	
+	
+	
+	input[type=text] {
+		width:280px;
+		height:30px;
+	}
+	
+	input[type=time] {
+		height:30px;
+		width:132px;
+	}
+	
+	input[type=submit] {
+		margin-top:15px;
+		width:200px;
+		height:35px;
+		border-radius:30px;
+	}
+	
+	input[type=tel] {
+		width:280px;
+		height:30px;
+	}
+	
+	select[name=type] {
+		width:280px;
+		height:30px;
+	}
+	
+	form table tr textarea {
+		width:280px;
+	}
+	
+	form {
+		margin-top:0px;
+	}
+	
+	.yes {
+		height:30px;
+	}
+}
+
+.my_pet_tab {
+	display: flex;
+    justify-content: space-around;
+}
+
+.my_pet_table {
+	display :flex;
+}
+
+#button1 {
+	width:70px;
+	height: 70px;
+	background-color: #dfdfdf;
+}
+
+#add{
+	text-align:center;
+	color: #B97630;
+}
+
+#addpet{
+	text-align:center;
+}
+
+#cancel{
+	
+	margin-top: 15px;
+    width: 200px;
+    height: 35px;
+    border-radius: 30px;
+}
