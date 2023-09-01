@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
+
 	pageEncoding="UTF-8" import="member.model.vo.Member, pet.model.vo.Pet, java.util.ArrayList"%>
 <%
 	ArrayList<Pet> pet = (ArrayList<Pet>)request.getAttribute("list");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +117,10 @@ form {
 
 div.wrapper {
 	border: 2px solid #cfcfcf;
-	text-align: center;
+	text-align:center;
+	background-color:#fafafa;
+	box-shadow:2px 2px 5px 2px #cfcfcf;
+
 }
 
 div.wrapper form {
@@ -191,13 +196,16 @@ height: 200px;
 
 
 	<div class="info-content">
+
 		<div class="info-detail02">
 
 			<ul class="tabs">
 				<li class="tab-link current" data-tab="tab-1">나의 정보</li>
+
 				<li class="tab-link" data-tab="tab-2">나의 펫 정보</li>
 				<li class="tab-link" data-tab="tab-3">나의 게시물 목록</li>
 				<li class="tab-link" data-tab="tab-4">나의 문의내역</li>
+
 			</ul>
 
 			<hr style="opacity: 0.5; margin: 0px;">
@@ -245,6 +253,7 @@ height: 200px;
 					</form>
 				</div>
 			</div>
+
 
 
 			<div id="tab-2" class="tab-content">
