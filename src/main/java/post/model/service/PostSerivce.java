@@ -46,10 +46,9 @@ public class PostSerivce {
 		return list;
 	}
 	
-	public ArrayList<Post> getMyPostList(String userId) {
+	public ArrayList<Post> getMyPostList(int userId) {
 		ArrayList<Post> list = null;
 		Connection conn = getConnection();
-		// TODO Auto-generated method stub
 
 		list = pdao.getMyPostList(conn, userId);
 		close(conn);
@@ -128,5 +127,14 @@ public class PostSerivce {
 		
 		close(conn);
 		return tradePostLikeNo;
+	}
+
+	public ArrayList<Post> getPostListByType(String postType) {
+		ArrayList<Post> list = null;
+		Connection conn = getConnection();
+
+		list = pdao.getPostListByType(conn, postType);
+		close(conn);
+		return list;
 	}
 }

@@ -1,29 +1,23 @@
-package post.controller;
+package reply.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import post.model.service.PostSerivce;
-import post.model.vo.Post;
-
 /**
- * Servlet implementation class StandardPostMyPostViewServlet
+ * Servlet implementation class ReplyDeleteServlet
  */
-@WebServlet("/pmypost")
-public class PostMyPostServlet extends HttpServlet {
+@WebServlet("/rdelete")
+public class ReplyDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostMyPostServlet() {
+    public ReplyDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +26,10 @@ public class PostMyPostServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PostSerivce pSerivce = new PostSerivce();
-		ArrayList<Post> list = new ArrayList<Post>();
-		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
-		list = pSerivce.getMyPostList(memberSeq);
-		
-		RequestDispatcher view = null;
-		
-		if(list.size() > 0) {
-			view = request.getRequestDispatcher("views/post/postList.jsp");
-			
-			request.setAttribute("list", list);
-		} else {
-			view = request.getRequestDispatcher("views/common/waiting.jsp");
-		}
-		
-		view.forward(request, response);
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -56,4 +37,5 @@ public class PostMyPostServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

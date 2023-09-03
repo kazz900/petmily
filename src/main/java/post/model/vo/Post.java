@@ -18,6 +18,8 @@ public class Post {
 	private Date postDate;
 	private Date lastModifiedDate;
 	private String tradeResult;
+	private String originalFileName;
+	private String changedFileName;
 	
 	@Override
 	public String toString() {
@@ -98,6 +100,18 @@ public class Post {
 	}
 	public void setTradeResult(String tradeResult) {
 		this.tradeResult = tradeResult;
+	}
+	public String getOriginalFileName() {
+		return originalFileName;
+	}
+	public void setOriginalFileName(String originalFileName) {
+		this.originalFileName = originalFileName;
+	}
+	public String getChangedFileName() {
+		return changedFileName;
+	}
+	public void setChangedFileName(String changedFileName) {
+		this.changedFileName = changedFileName;
 	}
 	
 	
