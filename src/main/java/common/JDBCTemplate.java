@@ -105,7 +105,7 @@ public class JDBCTemplate {
 		public static void close(Connection conn) {
 			try {
 				if (conn != null && !conn.isClosed())
-					conn.commit();
+					conn.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
