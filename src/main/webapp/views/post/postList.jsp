@@ -59,8 +59,9 @@
 
 								<div class="newPostformBox">
 									<div class="new-post-form-popup" id="newPostForm">
-										<form action="/petmily/spnewpost?memberseq=16" class="form-container" method="post">
+										<form action="/petmily/pnewpost?memberseq=16" class="form-container" method="post">
 											<textarea name="post-content" id="post-content-textarea" cols="30" rows="10" autofocus required onfocus="clearTextArea(this);">tell us your story :</textarea>
+											<img src="/petmily/resources/images/post/upload.png" alt="사진 업로드" style="width: 50px; height: 50px; position: relative;">
 											<button type="submit" id="postsubmit">게시글 추가</button>
 										</form>
 									</div>
