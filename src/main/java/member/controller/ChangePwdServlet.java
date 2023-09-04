@@ -37,7 +37,6 @@ public class ChangePwdServlet extends HttpServlet {
 		
 		Member member = new Member();
 		
-		
 		member.setMemberId(request.getParameter("userid"));
 		String userpwd = request.getParameter("userpwd");
 		
