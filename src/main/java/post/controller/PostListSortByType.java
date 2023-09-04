@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import post.model.service.PostSerivce;
 import post.model.vo.Post;
+import reply.model.service.ReplyService;
+import reply.model.vo.Reply;
 
 /**
  * Servlet implementation class PostListSortByType
@@ -33,16 +35,18 @@ public class PostListSortByType extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostSerivce pSerivce = new PostSerivce();
+		ReplyService rService = new ReplyService();
 		String postType = request.getParameter("posttype");
-		ArrayList<Post> list = new ArrayList<Post>();
-		list = pSerivce.getPostListByType(postType);
-		
+		ArrayList<Post> list = pSerivce.getPostListByType(postType);
+		ArrayList<Reply> rList = rService.getReplyList();
+
 		RequestDispatcher view = null;
 		
 		if(list.size() > 0) {
 			view = request.getRequestDispatcher("views/post/postList.jsp");
 			
 			request.setAttribute("list", list);
+			request.setAttribute("rList", rList);
 		} else {
 			view = request.getRequestDispatcher("views/common/waiting.jsp");
 		}

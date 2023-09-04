@@ -14,5 +14,8 @@ public final class StandardPost extends Post implements java.io.Serializable {
 			Date postDate, Date lastModifieddate, String tradeResult) {
 		super(postSeq, memberSeq, memberId, postContent, postImg, likeNo, replyNO, postDate, lastModifieddate, tradeResult);
 	}
-	
+	@Override
+	public String toString() {
+		return "StandardPost []";
+	}
 }

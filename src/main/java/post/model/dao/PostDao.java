@@ -103,9 +103,7 @@ public class PostDao {
 				tp.setChangedFileName(rset.getString("RENAME_FILE_NAME"));
 				list.add(tp);
 			}
-			
 			list.sort((p1 , p2) -> p2.getPostDate().compareTo(p1.getPostDate()) );
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -184,7 +182,7 @@ public class PostDao {
 			
 			pstmt = null;
 			rset = null;
-			
+			 
 			// Get all TradePost from DB
 			pstmt = conn.prepareStatement(getTradePostQuery);
 			pstmt.setInt(1, userId);
