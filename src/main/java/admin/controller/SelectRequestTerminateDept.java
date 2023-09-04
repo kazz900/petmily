@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -34,15 +35,22 @@ public class SelectRequestTerminateDept extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		System.out.println("srtd 아직안터짐");
 		ArrayList<Department> list = new DepartmentService().selectRequestTerminateDept();
-
-		
-		RequestDispatcher view = null;
-
-		System.out.println(list.size());
-		view = request.getRequestDispatcher("views/admin/AdminDeptTerminate.jsp");
-		request.setAttribute("list", list);
-		view.forward(request, response);
+		String keyword = (String)request.getParameter("keyword");
+		System.out.println("srtd keyword : " + keyword);
+		if(keyword == null) {
+			keyword = "";
+			RequestDispatcher view = null;
+			
+			view = request.getRequestDispatcher("views/admin/AdminDeptTerminate.jsp");
+			request.setAttribute("list", list);
+			request.setAttribute("keyword", keyword);
+			view.forward(request, response);
+		} else {
+			response.sendRedirect("/petmily/adf?keyword="+URLEncoder.encode(keyword, "UTF-8"));
+		}
 	}
 
 	/**

@@ -10,20 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
-import member.model.vo.Member;
+import admin.model.service.AdminPostService;
+import admin.model.vo.AdminPost;
+
+
+
+
 
 /**
- * Servlet implementation class AdminMemberSearchServlet
+ * Servlet implementation class AdminSPostSearch
  */
-@WebServlet("/amss")
-public class AdminMemberSearchServlet extends HttpServlet {
+@WebServlet("/asps")
+public class AdminSPostSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberSearchServlet() {
+    public AdminSPostSearch() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,24 +38,39 @@ public class AdminMemberSearchServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		
 		String action = request.getParameter("action");
 		String keyword = request.getParameter("keyword");
-
-		System.out.println(keyword);
-	
-		MemberService mservice = new MemberService();
-		ArrayList<Member> list = mservice.selectSearchMemberId(keyword);
 		
+		if(keyword == null) {
+			keyword = "";
+		}
+		AdminPostService apservice = new AdminPostService();
+		ArrayList<AdminPost> list = null;
+		
+		switch(action) {
+		case "id": 		list = apservice.selectSearchMemberId(keyword);	break;
+		case "content":		list = apservice.selectSearchContent(keyword);	break;
+		case "grade":		list = apservice.selectSearchMemberGrade(keyword);		break;
+		}
+		
+		
+		
+	
+				
 		RequestDispatcher view = null;
 		
 		System.out.println(list.size());
 
-		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
+		view = request.getRequestDispatcher("views/admin/AdminStandardPostDelete.jsp");
 		request.setAttribute("list", list);
 		request.setAttribute("keyword", keyword);
+		request.setAttribute("action", action);
+		
 
 		view.forward(request, response);
-}
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

@@ -10,52 +10,55 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
-import member.model.vo.Member;
+import department.model.service.DepartmentService;
+import department.model.vo.Department;
 
 /**
- * Servlet implementation class AdminMemberManagement
+ * Servlet implementation class AdminDeptSearch
  */
-@WebServlet("/admmm")
-public class AdminMemberManagement extends HttpServlet {
+@WebServlet("/ads")
+public class AdminDeptSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberManagement() {
+    public AdminDeptSearchServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		
-		String memberSeq = request.getParameter("memberSeq");
-		String memberGrade = request.getParameter("memberGrade");
-		String memberId = request.getParameter("memberId");
-
-		int result = new MemberService().managementMember(memberSeq, memberGrade);
-		
-		
-		
-		ArrayList<Member> member = new MemberService().againList(memberId);
-		
-		RequestDispatcher view = null;
-		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
-		request.setAttribute("list", member);
-		request.setAttribute("keyword", memberId);
-		view.forward(request, response);
+			request.setCharacterEncoding("utf-8");
 			
-		}
-	
+			String action = request.getParameter("action");
+			String keyword = request.getParameter("keyword");
+			if(keyword == null) {
+				keyword = "";
+			}
+		
+		    DepartmentService dservice = new DepartmentService();
+			ArrayList<Department> list = dservice.selectDeptName(keyword);
+			
+			RequestDispatcher view = null;
+			
+			System.out.println(list.size());
+
+			view = request.getRequestDispatcher("views/admin/AdminDeptInsert.jsp");
+			request.setAttribute("list", list);
+			request.setAttribute("keyword", keyword);
+
+			view.forward(request, response);
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
