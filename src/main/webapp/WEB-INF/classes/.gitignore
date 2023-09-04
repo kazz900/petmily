@@ -3,7 +3,10 @@
 /common/
 /department/
 /member/
+/org/
 /pet/
+/post/
+/reply/
 /servicecenter/
 /standardlike/
 /standardpost/
@@ -11,5 +14,3 @@
 /tradelike/
 /tradepost/
 /tradereply/
-/SESSIONS.ser
-/post/
