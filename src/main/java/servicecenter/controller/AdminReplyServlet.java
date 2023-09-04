@@ -37,12 +37,11 @@ public class AdminReplyServlet extends HttpServlet {
 		String result = request.getParameter("result");
 //		String title = request.getParameter("title");
 //		String content = request.getParameter("content");
-
+		
 		int eResult = new BoardService().addAdminReply(reply, boardNo, result);
-
+		System.out.println(eResult);
 		if (eResult > 0) {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/updateSucceed3.jsp");
-
 		} else {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/readFailed.jsp");
 		}
