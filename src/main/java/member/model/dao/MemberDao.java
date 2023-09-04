@@ -48,9 +48,7 @@ public class MemberDao {
 		return member;
 	}
 
-
-	//sns계정 로그인(네이버 카카오)
-
+	// sns계정 로그인(네이버 카카오)
 	public Member snsLogin(Connection conn, String memail) {
 		Member member = null;
 		PreparedStatement pstmt = null;
@@ -253,17 +251,16 @@ public class MemberDao {
 
 		try {
 			pstmt = conn.prepareStatement(query);
-				
-			if(memberGrade.equals("1")) {
-				
+
+			if (memberGrade.equals("1")) {
+
 				pstmt.setString(1, "2");
 				pstmt.setString(2, memberSeq);
-				
+
 			} else if (memberGrade.equals("2")) {
 				pstmt.setString(1, "1");
 				pstmt.setString(2, memberSeq);
 			}
-			
 
 			result = pstmt.executeUpdate();
 
@@ -301,95 +298,27 @@ public class MemberDao {
 		return result;
 	}
 
-public ArrayList<Member> selectList(Connection conn) {
-		ArrayList<Member> list = new ArrayList<Member>();
+	public int updateMemberpwd(Connection conn, Member member) {
+
+		int result = 0;
+
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 
-		String query = "select * from member where not member_grade = '0'";
-
+		String query = "UPDATE MEMBER SET MEMBER_PWD = ? " + "WHERE MEMBER_ID = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
 
-			rset = pstmt.executeQuery();
+			pstmt.setString(1, member.getMemberPwd());
+			pstmt.setString(2, member.getMemberId());
 
-			while (rset.next()) {
-				Member member = new Member();
+			result = pstmt.executeUpdate();
 
-				member.setMemberSeq(rset.getInt("member_seq"));
-				member.setMemberId(rset.getString("member_id"));
-				member.setMemberPwd(rset.getString("member_pwd"));
-				member.setMemberEmail(rset.getString("member_email"));
-				member.setMemberNick(rset.getString("member_nick"));
-				member.setMemberGrade(rset.getString("member_grade"));
-								
-				list.add(member);
-			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
-			close(rset);
 			close(pstmt);
 		}
-		return list;
-	}
-
-
-		public int updateMemberpwd(Connection conn, Member member) {
-			
-			int result = 0;
-
-			PreparedStatement pstmt = null;
-			
-			String query = "UPDATE MEMBER SET MEMBER_PWD = ? "
-						 + "WHERE MEMBER_ID = ?";
-			try {
-				pstmt = conn.prepareStatement(query);
-				
-				pstmt.setString(1, member.getMemberPwd());
-				pstmt.setString(2, member.getMemberId());
-
-				result = pstmt.executeUpdate();
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}finally {
-				close(pstmt);
-			}
-			return result;
-		}
-
-	//관리자 제외 전체 멤버 리스트 표시
-	public ArrayList<Member> selectList(Connection conn){
-
-		ArrayList<Member> list = new ArrayList<Member>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String query = "select * from member where not member_grade = '0'";
-
-		try {
-			pstmt = conn.prepareStatement(query);
-
-			rset = pstmt.executeQuery();
-
-			while (rset.next()) {
-				Member member = new Member();
-
-				member.setMemberSeq(rset.getInt("member_seq"));
-				member.setMemberId(rset.getString("member_id"));
-				member.setMemberPwd(rset.getString("member_pwd"));
-				member.setMemberEmail(rset.getString("member_email"));
-				member.setMemberNick(rset.getString("member_nick"));
-				member.setMemberGrade(rset.getString("member_grade"));
-								
-				list.add(member);
-			}
-		} catch (Exception e) {
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
+		return result;
 	}
 
 	// 회원 검색
@@ -408,13 +337,13 @@ public ArrayList<Member> selectList(Connection conn) {
 
 			while (rset.next()) {
 				Member member = new Member();
-				
+
 				member.setMemberSeq(rset.getInt("member_seq"));
 				member.setMemberId(rset.getString("member_id"));
 				member.setMemberEmail(rset.getString("member_email"));
 				member.setMemberNick(rset.getString("member_nick"));
 				member.setMemberGrade(rset.getString("member_grade"));
-								
+
 				list.add(member);
 			}
 
@@ -427,4 +356,116 @@ public ArrayList<Member> selectList(Connection conn) {
 
 		return list;
 	}
+
+	// 관리자 제외 전체 멤버 리스트 표시
+	public ArrayList<Member> selectList(Connection conn) {
+
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from member where not member_grade = '0'";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Member member = new Member();
+
+				member.setMemberSeq(rset.getInt("member_seq"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberPwd(rset.getString("member_pwd"));
+				member.setMemberEmail(rset.getString("member_email"));
+				member.setMemberNick(rset.getString("member_nick"));
+				member.setMemberGrade(rset.getString("member_grade"));
+
+				list.add(member);
+			}
+		} catch (Exception e) {
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Member> againList(Connection conn, String memberId) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from member where not member_grade = '0' and member_id like ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + memberId + "%");
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Member member = new Member();
+
+				member.setMemberSeq(rset.getInt("member_seq"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberEmail(rset.getString("member_email"));
+				member.setMemberNick(rset.getString("member_nick"));
+				member.setMemberGrade(rset.getString("member_grade"));
+
+				list.add(member);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	// 내용으로 검색 .. 게시판
+	public ArrayList<Member> selectSearchContent(Connection conn, String keyword) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// 회원등급으로 검색 .. 게시판
+	public ArrayList<Member> selectSearchMemberGrade(Connection conn, String keyword) {
+		ArrayList<Member> list = new ArrayList<Member>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from member where not member_grade = '0' and member_grade like ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Member member = new Member();
+
+				member.setMemberSeq(rset.getInt("member_seq"));
+				member.setMemberId(rset.getString("member_id"));
+				member.setMemberEmail(rset.getString("member_email"));
+				member.setMemberNick(rset.getString("member_nick"));
+				member.setMemberGrade(rset.getString("member_grade"));
+
+				list.add(member);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
 }
