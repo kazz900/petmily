@@ -78,12 +78,14 @@ public class LoginServlet extends HttpServlet {
 				// 로그인 성공시 내보낼 페이지 지정
 				response.sendRedirect("index.jsp");
 			} else {
-				String message = "정지처리된 회원입니다. 관리자에게 문의해주세요.";
-				response.getWriter().write("{\"message\":\"" + message + "\"}");
+				RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
+				request.setAttribute("message", "정지처리된 회원입니다. 관리자에게 문의해주세요.");
+				view.forward(request, response);		
 			}
 		} else {
-			String message = "아이디 혹은 패스워드를 다시 확인해주세요.";
-			response.getWriter().write("{\"message\":\"" + message + "\"}");
+			RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
+			request.setAttribute("message", "아이디 혹은 패스워드를 다시 확인해주세요.");
+			view.forward(request, response);			
 		}
 	}
 
