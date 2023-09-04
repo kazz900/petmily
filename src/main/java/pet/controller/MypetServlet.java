@@ -43,9 +43,11 @@ public class MypetServlet extends HttpServlet {
 		if(list.size() > 0) {
 			request.setAttribute("message", "정보있음");
 			request.setAttribute("list", list);
+
 		}else {
 			request.setAttribute("message", "정보없음");
 		}
+		
 		view = request.getRequestDispatcher("views/mypage/changeMyinfo.jsp");
 		view.forward(request, response);
 	}	
