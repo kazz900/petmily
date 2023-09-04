@@ -78,11 +78,13 @@ ul.tabs li.current {
 input[type=text] {
 	width: 280px;
 	height: 30px;
+	border:0px;
 }
 
 input[type=email] {
 	width: 280px;
 	height: 30px;
+	border:0px;
 }
 
 input[type=time] {
@@ -431,8 +433,6 @@ font-family: OhsquareAir;
 			</div>
 
 
-
-
 			<div id="tab-1" class="tab-content current">
 				<div style="position: absolute; background-color: white; left: 5%;">
 					<form action="/petmily/peten" method="post"
@@ -598,6 +598,7 @@ font-family: OhsquareAir;
 					</div>
 				</div>
 			</div>
+
 		</div>
 </body>
 </html>

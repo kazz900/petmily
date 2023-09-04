@@ -38,7 +38,7 @@ public class AddMySuggestServlet extends HttpServlet {
 		board.setBrdContent(request.getParameter("content"));
 		board.setBrdResult(request.getParameter("result"));
 		board.setBrdMemberNo(Integer.parseInt(request.getParameter("mNo")));
-		
+		System.out.println("sdf");
 		int result = new BoardService().addMySuggest(board);
 
 		if (result > 0) {
