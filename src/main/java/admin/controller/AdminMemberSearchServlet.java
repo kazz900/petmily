@@ -35,9 +35,8 @@ public class AdminMemberSearchServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		String action = request.getParameter("action");
-		String keyword = null;
-		
-		keyword = request.getParameter("keyword");
+		String keyword = request.getParameter("keyword");
+
 		System.out.println(keyword);
 	
 		MemberService mservice = new MemberService();
@@ -49,6 +48,7 @@ public class AdminMemberSearchServlet extends HttpServlet {
 
 		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
 		request.setAttribute("list", list);
+		request.setAttribute("keyword", keyword);
 
 		view.forward(request, response);
 }

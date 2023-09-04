@@ -78,13 +78,13 @@ ul.tabs li.current {
 input[type=text] {
 	width: 280px;
 	height: 30px;
-	border:0px;
+	border:1px solid gray;
 }
 
 input[type=email] {
 	width: 280px;
 	height: 30px;
-	border:0px;
+	border:1px solid gray;
 }
 
 input[type=time] {
@@ -290,6 +290,7 @@ font-family: OhsquareAir;
 
 		document.getElementById("upetSeq").value = petSeq;
 		document.getElementById("upetName").value = petName;
+		document.getElementById("duImg").value = petImg;
 		if (petType === "고양이") {
 			petType = "0";
 		} else if (petType === "강아지") {
@@ -436,7 +437,7 @@ font-family: OhsquareAir;
 					</div>
 					<div class="updateBtn">
 
-
+						
 						<input type="hidden" name="UpetSeq<%=p.getPetSeq()%>"
 							id="UpetSeq<%=p.getPetSeq()%>" value="<%=p.getPetSeq()%>">
 						<input type="hidden" name="UpetName<%=p.getPetSeq()%>"
@@ -454,6 +455,7 @@ font-family: OhsquareAir;
 							<input type="hidden" name="dmemberSeq" id="deletePet"
 								value="<%=p.getMemberSeq()%>"> <input type="hidden"
 								name="deletePet" id="deletePet" value="<%=p.getPetSeq()%>">
+								<input type="hidden" name="deleteImg" id="deleteImg" value="<%=p.getPetImg()%>">
 							<input type="submit" value="삭제">
 						</form>
 					</div>
@@ -466,9 +468,10 @@ font-family: OhsquareAir;
 				<% } %>
 				<div class="update1" id="update1">
 					<div class="update" id="update"
-						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 2; display: none;border-radius: 20px;">
+						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 2; display: none;border-radius: 20px; width:210px;">
 						<form action="/petmily/petup" method="post"
 							enctype="multipart/form-data"onsubmit="return ucheckinputpet();">
+							<input type="hidden" name="duImg" id="duImg">
 							<input type="hidden" name="memberSeq" id="memberSeq"
 								value="<%=member.getMemberSeq()%>"> <input type="hidden"
 								name="upetSeq" id="upetSeq">
