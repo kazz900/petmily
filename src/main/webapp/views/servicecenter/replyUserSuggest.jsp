@@ -33,7 +33,7 @@ div.content p textarea {
 <form action="/petmily/addAdminReply">
 	<input type="hidden" name="userid" value="<%=member.getMemberSeq()%>">
 	<input type="hidden" name="boardNo" value="<%=board.getBrdNo()%>">
-	<input type="hidden" name="result" value="Y">
+	<input type="hidden" name="result" value="y">
 	
 	<h1 style="margin-bottom:10px;">제목 : 
 		<input type="text" name="title" value="<%=board.getBrdTitle()%>" style="height:35px; font-size:20px; font-weight:bold; text-align:center;">

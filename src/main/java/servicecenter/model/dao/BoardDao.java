@@ -214,7 +214,6 @@ public class BoardDao implements Serializable {
 			pstmt.setString(2, result);
 			pstmt.setInt(3, boardNo);
 			
-			
 			eResult = pstmt.executeUpdate();
 
 		} catch (Exception e) {

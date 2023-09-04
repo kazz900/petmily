@@ -78,13 +78,13 @@ ul.tabs li.current {
 input[type=text] {
 	width: 280px;
 	height: 30px;
-	border:0px;
+	border:1px solid gray;
 }
 
 input[type=email] {
 	width: 280px;
 	height: 30px;
-	border:0px;
+	border:1px solid gray;
 }
 
 input[type=time] {
@@ -290,6 +290,7 @@ font-family: OhsquareAir;
 
 		document.getElementById("upetSeq").value = petSeq;
 		document.getElementById("upetName").value = petName;
+		document.getElementById("duImg").value = petImg;
 		if (petType === "고양이") {
 			petType = "0";
 		} else if (petType === "강아지") {
@@ -358,51 +359,6 @@ font-family: OhsquareAir;
 			</ul>
 
 			<hr style="opacity: 0.5; margin: 0px;">
-
-
-
-			<div id="tab-2" class="tab-content">
-
-				<div class="wrapper">
-					<p style="margin-bottom: 2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
-					<p style="font-size: 15px; margin-top: 3px;">닉네임만 변경 가능합니다.</p>
-					<form action="/petmily/myinfo" method="get">
-						<table>
-
-							<!-- 				<tr>
-					<th>프로필사진</th>
-					<td>
-						<label for="uploadProfile" style="cursor:pointer;">
-						<img src="/petmily/resources/images/girl.jpg" 
-						id="profile" name="profile" style=" width:160px;">
-						</label>
-						<input type="file" id="uploadProfile" onchange="loadImage(this);">
-					</td>
-				</tr> -->
-
-							<tr>
-								<th>아이디</th>
-								<td><input type="text" name="userid"
-									value="<%=member.getMemberId()%>" readonly></td>
-							</tr>
-							<tr>
-								<th>이메일</th>
-								<td><input type="email" name="email"
-									value="<%=member.getMemberEmail()%>" readonly></td>
-							</tr>
-							<tr>
-								<th>(*)닉네임</th>
-								<td><input type="text" name="nickname"
-									value="<%=member.getMemberNick()%>"></td>
-							</tr>
-						</table>
-
-						<input type="submit" value="변경하기" style="margin-bottom: 15px;">
-						<input type="button" value="비밀번호 변경" onclick="changePwd();">
-					</form>
-				</div>
-			</div>
-
 
 			<div id="tab-1" class="tab-content current">
 				<div style="position: absolute; background-color: white; left: 5%;">
@@ -481,7 +437,7 @@ font-family: OhsquareAir;
 					</div>
 					<div class="updateBtn">
 
-
+						
 						<input type="hidden" name="UpetSeq<%=p.getPetSeq()%>"
 							id="UpetSeq<%=p.getPetSeq()%>" value="<%=p.getPetSeq()%>">
 						<input type="hidden" name="UpetName<%=p.getPetSeq()%>"
@@ -499,6 +455,7 @@ font-family: OhsquareAir;
 							<input type="hidden" name="dmemberSeq" id="deletePet"
 								value="<%=p.getMemberSeq()%>"> <input type="hidden"
 								name="deletePet" id="deletePet" value="<%=p.getPetSeq()%>">
+								<input type="hidden" name="deleteImg" id="deleteImg" value="<%=p.getPetImg()%>">
 							<input type="submit" value="삭제">
 						</form>
 					</div>
@@ -511,9 +468,10 @@ font-family: OhsquareAir;
 				<% } %>
 				<div class="update1" id="update1">
 					<div class="update" id="update"
-						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 2; display: none;border-radius: 20px;">
+						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 2; display: none;border-radius: 20px; width:210px;">
 						<form action="/petmily/petup" method="post"
 							enctype="multipart/form-data"onsubmit="return ucheckinputpet();">
+							<input type="hidden" name="duImg" id="duImg">
 							<input type="hidden" name="memberSeq" id="memberSeq"
 								value="<%=member.getMemberSeq()%>"> <input type="hidden"
 								name="upetSeq" id="upetSeq">
@@ -569,6 +527,49 @@ font-family: OhsquareAir;
 					</div>
 				</div>
 				
+			</div>
+			
+			<div id="tab-2" class="tab-content">
+				<div class="wrapper">
+					<div style="text-align:center;">
+						<p style="margin-bottom:2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
+						<p style="font-size:15px; margin-top:3px;">닉네임만 변경 가능합니다.</p>
+					</div>
+					<form action="/petmily/myinfo" method="get">
+						<table id="outer" align="center" width="500" cellspacing="5"
+							cellpadding="0">
+							
+							<tr>
+								<th width="140">아이디</th>
+								<td><input type="text" name="userid" value="<%=member.getMemberId()%>"
+									readonly>
+							<tr>
+								<th width="140">이메일</th>
+								<td><input type="email" name="email" value="<%=member.getMemberEmail()%>">
+								</td>
+							</tr>
+							
+							<tr>
+								<th width="140">(*)닉네임</th>
+								<td><input type="text" name="nickname" value="<%=member.getMemberNick()%>">
+								</td>
+							</tr>
+						</table>
+						<div style="text-align:center; margin-top:10px;">
+						
+							<input type="button" value="비밀번호 변경" onclick="changePwd();" 
+							style="margin-bottom:15px; width:150px; height:30px; 
+							border-radius:5px; border:1px solid black;
+							box-shadow:1px 1px 0px 1px #cfcfcf;">
+							&nbsp; 
+							<input type="submit" value="변경하기" 
+							style="margin-bottom:15px; width:150px; height:30px; 
+							border-radius:5px; border:1px solid black;
+							box-shadow:1px 1px 0px 1px #cfcfcf;">
+						
+						</div>
+					</form>
+				</div>
 			</div>
 
 		</div>

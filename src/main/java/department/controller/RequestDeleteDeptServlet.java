@@ -38,7 +38,7 @@ public class RequestDeleteDeptServlet extends HttpServlet {
 		dept.setDeptAddress(request.getParameter("address"));
 		
 		int result = new DepartmentService().requestDeleteDept(dept);
-		System.out.println(result);
+
 		if (result > 0) {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/delSucceed.jsp");
 		} else {
