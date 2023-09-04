@@ -214,7 +214,8 @@ function getInfo() {
                     location.href="http://localhost:8080/petmily"; 
                     },
                     error: function(error) {
-                        console.log('Data sending failed');
+                    alert("정지처리된 회원입니다. 관리자에게 문의해주세요");
+                    location.href="/petmily/views/member/login.jsp"; 
                     }
                 });
         },
