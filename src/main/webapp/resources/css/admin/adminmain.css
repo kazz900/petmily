@@ -73,7 +73,8 @@
 	}
 	
 	#tab-1 th {
-		background: rgb(221, 221, 221);
+		background: hsl(30.46deg 58.9% 45.68%);
+		font-family: 'Surround';
 		margin:0;
 	}
 	
@@ -87,11 +88,11 @@
 	}
 	
 	#tab-1 tr:hover {
-		background-color:#dfdfdf;
+		background-color:hsl(36deg 70.37% 68.61%);
 	}
 	
 	#tab-1 #outer {
-		width: 800px;
+		width: 1050px;
 		margin: auto;
 	}
 	
@@ -191,5 +192,9 @@
 	
 	.yes {
 		height:30px;
+	}
+	h1 {
+		color: hsl(30.46deg 58.9% 45.68%);
+		font-family: 'Surround';
 	}
 }

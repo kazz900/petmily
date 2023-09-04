@@ -27,9 +27,9 @@ public class PetService {
 
 	
 
-	public int insertPet(Pet pet, int memberSeq ) {
+	public int insertPet(Pet pet) {
 		Connection conn = getConnection();
-		int result = pdao.insertPet(conn, pet, memberSeq);
+		int result = pdao.insertPet(conn, pet);
 		if(result > 0)
 			commit(conn);
 		else
@@ -38,11 +38,9 @@ public class PetService {
 		return result;
 	}
 
-	public int updatePet(Pet pet, int memberSeq) {
-		
-		
+	public int updatePet(Pet pet) {
 		Connection conn = getConnection();
-		int result = pdao.updatePet(conn, pet, memberSeq);
+		int result = pdao.updatePet(conn, pet);
 		if(result > 0)
 			commit(conn);
 		else
@@ -59,23 +57,24 @@ public class PetService {
 		
 	}
 
-	public int updatePet(int memberSeq, int petSeq) {
-		// TODO Auto-generated method stub
-		return 0;
+	public Pet selectPetSeq(int petSeq) {
+		Connection conn = getConnection();
+		Pet pet = pdao.selectPetSeq(conn, petSeq);
+		close(conn);
+		return pet;
+	}
+
+	public int petDelete(Pet pet) {
+		Connection conn = getConnection();
+		int result = pdao.petDelete(conn, pet);
+		if (result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		close(conn);
+		return result;
 	}
 
 	
-
-//	public Pet selectPetmily(int petSeq, int memberSeq) {
-//		
-//		Connection conn = getConnection();
-//		petSeq = pdao.selectPetmily(conn, petSeq, memberSeq);
-//		close(conn);
-//		return petSeq;
-//		
-//		
-//	}
-
-	
-
 }

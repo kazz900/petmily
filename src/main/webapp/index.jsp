@@ -4,6 +4,9 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" type="image/png" sizes="32x32" href="/petmily/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/petmily/favicon-16x16.png">
+<link rel="manifest" href="/petmily/site.webmanifest">
 <title>petmily</title>
 <script type="text/javascript" src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <script type="text/javascript" src="/petmily/resources/js/main/banner_scroll.js"></script>

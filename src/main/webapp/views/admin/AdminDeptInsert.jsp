@@ -27,7 +27,10 @@ ArrayList<Department> list = (ArrayList<Department>) request.getAttribute("list"
 	src="/petmily/resources/js/info/infotap.js"></script>
 <body>
 	<%@ include file="../common/main.jsp"%>
-
+	<div>
+	<br>
+	</div>
+	<h1 align="center" class="block">업체 등록</h1>
 	<div id="tab-1" class="block">
 		<table id="outer" align="center" border="1" cellspacing="0"
 			cellpadding="3">
