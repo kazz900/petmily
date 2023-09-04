@@ -24,18 +24,29 @@ String type = (String)request.getAttribute("type");
 }
 
 html, body {
-	height: 100%;
+	height: 920px;
 }
 
 div#main {
-	width: 100%;
+	width: 90%;
 	height: 100%;
 }
 
 div#top {
 	width: 100%;
-	height: 150px;
-	margin-bottm: 3px;
+	height: 100px;
+}
+
+div#searchname {
+	width: 50%;
+	height: 100%;
+	float: left;
+}
+
+div#searchcheck {
+	width: 50%;
+	height: 100%;
+	float: right;
 }
 
 div#bottom {
@@ -63,15 +74,28 @@ div#info {
 	width: 100%;
 }
 
-h1#searchvalue {
-	text-align: center;
-}
-
 img#searchImg {
 	width: 200px;
 	height: 80px;
+	algin: left;
 }
-</style>
+
+.checkbox-container {
+	display: inline-block;
+    margin-right: 10px; /* 체크박스 간격 조절을 위해 마진 추가 */
+}
+        
+</style>					
+<script type="text/javascript">
+	var lat = 0;
+	var lng = 0;
+	//실행시 권한 요청을 수락하여야 함.
+	navigator.geolocation.getCurrentPosition(function(position) {
+		lat = position.coords.latitude;
+		lng = position.coords.longitude;
+
+	});
+</script>
 </head>
 <body>
 
@@ -79,24 +103,32 @@ img#searchImg {
 
 	<div id="main" class="block">
 		<div id="top">
-			<h1 id="searchvalue">
-				검색 정보 :
-				<%=searchInfo%></h1>
-
-			<script type="text/javascript">
-				var lat = 0;
-				var lng = 0;
-				//실행시 권한 요청을 수락하여야 함.
-				navigator.geolocation.getCurrentPosition(function(position) {
-					lat = position.coords.latitude;
-					lng = position.coords.longitude;
-
-				});
-			</script>
+			<div id="searchname">
+				<h1>
+					검색 정보 : 	<%=searchInfo%>
+				</h1>
+			</div>
+			<div id="searchcheck">
+			    <!-- 체크박스 항목들 -->
+			    <div class="checkbox-container">
+			        <input type="checkbox" id="item1" name="items" value="아이템1">
+			        <label for="item1">아이템 1</label>
+			    </div>
+			
+			    <div class="checkbox-container">
+			        <input type="checkbox" id="item2" name="items" value="아이템2">
+			        <label for="item2">아이템 2</label>
+			    </div>
+			
+			    <div class="checkbox-container">
+			        <input type="checkbox" id="item3" name="items" value="아이템3">
+			        <label for="item3">아이템 3</label>
+			    </div>
+		    </div>
 			<hr>
 		</div>
 		<div id="bottom">
-			<div id="map" style="z-index:1;">				
+			<div id="map">				
 			</div>
 			<div id="info">
 			</div>
@@ -123,7 +155,8 @@ img#searchImg {
 					var container = document.getElementById('map');
 					var options = {
 						center : new kakao.maps.LatLng(lat, lng),
-						level : 3
+						level : 3,
+						marker : marker
 					};
 
 					var imageSrc = null;
@@ -146,7 +179,7 @@ img#searchImg {
 													map : map,
 													position : new kakao.maps.LatLng(
 															lat, lng),
-													title : '현재 위치',
+													title : '내 위치',
 													image : new kakao.maps.MarkerImage(
 															"/petmily/resources/images/marker/myloc.png",
 															new kakao.maps.Size(34,
@@ -240,9 +273,7 @@ img#searchImg {
 						        infowindow.setContent(content); // 가게 이름 설정
 						        infowindow.open(map, marker);
 						    });
-						})(marker, dept[i].deptName, deptSeq);
-						marker.setMap(map);
-						
+						})(marker, dept[i].deptName, deptSeq);						
 						  
 				div.innerHTML += '<a href="/petmily/mis?deptSeq='
 						+ dept[i].deptSeq + '"><h3>' + dept[i].deptName
@@ -255,8 +286,6 @@ img#searchImg {
 		//여기서부터 함수
 		function makeMap() {
 
-			var infowindow = new kakao.maps.InfoWindow(); // 인포윈도우 객체 생성
-
 			var filteredDepts = dept.filter(function(deptItem) {
 				var deptLat = deptItem.deptLatitude;
 				var deptLng = deptItem.deptLongitude;
@@ -264,7 +293,7 @@ img#searchImg {
 				var distance = Math.sqrt(Math.pow(lat - deptLat, 2)
 						+ Math.pow(lng - deptLng, 2)) * 111;
 
-				return distance <= 5;
+				return distance <= 3;
 			});
 
 			if (filteredDepts.length > 0) {
@@ -310,33 +339,54 @@ img#searchImg {
 					image : markerImage
 				});
 
+				
+				marker.setMap(map);
+				
 				var deptSeq = filteredDepts[i].deptSeq;
-
-				// 클로저를 이용하여 인포윈도우에 표시할 정보를 제공
-				(function(marker, deptName, deptSeq) {
-					kakao.maps.event
-							.addListener(
-									marker,
-									'click',
-									function() {
-										var content = '<div class="markerDeptName"><a href="/petmily/mis?deptSeq='
-												+ deptSeq
-												+ '">'
-												+ deptName
-												+ '</a></div>';
-										infowindow.setContent(content); // 가게 이름 설정
-										infowindow.open(map, marker);
-									});
-				})(marker, filteredDepts[i].deptName, deptSeq);
-
+				
+				 // 인포윈도우 객체 생성
+				var infowindow = new kakao.maps.InfoWindow({
+					content: '<a href="/petmily/mis?deptSeq='
+						+ deptSeq + '">'
+						+ filteredDepts[i].deptName + '</a>',
+					removable: true
+				}); 
+				
 				div.innerHTML += '<a href="/petmily/mis?deptSeq='
 						+ filteredDepts[i].deptSeq + '"><h3>'
 						+ filteredDepts[i].deptName + '</h3></a>';
 				div.innerHTML += '<h4>' + filteredDepts[i].deptAddress
 						+ '</h4><hr>';
+						
 				divElement.appendChild(div);
+				
+				(function(marker, infowindow) {
+				    var clickHandler = function() {
+				        // 마커 위에 인포윈도우를 표시합니다
+				        infowindow.open(map, marker);  				       
+				    };
+
+				    kakao.maps.event.addListener(marker, 'click', clickHandler);
+				   // kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+/* 				    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+ */				})(marker, infowindow);
+				 
 			}
 		}
+		
+		// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	/* 	function makeOverListener(map, marker, infowindow) {
+		    return function() {
+		        infowindow.open(map, marker);
+		    };
+		}
+ */
+		// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		/* function makeOutListener(infowindow) {
+		    return function() {
+		        infowindow.close();
+		    };
+		} */
 	</script>
 </body>
 </html>
