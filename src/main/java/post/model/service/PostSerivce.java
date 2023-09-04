@@ -78,6 +78,13 @@ public class PostSerivce {
 		// TODO Auto-generated method stub
 
 		result = pdao.updatePost(conn, memberSeq, post);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
 		close(conn);
 		return result;
 	}

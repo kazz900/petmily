@@ -248,8 +248,47 @@ public class PostDao {
 	}
 
 	public int updatePost(Connection conn, int memberSeq, Post post) {
-		// TODO Auto-generated method stub
-		return 0;
+		int result = 0;
+		String query = "";
+		PreparedStatement pstmt = null;
+		
+		if(post instanceof StandardPost) {
+			query = "UPDATE STANDARD_POST "
+					+ "SET "
+					+ "POST_CONTENT = ?, "
+					+ "ORIGINAL_FILE_NAME = ?, "
+					+ "RENAME_FILE_NAME = ?, "
+					+ "LAST_MODIFIED_DATE = SYSDATE "
+					+ "WHERE POST_SEQ = ? ";
+		}else {
+			query = "UPDATE TRADE_POST "
+					+ "SET "
+					+ "POST_CONTENT = ?, "
+					+ "ORIGINAL_FILE_NAME = ?, "
+					+ "RENAME_FILE_NAME = ?, "
+					+ "LAST_MODIFIED_DATE = SYSDATE "
+					+ "WHERE POST_SEQ = ? ";
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, post.getPostContent());
+			if(post.getOriginalFileName() != null) {
+				pstmt.setString(2, post.getOriginalFileName());
+				pstmt.setString(3, post.getChangedFileName());
+			}else {
+				pstmt.setString(2, "DEFAULT");
+				pstmt.setString(3, "DEFAULT");
+			}
+			pstmt.setInt(4, post.getPostSeq());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public StandardPost selectPost(Connection conn, int postSeq) {

@@ -113,6 +113,7 @@ public class PostNewPostServlet extends HttpServlet {
 			view.forward(request, response);
 		}
 		
+		
 		//2. 업로드할 파일의 용량 제한 설정 : 10메가바이트로 제한한다면
 		int maxSize = 1024 * 1024 * 10;
 		
@@ -126,6 +127,9 @@ public class PostNewPostServlet extends HttpServlet {
 		//MultipartRequest 객체가 생성되면, 자동으로 지정 폴더에 업로드된 파일이 저장됨
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
 		
+	
+		
+//		pService.deleteFile(mrequest.getOriginalFileName(savePath));
 		//6. 업로드된 원본 파일이름 추출
 		String originalFileName = mrequest.getFilesystemName("upfile");
 		
