@@ -78,13 +78,13 @@ ul.tabs li.current {
 input[type=text] {
 	width: 280px;
 	height: 30px;
-	border:0px;
+	border:1px solid gray;
 }
 
 input[type=email] {
 	width: 280px;
 	height: 30px;
-	border:0px;
+	border:1px solid gray;
 }
 
 input[type=time] {
