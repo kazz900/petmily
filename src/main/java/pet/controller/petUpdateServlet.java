@@ -1,5 +1,6 @@
 package pet.controller;
 
+import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -43,7 +44,7 @@ public class petUpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		request.setCharacterEncoding("UTF-8");
-		
+
 		RequestDispatcher view = null;
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			view = request.getRequestDispatcher("views/common/error.jsp");
@@ -62,9 +63,6 @@ public class petUpdateServlet extends HttpServlet {
 		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "utf-8",
 				new DefaultFileRenamePolicy());
 
-		
-		
-		
 		Pet pet = new Pet();
 		HttpSession session = request.getSession();
 		Member member = (Member) session.getAttribute("member");
@@ -74,19 +72,21 @@ public class petUpdateServlet extends HttpServlet {
 		pet.setPetType(mrequest.getParameter("upetType"));
 		pet.setPetSize(mrequest.getParameter("upetSize"));
 
-		if(mrequest.getFilesystemName("uinput-image") != null) {
-		String originalFileName = mrequest.getFilesystemName("uinput-image");
+		if (mrequest.getFilesystemName("uinput-image") != null) {
+			String deletFileName = mrequest.getParameter("duImg");
+			
+			new File(savePath + "\\" + deletFileName).delete(); 
+			
+			String originalFileName = mrequest.getFilesystemName("uinput-image");
 
-		String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
+			String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
 
-		pet.setPetImg(renameFileName);
+			pet.setPetImg(renameFileName);
 		}
 
 		int result = new PetService().updatePet(pet);
 
-
 		if (result > 0) {
-			
 			String link = "/petmily/mypet?memberSeq=" + member.getMemberSeq();
 			response.sendRedirect(link);
 		} else {
