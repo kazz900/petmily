@@ -1,9 +1,7 @@
 package pet.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,16 +12,16 @@ import pet.model.service.PetService;
 import pet.model.vo.Pet;
 
 /**
- * Servlet implementation class LoadMyPetPictureServlet
+ * Servlet implementation class PetDelete
  */
-@WebServlet("/loadPetPic")
-public class LoadMyPetPictureServlet extends HttpServlet {
+@WebServlet("/petdel")
+public class PetDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadMyPetPictureServlet() {
+    public PetDelete() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +30,22 @@ public class LoadMyPetPictureServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		PetService psv = new PetService();
+		Pet pet = new Pet();
 		
-		int memberSeq = Integer.parseInt(request.getParameter("memberSeq"));
-
-		ArrayList<Pet> list = psv.selectPet(memberSeq);
-
-		RequestDispatcher view = null;
-		System.out.println(list.size());
-		if(list.size() > 0) {
-			request.setAttribute("list", list);
+		pet.setMemberSeq(Integer.parseInt(request.getParameter("dmemberSeq")));
+		pet.setPetSeq(Integer.parseInt(request.getParameter("deletePet")));
+		
+		
+		int result = new PetService().petDelete(pet);
+		System.out.println(result);
+		if (result > 0) {
+			String link = "/petmily/mypet?memberSeq="+pet.getMemberSeq();
+			response.sendRedirect(link);
+		} else {
+			String link = "/petmily/mypet?memberSeq="+pet.getMemberSeq();
+			response.sendRedirect(link);
 		}
-		
-		view = request.getRequestDispatcher("views/mypage/changeMyinfo.jsp");
-		view.forward(request, response);
 	}
 
 	/**

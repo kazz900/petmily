@@ -35,6 +35,6 @@ a {
 </head>
 <body>
 <h2>성공적으로 변경되었습니다.</h2>
-<a href="/petmily/views/myPage/changeMyinfo.jsp"><button>확인</button></a>
+<a href="/petmily/views/mypage/changeMyinfo.jsp"><button>확인</button></a>
 </body>
 </html>
