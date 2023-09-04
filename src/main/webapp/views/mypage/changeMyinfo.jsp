@@ -75,11 +75,13 @@ ul.tabs li.current {
 input[type=text] {
 	width: 280px;
 	height: 30px;
+	border:0px;
 }
 
 input[type=email] {
 	width: 280px;
 	height: 30px;
+	border:0px;
 }
 
 input[type=time] {
@@ -184,7 +186,7 @@ height: 200px;
 </script>
 <script type="text/javascript">
 	function changePwd() {
-		location.href = "/petmily/views/myPage/changePwd.jsp";
+		location.href = "/petmily/views/mypage/changePwd.jsp";
 	}
 </script>
 
@@ -272,38 +274,8 @@ height: 200px;
 
 			<div id="tab-4" class="tab-content">
 				
-				
-				<% for(Pet p : pet){  %>
-				<div class="pet">
-				<div class="petimg">
-				<img src="/petmily/resources/images/petImg/<%= p.getPetImg() %>" style="width: 300px;">
-				</div>
-				<div class="petinfo">
-				이름:<%= p.getPetName() %>
-				종류:<%= p.getPetType() %>
-				크기:<%= p.getPetSize() %>
-				
-				</div>
-				<div>
-				
-				<form>
-				<input type="submit"value="수정">
-				</form>
-				<form>
-				<input type="submit"value="삭제">
-				</form>
-				</div>
-				</div>
-				<% } %> 
 			</div> 
 
-
-
-			<div id="tab-3" class="tab-content"></div>
-
-
-
-			<div id="tab-4" class="tab-content"></div>
 		</div>
 	</div>
 
