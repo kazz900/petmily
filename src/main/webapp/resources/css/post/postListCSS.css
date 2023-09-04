@@ -1,0 +1,357 @@
+@media (min-width : 1050px) {
+    .block {
+        width: 700px;
+        margin: 98px auto 0 auto;
+        word-wrap: break-word;
+        text-align: center;
+    }
+}
+
+html,
+body {
+    height: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+div button#newpost {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    background-color: #fff;
+    color: #fda90d;
+    align-items: center;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+div button#newpost:hover {
+    background-color: #fda90d;
+    box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+}
+
+/* div button#start-chat {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    background-color: #fff;
+    color: #fda90d;
+    align-items: center;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+}
+
+div button#start-chat:hover {
+    background-color: #fda90d;
+    box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+} */
+
+img#new-post-file-upload{
+    width: 50px;
+    height: 50px;
+    position: relative;
+    right: -250px;
+    bottom: 70px;
+}
+
+div#post-content-editor{
+    position:relative;
+    width: 95%;
+    height: 90%;
+    right: -15px;
+    border-radius: 10px;
+    border: 2px solid #777777;
+    font-weight: bold;
+    font-size: 20px;
+    outline-color: #fda90d;
+    text-align: center;
+    color: #fda90d;
+}
+
+div[contentEditable=true]:empty::before{
+    content: attr(placeholder);
+    display: block;
+    color: #777777;
+}
+
+textarea#post-content-textarea {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    resize: none;
+    border-radius: 10px;
+    border: 2px solid #777777;
+    font-weight: bold;
+    font-size: 20px;
+    outline-color: #fda90d;
+    text-align: center;
+    color: #fda90d;
+}
+
+table#standard-post tr td#posteditdate {
+    text-align: left;
+    padding-left: 20px;
+}
+
+/* POST DELETE BUTTON POSITION */
+table tr td#postdeletebutton {
+    position: relative;
+    right: -380px;
+}
+
+img#likeButton{
+    position: relative;
+    bottom: -7px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+    width: 30px;
+    height: 30px;
+    /* padding-bottom: 20px; */
+}
+
+img#likeButton:hover {
+    box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
+    transform: translateY(-7px);
+}
+
+img#replybutton{
+    position: relative;
+    right: 0;
+    bottom: -5px;
+    width: 35px;
+    height: 35px;
+}
+
+
+:root {
+    --button-color: #ffffff;
+    --button-bg-color: #fda90d;
+}
+
+td.likeNo{
+    text-align: left;
+    padding-left: 20px;
+    font-weight: bold;
+    color: #fda90d;
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+tr#replyrow{
+    border: 1px solid #fda90d;
+}
+
+tr#replyrow{
+    padding: 10px;
+}
+
+tr#postcontent{
+    text-align: center;
+    font-size: 20px;
+}
+
+tr#postcontent td{
+    padding: 30px;
+}
+
+tr.replies{
+    border: 1px solid #fda90d;
+}
+
+tr.replies td{
+    border: 1px solid #fda90d;
+}
+
+input#replyinputfield{
+    position: relative;
+    width: 90%;
+    height: 35px;
+    bottom: 5px;
+    border-style: none;
+    outline: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+input#replyinputfield::placeholder{
+    font-weight: bold;
+    font-size: 15px;
+    color: #777777;
+    text-align: center;
+}
+
+input#replyinputfield:focus{
+    outline: none !important; 
+    box-shadow: 0 0 10px #ffcd61;
+}
+
+input#replyinputfield:focus -webkit-input-placeholder {
+     color:transparent; 
+}
+
+input#replyinputfield:focus::placeholder{
+    color: transparent;
+}
+
+
+
+/* td{
+    border: 1px solid #fda90d;
+}
+
+td#chatbutton{
+    border: 0px;
+} */
+
+button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: var(--button-bg-color);
+    color: var(--button-color);
+
+    /* margin: 0; */
+    padding: 0.5rem 1rem;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+
+    border: none;
+    border-radius: 4px;
+
+    display: inline-block;
+    width: auto;
+
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+    cursor: pointer;
+
+    transition: 0.5s;
+}
+
+button#show-my-post{
+    position: relative;
+    left: -155px;
+}
+
+button#sort-by-like{
+    position: relative;
+    right: -290px;
+}
+
+button#sort-by-type{
+    position: relative;
+    right: -60px;
+}
+
+button#postsubmit {
+    position: relative;
+    border-radius: 10px;
+    right: -145px;
+}
+
+
+div.snsbuttonswrap{
+    position: fixed;
+    padding: 10px;
+    top: 85px;
+    width: 700px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    text-align: center;
+    z-index: 1;
+}
+
+select.pl{
+    text-align: center;
+    position: relative;
+    bottom: 86px;
+    right: -240px;
+    width: 150px;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    background-color: #fda90d;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    font-size: 18px;
+}
+
+select.pl:focus{
+    text-align: center;
+    border-style: none;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+select#sortbytype{
+    text-align: center;
+    position: relative;
+    bottom: 0px;
+    right: 0px;
+    width: 150px;
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background-color: #fda90d;
+    color: white;
+    font-weight: bold;
+    border-style: none;
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+div.newPostformBox{
+    display: none;
+    position: fixed;
+    /* padding: 10px; */
+    width: 700px;
+    align-items: center;
+    text-align: center;
+}
+
+/* The popup form - hidden by default */
+.new-post-form-popup {
+    position: fixed;
+    top: 480px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    width: 700px;
+    height: 500px;
+    text-align: center;
+    z-index: 9;
+    border-radius: 45px;
+}
+
+/* Add styles to the form container */
+.form-container {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+    padding: 10px;
+    background-color: white;
+    text-align: center;
+}

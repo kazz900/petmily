@@ -28,6 +28,7 @@ public class MemberDao {
 			pstmt.setString(2, mpwd);
 
 			rset = pstmt.executeQuery();
+      
 
 			if (rset.next()) {
 
@@ -48,7 +49,8 @@ public class MemberDao {
 		return member;
 	}
 
-	// sns계정 로그인(네이버 카카오)
+
+	//sns계정 로그인(네이버 카카오)
 	public Member snsLogin(Connection conn, String memail) {
 		Member member = null;
 		PreparedStatement pstmt = null;
@@ -392,6 +394,7 @@ public class MemberDao {
 	}
 
 	public ArrayList<Member> againList(Connection conn, String memberId) {
+
 		ArrayList<Member> list = new ArrayList<Member>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

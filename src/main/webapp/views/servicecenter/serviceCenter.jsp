@@ -4,6 +4,7 @@
 
 <%
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
+	Board board = (Board)request.getAttribute("board");
 %>
 <!DOCTYPE html>
 <html>
@@ -17,6 +18,14 @@
 	src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <script type="text/javascript"
 	src="/petmily/resources/js/info/infotap.js"></script>
+	
+<script type="text/javascript">
+
+<%if (request.getAttribute("message") != null) { %>
+	alert("건의사항이 수정되었습니다.");
+<% } %>
+
+</script>
 
 </head>
 <%@ include file="../common/main.jsp"%>
@@ -37,55 +46,53 @@
 
 
 			<div id="tab-1" class="tab-content current">
+				<% if (list != null) { %>
 				<table id="outer" align="center" cellspacing="5" cellpadding="0">
 					<tr>
-						<th style="width: 80px;">No.</th>
-						<th style="width: 200px;">Title</th>
-						<th style="width: 310px;">Content</th>
-						<th>Progress</th>
-						<th style="width: 110px;">Date</th>
+						<th style="width: 80px;">번호</th>
+						<th style="width: 200px;">제목</th>
+						<th style="width: 310px;">글 내용</th>
+						<th>현황</th>
+						<th style="width: 110px;">작성일자</th>
 					</tr>
-					<%
-					if (list != null) {
-					%>
-					<%
-					for (Board b : list) {
-					%>
+
+					
+					<% for (Board b : list) { %>
 					<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
 						<td style="font-size: 14px;"><%=b.getBrdNo()%></td>
 						<td style="padding-right: 15px; font-size: 14px;"><%=b.getBrdTitle()%></td>
 						
 						<td style="padding-left: 15px; font-size: 14px;">
+						<% if (b.getBrdReply() != null) { %>
+						&nbsp; &nbsp; (답변완료)
+						<% } %>
 						<a href="/petmily/bdetail?bnum=<%=b.getBrdNo()%>">
 						<%=b.getBrdContent()%></a></td>
 						
-						<td style="font-size:12px;"><%=b.getBrdResult()%></td>
+						<td style="font-size:12px;">
+						<% if (b.getBrdResult().equals("n")) { %>
+						접수
+						<% } else if (b.getBrdResult().equals("y")) { %>
+						답변완료
+						<% } %>
+						</td>
+						
+						
 						<td style="font-size: 10px;"><%=b.getBrdDate()%></td>
 					</tr>
-					<%
-					}
-					%>
+					<% } %>
 
-					<%
-					} else {
-					%>
-					<tr>
-						<td style="font-size: 14px;"></td>
-						<td style="padding-right: 15px; font-size: 14px;"></td>
-						<td style="padding-left: 15px; font-size: 14px;"></td>
-						<td style="font-size: 14px;"></td>
-					</tr>
-					<%
-					}
-					%>
 				</table>
+					<% } else { %>
+					    <h1>아직 문의사항이 없습니다.</h1>
+					<% } %>
 			</div>
 
 
 
 			<div id="tab-2" class="tab-content">
 				<form action="/petmily/addsuggest" method="get">
-					<input type="hidden" name="result" value="접수">
+					<input type="hidden" name="result" value="n">
 					<input type="hidden" name="mNo" value="<%=member.getMemberSeq()%>">
 					
 					<table width="500" align="center" cellspacing="5">
@@ -97,7 +104,7 @@
 
 						<tr>
 							<th width="150">내용</th>
-							<td><textarea name="content" rows="5" cols="30"></textarea></td>
+							<td><textarea name="content" rows="5" cols="30" style="height:351px;"></textarea></td>
 						</tr>
 
 						<th colspan="2"><input type="submit" value="확인"
@@ -107,12 +114,10 @@
 				</form>
 			</div>
 
-
-
 			<div id="tab-3" class="tab-content">
 				<form action="/petmily/adddept" method="get" id="form">
-					<input type="hidden" name="loginOk" value="N">
-					<input type="hidden" name="deleteOk" value="N">
+					<input type="hidden" name="loginOk" value="n">
+					<input type="hidden" name="deleteOk" value="n">
 					<table width="500" align="center" cellspacing="5">
 
 						<tr>
@@ -211,7 +216,7 @@
 
 			<div id="tab-4" class="tab-content">
 				<form action="/petmily/deldept" method="get">
-				<input type="hidden" name="deleteOk" value="Y">
+				<input type="hidden" name="deleteOk" value="y">
 					<table width="500" align="center" cellspacing="5">
 
 						<tr>
