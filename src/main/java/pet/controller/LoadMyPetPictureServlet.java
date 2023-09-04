@@ -33,20 +33,20 @@ public class LoadMyPetPictureServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-	
+		
+		PetService psv = new PetService();
+		
 		int memberSeq = Integer.parseInt(request.getParameter("memberSeq"));
 
-		ArrayList<Pet> list = new PetService().selectPet(memberSeq);
+		ArrayList<Pet> list = psv.selectPet(memberSeq);
 
 		RequestDispatcher view = null;
 		System.out.println(list.size());
 		if(list.size() > 0) {
-			view = request.getRequestDispatcher("views/mypage/myPageOfficial.jsp");
 			request.setAttribute("list", list);
-		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "펫밀리 전체 조회 실패!");
 		}
+		
+		view = request.getRequestDispatcher("views/mypage/changeMyinfo.jsp");
 		view.forward(request, response);
 	}
 

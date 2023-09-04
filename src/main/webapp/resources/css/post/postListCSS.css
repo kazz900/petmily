@@ -165,6 +165,14 @@ tr#postcontent td{
     padding: 30px;
 }
 
+tr.replies{
+    border: 1px solid #fda90d;
+}
+
+tr.replies td{
+    border: 1px solid #fda90d;
+}
+
 input#replyinputfield{
     position: relative;
     width: 90%;

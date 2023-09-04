@@ -55,6 +55,24 @@ $(function(){
 			notice.hidden = true;
 		}
 	});
+	
+	
+	/*	
+		1. 첫번째 비밀번호가 정규식에 맞지 않는 경우
+		2. 첫번째 비밀번호는 정규식에 맞지만 두번째가 불일치하는 경우
+		3. 
+	*/
+	var notice2 = document.getElementById("notice2");
+	notice2.hidden = true;
+	
+	pwdValue2.addEventListener("keyup", function(){
+		if (pwdValue2.value != pwdValue1.value) {
+			notice2.hidden = false;
+		} else {
+			notice2.hidden = true;
+		}
+	})
+	
 })
 
 function toMyPage(){
@@ -74,6 +92,7 @@ function toMyPage(){
 	</div>
 		<form action="/petmily/changePwd" method="post" onsubmit="return validate();">
 		<p style="font-size:14px;" id="notice">비밀번호는 영어 대/소문자, 특수문자, 숫자를 포함하여 최소 6자리 이상으로 설정해주세요.</p>
+		<p style="font-size:14px;" id="notice2">비밀번호가 일치하지 않습니다.<br>확인 후 다시 입력해주세요.</p>
 			<table id="outer" align="center" width="500" cellspacing="5"
 				cellpadding="0">
 				
@@ -97,12 +116,12 @@ function toMyPage(){
 			</table>
 			<div style="text-align:center; margin-top:10px;">
 			
-				<input type="reset" value="취소하기" onclick="changePwd();" 
+				<input type="reset" value="취소하기" 
 				style="margin-bottom:15px; width:150px; height:30px; 
 				border-radius:5px; border:1px solid black;
 				box-shadow:1px 1px 0px 1px #cfcfcf;">
 				&nbsp; 
-				<input type="submit" value="변경하기" 
+				<input type="submit" value="변경하기" id="submit"
 				style="margin-bottom:15px; width:150px; height:30px; 
 				border-radius:5px; border:1px solid black;
 				box-shadow:1px 1px 0px 1px #cfcfcf;">

@@ -104,7 +104,7 @@
 
 						<tr>
 							<th width="150">내용</th>
-							<td><textarea name="content" rows="5" cols="30"></textarea></td>
+							<td><textarea name="content" rows="5" cols="30" style="height:351px;"></textarea></td>
 						</tr>
 
 						<th colspan="2"><input type="submit" value="확인"
