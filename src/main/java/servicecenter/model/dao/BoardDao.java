@@ -206,7 +206,7 @@ public class BoardDao implements Serializable {
 		String query = "UPDATE SERV_CENTER "
 					 + "SET REPLY = ?, RESULT = ? "
 					 + "WHERE SERV_SEQ = ?";
-
+		System.out.println("Hi1");
 		try {
 			pstmt = conn.prepareStatement(query);
 
@@ -214,7 +214,7 @@ public class BoardDao implements Serializable {
 			pstmt.setString(2, result);
 			pstmt.setInt(3, boardNo);
 			
-			
+			System.out.println("Hi2");
 			eResult = pstmt.executeUpdate();
 
 		} catch (Exception e) {
