@@ -96,7 +96,7 @@ function toggleDropdown() {
 					<% }else if(member.getMemberGrade().equals("1")){ %>
 					<li class="sidebarmenutitle">더보기</li>
 
-					<li><a href="/petmily/views/mypage/changeMyinfo.jsp" class="sidebarmenu">마이페이지</a></li>
+					<li><a href="/petmily/mypet?memberSeq=<%=member.getMemberSeq()%>" class="sidebarmenu">마이페이지</a></li>
 					<li><a href="/petmily/suggest?mseq=<%=member.getMemberSeq()%>" class="sidebarmenu">고객센터</a></li>
 					<%-- mseq를 들고가야됩니다. --%>
 					<% }else if(member.getMemberGrade().equals("0")){ %>
