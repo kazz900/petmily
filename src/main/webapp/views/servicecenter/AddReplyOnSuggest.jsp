@@ -30,7 +30,7 @@ div.content p textarea {
 <body>
 <%@ include file="../common/main.jsp"%>
 <div class="upper">
-<form action="/petmily/updateReply">
+<form action="/petmily/addAdminReply">
 	<input type="hidden" name="userid" value="<%=member.getMemberSeq()%>">
 	<input type="hidden" name="boardNo" value="<%=board.getBrdNo()%>">
 	<input type="hidden" name="result" value="<%=board.getBrdResult() %>">
@@ -55,7 +55,7 @@ div.content p textarea {
 	</div>
 		<div class="content" style=" height:200px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px;">
 		<p>
-			<textarea name="content" style=" width:430px; height:450px; 
+			<textarea name="reply" style=" width:430px; height:450px; 
 			padding:10px 15px 5px 15px; text-size:20px;" placeholder="답변을 작성해주세요."></textarea>
 		</p>
 	</div>

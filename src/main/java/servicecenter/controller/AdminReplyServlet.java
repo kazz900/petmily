@@ -30,19 +30,14 @@ public class AdminReplyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-//		int userid = Integer.parseInt(request.getParameter("userid"));
-//		System.out.println(userid);
 		String reply = request.getParameter("reply");
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String result = request.getParameter("result");
-//		String title = request.getParameter("title");
-//		String content = request.getParameter("content");
 
 		int eResult = new BoardService().addAdminReply(reply, boardNo, result);
-
+		System.out.println(eResult);
 		if (eResult > 0) {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/updateSucceed3.jsp");
-
 		} else {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/readFailed.jsp");
 		}

@@ -37,7 +37,6 @@ public class ChangePwdServlet extends HttpServlet {
 		
 		Member member = new Member();
 		
-		
 		member.setMemberId(request.getParameter("userid"));
 		String userpwd = request.getParameter("userpwd");
 		
@@ -69,7 +68,7 @@ public class ChangePwdServlet extends HttpServlet {
 		} else {
 			System.out.println("비밀번호 변경 실패.");
 		}
-		
+
 	}
 
 	/**
