@@ -73,16 +73,20 @@ public class PetenrollServlet extends HttpServlet {
 				pet.setPetName(mrequest.getParameter("petName"));
 				pet.setPetType(mrequest.getParameter("petType"));
 				pet.setPetSize(mrequest.getParameter("petSize"));
-				
+				String renameFileName = null;
+				if(mrequest.getFilesystemName("input-image") != null) {
 				//6. 업로드된 원본 파일이름 추출
 				String originalFileName = mrequest.getFilesystemName("input-image");
 				
-				String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
+				renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
 					
-					
-				pet.setPetImg(renameFileName);
 					
 				
+				}else {
+				renameFileName = "882.jpg";
+				}
+				
+				pet.setPetImg(renameFileName);
 				
 				//모델 서비스 메소드로 전달하고 결과 받기
 				int result = new PetService().insertPet(pet);

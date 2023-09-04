@@ -1,7 +1,6 @@
 package pet.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +13,16 @@ import pet.model.service.PetService;
 import pet.model.vo.Pet;
 
 /**
- * Servlet implementation class LoadMyPetPictureServlet
+ * Servlet implementation class PetSelect
  */
-@WebServlet("/loadPetPic")
-public class LoadMyPetPictureServlet extends HttpServlet {
+@WebServlet("/PetSelect")
+public class PetSelect extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadMyPetPictureServlet() {
+    public PetSelect() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +31,22 @@ public class LoadMyPetPictureServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		int petSeq = Integer.parseInt(request.getParameter("petSeq"));
 		
-		PetService psv = new PetService();
+		Pet pet = new PetService().selectPetSeq(petSeq);
 		
-		int memberSeq = Integer.parseInt(request.getParameter("memberSeq"));
-
-		ArrayList<Pet> list = psv.selectPet(memberSeq);
-
+		
+		
+		
+		
 		RequestDispatcher view = null;
-		System.out.println(list.size());
-		if(list.size() > 0) {
-			request.setAttribute("list", list);
+		if(pet != null) { 
+			view = request.getRequestDispatcher("views/mypage/updatePet.jsp");
+			request.setAttribute("petSeq", pet);
+		}else { 
+			view = request.getRequestDispatcher("views/common/error.jsp");
+			request.setAttribute("message", pet + "정보 조회 실패!");
 		}
-		
-		view = request.getRequestDispatcher("views/mypage/changeMyinfo.jsp");
 		view.forward(request, response);
 	}
 
