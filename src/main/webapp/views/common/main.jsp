@@ -62,7 +62,6 @@ function toggleDropdown() {
 				<li><a href="/petmily/selectdepttype?selecttype=5&typename=장묘" style="color : hsl(30.46deg 58.9% 45.68%)">장묘</a></li>			
 				</ul>
 				</li>
-				<li><a class="sub-link" href="/petmily/splist" method="get">커뮤니티</a></li>
 
 
 				<%if(member != null){ %>
