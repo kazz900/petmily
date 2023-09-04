@@ -35,7 +35,6 @@ public class AdminMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		
 		ArrayList<Department> list = new DepartmentService().selectNotInsertedDept();
 		
 		System.out.println("adminmain size =" + list.size());

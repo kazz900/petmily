@@ -120,9 +120,9 @@ form {
 
 div.wrapper {
 	border: 2px solid #cfcfcf;
-	text-align: center;
-	background-color: #fafafa;
-	box-shadow: 2px 2px 5px 2px #cfcfcf;
+	text-align:center;
+	background-color:#fafafa;
+	box-shadow:2px 2px 5px 2px #cfcfcf;
 }
 
 div.wrapper form {
@@ -346,6 +346,10 @@ font-family: OhsquareAir;
 
 	<div class="info-content">
 
+
+	<div class="info-content">
+
+
 		<div class="info-detail02">
 
 			<ul class="tabs">
@@ -356,6 +360,7 @@ font-family: OhsquareAir;
 			</ul>
 
 			<hr style="opacity: 0.5; margin: 0px;">
+
 
 
 
@@ -376,7 +381,31 @@ font-family: OhsquareAir;
 						</label>
 						<input type="file" id="uploadProfile" onchange="loadImage(this);">
 					</td>
-				</tr> -->
+				</tr>
+				
+				<tr>
+					<th width="140">(*)닉네임</th>
+					<td><input type="text" name="nickname" value="<%=member.getMemberNick()%>">
+					</td>
+				</tr>
+			</table>
+			<div style="text-align:center; margin-top:10px;">
+			
+				<input type="button" value="비밀번호 변경" onclick="changePwd();" 
+				style="margin-bottom:15px; width:150px; height:30px; 
+				border-radius:5px; border:1px solid black;
+				box-shadow:1px 1px 0px 1px #cfcfcf;">
+				&nbsp; 
+				<input type="submit" value="변경하기" 
+				style="margin-bottom:15px; width:150px; height:30px; 
+				border-radius:5px; border:1px solid black;
+				box-shadow:1px 1px 0px 1px #cfcfcf;">
+			
+			</div>
+		</form>
+	</div>
+</div>
+
 
 							<tr>
 								<th>아이디</th>
@@ -400,6 +429,7 @@ font-family: OhsquareAir;
 					</form>
 				</div>
 			</div>
+
 
 
 
@@ -567,7 +597,6 @@ font-family: OhsquareAir;
 						</form>
 					</div>
 				</div>
-				
 			</div>
 		</div>
 </body>

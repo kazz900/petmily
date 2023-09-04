@@ -58,7 +58,7 @@ $(function(){
 })
 
 function toMyPage(){
-	location.href="/petmily/views/mypage/changeMyinfo.jsp";
+	location.href="/petmily/views/myPage/changeMyinfo.jsp";
 }
 
 </script>
