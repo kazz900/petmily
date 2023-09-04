@@ -41,7 +41,9 @@ public class MypetServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		System.out.println(list.size());
 		if(list.size() > 0) {
+
 			request.setAttribute("message", "정보있음");
+
 			request.setAttribute("list", list);
 
 		}else {
