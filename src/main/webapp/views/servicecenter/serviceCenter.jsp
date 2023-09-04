@@ -70,9 +70,9 @@
 						<%=b.getBrdContent()%></a></td>
 						
 						<td style="font-size:12px;">
-						<% if (b.getBrdResult().equals("N")) { %>
+						<% if (b.getBrdResult().equals("n")) { %>
 						접수
-						<% } else if (b.getBrdResult().equals("Y")) { %>
+						<% } else if (b.getBrdResult().equals("y")) { %>
 						답변완료
 						<% } %>
 						</td>
@@ -92,7 +92,7 @@
 
 			<div id="tab-2" class="tab-content">
 				<form action="/petmily/addsuggest" method="get">
-					<input type="hidden" name="result" value="N">
+					<input type="hidden" name="result" value="n">
 					<input type="hidden" name="mNo" value="<%=member.getMemberSeq()%>">
 					
 					<table width="500" align="center" cellspacing="5">
@@ -116,8 +116,8 @@
 
 			<div id="tab-3" class="tab-content">
 				<form action="/petmily/adddept" method="get" id="form">
-					<input type="hidden" name="loginOk" value="N">
-					<input type="hidden" name="deleteOk" value="N">
+					<input type="hidden" name="loginOk" value="n">
+					<input type="hidden" name="deleteOk" value="n">
 					<table width="500" align="center" cellspacing="5">
 
 						<tr>
@@ -216,7 +216,7 @@
 
 			<div id="tab-4" class="tab-content">
 				<form action="/petmily/deldept" method="get">
-				<input type="hidden" name="deleteOk" value="Y">
+				<input type="hidden" name="deleteOk" value="y">
 					<table width="500" align="center" cellspacing="5">
 
 						<tr>
