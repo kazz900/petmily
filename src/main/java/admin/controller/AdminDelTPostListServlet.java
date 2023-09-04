@@ -11,20 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import admin.model.service.AdminPostService;
-import department.model.service.DepartmentService;
-import department.model.vo.Department;
+import admin.model.vo.AdminPost;
 
 /**
- * Servlet implementation class DeptManageServlet
+ * Servlet implementation class AdminDelTPost
  */
-@WebServlet("/adminmain")
-public class AdminMainServlet extends HttpServlet {
+@WebServlet("/adtp")
+public class AdminDelTPostListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public AdminMainServlet() {
+	public AdminDelTPostListServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -35,28 +34,34 @@ public class AdminMainServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-
-		request.setCharacterEncoding("UTF-8");
+		ArrayList<AdminPost> list = null;
+		AdminPostService apservice = new AdminPostService();
 		String keyword = request.getParameter("keyword");
-
-		ArrayList<Department> list = new DepartmentService().selectNotInsertedDept();
-		
-		
-		System.out.println("adminmain size =" + list.size());
-		RequestDispatcher view = request.getRequestDispatcher("views/admin/AdminDeptInsert.jsp");
-		
-		if (keyword == null) {
-			keyword = "";
-		}
-		
-		request.setAttribute("list", list);
-		request.setAttribute("keyword", keyword);
-		
 		System.out.println(keyword);
-		
+		String action = request.getParameter("action");
+		if (keyword == null || keyword == "") {
+			list = new AdminPostService().showTradePostList();
+			keyword = "";
+		} else {
+			switch (action) {
+			case "id":
+				list = apservice.findSearchMemberId(keyword);
+				break;
+			case "content":
+				list = apservice.findSearchContent(keyword);
+				break;
+			case "grade":
+				list = apservice.findSearchMemberGrade(keyword);
+				break;
+			}
+		}
+		RequestDispatcher view = null;
 
-		view.forward(request, response);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("list", list);
+			request.setAttribute("action", action);
+			view = request.getRequestDispatcher("views/admin/AdminTradePostDelete.jsp");
+			view.forward(request, response);
 	}
 
 	/**
@@ -65,6 +70,7 @@ public class AdminMainServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -1,29 +1,27 @@
 package admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import member.model.service.MemberService;
-import member.model.vo.Member;
+import admin.model.service.AdminPostService;
 
 /**
- * Servlet implementation class AdminMemberList
+ * Servlet implementation class AdminTerminateTPostServlet
  */
-@WebServlet("/memli")
-public class AdminMemberList extends HttpServlet {
+@WebServlet("/atts")
+public class AdminTerminateTPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminMemberList() {
+    public AdminTerminateTPostServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,22 +30,16 @@ public class AdminMemberList extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Member> list = new MemberService().selectList();
-		String keyword = "";
-//		System.out.println("size =" + list.size());
-		RequestDispatcher view = null;
-
-		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
-		request.setAttribute("list", list);
-		request.setAttribute("keyword", keyword);
-		view.forward(request, response);
-	
+		String value = request.getParameter("postSeq");
+		String keyword = request.getParameter("keyword");
+		String action = request.getParameter("action");
+		int result = new AdminPostService().terminateTPost(value);
+		if(action != null) {
+			response.sendRedirect("/petmily/adtp?keyword=" + URLEncoder.encode(keyword, "UTF-8")+"&action="+action);
+		} else {			
+			response.sendRedirect("/petmily/adtp");
+		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
