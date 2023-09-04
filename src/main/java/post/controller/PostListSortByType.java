@@ -14,16 +14,16 @@ import post.model.service.PostSerivce;
 import post.model.vo.Post;
 
 /**
- * Servlet implementation class StandardPostMyPostViewServlet
+ * Servlet implementation class PostListSortByType
  */
-@WebServlet("/pmypost")
-public class PostMyPostServlet extends HttpServlet {
+@WebServlet("/plistbytype")
+public class PostListSortByType extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PostMyPostServlet() {
+    public PostListSortByType() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,9 +33,9 @@ public class PostMyPostServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostSerivce pSerivce = new PostSerivce();
+		String postType = request.getParameter("posttype");
 		ArrayList<Post> list = new ArrayList<Post>();
-		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
-		list = pSerivce.getMyPostList(memberSeq);
+		list = pSerivce.getPostListByType(postType);
 		
 		RequestDispatcher view = null;
 		
@@ -49,6 +49,7 @@ public class PostMyPostServlet extends HttpServlet {
 		
 		view.forward(request, response);
 	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -56,4 +57,5 @@ public class PostMyPostServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+
 }

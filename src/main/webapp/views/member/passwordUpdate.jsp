@@ -121,6 +121,7 @@ window.onload = function() {
 	var submit = document.getElementById('chpwd');
 	notice.hidden = true;
 	submit.hidden = true;
+	
 	mpwd.addEventListener('keyup',function() {
 		if (!cpwd.test(mpwd.value)) {
 			submit.hidden = true;
