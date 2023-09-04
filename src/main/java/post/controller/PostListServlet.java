@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import post.model.service.PostSerivce;
 import post.model.vo.Post;
-import standardpost.model.vo.StandardPost;
-import tradepost.model.vo.TradePost;
+import reply.model.service.ReplyService;
+import reply.model.vo.Reply;
 
 /**
  * Servlet implementation class StandardPostListViewServlet
@@ -32,10 +32,14 @@ public class PostListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PostSerivce spSerivce = new PostSerivce();
+		PostSerivce pSerivce = new PostSerivce();
+		ReplyService rService = new ReplyService();
 		ArrayList<Post> list = new ArrayList<Post>();
-		list = spSerivce.getPostList();
-
+		ArrayList<Reply> rList = new ArrayList<Reply>();
+		
+		list = pSerivce.getPostList();
+		rList = rService.getReplyList();
+		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
 		
 		RequestDispatcher view = null;
 		
@@ -43,6 +47,7 @@ public class PostListServlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/post/postList.jsp");
 			
 			request.setAttribute("list", list);
+			request.setAttribute("rList", rList);
 		} else {
 			view = request.getRequestDispatcher("views/common/waiting.jsp");
 		}

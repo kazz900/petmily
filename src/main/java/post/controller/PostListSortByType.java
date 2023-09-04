@@ -1,4 +1,4 @@
-package pet.controller;
+package post.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pet.model.service.PetService;
-import pet.model.vo.Pet;
+import post.model.service.PostSerivce;
+import post.model.vo.Post;
 
 /**
- * Servlet implementation class LoadMyPetPictureServlet
+ * Servlet implementation class PostListSortByType
  */
-@WebServlet("/loadPetPic")
-public class LoadMyPetPictureServlet extends HttpServlet {
+@WebServlet("/plistbytype")
+public class PostListSortByType extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoadMyPetPictureServlet() {
+    public PostListSortByType() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,21 +32,21 @@ public class LoadMyPetPictureServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		PostSerivce pSerivce = new PostSerivce();
+		String postType = request.getParameter("posttype");
+		ArrayList<Post> list = new ArrayList<Post>();
+		list = pSerivce.getPostListByType(postType);
 		
-		PetService psv = new PetService();
-		
-		int memberSeq = Integer.parseInt(request.getParameter("memberSeq"));
-
-		ArrayList<Pet> list = psv.selectPet(memberSeq);
-
 		RequestDispatcher view = null;
-		System.out.println(list.size());
+		
 		if(list.size() > 0) {
+			view = request.getRequestDispatcher("views/post/postList.jsp");
+			
 			request.setAttribute("list", list);
+		} else {
+			view = request.getRequestDispatcher("views/common/waiting.jsp");
 		}
 		
-		view = request.getRequestDispatcher("views/mypage/changeMyinfo.jsp");
 		view.forward(request, response);
 	}
 
