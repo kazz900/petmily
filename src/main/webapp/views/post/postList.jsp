@@ -35,11 +35,11 @@
 									$('html').click(function (e) {
 										// If clcicked outside of new post form div
 										if ($(e.target).parents('div.post-edit-form-wrap').length < 1) {
-											console.log("clicked else where")
-											console.log('$(e.target) ' + $(e.target).attr('id'))
 											if ($(e.target).attr('id') == 'postEditButton') {
+												console.log("수정버튼 클릭");
 											} else {
 												console.log("clicked else where");
+												console.log('$(e.target) ' + $(e.target).attr('id'));
 												document.querySelector("div.editPostformBox").style.display = 'none';
 											}
 										}
@@ -75,8 +75,12 @@
 									}
 								}
 
-								function fileUpload() {
-									$("input#fileupload").click();
+								function fileUpload1() {
+									$("input#newfileupload").click();
+								}
+
+								function fileUpload2() {
+									$("input#editfileupload").click();
 								}
 
 								function showMyPostList(memberSeq) {
@@ -101,25 +105,24 @@
 									$("input#inputmemberseq").val(memberSeq);
 									$("input#inputoriginalfilename").val(originalFileName);
 									$("input#inputchangedfilename").val(changedFileName);
-
-									console.log(originalFileName + ", " + changedFileName);
+									$("input#dinputpostseq").val(postSeq);
+									$("input#dinputposttype").val(postType);
+									$("input#dinputmemberseq").val(memberSeq);
+									console.log($("input#dinputpostseq").val() + ", " + $("input#dinputposttype").val());
 								}
 
-								function showEditForm(postSeq, memberSeq, postContent, postType) {
-									document.querySelector("div.editPostformBox").style.display = "block";
-									$("div.edit-post-form-popup form textarea").val(postContent);
-									$("div.edit-post-form-popup form select").val(postType);
-									$("input#inputmemberseq").val(memberSeq);
-								}
+								// function deletePost() {
+								// 	console.log("clicked");
+								// 	var postSeq = $("input#inputpostseq").val();
+								// 	var postType = $("input#dinputposttype").val();
+								// 	var memberSeq = $("input#dinputmemberseq").val();
 
-
-
-								// function deletePost(memberSeq, postSeq) {
-								// 	// TEST DELETEPOST TODO : CHAMGE MEMBERSEQ
-								// 	var seq = postSeq;
+								// 	console.log(postSeq + ", " + postType);
 						
-								// 	var path = "/petmily/pdelete?memberseq=16&postSeq=" + postSeq;
-								// 	location.href = path;
+								// 	var path = "/petmily/pdelete?postseq=" + postSeq + "&post-type=" + postType + "&memberseq=" + memberSeq;
+								// 	alert(path);
+								// 	console.log(path);
+								// 	// location.href = path;
 								// }
 
 							</script>
@@ -132,8 +135,7 @@
 								<div class="block">
 									<div class="snsbuttonswrap">
 										<!-- 정렬버튼들 -->
-										<button id="show-my-post" onclick="showMyPostList(<%= m.getMemberSeq() %>);">내
-											게시글 보기</button>
+										<button id="show-my-post" onclick="showMyPostList(<%= m.getMemberSeq() %>);">내 게시글 보기</button>
 										<button id="sort-by-like" onclick="sortByPopularity();">인기순
 											정렬</button>
 										<select name="sort-post-type" id="sortbytype" class="pl"
@@ -161,11 +163,11 @@
 														<option value="" selected>게시글종류</option>
 														<option value="standardpost">일반게시글</option>
 														<option value="tradepost">중고거래글</option>
-													</select> <input type="file" name="upfile" id="fileupload"
+													</select> <input type="file" name="upfile" id="newfileupload"
 														style="display: none;" accept="images/*"
 														onchange="loadFile(event);"> <img id="new-post-file-upload"
 														src="/petmily/resources/images/post/image-upload.png"
-														alt="사진 업로드" onclick="fileUpload();">
+														alt="사진 업로드" onclick="fileUpload1();">
 													<button type="submit" id="postsubmit">게시물 등록</button>
 												</form>
 											</div>
@@ -188,16 +190,22 @@
 														<option value="" selected>게시글종류</option>
 														<option value="standardpost">일반게시글</option>
 														<option value="tradepost">중고거래글</option>
-													</select> <input type="file" name="upfile" id="fileupload"
+													</select> <input type="file" name="upfile" id="editfileupload"
 														style="display: none;" accept="images/*"
 														onchange="loadFile(event);"> <img id="new-post-file-upload"
 														src="/petmily/resources/images/post/image-upload.png"
-														alt="사진 업로드" onclick="fileUpload();">
+														alt="사진 업로드" onclick="fileUpload2();">
 													<input type="hidden" name="memberseq" id="inputmemberseq">
 													<input type="hidden" name="originalfilename" id="inputoriginalfilename">
 													<input type="hidden" name="changedfilename" id="inputchangedfilename">
+													<input type="hidden" name="postseq" id="inputpostseq">
 													<button type="submit" id="postedit">수정</button>
-													<button id="postdelete" onclick="deletePost();">삭제</button>
+												</form>
+												<form action="/petmily/pdelete">
+													<input type="hidden" name="dpostseq" id="dinputpostseq">
+													<input type="hidden" name="dposttype" id="dinputposttype">
+													<input type="hidden" name="dmemberseq" id="dinputmemberseq">
+													<button type="submit" id="postdelete">삭제</button>
 												</form>
 											</div>
 										</div>
@@ -232,9 +240,6 @@
 																	width="400px" height="auto"> <br>
 																<% } %> <!-- 게시글 내용 표시 -->
 																	<%= p.getPostContent() %>
-																	<br>
-																	<!-- 테스트용 지워야됨 -->
-																	<%= p.getOriginalFileName() %>
 														</td>
 													</tr>
 													<!-- 좋아요 숫자 표시 -->
@@ -251,8 +256,7 @@
 														<tr id="postbottom" style="height: 50px; align-items: center;">
 															<td colspan="2" id="posteditbutton"
 																style="text-align: right; padding-right: 20px;">
-																<!-- 수정할 게시글에 사진이 있을때 -->
-																<button id="postEditButton" onclick="showEditForm(<%= p.getPostSeq() %>, <%= p.getMemberSeq() %>, '<%= p.getPostContent() %>', '<%= p.getChangedFileName() %>', '<%= p.getOriginalFileName() %>',  'standardpost');">수정</button>
+																<button id="postEditButton" onclick="showEditForm('<%= p.getPostSeq() %>', '<%= p.getMemberSeq() %>', '<%= p.getPostContent() %>', '<%= p.getChangedFileName() %>', '<%= p.getOriginalFileName() %>', 'standardpost');">수정</button>
 															</td>
 														</tr>
 														<% } %>
@@ -332,28 +336,35 @@
 															<% } %>
 																<!-- 자기 게시글일 경우 수정버튼 표시 -->
 																<% if (m.getMemberSeq()==p.getMemberSeq()){ %>
-																	<tr id="postbottom"
-																		style="height: 50px; align-items: center;">
+																	<tr id="postbottom" style="height: 50px; align-items: center;">
 																		<td colspan="2" id="posteditbutton"
 																			style="text-align: right; padding-right: 20px;">
-																			<button>수정</button>
+																			<button id="postEditButton" onclick="showEditForm('<%= p.getPostSeq() %>', '<%= p.getMemberSeq() %>', '<%= p.getPostContent() %>', '<%= p.getChangedFileName() %>', '<%= p.getOriginalFileName() %>', 'tradepost');">수정</button>
 																		</td>
-
-
 																	</tr>
 																	<% } %>
-																		<!-- 댓글달기 Row -->
-																		<tr id="replyrow">
-																			<td colspan="2"><input type="text"
-																					id="replyinputfield"
-																					placeholder="댓글을 달아보세요">
-																				<!-- 댓글달기 버튼 --> <img id="replybutton"
-																					src="/petmily/resources/images/post/reply.png"
-																					alt="댓글달기"></td>
+															<!-- 댓글달기 Row -->
+															<tr id="replyrow">
+																<td colspan="2"><input type="text" id="replyinputfield"
+																		placeholder="댓글을 달아보세요"> <!-- 댓글달기 버튼 --> <img
+																		id="replybutton"
+																		src="/petmily/resources/images/post/reply.png"
+																		alt="댓글달기"></td>
+															</tr>
+															<!-- 게시글에 댓글이 있을 경우 댓글 띄우기 -->
+															<% if(p.getReplyNO() !=0) { %>
+																<% for (Reply r : rList) { %>
+																	<!-- 댓글 띄우기 -->
+																	<% if(p.getPostSeq()==r.getPostSeq()) { %>
+																		<tr class="replies">
+																			<td>
+																				<%= r.getReplyContent() %>
+																			</td>
+																			<td>
+																				<%= r.getReplyDate() %>
+																			</td>
 																		</tr>
-																		<!-- 게시글에 댓글이 있을 경우 댓글 띄우기 -->
-																		<% if(p.getReplyNO() !=0) { %>
-																			<% } %>
+																		<% }}} %>
 													</table>
 
 												</div>

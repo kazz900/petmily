@@ -142,10 +142,7 @@ public class PostNewPostServlet extends HttpServlet {
 		System.out.println(memberSeq);
 		String postType = mrequest.getParameter("post-type");
 		String postContent = mrequest.getParameter("post-content");
-		
-		if(postType == null) {
-			System.out.println("");
-		}
+	
 		
 		// 일반게시글일떄
 		if (postType.equals("standardpost")) {

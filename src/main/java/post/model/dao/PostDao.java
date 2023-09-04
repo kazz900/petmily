@@ -253,35 +253,52 @@ public class PostDao {
 		PreparedStatement pstmt = null;
 		
 		if(post instanceof StandardPost) {
-			query = "UPDATE STANDARD_POST "
-					+ "SET "
-					+ "POST_CONTENT = ?, "
-					+ "ORIGINAL_FILE_NAME = ?, "
-					+ "RENAME_FILE_NAME = ?, "
-					+ "LAST_MODIFIED_DATE = SYSDATE "
-					+ "WHERE POST_SEQ = ? ";
-		}else {
-			query = "UPDATE TRADE_POST "
-					+ "SET "
-					+ "POST_CONTENT = ?, "
-					+ "ORIGINAL_FILE_NAME = ?, "
-					+ "RENAME_FILE_NAME = ?, "
-					+ "LAST_MODIFIED_DATE = SYSDATE "
-					+ "WHERE POST_SEQ = ? ";
+			if(post.getOriginalFileName() != null) {
+				query = "UPDATE STANDARD_POST "
+						+ "SET "
+						+ "POST_CONTENT = ?, "
+						+ "ORIGINAL_FILE_NAME = ?, "
+						+ "RENAME_FILE_NAME = ?, "
+						+ "LAST_MODIFIED_DATE = SYSDATE "
+						+ "WHERE POST_SEQ = ? ";				
+			} else {
+				query = "UPDATE STANDARD_POST "
+						+ "SET "
+						+ "POST_CONTENT = ?, "
+						+ "LAST_MODIFIED_DATE = SYSDATE "
+						+ "WHERE POST_SEQ = ? ";
+			}
+		} else {
+			if(post.getOriginalFileName() != null) {
+				query = "UPDATE TRADE_POST "
+						+ "SET "
+						+ "POST_CONTENT = ?, "
+						+ "ORIGINAL_FILE_NAME = ?, "
+						+ "RENAME_FILE_NAME = ?, "
+						+ "LAST_MODIFIED_DATE = SYSDATE "
+						+ "WHERE POST_SEQ = ? ";				
+			} else {
+				query = "UPDATE TRADE_POST "
+						+ "SET "
+						+ "POST_CONTENT = ?, "
+						+ "LAST_MODIFIED_DATE = SYSDATE "
+						+ "WHERE POST_SEQ = ? ";
+			}
 		}
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, post.getPostContent());
 			if(post.getOriginalFileName() != null) {
+				pstmt.setString(1, post.getPostContent());
 				pstmt.setString(2, post.getOriginalFileName());
 				pstmt.setString(3, post.getChangedFileName());
-			}else {
-				pstmt.setString(2, "DEFAULT");
-				pstmt.setString(3, "DEFAULT");
+				pstmt.setInt(4, post.getPostSeq());
+			} else {
+				pstmt.setString(1, post.getPostContent());
+				pstmt.setInt(2, post.getPostSeq());
 			}
-			pstmt.setInt(4, post.getPostSeq());
 			result = pstmt.executeUpdate();
+			System.out.println("RESULT = " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -294,11 +311,6 @@ public class PostDao {
 	public StandardPost selectPost(Connection conn, int postSeq) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	public int deletePost(Connection conn, int memberSeq, int postSeq) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	public int updatePostLikeNo(Connection conn, int memberSeq, int postSeq) {
@@ -399,5 +411,61 @@ public class PostDao {
 			close(rset, pstmt);
 		}
 		return list;
+	}
+
+	public int deleteImage(Connection conn, Post post) {
+		int result = 0;
+		String query = "";
+		PreparedStatement pstmt = null;
+		
+		if(post instanceof StandardPost) {
+			query = "UPDATE STANDARD_POST "
+					+ "SET "
+					+ "ORIGINAL_FILE_NAME = DEFAULT, "
+					+ "RENAME_FILE_NAME = DEFAULT "
+					+ "WHERE POST_SEQ = ? ";
+		} else {
+			query = "UPDATE TRADE_POST "
+					+ "SET "
+					+ "ORIGINAL_FILE_NAME = DEFAULT, "
+					+ "RENAME_FILE_NAME = DEFAULT "
+					+ "WHERE POST_SEQ = ? ";
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, post.getPostSeq());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deletePost(Connection conn, Post post) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = "";
+		if(post instanceof StandardPost) {
+			query = "DELETE FROM STANDARD_POST WHERE POST_SEQ = ?";			
+		}else {
+			query = "DELETE FROM TRADE_POST WHERE POST_SEQ = ?";	
+		}
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, post.getPostSeq());
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

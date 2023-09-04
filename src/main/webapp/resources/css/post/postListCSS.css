@@ -99,6 +99,10 @@ textarea#post-content-textarea {
     color: #fda90d;
 }
 
+table{
+    table-layout: fixed;
+}
+
 table#standard-post tr td#posteditdate {
     text-align: left;
     padding-left: 20px;
@@ -269,7 +273,7 @@ button#postsubmit {
 div.snsbuttonswrap{
     position: fixed;
     padding: 10px;
-    top: 85px;
+    top: 100px;
     width: 700px;
     align-items: center;
     justify-content: center;
