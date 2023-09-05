@@ -18,13 +18,13 @@
 </section>
 <div style="display: flex;
     justify-content: center;
-    align-items: end;
+    
     height: 740px;">
 <div class="banner-container" style="height: 670px; margin-top:85px">
   <div class="banner">
     <div data-index=1><img src="/petmily/resources/images/mainbanner/882.jpg"></div>
     <div data-index=2><img src="/petmily/resources/images/mainbanner/miho.jpg"></div>
-    <div data-index=3><img src="/petmily/resources/images/mainbanner/884.jpg"></div>
+    <div data-index=3><img src="https://henlopaw.com/banner/00_main/slide/pc/HD.jpg"></div>
     <div data-index=4><img src="/petmily/resources/images/mainbanner/885.jpg"></div>
   </div>
 </div>

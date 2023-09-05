@@ -95,6 +95,8 @@ public class DepartmentDao implements Serializable {
 				dept.setDeptPhone(rset.getString("dept_phone"));
 				dept.setDeptLatitude(rset.getString("dept_latitude"));
 				dept.setDeptLongitude(rset.getString("dept_longitude"));
+				dept.setDeptLatitude(rset.getString("dept_latitude"));
+				dept.setDeptLongitude(rset.getString("dept_longitude"));
 				dept.setDeptTime(rset.getString("dept_time"));
 				dept.setDeptParking(rset.getString("dept_parking"));
 				dept.setDeptEntrancefee(rset.getString("dept_entrance_fee"));
@@ -195,15 +197,13 @@ public class DepartmentDao implements Serializable {
 	}
 
 	public int requestDeleteDept(Connection conn, Department dept) {
-		
+
 		int result = 0;
-		
+
 		PreparedStatement pstmt = null;
-		
-		String query = "UPDATE DEPARTMENT "
-					 + "SET DEPT_DELETE_OK = ? "
-					 + "WHERE DEPT_NAME = ? AND DEPT_ADDRESS = ?";
-		
+
+		String query = "UPDATE DEPARTMENT " + "SET DEPT_DELETE_OK = ? " + "WHERE DEPT_NAME = ? AND DEPT_ADDRESS = ?";
+
 		try {
 			pstmt = conn.prepareStatement(query);
 
@@ -354,7 +354,6 @@ public class DepartmentDao implements Serializable {
 
 			pstmt.setInt(1, Integer.parseInt(value));
 
-
 			result = pstmt.executeUpdate();
 
 		} catch (Exception e) {
@@ -399,7 +398,7 @@ public class DepartmentDao implements Serializable {
 				dept.setDeptPic(rset.getString("dept_pic"));
 				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
 				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
-				
+
 				dept.typeSelect();
 
 				list.add(dept);
@@ -420,7 +419,7 @@ public class DepartmentDao implements Serializable {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from department where dept_delete_ok = 'y' or dept_name like ?";
+		String query = "select * from department where dept_name like ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -430,7 +429,7 @@ public class DepartmentDao implements Serializable {
 
 			while (rset.next()) {
 				System.out.println("ㅎㅇ");
-				
+
 				Department dept = new Department();
 
 				dept.setDeptSeq(rset.getInt("dept_seq"));
@@ -450,7 +449,7 @@ public class DepartmentDao implements Serializable {
 				dept.setDeptPic(rset.getString("dept_pic"));
 				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
 				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
-				
+
 				dept.typeSelect();
 
 				list.add(dept);
@@ -472,7 +471,7 @@ public class DepartmentDao implements Serializable {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from department where dept_delete_ok = 'y' or dept_name like ?";
+		String query = "select * from department where dept_name like ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -481,7 +480,7 @@ public class DepartmentDao implements Serializable {
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				
+
 				Department dept = new Department();
 
 				dept.setDeptSeq(rset.getInt("dept_seq"));
@@ -501,7 +500,7 @@ public class DepartmentDao implements Serializable {
 				dept.setDeptPic(rset.getString("dept_pic"));
 				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
 				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
-				
+
 				dept.typeSelect();
 
 				list.add(dept);

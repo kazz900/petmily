@@ -37,6 +37,51 @@ input[type=text] {
     word-wrap: break-word;
 }
 }
+
+input[type=submit]#submit {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=submit]#submit:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=button]#prev {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=button]#prev:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
 </style>
 <script type="text/javascript">
 $(function(){
@@ -53,6 +98,8 @@ $(function(){
 	notice2.hidden = true;
 	submitBtn.disabled = true;
 	
+
+	
 	pwdValue1.addEventListener("keyup", function(){
 		if (!reg.test(pwdValue1.value)) {
 			notice.hidden = false;
@@ -60,16 +107,22 @@ $(function(){
 		} else {
 			notice.hidden = true;
 			submitBtn.disabled = true;
+			if(pwdValue1.value == pwdValue2.value){
+				submitBtn.disabled = false;
+			}
 		}
 	});
-
+	
 	pwdValue2.addEventListener("keyup", function(){
-		if (pwdValue2.value != pwdValue1.value) {
-			notice2.hidden = false;
+		if (!reg.test(pwdValue2.value)) {
+			notice.hidden = false;
 			submitBtn.disabled = true;
 		} else {
-			notice2.hidden = true;
-			submitBtn.disabled = false;
+			notice.hidden = true;
+			submitBtn.disabled = true;
+			if(pwdValue1.value == pwdValue2.value){
+				submitBtn.disabled = false;
+			}
 		}
 	});
 
@@ -91,19 +144,21 @@ function toMyPage(){
 		<p style="margin-bottom:10px; font-size:24px; font-weight:bold;">비밀번호 변경 페이지</p>
 		<!-- <p style="margin-bottom:10px; font-size:16px;">비밀번호를 정확히 입력하면 변경하기 버튼이 생깁니다.</p> -->
 	</div>
-		<form action="/petmily/changePwd" method="post" onsubmit="return validate();">
+		<form action="/petmily/pwdupdate" method="post" onsubmit="return validate();">
 		<p style="font-size:14px;" id="notice">비밀번호는 영어 대/소문자, 특수문자, 숫자를 포함하여 최소 6자리 이상으로 설정해주세요.</p>
 		<p style="font-size:14px;" id="notice2">비밀번호가 일치하지 않습니다.<br>확인 후 다시 입력해주세요.</p>
+		
+		<input type="hidden" name="memail" value="<%=member.getMemberEmail()%>">
+		
 			<table id="outer" align="center" width="500" cellspacing="5"
 				cellpadding="0">
-		
 				<tr>
 					<th width="140">아이디</th>
-					<td><input type="text" name="userid" value="<%=member.getMemberId()%>"
+					<td><input type="text" name="mid" value="<%=member.getMemberId()%>"
 						readonly>
 				<tr>
 					<th width="140">비밀번호</th>
-					<td><input type="password" name="userpwd" id="userpwd1" required>
+					<td><input type="password" name="mpwd" id="userpwd1" required>
 					</td>
 				</tr>
 				
@@ -115,14 +170,14 @@ function toMyPage(){
 			</table>
 			<div style="text-align:center; margin-top:10px;">
 			
-				<input type="button" value="이전으로" 
+				<input type="button" value="이전으로" id="prev"
 				style="margin-bottom:15px; width:150px; height:30px; 
-				border-radius:5px; border:1px solid black;
+				border-radius:5px;
 				box-shadow:1px 1px 0px 1px #cfcfcf;" onclick="history.go(-1)">
 				&nbsp; 
 				<input type="submit" value="변경하기" id="submit"
 				style="margin-bottom:15px; width:150px; height:30px; 
-				border-radius:5px; border:1px solid black;
+				border-radius:5px;
 				box-shadow:1px 1px 0px 1px #cfcfcf;">
 			
 			</div>
