@@ -19,11 +19,11 @@ String keyword = (String)request.getAttribute("keyword");
 		word-wrap: break-word;
 	}
 }
-div#tab-0 {
+form#tab-0 {
 	border-radius:5px;
  	margin: 10px auto;
 }
-div#tab-1 {
+form#tab-1 {
 	border-radius:5px;
 	width: 1050px;
 	height: 800px;
@@ -34,6 +34,18 @@ div#tab-1 {
     background-color: hsl(36deg 70.37% 68.61%);
     font-family: 'Surround';
 
+}
+body{
+	background: url('resources/images/admin/0905bg.png') left top fixed;
+	background-size : cover;
+}
+#csssearch{
+  background-color: hsl(36deg 70.37% 68.61%);
+  font-family: 'Surround';
+}
+#csssearch:hover{
+  background-color: hsl(30.46deg 58.9% 45.68%);
+  color: #fff;
 }
 </style>
 <link rel="stylesheet" href="/petmily/resources/css/admin/adminmain.css">
@@ -58,9 +70,9 @@ div#tab-1 {
 	</script>
 <body>
 	<%@ include file="../common/main.jsp"%>
-<div id="tab-0">
+<form id="tab-0">
 <br>
-<div class="block" align="center">
+<div class="block" style="text-align: center;">
 <form id="idform" class="block" action="/petmily/amss" method="post">
 <fieldset>
 	<legend>검색할 아이디를 입력하세요.</legend>
@@ -71,10 +83,10 @@ div#tab-1 {
 </form>
 <br>
 
-</div>
-	<h1 align="center">회원등급 변경</h1>
+</form>
+	<h1 style="text-align: center; margin-top: 0;">회원등급 변경</h1>
 	<h4 align="center">회원 <%= list.size()%> 명 조회</h5>
-	<div id="tab-1" class="block">
+	<form id="tab-1" class="block" style="text-align: center; margin-top: 0;">
 		<table id="outer" align="center" border="1" cellspacing="0"
 			cellpadding="3">
 			<tr>
@@ -115,7 +127,7 @@ div#tab-1 {
 			<% } %>
 			
 		</table>
-	</div>
+	</form>
 
 
 </body>

@@ -40,7 +40,7 @@ public class AllSuggestAdminServlet extends HttpServlet {
 
 		RequestDispatcher view = null;
 
-		view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
+		view = request.getRequestDispatcher("views/admin/AdminReply.jsp");
 		request.setAttribute("list", list);
 
 		view.forward(request, response);
