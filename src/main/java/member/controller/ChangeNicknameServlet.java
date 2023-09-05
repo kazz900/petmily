@@ -52,7 +52,7 @@ public class ChangeNicknameServlet extends HttpServlet {
 			
 			response.sendRedirect("/petmily/mypet?memberSeq=" + member.getMemberSeq() + "&message=" + URLEncoder.encode(message, "UTF-8"));
 		} else {
-			System.out.println("실패");
+			System.out.println("ChangeNicknameServlet 실패");
 		}
 
 	}
