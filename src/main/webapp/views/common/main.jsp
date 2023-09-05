@@ -65,6 +65,7 @@ function toggleDropdown() {
 				</li>
 
 				<li style="width:15px;"></li>
+
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
 				<% }else{ %>

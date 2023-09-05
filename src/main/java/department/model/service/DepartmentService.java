@@ -20,6 +20,7 @@ public class DepartmentService implements Serializable{
 		close(conn);
 		return list;
 	}
+	
 
 	public ArrayList<Department> selectType(String value) {
 		Connection conn = getConnection();
