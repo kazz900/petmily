@@ -15,14 +15,14 @@
 <script type="text/javascript">
   <% if (request.getAttribute("message") != null) { %>
   <% if (request.getAttribute("message").equals("비밀번호 변경됨.")) { %>
-  	alert("비밀번호 변경 성공! 새로운 비밀번호로 로그인해주세요.");
+     alert("비밀번호 변경 성공! 새로운 비밀번호로 로그인해주세요.");
   <% } else {%>
     alert("<%=request.getAttribute("message")%>");
   <% } %>
-    location.href="/petmily/views/member/login.jsp";	
+    location.href="/petmily/views/member/login.jsp";   
   <% } %>
 </script>
- <%	//	네이버 로그인
+ <%   //   네이버 로그인
     String clientId = "Y4aSWVB6n8GBIwdvF73u";//애플리케이션 클라이언트 아이디값";
     String redirectURI = URLEncoder.encode("http:" + "//" + "localhost:8080/petmily/naver", "UTF-8");
     SecureRandom random = new SecureRandom();
@@ -35,10 +35,10 @@
  %>
 <style type="text/css">
 @font-face {
-	font-family: 'Surround';
-	src: url('/petmily/resources/font/surround.woff2') format('woff2');
-	font-weight: normal;
-	font-style: normal;
+   font-family: 'Surround';
+   src: url('/petmily/resources/font/surround.woff2') format('woff2');
+   font-weight: normal;
+   font-style: normal;
 }
 body {
       font-family: 'Surround', sans-serif;
@@ -67,17 +67,17 @@ color: hsl(30.5, 77.6%, 29.8%);
 color: hsl(30.5, 77.6%, 29.8%);
     }
     form {
-	text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
-	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
-	width: 350px; /* 폼의 너비 설정 */
-	height: auto;
-/* 	border: 1px solid black;  */
+   text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
+   margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
+   width: 350px; /* 폼의 너비 설정 */
+   height: auto;
+/*    border: 1px solid black;  */
     }
 /* td {
 border: 1px solid red; 
 }  */
  td input[type=text]{
-	width: 250px;
+   width: 250px;
     height: 30px;
     border-radius: 7px;
     background-color: beige;
@@ -85,7 +85,7 @@ border: 1px solid red;
     border: solid;
  }
  td input[type=password]{
-	width: 250px;
+   width: 250px;
     height: 30px;
     border-radius: 7px;
     background-color: beige;
@@ -124,9 +124,9 @@ td a {
 left: 0px;
 }
 .social {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
       </style>
 </head>
@@ -136,24 +136,24 @@ left: 0px;
 </header>
 <h2 align="center">로그인</h2>
 <form action="/petmily/login">
-	<table>
-		<tr><td><input type="text" id="memberid" name="memberid" placeholder="아이디 입력" required> </td>
-		<td rowspan="2"><input type="submit" value="로그인" id="logincheck"></td></tr>
-		<tr><td><input type="password" id="memberpwd" name="memberpwd" placeholder="패스워드 입력"required></td></tr>
-		<tr><td colspan="2"><input type="button" value="아이디/패스워드 찾기" id="findinfo" onclick="moveFindinfoPage();">
-		<input type="button" value="회원가입" id="enroll" onclick="moveEnrollPage();"></td></tr>
+   <table>
+      <tr><td><input type="text" id="memberid" name="memberid" placeholder="아이디 입력" required> </td>
+      <td rowspan="2"><input type="submit" value="로그인" id="logincheck"></td></tr>
+      <tr><td><input type="password" id="memberpwd" name="memberpwd" placeholder="패스워드 입력"required></td></tr>
+      <tr><td colspan="2"><input type="button" value="아이디/패스워드 찾기" id="findinfo" onclick="moveFindinfoPage();">
+      <input type="button" value="회원가입" id="enroll" onclick="moveEnrollPage();"></td></tr>
 <script type="text/javascript">
 function moveFindinfoPage(){
-	location.href="/petmily/views/member/findinfoPage.jsp";
+   location.href="/petmily/views/member/findinfoPage.jsp";
 }
 function moveEnrollPage(){
-	location.href="/petmily/views/member/enrollPage.jsp";
+   location.href="/petmily/views/member/enrollPage.jsp";
 }
 </script>
 <tr>
 <td colspan="2">
-		<div class="social">
-			<div style="width:170px;">
+      <div class="social">
+         <div style="width:170px;">
 <a id="kakao-login-btn" href="javascript:loginWithKakao()">
   <img src="/petmily/resources/images/kakaologo.png" width="60" height="60" alt="카카오 로그인 버튼" /></a>
   </div>
@@ -163,7 +163,7 @@ function moveEnrollPage(){
 </td>
 </tr>
   
-	</table>
+   </table>
 
 <!-- 네이버로그인버튼 -->
 <!-- 카카오로그인버튼 -->
@@ -214,7 +214,8 @@ function getInfo() {
                     location.href="http://localhost:8080/petmily"; 
                     },
                     error: function(error) {
-                        console.log('Data sending failed');
+                    alert("정지처리된 회원입니다. 관리자에게 문의해주세요");
+                    location.href="/petmily/views/member/login.jsp"; 
                     }
                 });
         },

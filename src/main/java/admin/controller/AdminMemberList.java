@@ -34,12 +34,13 @@ public class AdminMemberList extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		ArrayList<Member> list = new MemberService().selectList();
-		
-		System.out.println("size =" + list.size());
+		String keyword = "";
+//		System.out.println("size =" + list.size());
 		RequestDispatcher view = null;
 
 		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
 		request.setAttribute("list", list);
+		request.setAttribute("keyword", keyword);
 		view.forward(request, response);
 	
 	}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import admin.model.service.AdminPostService;
 import department.model.service.DepartmentService;
 import department.model.vo.Department;
 
@@ -35,15 +36,27 @@ public class AdminMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+
+		request.setCharacterEncoding("UTF-8");
+		String keyword = request.getParameter("keyword");
+
 		ArrayList<Department> list = new DepartmentService().selectNotInsertedDept();
 		
-		System.out.println("adminmain size =" + list.size());
-		RequestDispatcher view = null;
-
-		view = request.getRequestDispatcher("views/admin/AdminDeptInsert.jsp");
-		request.setAttribute("list", list);
-		view.forward(request, response);
 		
+		System.out.println("adminmain size =" + list.size());
+		RequestDispatcher view = request.getRequestDispatcher("views/admin/AdminDeptInsert.jsp");
+		
+		if (keyword == null) {
+			keyword = "";
+		}
+		
+		request.setAttribute("list", list);
+		request.setAttribute("keyword", keyword);
+		
+		System.out.println(keyword);
+		
+
+		view.forward(request, response);
 	}
 
 	/**

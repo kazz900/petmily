@@ -1,6 +1,7 @@
 package admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,10 +35,20 @@ public class AdminMemberManagement extends HttpServlet {
 		
 		String memberSeq = request.getParameter("memberSeq");
 		String memberGrade = request.getParameter("memberGrade");
-		
+		String memberId = request.getParameter("memberId");
+
 		int result = new MemberService().managementMember(memberSeq, memberGrade);
 		
-		response.sendRedirect("/petmily/memli");
+		
+		
+		ArrayList<Member> member = new MemberService().againList(memberId);
+		
+		RequestDispatcher view = null;
+		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
+		request.setAttribute("list", member);
+		request.setAttribute("keyword", memberId);
+		view.forward(request, response);
+			
 		}
 	
 

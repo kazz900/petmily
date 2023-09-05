@@ -152,13 +152,17 @@ public class NaverServlet extends HttpServlet {
 			member = mservice.snsLogin(Nemail);
 		} 
 		}	//회원정보생성및 로그인, 멤버반환처리
-		// 세션생성
-		HttpSession session = request.getSession();
-		session.setMaxInactiveInterval(30*60);	//세션수명은 30분
-
-		session.setAttribute("member", member);
 		
-		response.sendRedirect("index.jsp");		
+		if (Integer.parseInt(member.getMemberGrade()) != 2) {
+			HttpSession session = request.getSession();
+			session.setMaxInactiveInterval(30 * 60);	// 30분동안 활동 없을시 자동 파기(로그아웃)처리됨.
+			session.setAttribute("member", member);
+			response.sendRedirect("index.jsp");
+		} else {
+			RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
+			request.setAttribute("message", "정지처리된 회원입니다. 관리자에게 문의해주세요.");
+			view.forward(request, response);
+		}
 	}
 	
 	/**

@@ -62,8 +62,6 @@ public class KakaoServlet extends HttpServlet {
 
 			Kname = (String)resObj.get("nickname");
 			Kemail = checkKakaoemail + (String)resObj.get("email");
-//			System.out.println("회원의 이름은? " + Kemail);
-//			System.out.println("카카오 이메일은? " + Kname);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -93,10 +91,19 @@ public class KakaoServlet extends HttpServlet {
 					member = mservice.snsLogin(Kemail);
 				}
 			}
+		if (Integer.parseInt(member.getMemberGrade()) != 2) {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(30 * 60);	// 30분동안 활동 없을시 자동 파기(로그아웃)처리됨.
 			session.setAttribute("member", member);
+			request.setAttribute("message", "정상적인 로그인입니다.");
 			response.sendRedirect("index.jsp");
+		} else {
+			boolean condition = true; // 조건을 원하는 대로 설정
+	        if (condition) {
+	            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+	            return;
+	        }
+		}		
 	}
 
 	/**

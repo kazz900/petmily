@@ -1,9 +1,8 @@
 package admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import department.model.service.DepartmentService;
-import department.model.vo.Department;
 
 /**
  * Servlet implementation class DeptDeleteServlet
@@ -34,11 +32,12 @@ public class DeptTerminateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		String value = request.getParameter("deptSeq");
-
+		String keyword = request.getParameter("keyword");
+		System.out.println("deptter keyword : " + keyword);
 		int result = new DepartmentService().terminateDept(value);
-		
-		response.sendRedirect("/petmily/srtd");
+		response.sendRedirect("/petmily/srtd?keyword="+URLEncoder.encode(keyword, "UTF-8"));
 	}
 
 	/**
