@@ -33,6 +33,8 @@ html, body {
 div#main {
 	width: 60%;
 	height: 100%;
+	position: relative;
+    z-index: 0;
 }
 
 div#top {
