@@ -26,7 +26,7 @@ public class Department implements java.io.Serializable {
    }
 
    public Department(int deptSeq, String deptType, String deptName, String deptAddress, String deptPhone,
-         String deptLatitude, String deptLongitude, String deptTime, String deptParking, String deptEntrancefee,
+		   String deptLatitude, String deptLongitude, String deptTime, String deptParking, String deptEntrancefee,
          String deptSizerestrict, String deptRestrict, String deptWithpetfee, String deptUrl, String deptPic,
          String deptInsertOk, String deptDeleteOk) {
       super();

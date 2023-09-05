@@ -1,14 +1,21 @@
 package post.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import standardpost.model.service.StandardPostService;
+import post.model.service.PostSerivce;
+import post.model.vo.Post;
+import reply.model.service.ReplyService;
+import reply.model.vo.Reply;
+import standardpost.model.vo.StandardPost;
+import tradepost.model.vo.TradePost;
 
 /**
  * Servlet implementation class StandardPostDeleteServlet
@@ -30,18 +37,34 @@ public class PostDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int postSeq = Integer.parseInt(request.getParameter("postSeq"));
-		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
+		PostSerivce pSerivce = new PostSerivce();
+		ReplyService rService = new ReplyService();
+//		ArrayList<Post> list = pSerivce.getPostList();
+//		ArrayList<Reply> rList = rService.getReplyList();
+		int postSeq = Integer.parseInt(request.getParameter("dpostseq"));
+		int memberSeq = Integer.parseInt(request.getParameter("dmemberseq"));
+		String postType = request.getParameter("dposttype");
+		System.out.println(postSeq + ", " + memberSeq + ", " + postType);
 		int result = 0;
-		StandardPostService spService = new StandardPostService();
-		result = spService.deleteStrandardPost(memberSeq, postSeq);
+		Post p = null;
+		System.out.println(postSeq + ", " + postType);
+		System.out.println(postType);
+		if(postType.equals("standardpost")) {
+			System.out.println("일반게시글");
+			p = new StandardPost();
+			p.setPostSeq(postSeq);
+		}else {
+			System.out.println("중고거래글");
+			p = new TradePost();
+			p.setPostSeq(postSeq);
+		}
+		
+		result = pSerivce.deletePost(p); 
 		
 		if (result > 0) {
-			//insert successful
-			response.sendRedirect("/petmily/splist");
+			String path = "/petmily/plist?memberseq=" + String.valueOf(memberSeq);
+			response.sendRedirect(path);
 		} else {
-			//insert fail
-			// TODO : MAKE INSERT FAIL HTML
 		}
 	}
 

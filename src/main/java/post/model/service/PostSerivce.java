@@ -78,6 +78,13 @@ public class PostSerivce {
 		// TODO Auto-generated method stub
 
 		result = pdao.updatePost(conn, memberSeq, post);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
 		close(conn);
 		return result;
 	}
@@ -90,23 +97,6 @@ public class PostSerivce {
 		sp = pdao.selectPost(conn, postSeq);
 		close(conn);
 		return sp;
-	}
-	
-	public int deletePost(int memberSeq, int postSeq) {
-		// TODO Auto-generated method stub
-		int result = 0;
-		Connection conn = getConnection();
-
-		result = pdao.deletePost(conn, memberSeq, postSeq);
-		
-		if(result > 0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		
-		close(conn);
-		return result;
 	}
 	
 	public int updatePostLikeNo(int memberSeq, int postSeq) {
@@ -136,5 +126,37 @@ public class PostSerivce {
 		list = pdao.getPostListByType(conn, postType);
 		close(conn);
 		return list;
+	}
+
+	public int deleteImage(Post post) {
+		int result = 0;
+		Connection conn = getConnection();
+
+		result = pdao.deleteImage(conn, post);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+	public int deletePost(Post post) {
+		int result = 0;
+		Connection conn = getConnection();
+
+		result = pdao.deletePost(conn, post);
+		
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
 	}
 }

@@ -54,6 +54,7 @@ Member member = (Member) session.getAttribute("member");
 					</form>
 				</li>
 
+
 				<li class="sub-link" onclick="toggleDropdown()"
 					style="margin-left: 150px;"><a href="#">내주변</a>
 					<ul class="dropdown" id="dropdown">
@@ -94,6 +95,7 @@ Member member = (Member) session.getAttribute("member");
 				<%
 				if (member == null) {
 				%>
+
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
 				<%
 				} else {
