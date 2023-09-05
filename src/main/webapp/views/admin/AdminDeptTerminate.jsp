@@ -4,6 +4,7 @@
 	import="java.util.ArrayList, department.model.vo.Department, java.sql.Date"%>
 <%
 ArrayList<Department> list = (ArrayList<Department>) request.getAttribute("list");
+String keyword = (String)request.getAttribute("keyword");
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,11 +18,23 @@ ArrayList<Department> list = (ArrayList<Department>) request.getAttribute("list"
 		margin: 98px auto 0 auto;
 		word-wrap: break-word;
 	}
+#chggrade {
+	border-radius:5px;
+    background-color: hsl(36deg 70.37% 68.61%);
+    font-family: 'Surround';
+
 }
-div#tab-1 {
+div#tab-1{
 	width: 1050px;
 	height: 720px;
-	overflow : auto;
+	overflow: auto;
+}
+form.sform {
+	background: lightgray;
+	width: 630px;
+	left: 400px;
+	display: none;  
+	}
 }
 </style>
 <link rel="stylesheet" href="/petmily/resources/css/admin/adminmain.css">
@@ -32,10 +45,18 @@ div#tab-1 {
 	src="/petmily/resources/js/info/infotap.js"></script>
 <body>
 	<%@ include file="../common/main.jsp"%>
-	<div>
-	<br>
-	</div>
-	<h1 align="center" class="block">업체 삭제</h1>
+	<div class="block" align="center">
+	<form id="idform" class="block" action="/petmily/adf" method="post">
+		<!-- <input type="hidden" name="action" value="id">  -->
+			<fieldset>
+				<legend>검색하실 업체명을 입력하세요.</legend>
+				<input type="search" name="keyword" id="key" value="<%= keyword %>">
+				
+				<input type="submit" id="csssearch" value="검색">
+			</fieldset>
+		</form>	
+		<h1 align="center" class="block">업체 삭제</h1>
+		<h4 align="center">업체 <%= list.size()%> 개 조회</h5>
 	<div id="tab-1" class="block">
 		<table id="outer" align="center" border="1" cellspacing="0"
 			cellpadding="3">
@@ -48,6 +69,7 @@ div#tab-1 {
 				<th>삭제</th>
 			</tr>
 			<%
+			if(list.size() >0){
 			for (Department dept : list) {
 			%>
 			<tr>
@@ -56,13 +78,20 @@ div#tab-1 {
 				<td><%=dept.getDeptName()%></td>
 				<td><%=dept.getDeptPhone()%></td>
 				<td><%=dept.getDeptAddress()%></td>
-				<td><input type="button" value="삭제"
-					onclick="location.href='/petmily/deptter?deptSeq=<%=dept.getDeptSeq()%>';
+				<td><input type="button" value="삭제" id="chggrade" 
+					onclick="location.href='/petmily/deptter?deptSeq=<%=dept.getDeptSeq()%>&keyword=<%= keyword %>';
 							return false;"></td>
 			</tr>
+			
 			<%
 			}
-			%>
+			}else{ %>
+			<tr>
+				<td colspan="6">
+				검색결과없음
+				</td>
+			</tr>		
+			<% } %>
 		</table>
 	</div>
 

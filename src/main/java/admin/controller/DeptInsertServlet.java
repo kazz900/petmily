@@ -1,9 +1,8 @@
 package admin.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import department.model.service.DepartmentService;
-import department.model.vo.Department;
 
 /**
  * Servlet implementation class DeptManageServlet
@@ -34,14 +32,17 @@ public class DeptInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		String value = request.getParameter("deptSeq");
-		
-		int result = new DepartmentService().approveDept(value);
-		
-		response.sendRedirect("/petmily/adminmain");
-		
-	
+
+		String deptSeq = request.getParameter("deptSeq");
+		String keyword = request.getParameter("keyword");
+
+		int result = new DepartmentService().approveDept(deptSeq);
+
+		request.setAttribute("deptSeq", deptSeq);
+		request.setAttribute("keyword", keyword);
+
+		response.sendRedirect("/petmily/ads?deptSeq=" + deptSeq + "&keyword=" + URLEncoder.encode(keyword, "UTF-8"));
+
 	}
 
 	/**

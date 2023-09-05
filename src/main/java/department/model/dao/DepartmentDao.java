@@ -365,4 +365,155 @@ public class DepartmentDao implements Serializable {
 		return result;
 	}
 
+	public ArrayList<Department> selectDeptName(Connection conn, String keyword) {
+		ArrayList<Department> list = new ArrayList<Department>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from department where dept_insert_ok = 'n' and dept_name like ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Department dept = new Department();
+
+				dept.setDeptSeq(rset.getInt("dept_seq"));
+				dept.setDeptType(rset.getString("dept_type"));
+				dept.setDeptName(rset.getString("dept_name"));
+				dept.setDeptAddress(rset.getString("dept_address"));
+				dept.setDeptPhone(rset.getString("dept_phone"));
+				dept.setDeptLatitude(rset.getString("dept_latitude"));
+				dept.setDeptLongitude(rset.getString("dept_longitude"));
+				dept.setDeptTime(rset.getString("dept_time"));
+				dept.setDeptParking(rset.getString("dept_parking"));
+				dept.setDeptEntrancefee(rset.getString("dept_entrance_fee"));
+				dept.setDeptSizerestrict(rset.getString("dept_sizerestrict"));
+				dept.setDeptRestrict(rset.getString("dept_restrict"));
+				dept.setDeptWithpetfee(rset.getString("dept_withpetfee"));
+				dept.setDeptUrl(rset.getString("dept_url"));
+				dept.setDeptPic(rset.getString("dept_pic"));
+				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
+				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
+				
+				dept.typeSelect();
+
+				list.add(dept);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	public ArrayList<Department> findDeptName(Connection conn, String keyword) {
+		ArrayList<Department> list = new ArrayList<Department>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from department where dept_delete_ok = 'y' or dept_name like ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			System.out.println(keyword);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				System.out.println("ㅎㅇ");
+				
+				Department dept = new Department();
+
+				dept.setDeptSeq(rset.getInt("dept_seq"));
+				dept.setDeptType(rset.getString("dept_type"));
+				dept.setDeptName(rset.getString("dept_name"));
+				dept.setDeptAddress(rset.getString("dept_address"));
+				dept.setDeptPhone(rset.getString("dept_phone"));
+				dept.setDeptLatitude(rset.getString("dept_latitude"));
+				dept.setDeptLongitude(rset.getString("dept_longitude"));
+				dept.setDeptTime(rset.getString("dept_time"));
+				dept.setDeptParking(rset.getString("dept_parking"));
+				dept.setDeptEntrancefee(rset.getString("dept_entrance_fee"));
+				dept.setDeptSizerestrict(rset.getString("dept_sizerestrict"));
+				dept.setDeptRestrict(rset.getString("dept_restrict"));
+				dept.setDeptWithpetfee(rset.getString("dept_withpetfee"));
+				dept.setDeptUrl(rset.getString("dept_url"));
+				dept.setDeptPic(rset.getString("dept_pic"));
+				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
+				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
+				
+				dept.typeSelect();
+
+				list.add(dept);
+				System.out.println("ㅎㅇ");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
+	public ArrayList<Department> reDeptList(Connection conn, String keyword) {
+		ArrayList<Department> list = new ArrayList<Department>();
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "select * from department where dept_delete_ok = 'y' or dept_name like ?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, "%" + keyword + "%");
+			System.out.println(keyword);
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				
+				Department dept = new Department();
+
+				dept.setDeptSeq(rset.getInt("dept_seq"));
+				dept.setDeptType(rset.getString("dept_type"));
+				dept.setDeptName(rset.getString("dept_name"));
+				dept.setDeptAddress(rset.getString("dept_address"));
+				dept.setDeptPhone(rset.getString("dept_phone"));
+				dept.setDeptLatitude(rset.getString("dept_latitude"));
+				dept.setDeptLongitude(rset.getString("dept_longitude"));
+				dept.setDeptTime(rset.getString("dept_time"));
+				dept.setDeptParking(rset.getString("dept_parking"));
+				dept.setDeptEntrancefee(rset.getString("dept_entrance_fee"));
+				dept.setDeptSizerestrict(rset.getString("dept_sizerestrict"));
+				dept.setDeptRestrict(rset.getString("dept_restrict"));
+				dept.setDeptWithpetfee(rset.getString("dept_withpetfee"));
+				dept.setDeptUrl(rset.getString("dept_url"));
+				dept.setDeptPic(rset.getString("dept_pic"));
+				dept.setDeptInsertOk(rset.getString("dept_insert_ok"));
+				dept.setDeptDeleteOk(rset.getString("dept_delete_ok"));
+				
+				dept.typeSelect();
+
+				list.add(dept);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+	}
+
 }

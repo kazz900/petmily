@@ -75,6 +75,7 @@
 	#tab-1 th {
 		background: hsl(30.46deg 58.9% 45.68%);
 		font-family: 'Surround';
+		color: #fff;
 		margin:0;
 	}
 	
@@ -102,58 +103,7 @@
 	
 	#tab-1 .content {
 		width:310px;
-	}
-	
-	
-	
-	#tab-2 table {
-		width: 100%;
-		border-collapse: collapse;
-		table-layout: fixed;
-		line-height: 24px;
-	}
-	
-	#tab-2 table td, th {
-		border-collapse: collapse;
-		text-align: center;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
-	}
-	
-	#tab-2 th {
-		background: rgb(221, 221, 221);
-		margin:0;
-	}
-	
-	#tab-2 a {
-		text-decoration: none;
-		color: black;
-	}
-	
-	#tab-2 a:hover {
-		text-decoration: underline;
-	}
-	
-	#tab-2 tr:hover {
-		background-color:#dfdfdf;
-	}
-	
-	#tab-2 #outer {
-		width: 800px;
-		margin: auto;
-	}
-	
-	#tab-2 tr {
-		height: 30px;
-	}
-	
-	#tab-2 .content {
-		width:310px;
-	}
-	
-	
-	
+	}	
 	
 	input[type=text] {
 		width:280px;
@@ -196,5 +146,8 @@
 	h1 {
 		color: hsl(30.46deg 58.9% 45.68%);
 		font-family: 'Surround';
+	}
+	#chggrade:hover{
+		background-color: hsl(30.46deg 58.9% 45.68%);
 	}
 }
