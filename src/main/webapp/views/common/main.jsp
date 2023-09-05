@@ -50,7 +50,7 @@ function toggleDropdown() {
                </form>
 				</li>
         
-				<li class="sub-link" onclick="toggleDropdown()"><a href="#">내주변</a>
+				<li class="sub-link" onclick="toggleDropdown()" style="margin-left:150px;"><a href="#">내주변</a>
 				<ul class="dropdown" id="dropdown">
 				<li><a href="/petmily/selectdepttype?selecttype=1&typename=의료" style="color : hsl(30.46deg 58.9% 45.68%)">의료</a></li>
 				<li><a href="/petmily/selectdepttype?selecttype=2&typename=미용" style="color : hsl(30.46deg 58.9% 45.68%)">미용</a></li>
@@ -68,10 +68,10 @@ function toggleDropdown() {
 			
 			
 				
+				<li style="width:15px;"></li>
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
 				<% }else{ %>
-				<li style="width:150px;"></li>
 				<li
 					style="display: inline-block; font-size: 15px; width: 90px; height: 20px; position: absolute; top: 25px;"><%= member.getMemberNick() %>님</li>
 				<li
