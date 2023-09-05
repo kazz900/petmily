@@ -21,7 +21,6 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	public LogoutServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -30,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// 로그아웃 컨트롤러
+		// 로그아웃 처리용 컨트롤러
 
 		// request에 등록되어 있는 세션 객체의 ID 를 이용해서 세션 객체를 조화함
 		HttpSession session = request.getSession();
@@ -40,10 +39,7 @@ public class LogoutServlet extends HttpServlet {
 		if (session != null) {
 			session.invalidate();
 			response.sendRedirect("index.jsp");
-		} else {
-
 		}
-
 	}
 
 	/**
@@ -52,7 +48,6 @@ public class LogoutServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -35,20 +35,24 @@ public class MypetServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int memberSeq = Integer.parseInt(request.getParameter("memberSeq"));
-		
+		String message = request.getParameter("message");
+		if(message == null) {
+			message = "";
+		}
+		System.out.println(message);
 		ArrayList<Pet> list = new PetService().selectPet(memberSeq);		
 		
 		RequestDispatcher view = null;
 		System.out.println(list.size());
+		
 		if(list.size() > 0) {
-
-			request.setAttribute("message", "정보있음");
-
-			request.setAttribute("list", list);
-
-		}else {
-			request.setAttribute("message", "정보없음");
+			request.setAttribute("list", list);			
 		}
+		if(message.equals("성공적으로 변경되었습니다.")) {
+			request.setAttribute("message", message);
+		}
+		
+		
 		
 		view = request.getRequestDispatcher("views/mypage/changeMyinfo.jsp");
 		view.forward(request, response);
