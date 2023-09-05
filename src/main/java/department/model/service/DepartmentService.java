@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import static common.JDBCTemplate.*;
 import department.model.dao.DepartmentDao;
 import department.model.vo.Department;
+import member.model.vo.Member;
 
 public class DepartmentService implements Serializable{
 	
@@ -95,6 +96,28 @@ public class DepartmentService implements Serializable{
 		close(conn);
 		return result;
 	}
+
+	public ArrayList<Department> selectDeptName(String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Department> list = ddao.selectDeptName(conn, keyword);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Department> findDeptName(String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Department> list = ddao.findDeptName(conn, keyword);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Department> reDeptList(String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Department> list = ddao.reDeptList(conn, keyword);
+		close(conn);
+		return list;
+	}
+
 
 }
 

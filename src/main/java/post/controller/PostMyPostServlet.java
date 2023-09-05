@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import post.model.service.PostSerivce;
 import post.model.vo.Post;
+import reply.model.service.ReplyService;
+import reply.model.vo.Reply;
 
 /**
  * Servlet implementation class StandardPostMyPostViewServlet
@@ -33,16 +35,20 @@ public class PostMyPostServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostSerivce pSerivce = new PostSerivce();
+		ReplyService rService = new ReplyService();
 		ArrayList<Post> list = new ArrayList<Post>();
+		ArrayList<Reply> rList = new ArrayList<Reply>();
 		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
 		list = pSerivce.getMyPostList(memberSeq);
-		
+		rList = rService.getReplyList();
+		System.out.println(list.size());
 		RequestDispatcher view = null;
 		
 		if(list.size() > 0) {
 			view = request.getRequestDispatcher("views/post/postList.jsp");
 			
 			request.setAttribute("list", list);
+			request.setAttribute("rList", rList);
 		} else {
 			view = request.getRequestDispatcher("views/common/waiting.jsp");
 		}

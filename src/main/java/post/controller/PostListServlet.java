@@ -34,11 +34,9 @@ public class PostListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PostSerivce pSerivce = new PostSerivce();
 		ReplyService rService = new ReplyService();
-		ArrayList<Post> list = new ArrayList<Post>();
-		ArrayList<Reply> rList = new ArrayList<Reply>();
-		
-		list = pSerivce.getPostList();
-		rList = rService.getReplyList();
+		ArrayList<Post> list = pSerivce.getPostList();
+		ArrayList<Reply> rList = rService.getReplyList();
+
 		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
 		
 		RequestDispatcher view = null;

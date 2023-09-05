@@ -196,6 +196,7 @@ td a {
 				</td>
 			</tr>
 
+
 		</table>
 
 		<!-- 네이버로그인버튼 -->
@@ -260,5 +261,45 @@ td a {
 	</script>
 	<br>
 	<%@ include file="../common/footer.jsp"%>
+=======
+// 4. 엑세스 토큰을 발급받고, 아래 함수를 호출시켜서 사용자 정보를 받아옴.
+function getInfo() {
+    Kakao.API.request({
+        url: '/v2/user/me',
+        success: function (res) {
+            console.log(res);
+            // 이메일, 닉네임 저장
+            var email = res.kakao_account.email; 
+            var nickname = res.kakao_account.profile.nickname;
+            var userInfo = {
+                    email: email,
+                    nickname: nickname
+                };
+
+                // 서버로 정보 전송 후 메인페이지로 리다이렉트
+                $.ajax({
+                    type: 'POST',
+                    url: '/petmily/kakao', 
+                    data: JSON.stringify(userInfo),
+                    contentType: 'application/json',
+                    success: function(response) {
+                    console.log('Data sent successfully');
+                    location.href="http://localhost:8080/petmily"; 
+                    },
+                    error: function(error) {
+                    alert("정지처리된 회원입니다. 관리자에게 문의해주세요");
+                    location.href="/petmily/views/member/login.jsp"; 
+                    }
+                });
+        },
+        fail: function (error) {
+            alert('카카오 로그인에 실패했습니다. 관리자에게 문의하세요.' + JSON.stringify(error));
+        }
+    });
+}
+</script>
+<br>
+<%@ include file="../common/footer.jsp" %>
+
 </body>
 </html>
