@@ -256,24 +256,47 @@ font-family: OhsquareAir;
 	};
  */
  
-	function checkinputpet () {
-	 
+	function checkinputpet() {
+	 var frm = document.form1;
 		var petname = document.getElementById('petName');
+		/* var upettype = document.getElementByName('upetType');
+		var upetsize = document.getElementById('upetSize'); */
 		if(petname.value.length < 1){
 			alert("펫이름을 입력해 주세요.");
+			return false;}
+		
+		  
+		 
+		if(!frm.petType[0].checked && !frm.petType[1].checked && !frm.petType[2].checked){
+			alert("펫타입을 입력해 주세요.");
+			return false;
+		}else if(!frm.petSize[0].checked && !frm.petSize[1].checked && !frm.petSize[2].checked){
+			alert("펫타입을 입력해 주세요.");
 			return false;
 		}
 			return true;
 	}
  function ucheckinputpet () {
-	 
-		var petname = document.getElementById('upetName');
-		if(petname.value.length < 1){
+	 var frm = document.form2;
+		var upetname = document.getElementById('upetName');
+		/* var upettype = document.getElementByName('upetType');
+		var upetsize = document.getElementById('upetSize'); */
+		if(upetname.value.length < 1){
 			alert("펫이름을 입력해 주세요.");
+			return false;}
+		
+		  
+		 
+		if(!frm.upetType[0].checked && !frm.upetType[1].checked && !frm.upetType[2].checked){
+			alert("펫타입을 입력해 주세요.");
+			return false;
+		}else if(!frm.upetSize[0].checked && !frm.upetSize[1].checked && !frm.upetSize[2].checked){
+			alert("펫타입을 입력해 주세요.");
 			return false;
 		}
 			return true;
 	}
+
 	function changePwd() {
 		location.href = "/petmily/views/mypage/changePwd.jsp";
 	}
@@ -390,7 +413,7 @@ window.onload = function(){
 
 			<div id="tab-1" class="tab-content current">
 				<div style="position: absolute; background-color: white; left: 5%;z-index:2;">
-					<form action="/petmily/peten" method="post"
+					<form action="/petmily/peten" method="post" name="form1"
 						enctype="multipart/form-data" onsubmit="return checkinputpet();">
 						<table
 							style="border-radius: 12px; box-shadow: 0px 0px 7px black; font-size: 15px; "
@@ -409,7 +432,7 @@ window.onload = function(){
 							</tr>
 							<tr class="petintr" style="width: 200px; display: block;">
 								<td class="petintd-radio"><input type="radio"
-									name="petType" id="petType" value="0" checked>고양이</td>
+									name="petType" id="petType" value="0">고양이</td>
 								<td class="petintd-radio"><input type="radio"
 									name="petType" id="petType" value="1">강아지</td>
 								<td class="petintd-radio"><input type="radio"
@@ -417,7 +440,7 @@ window.onload = function(){
 							</tr>
 							<tr class="petintr">
 								<td class="petintd-radio"><input type="radio"
-									name="petSize" id="petSize" value="소형" checked>소형(10kg 미만)</td>
+									name="petSize" id="petSize" value="소형">소형(10kg 미만)</td>
 								<td class="petintd-radio"><input type="radio"
 									name="petSize" id="petSize" value="중형">중형(10~25kg 미만)</td>
 								<td class="petintd-radio"><input type="radio"
@@ -497,7 +520,7 @@ window.onload = function(){
 				<div class="update1" id="update1">
 					<div class="update" id="update"
 						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 3; display: none;border-radius: 20px; width:210px;">
-						<form action="/petmily/petup" method="post"
+						<form action="/petmily/petup" method="post" name="form2"
 							enctype="multipart/form-data"onsubmit="return ucheckinputpet();">
 							<input type="hidden" name="duImg" id="duImg">
 							<input type="hidden" name="memberSeq" id="memberSeq"
