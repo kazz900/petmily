@@ -64,11 +64,6 @@ function toggleDropdown() {
 				</ul>
 				</li>
 
-
-				
-			
-			
-				
 				<li style="width:15px;"></li>
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
@@ -108,14 +103,12 @@ function toggleDropdown() {
 					<li><a href="/petmily/adminmain" class="sidebarmenu">업체등록</a></li>
 					<li><a href="/petmily/srtd" class="sidebarmenu">업체삭제</a></li>
 					<li><a href="/petmily/memli" class="sidebarmenu">회원등급변경</a></li>
-
 					<li><a href="/petmily/adsp" class="sidebarmenu">일반게시판관리</a></li>
 					<li><a href="/petmily/adtp" class="sidebarmenu">거래게시판관리</a></li>
-
+					<li><a href="/petmily/suggestAdmin?mseq=<%=member.getMemberSeq()%>" class="sidebarmenu">고객센터</a></li>
 					<% }else if(member.getMemberGrade().equals("2")){ %>
 					
 					<% } %>
-				</ul>
 			</span><br>
 
 		</div>
