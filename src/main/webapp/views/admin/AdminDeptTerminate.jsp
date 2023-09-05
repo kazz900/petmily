@@ -36,6 +36,18 @@ form.sform {
 	display: none;  
 	}
 }
+body{
+	background: url('resources/images/admin/0905bg.png') left top fixed;
+	background-size : cover;
+}
+#csssearch{
+  background-color: hsl(36deg 70.37% 68.61%);
+  font-family: 'Surround';
+}
+#csssearch:hover{
+  background-color: hsl(30.46deg 58.9% 45.68%);
+  color: #fff;
+}
 </style>
 <link rel="stylesheet" href="/petmily/resources/css/admin/adminmain.css">
 
@@ -45,7 +57,7 @@ form.sform {
 	src="/petmily/resources/js/info/infotap.js"></script>
 <body>
 	<%@ include file="../common/main.jsp"%>
-	<div class="block" align="center">
+	<div class="block" style="text-align: center;">
 	<form id="idform" class="block" action="/petmily/adf" method="post">
 		<!-- <input type="hidden" name="action" value="id">  -->
 			<fieldset>
@@ -55,9 +67,9 @@ form.sform {
 				<input type="submit" id="csssearch" value="검색">
 			</fieldset>
 		</form>	
-		<h1 align="center" class="block">업체 삭제</h1>
+		<h1 class="block" style="text-align: center; margin-top: 0;">업체 삭제</h1>
 		<h4 align="center">업체 <%= list.size()%> 개 조회</h5>
-	<div id="tab-1" class="block">
+	<div id="tab-1" class="block" style="text-align: center; margin-top: 0;">
 		<table id="outer" align="center" border="1" cellspacing="0"
 			cellpadding="3">
 			<tr>
