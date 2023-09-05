@@ -2,11 +2,14 @@
 	pageEncoding="UTF-8"
 	import="member.model.vo.Member, pet.model.vo.Pet, java.util.ArrayList"%>
 <%
-//if (request.getAttribute("message").equals("정보있음")) {
 	ArrayList<Pet> pet = (ArrayList<Pet>) request.getAttribute("list");
-
-//}
+if (request.getAttribute("message") != null) {
+    if (request.getAttribute("message").equals("성공적으로 변경되었습니다.")) {
 %>
+    <script>
+        alert('<%=request.getAttribute("message") %>');
+    </script>
+<% } } %>
 
 <!DOCTYPE html>
 <html>
@@ -252,6 +255,7 @@ font-family: OhsquareAir;
 		})
 	};
  */
+ 
 	function checkinputpet () {
 	 
 		var petname = document.getElementById('petName');
@@ -339,7 +343,31 @@ font-family: OhsquareAir;
 		document.querySelector("div.update").style.display = 'block';
 	}
 </script>
+<script type="text/javascript">
+window.onload = function(){
 
+	var submitBtn = document.getElementById("changeSubmit");
+	var nickname = document.getElementById("nickname");
+	
+	const unchangedNick = nickname.value;
+	
+	submitBtn.disabled = true;
+	
+	nickname.addEventListener("keyup", function(){
+		var changedNick = nickname.value;
+		
+		if (changedNick !== unchangedNick) {
+			
+			submitBtn.disabled = false;
+			
+		} else if (changedNick === unchangedNick) {
+			
+			submitBtn.disabled = true;
+			
+		}
+	});
+}
+</script>
 </head>
 <body>
 	<%@ include file="../common/main.jsp"%>
@@ -532,7 +560,7 @@ font-family: OhsquareAir;
 						<p style="margin-bottom:2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
 						<p style="font-size:15px; margin-top:3px;">닉네임만 변경 가능합니다.</p>
 					</div>
-					<form action="/petmily/myinfo" method="get">
+					<form action="/petmily/myinfo" method="post">
 						<table id="outer" align="center" width="500" cellspacing="5"
 							cellpadding="0">
 							
@@ -548,7 +576,7 @@ font-family: OhsquareAir;
 							
 							<tr>
 								<th width="140">(*)닉네임</th>
-								<td><input type="text" name="nickname" value="<%=member.getMemberNick()%>">
+								<td><input type="text" name="nickname" id="nickname" value="<%=member.getMemberNick()%>">
 								</td>
 							</tr>
 						</table>
@@ -559,7 +587,7 @@ font-family: OhsquareAir;
 							border-radius:5px; border:1px solid black;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">
 							&nbsp; 
-							<input type="submit" value="변경하기" 
+							<input type="submit" value="변경하기" id="changeSubmit"
 							style="margin-bottom:15px; width:150px; height:30px; 
 							border-radius:5px; border:1px solid black;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">
