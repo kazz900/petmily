@@ -43,7 +43,7 @@ a {
 <body>
 <img src="/petmily/resources/images/servicecenter/check_mark.png" style="width:100px; height:auto;">
 <h1 style="margin-bottom:5px; font-size:36px;">감사합니다!</h1>
-<h3 style="margin-top:5px; font-size:28px;">건의사항이 등록되었습니다!</h3>
+<h3 style="margin-top:5px; font-size:28px;">등록요청이 전송되었습니다!</h3>
 <a href="/petmily/suggest?mseq=<%=member.getMemberSeq()%>"><button style="margin-bottom:15px; width:200px; height:40px; 
 	border-radius:5px; border:1px solid black;
 	box-shadow:1px 1px 0px 1px #cfcfcf;">확인</button></a>

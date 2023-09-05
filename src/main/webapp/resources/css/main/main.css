@@ -235,7 +235,8 @@ input[id="menuicon"]:checked ~ .menu-container .sidebar {
     display: none;
     position: absolute;
     top: 100%;
-    left: 64%;
+    text-align: center;
+    left: 75%;
     background-color: #fff;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     list-style: none;

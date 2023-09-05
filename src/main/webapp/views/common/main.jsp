@@ -22,6 +22,7 @@
 .dropdown > li {
   padding: 10px;
 }
+
 </style>
 <script type="text/javascript" src="/petmily/resources/js/main/main.js"></script>
 <script>
@@ -50,24 +51,24 @@ function toggleDropdown() {
                </form>
 				</li>
         
-				<li class="sub-link" onclick="toggleDropdown()"><a href="#">내주변</a>
+				<li class="sub-link" onclick="toggleDropdown()" style="margin-left:150px;"><a href="#">내주변</a>
 				<ul class="dropdown" id="dropdown">
-				<li><a href="/petmily/selectdepttype?selecttype=1&typename=의료" style="color : hsl(30.46deg 58.9% 45.68%)">의료</a></li>
-				<li><a href="/petmily/selectdepttype?selecttype=2&typename=미용" style="color : hsl(30.46deg 58.9% 45.68%)">미용</a></li>
-				<li><a href="/petmily/selectdepttype?selecttype=3&typename=용품" style="color : hsl(30.46deg 58.9% 45.68%)">용품</a></li>
-				<li><a href="/petmily/selectdepttype?selecttype=4&typename=위탁" style="color : hsl(30.46deg 58.9% 45.68%)">위탁</a></li>
-				<li><a href="/petmily/selectdepttype?selecttype=6&typename=카페/식당" style="color : hsl(30.46deg 58.9% 45.68%)">카페/식당</a></li>
-				<li><a href="/petmily/selectdepttype?selecttype=7&typename=호텔" style="color : hsl(30.46deg 58.9% 45.68%)">호텔</a></li>
-				<li><a href="/petmily/selectdepttype?selecttype=8&typename=문화" style="color : hsl(30.46deg 58.9% 45.68%)">문화</a></li>
-				<li><a href="/petmily/selectdepttype?selecttype=5&typename=장묘" style="color : hsl(30.46deg 58.9% 45.68%)">장묘</a></li>			
+				<li><a href="/petmily/selectdepttype?selecttype=1&typename=의료" style="color : hsl(30.46deg 58.9% 45.68%);">의료</a></li>
+				<li><a href="/petmily/selectdepttype?selecttype=2&typename=미용" style="color : hsl(30.46deg 58.9% 45.68%);">미용</a></li>
+				<li><a href="/petmily/selectdepttype?selecttype=3&typename=용품" style="color : hsl(30.46deg 58.9% 45.68%);">용품</a></li>
+				<li><a href="/petmily/selectdepttype?selecttype=4&typename=위탁" style="color : hsl(30.46deg 58.9% 45.68%);">위탁</a></li>
+				<li><a href="/petmily/selectdepttype?selecttype=6&typename=카페/식당" style="color : hsl(30.46deg 58.9% 45.68%);">카페/식당</a></li>
+				<li><a href="/petmily/selectdepttype?selecttype=7&typename=호텔" style="color : hsl(30.46deg 58.9% 45.68%);">호텔</a></li>
+				<li><a href="/petmily/selectdepttype?selecttype=8&typename=문화" style="color : hsl(30.46deg 58.9% 45.68%);">문화</a></li>
+				<li><a href="/petmily/selectdepttype?selecttype=5&typename=장묘" style="color : hsl(30.46deg 58.9% 45.68%);">장묘</a></li>			
 				</ul>
 				</li>
-		
-				
+
+				<li style="width:15px;"></li>
+
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
 				<% }else{ %>
-				<li style="width:150px;"></li>
 				<li
 					style="display: inline-block; font-size: 15px; width: 90px; height: 20px; position: absolute; top: 25px;"><%= member.getMemberNick() %>님</li>
 				<li
@@ -88,6 +89,9 @@ function toggleDropdown() {
 				<ul>
 					<% if(member == null) { %>
 					<li class="sidebarmenutitle">더보기</li>
+					<script>
+					
+					</script>
 					
 					<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
 					<% }else if(member.getMemberGrade().equals("1")){ %>
@@ -98,19 +102,19 @@ function toggleDropdown() {
 					<%-- mseq를 들고가야됩니다. --%>
 					<% }else if(member.getMemberGrade().equals("0")){ %>
 					<li class="sidebarmenutitle">더보기</li>
-					<li><a href="#" class="sidebarmenu">마이페이지</a></li>
-					<li><a href="/petmily/plist?memberseq=<%= member.getMemberSeq() %>" method="post">커뮤니티</a></li>
+
+					<li><a href="/petmily/mypet?memberSeq=<%=member.getMemberSeq()%>"class="sidebarmenu">마이페이지</a></li>
+
+					<li><a href="/petmily/plist?memberseq=<%= member.getMemberSeq() %>" method="post" class="sidebarmenu">커뮤니티</a></li>
 					<li><a href="/petmily/adminmain" class="sidebarmenu">업체등록</a></li>
 					<li><a href="/petmily/srtd" class="sidebarmenu">업체삭제</a></li>
 					<li><a href="/petmily/memli" class="sidebarmenu">회원등급변경</a></li>
-
 					<li><a href="/petmily/adsp" class="sidebarmenu">일반게시판관리</a></li>
 					<li><a href="/petmily/adtp" class="sidebarmenu">거래게시판관리</a></li>
-
+					<li><a href="/petmily/suggestAdmin?mseq=<%=member.getMemberSeq()%>" class="sidebarmenu">고객센터</a></li>
 					<% }else if(member.getMemberGrade().equals("2")){ %>
 					
 					<% } %>
-				</ul>
 			</span><br>
 
 		</div>

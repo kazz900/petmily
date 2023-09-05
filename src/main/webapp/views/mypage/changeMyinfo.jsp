@@ -2,11 +2,14 @@
 	pageEncoding="UTF-8"
 	import="member.model.vo.Member, pet.model.vo.Pet, java.util.ArrayList"%>
 <%
-//if (request.getAttribute("message").equals("정보있음")) {
 	ArrayList<Pet> pet = (ArrayList<Pet>) request.getAttribute("list");
-
-//}
+if (request.getAttribute("message") != null) {
+    if (request.getAttribute("message").equals("성공적으로 변경되었습니다.")) {
 %>
+    <script>
+        alert('<%=request.getAttribute("message") %>');
+    </script>
+<% } } %>
 
 <!DOCTYPE html>
 <html>
@@ -190,6 +193,15 @@ font-family: OhsquareAir;
 #petName{
 font-family: OhsquareAir;
 }
+
+#pwdChange:hover {
+	background-color:#dfdfdf;
+}
+
+#changeSubmit:hover {
+	background-color:#dfdfdf;
+}
+
 </style>
 <script>
 	/*  function setThumbnail(event) {
@@ -252,24 +264,48 @@ font-family: OhsquareAir;
 		})
 	};
  */
-	function checkinputpet () {
-	 
+ 
+	function checkinputpet() {
+	 var frm = document.form1;
 		var petname = document.getElementById('petName');
+		/* var upettype = document.getElementByName('upetType');
+		var upetsize = document.getElementById('upetSize'); */
 		if(petname.value.length < 1){
 			alert("펫이름을 입력해 주세요.");
+			return false;}
+		
+		  
+		 
+		if(!frm.petType[0].checked && !frm.petType[1].checked && !frm.petType[2].checked){
+			alert("펫타입을 입력해 주세요.");
+			return false;
+		}else if(!frm.petSize[0].checked && !frm.petSize[1].checked && !frm.petSize[2].checked){
+			alert("펫타입을 입력해 주세요.");
 			return false;
 		}
 			return true;
 	}
  function ucheckinputpet () {
-	 
-		var petname = document.getElementById('upetName');
-		if(petname.value.length < 1){
+	 var frm = document.form2;
+		var upetname = document.getElementById('upetName');
+		/* var upettype = document.getElementByName('upetType');
+		var upetsize = document.getElementById('upetSize'); */
+		if(upetname.value.length < 1){
 			alert("펫이름을 입력해 주세요.");
+			return false;}
+		
+		  
+		 
+		if(!frm.upetType[0].checked && !frm.upetType[1].checked && !frm.upetType[2].checked){
+			alert("펫타입을 입력해 주세요.");
+			return false;
+		}else if(!frm.upetSize[0].checked && !frm.upetSize[1].checked && !frm.upetSize[2].checked){
+			alert("펫타입을 입력해 주세요.");
 			return false;
 		}
 			return true;
 	}
+
 	function changePwd() {
 		location.href = "/petmily/views/mypage/changePwd.jsp";
 	}
@@ -340,7 +376,31 @@ font-family: OhsquareAir;
 		document.querySelector("div.update").style.display = 'block';
 	}
 </script>
+<script type="text/javascript">
+window.onload = function(){
 
+	var submitBtn = document.getElementById("changeSubmit");
+	var nickname = document.getElementById("nickname");
+	
+	const unchangedNick = nickname.value;
+	
+	submitBtn.disabled = true;
+	
+	nickname.addEventListener("keyup", function(){
+		var changedNick = nickname.value;
+		
+		if (changedNick !== unchangedNick) {
+			
+			submitBtn.disabled = false;
+			
+		} else if (changedNick === unchangedNick) {
+			
+			submitBtn.disabled = true;
+			
+		}
+	});
+}
+</script>
 </head>
 <body>
 	<%@ include file="../common/main.jsp"%>
@@ -361,11 +421,11 @@ font-family: OhsquareAir;
 			<hr style="opacity: 0.5; margin: 0px;">
 
 			<div id="tab-1" class="tab-content current">
-				<div style="position: absolute; background-color: white; left: 5%;">
-					<form action="/petmily/peten" method="post"
+				<div style="position: absolute; background-color: white; left: 5%;z-index:2;">
+					<form action="/petmily/peten" method="post" name="form1"
 						enctype="multipart/form-data" onsubmit="return checkinputpet();">
 						<table
-							style="border-radius: 12px; box-shadow: 0px 0px 7px black; font-size: 15px;"
+							style="border-radius: 12px; box-shadow: 0px 0px 7px black; font-size: 15px; "
 							class="petintable">
 							<tr class="petintr">
 								<td colspan="3" class="petintd">나의 Petmily 추가하기.</td>
@@ -381,7 +441,7 @@ font-family: OhsquareAir;
 							</tr>
 							<tr class="petintr" style="width: 200px; display: block;">
 								<td class="petintd-radio"><input type="radio"
-									name="petType" id="petType" value="0" checked>고양이</td>
+									name="petType" id="petType" value="0">고양이</td>
 								<td class="petintd-radio"><input type="radio"
 									name="petType" id="petType" value="1">강아지</td>
 								<td class="petintd-radio"><input type="radio"
@@ -389,7 +449,7 @@ font-family: OhsquareAir;
 							</tr>
 							<tr class="petintr">
 								<td class="petintd-radio"><input type="radio"
-									name="petSize" id="petSize" value="소형" checked>소형(10kg 미만)</td>
+									name="petSize" id="petSize" value="소형">소형(10kg 미만)</td>
 								<td class="petintd-radio"><input type="radio"
 									name="petSize" id="petSize" value="중형">중형(10~25kg 미만)</td>
 								<td class="petintd-radio"><input type="radio"
@@ -424,7 +484,7 @@ font-family: OhsquareAir;
 				for (Pet p : pet) {
 					int i = 1;
 				%>
-				<div class="pet" style="margin-top:10px; border-radius: 12px;  font-size: 15px;">
+				<div class="pet" style="margin-top:10px; border-radius: 12px;  font-size: 15px; z-index=1;">
 					<div class="petimg"
 						style="width: 200px; height: 200px; display: flex; overflow: hidden; justify-content: center;">
 						<img src="/petmily/resources/images/petImg/<%=p.getPetImg()%>"
@@ -468,8 +528,8 @@ font-family: OhsquareAir;
 				<% } %>
 				<div class="update1" id="update1">
 					<div class="update" id="update"
-						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 2; display: none;border-radius: 20px; width:210px;">
-						<form action="/petmily/petup" method="post"
+						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 3; display: none;border-radius: 20px; width:210px;">
+						<form action="/petmily/petup" method="post" name="form2"
 							enctype="multipart/form-data"onsubmit="return ucheckinputpet();">
 							<input type="hidden" name="duImg" id="duImg">
 							<input type="hidden" name="memberSeq" id="memberSeq"
@@ -535,7 +595,7 @@ font-family: OhsquareAir;
 						<p style="margin-bottom:2px;">고객님께서 가입하신 펫밀리 계정정보입니다.</p>
 						<p style="font-size:15px; margin-top:3px;">닉네임만 변경 가능합니다.</p>
 					</div>
-					<form action="/petmily/myinfo" method="get">
+					<form action="/petmily/myinfo" method="post">
 						<table id="outer" align="center" width="500" cellspacing="5"
 							cellpadding="0">
 							
@@ -551,18 +611,18 @@ font-family: OhsquareAir;
 							
 							<tr>
 								<th width="140">(*)닉네임</th>
-								<td><input type="text" name="nickname" value="<%=member.getMemberNick()%>">
+								<td><input type="text" name="nickname" id="nickname" value="<%=member.getMemberNick()%>">
 								</td>
 							</tr>
 						</table>
 						<div style="text-align:center; margin-top:10px;">
 						
-							<input type="button" value="비밀번호 변경" onclick="changePwd();" 
+							<input type="button" value="비밀번호 변경" id="pwdChange" onclick="changePwd();" 
 							style="margin-bottom:15px; width:150px; height:30px; 
 							border-radius:5px; border:1px solid black;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">
 							&nbsp; 
-							<input type="submit" value="변경하기" 
+							<input type="submit" value="변경하기" id="changeSubmit"
 							style="margin-bottom:15px; width:150px; height:30px; 
 							border-radius:5px; border:1px solid black;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">

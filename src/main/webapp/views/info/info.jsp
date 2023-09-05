@@ -52,8 +52,8 @@ function kakaoShare() {
 </section>
 <div id="info-content" class="info-content">
 <div>
-<!-- <img class="info-img" src="/petmily/resources/images/mainbanner/882.jpg"> -->
-<img class="info-img" src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f184_184&amp;src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200216_260%2F15818269954319jfwa_JPEG%2F_9Yd8jwNtxtLyFcMAdHFV3Ur.jpeg.jpg" alt="1004약국">
+<img class="info-img" src="/petmily/resources/images/mainbanner/882.jpg">
+<!-- <img class="info-img" src="https://search.pstatic.net/common/?autoRotate=true&amp;quality=95&amp;type=f184_184&amp;src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20200216_260%2F15818269954319jfwa_JPEG%2F_9Yd8jwNtxtLyFcMAdHFV3Ur.jpeg.jpg" alt="1004약국"> -->
 <ul class="info-detail01">
 	<li class="info-detail-title"><%= dptmt.getDeptName() %></li><br>
 	<li class="info-detail-subtitle"><%=dptmt.getDeptType()%></li><br>

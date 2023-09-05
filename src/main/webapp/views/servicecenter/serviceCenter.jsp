@@ -56,7 +56,7 @@
 						<th style="width: 110px;">작성일자</th>
 					</tr>
 
-					
+
 					<% for (Board b : list) { %>
 					<tr style="border-top: 1px solid black; border-bottom: 1px solid black;">
 						<td style="font-size: 14px;"><%=b.getBrdNo()%></td>
