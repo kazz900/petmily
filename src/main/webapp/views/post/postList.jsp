@@ -21,7 +21,33 @@
 								rel="stylesheet">
 							<script type="text/javascript">
 								$(function () {
-									$('.likeimg').on('click', function(){})
+									$('.likeimg').on('click', function(){
+										var parent = $(this).parent().parent().parent().parent().parent('#standard-post');
+										var data_post_seq = parent.attr('data-post-seq');
+										var data_member_seq = parent.attr('data-member-seq');
+										var data_post_type = parent.attr('data-post-type');
+										var likeNo = parent.find('.likenotext');
+										var val = Number(likeNo.text());
+
+										console.log('data_post_seq : ' + data_post_seq);
+										console.log('data-member-seq : ' + data_member_seq);
+										$.ajax({
+											url : '/petmily/lcs',
+											type : 'post',
+											dataType : 'json',
+											data : {
+												post_seq : data_post_seq,
+												member_seq : data_member_seq,
+												post_type : data_post_type
+											},
+											success : function(){
+												likeNo.text(val+1);
+											},
+											error : function (error) {
+												alert("이미 좋아요한 게시글 입니다");
+											}
+										})
+									});
 
 									// 새 게시글 폼 바깥쪽 클릭하면 사라지게 하기
 									$('html').click(function (e) {
@@ -233,7 +259,7 @@
 										<% if(p instanceof StandardPost){ %>
 											
 											<!-- 일반게시글 -->
-											<div id="standard-post" style="width: 700px; padding: 10px;">
+											<div id="standard-post" style="width: 700px; padding: 10px;" data-post-seq="<%= p.getPostSeq() %>" data-member-seq="<%= m.getMemberSeq() %>" data-post-type="standardpost">
 												<table id="standardpost"
 													style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid #fda90d; top: 50px;">
 													<tr id="postmemberid"
@@ -260,12 +286,11 @@
 													</tr>
 													<!-- 좋아요 숫자 표시 -->
 													<tr>
-														<td colspan="2" class="likeNo">
-															<!-- 좋아요 기능 추가 해야됨 --> <img
-																src="/petmily/resources/images/post/love.png"
-																class="likeimg">
-															&nbsp;&nbsp;<%= p.getLikeNo() %>
-															
+														<td class="likeNo">
+															<img src="/petmily/resources/images/post/love.png" class="likeimg">
+														</td>
+														<td class="likenotext">
+															<%= p.getLikeNo() %>
 														</td>
 													</tr>
 													<!-- 자기 게시글일 경우 수정버튼 표시 -->
@@ -310,7 +335,7 @@
 											</div>
 											<% } else if (p instanceof TradePost) { %>
 												<!-- 중고거래게시글 -->
-												<div id="trade-post" style="width: 700px; padding: 10px;">
+												<div id="trade-post" style="width: 700px; padding: 10px;" data-post-seq="<%= p.getPostSeq() %>" data-member-seq="<%= m.getMemberSeq() %>" data-post-type="tradepost">
 													<table id="standardpost"
 														style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid #fda90d; top: 50px;">
 														<tr id="postmemberid"
