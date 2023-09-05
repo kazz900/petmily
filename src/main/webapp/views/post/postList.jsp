@@ -300,7 +300,7 @@
 																				<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
 																			</td>
 																			<td>
-																				<% if(p.getMemberSeq() == r.getMemberSeq()) { %>
+																				<% if(m.getMemberSeq() == r.getMemberSeq()) { %>
 																				<button class="replydelete" onclick="deleteReply(<%= r.getReplySeq() %>, <%= m.getMemberSeq() %>)">삭제</button>
 																				<% } %>
 																			</td>
@@ -380,14 +380,13 @@
 																<!-- 댓글 띄우기 -->
 																<% if(p.getPostSeq()==r.getPostSeq()) { %>
 																	<tr class="replies">
-																		<td>
-																			<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>
+																		<td class="replyinfo">
+																			<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
 																		</td>
 																		<td>
-																			<% if(p.getMemberSeq() == r.getMemberSeq()) { %>
-																			<button class="replydelete">삭제</button>
+																			<% if(m.getMemberSeq() == r.getMemberSeq()) { %>
+																			<button class="replydelete" onclick="deleteReply(<%= r.getReplySeq() %>, <%= m.getMemberSeq() %>)">삭제</button>
 																			<% } %>
-																			<%= r.getReplyContent() %>
 																		</td>
 																	</tr>
 																	<% }} %>
