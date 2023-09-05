@@ -1,5 +1,7 @@
 package department.controller;
 
+//import java.io.BufferedWriter;
+//import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,6 +11,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+//import com.google.gson.Gson;
 
 import department.model.service.DepartmentService;
 import department.model.vo.Department;
@@ -38,21 +42,29 @@ public class DeptTypeServlet extends HttpServlet {
 		DepartmentService dservice = new DepartmentService();
 		String value = request.getParameter("selecttype");
 		String search = request.getParameter("typename");		
-
+	
+		ArrayList<Department> list = dservice.selectType(value);	
 		
 		
-		ArrayList<Department> list = dservice.selectType(value);
+		/*
+		 * Gson gson = new Gson(); String jsonPlace = gson.toJson(list); // //
+		 * BufferedWriter writer = new BufferedWriter(new //
+		 * FileWriter("C:\\Users\\user\\Desktop\\a.json")); writer.write(jsonPlace);
+		 * writer.close();
+		 */
+		 		
+		 //받은 결과에 따라 성공 또는 실패 페이지 내보내기
 		
-		//받은 결과에 따라 성공 또는 실패 페이지 내보내기
-		RequestDispatcher view = null;
-		
-		view = request.getRequestDispatcher("views/department/deptsearch.jsp");
-		request.setAttribute("list", list);
-		request.setAttribute("search", search);
-		request.setAttribute("type", "0");
-
-		// 내보내기
-		view.forward(request, response);
+		  RequestDispatcher view = null;
+		  
+		  view = request.getRequestDispatcher("views/department/deptsearch.jsp");
+		  request.setAttribute("list", list); request.setAttribute("search", search);
+		  request.setAttribute("type", "0");
+		  
+		  //내보내기 
+		  view.forward(request, response);
+		 
+		 
 	}
 
 	/**

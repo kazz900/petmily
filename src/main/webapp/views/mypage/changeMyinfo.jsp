@@ -194,12 +194,158 @@ font-family: OhsquareAir;
 font-family: OhsquareAir;
 }
 
-#pwdChange:hover {
-	background-color:#dfdfdf;
+input[type=submit]#changeSubmit {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:none;
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
 }
 
-#changeSubmit:hover {
-	background-color:#dfdfdf;
+input[type=submit]#changeSubmit:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=submit]#addpetsub {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=submit]#addpetsub:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=button]#pwdChange {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:none;
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=button]#pwdChange:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+button#fixBtn {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:80px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+button#fixBtn:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=reset] {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=reset]:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=submit]#uEdit {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=submit]#uEdit:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=submit]#deleteOk {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:80px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=submit]#deleteOk:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
 }
 
 </style>
@@ -495,7 +641,7 @@ window.onload = function(){
 						크기:<%=p.getPetSize()%><br>
 
 					</div>
-					<div class="updateBtn">
+					<div class="updateBtn" style="display: inline-flex;">
 
 						
 						<input type="hidden" name="UpetSeq<%=p.getPetSeq()%>"
@@ -511,12 +657,12 @@ window.onload = function(){
 						<button id="fixBtn" value="<%=p.getPetSeq()%>"
 							onclick="getValue(this.value);openNewPostForm();">수정하기</button>
 
-						<form action="/petmily/petdel" method="post">
+						<form action="/petmily/petdel" method="post"  style="margin-left:15px;">
 							<input type="hidden" name="dmemberSeq" id="deletePet"
 								value="<%=p.getMemberSeq()%>"> <input type="hidden"
 								name="deletePet" id="deletePet" value="<%=p.getPetSeq()%>">
 								<input type="hidden" name="deleteImg" id="deleteImg" value="<%=p.getPetImg()%>">
-							<input type="submit" value="삭제">
+							<input type="submit" id="deleteOk" value="삭제">
 						</form>
 					</div>
 				</div>
@@ -578,7 +724,7 @@ window.onload = function(){
 										onchange="ureadImage(this);" style="width: 200px;"></td>
 								</tr>
 								<tr class="petintr">
-									<td colspan="2" style="width: 100px;"><input type="submit"
+									<td colspan="2" style="width: 100px;"><input type="submit" id="uEdit"
 										value="수정완료" style="width: 80px;"></td>
 									<td><input type="reset" value="모두 지우기" style="width: 80px;"></td>
 								</tr>
@@ -619,12 +765,12 @@ window.onload = function(){
 						
 							<input type="button" value="비밀번호 변경" id="pwdChange" onclick="changePwd();" 
 							style="margin-bottom:15px; width:150px; height:30px; 
-							border-radius:5px; border:1px solid black;
+							border-radius:5px;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">
 							&nbsp; 
 							<input type="submit" value="변경하기" id="changeSubmit"
 							style="margin-bottom:15px; width:150px; height:30px; 
-							border-radius:5px; border:1px solid black;
+							border-radius:5px;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">
 						
 						</div>

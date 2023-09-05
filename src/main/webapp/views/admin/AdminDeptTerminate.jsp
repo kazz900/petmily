@@ -75,9 +75,10 @@ body{
 			<tr>
 				<th>등록번호</th>
 				<th>시설종류</th>
-				<th>시설명</th>
-				<th>전화번호</th>
-				<th>주소</th>
+				<th width="150px">시설명</th>
+				<th width="150px">전화번호</th>
+				<th width="350px">주소</th>
+				<th>삭제요청</th>
 				<th>삭제</th>
 			</tr>
 			<%
@@ -90,6 +91,7 @@ body{
 				<td><%=dept.getDeptName()%></td>
 				<td><%=dept.getDeptPhone()%></td>
 				<td><%=dept.getDeptAddress()%></td>
+				<td><%=dept.getDeptDeleteOk()%></td>
 				<td><input type="button" value="삭제" id="chggrade" 
 					onclick="location.href='/petmily/deptter?deptSeq=<%=dept.getDeptSeq()%>&keyword=<%= keyword %>';
 							return false;"></td>
@@ -99,7 +101,7 @@ body{
 			}
 			}else{ %>
 			<tr>
-				<td colspan="6">
+				<td colspan="7">
 				검색결과없음
 				</td>
 			</tr>		

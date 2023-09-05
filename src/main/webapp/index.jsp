@@ -18,7 +18,7 @@
 </section>
 <div style="display: flex;
     justify-content: center;
-    align-items: end;
+    
     height: 740px;">
 <div class="banner-container" style="height: 670px; margin-top:85px">
   <div class="banner">

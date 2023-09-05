@@ -13,12 +13,14 @@ import javax.servlet.http.HttpServletResponse;
 import department.model.service.DepartmentService;
 import department.model.vo.Department;
 
+
 /**
  * Servlet implementation class DepartmentServlet
  */
 @WebServlet("/selectdepartment")
 public class DepartmentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -44,7 +46,6 @@ public class DepartmentServlet extends HttpServlet {
 		request.setAttribute("search", value);
 		request.setAttribute("list", list);
 		request.setAttribute("type", "1");
-
 		// 내보내기
 		view.forward(request, response);
 
