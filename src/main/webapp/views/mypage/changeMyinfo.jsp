@@ -389,11 +389,11 @@ window.onload = function(){
 			<hr style="opacity: 0.5; margin: 0px;">
 
 			<div id="tab-1" class="tab-content current">
-				<div style="position: absolute; background-color: white; left: 5%;">
+				<div style="position: absolute; background-color: white; left: 5%;z-index:2;">
 					<form action="/petmily/peten" method="post"
 						enctype="multipart/form-data" onsubmit="return checkinputpet();">
 						<table
-							style="border-radius: 12px; box-shadow: 0px 0px 7px black; font-size: 15px;"
+							style="border-radius: 12px; box-shadow: 0px 0px 7px black; font-size: 15px; "
 							class="petintable">
 							<tr class="petintr">
 								<td colspan="3" class="petintd">나의 Petmily 추가하기.</td>
@@ -452,7 +452,7 @@ window.onload = function(){
 				for (Pet p : pet) {
 					int i = 1;
 				%>
-				<div class="pet" style="margin-top:10px; border-radius: 12px;  font-size: 15px;">
+				<div class="pet" style="margin-top:10px; border-radius: 12px;  font-size: 15px; z-index=1;">
 					<div class="petimg"
 						style="width: 200px; height: 200px; display: flex; overflow: hidden; justify-content: center;">
 						<img src="/petmily/resources/images/petImg/<%=p.getPetImg()%>"
@@ -496,7 +496,7 @@ window.onload = function(){
 				<% } %>
 				<div class="update1" id="update1">
 					<div class="update" id="update"
-						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 2; display: none;border-radius: 20px; width:210px;">
+						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 3; display: none;border-radius: 20px; width:210px;">
 						<form action="/petmily/petup" method="post"
 							enctype="multipart/form-data"onsubmit="return ucheckinputpet();">
 							<input type="hidden" name="duImg" id="duImg">
