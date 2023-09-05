@@ -42,6 +42,11 @@ public class BoardService implements Serializable {
 	public int updateMySuggest(int userid, String title, String content, int boardNo, String result) {
 		Connection conn = getConnection();
 		int eResult = bdao.updateMySuggest(conn, userid, title, content, boardNo, result);
+		if (eResult > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		close(conn);
 		return eResult;
 	}

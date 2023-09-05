@@ -42,7 +42,7 @@ public class AddMySuggestServlet extends HttpServlet {
 		int result = new BoardService().addMySuggest(board);
 
 		if (result > 0) {
-			response.sendRedirect("/petmily/views/servicecenter/dCommon/addSucceed.jsp");
+			response.sendRedirect("/petmily/views/servicecenter/dCommon/addSuggestSucceed.jsp");
 		} else {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/addFailed.jsp");
 		}
