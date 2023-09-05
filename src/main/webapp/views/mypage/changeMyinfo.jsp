@@ -193,6 +193,15 @@ font-family: OhsquareAir;
 #petName{
 font-family: OhsquareAir;
 }
+
+#pwdChange:hover {
+	background-color:#dfdfdf;
+}
+
+#changeSubmit:hover {
+	background-color:#dfdfdf;
+}
+
 </style>
 <script>
 	/*  function setThumbnail(event) {
@@ -608,7 +617,7 @@ window.onload = function(){
 						</table>
 						<div style="text-align:center; margin-top:10px;">
 						
-							<input type="button" value="비밀번호 변경" onclick="changePwd();" 
+							<input type="button" value="비밀번호 변경" id="pwdChange" onclick="changePwd();" 
 							style="margin-bottom:15px; width:150px; height:30px; 
 							border-radius:5px; border:1px solid black;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">
