@@ -194,12 +194,158 @@ font-family: OhsquareAir;
 font-family: OhsquareAir;
 }
 
-#pwdChange:hover {
-	background-color:#dfdfdf;
+input[type=submit]#changeSubmit {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:none;
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
 }
 
-#changeSubmit:hover {
-	background-color:#dfdfdf;
+input[type=submit]#changeSubmit:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=submit]#addpetsub {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=submit]#addpetsub:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=button]#pwdChange {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:none;
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=button]#pwdChange:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+button#fixBtn {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:80px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+button#fixBtn:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=reset] {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=reset]:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=submit]#uEdit {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=submit]#uEdit:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=submit]#deleteOk {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:80px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=submit]#deleteOk:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
 }
 
 </style>
@@ -265,24 +411,47 @@ font-family: OhsquareAir;
 	};
  */
  
-	function checkinputpet () {
-	 
+	function checkinputpet() {
+	 var frm = document.form1;
 		var petname = document.getElementById('petName');
+		/* var upettype = document.getElementByName('upetType');
+		var upetsize = document.getElementById('upetSize'); */
 		if(petname.value.length < 1){
 			alert("펫이름을 입력해 주세요.");
+			return false;}
+		
+		  
+		 
+		if(!frm.petType[0].checked && !frm.petType[1].checked && !frm.petType[2].checked){
+			alert("펫타입을 입력해 주세요.");
+			return false;
+		}else if(!frm.petSize[0].checked && !frm.petSize[1].checked && !frm.petSize[2].checked){
+			alert("펫타입을 입력해 주세요.");
 			return false;
 		}
 			return true;
 	}
  function ucheckinputpet () {
-	 
-		var petname = document.getElementById('upetName');
-		if(petname.value.length < 1){
+	 var frm = document.form2;
+		var upetname = document.getElementById('upetName');
+		/* var upettype = document.getElementByName('upetType');
+		var upetsize = document.getElementById('upetSize'); */
+		if(upetname.value.length < 1){
 			alert("펫이름을 입력해 주세요.");
+			return false;}
+		
+		  
+		 
+		if(!frm.upetType[0].checked && !frm.upetType[1].checked && !frm.upetType[2].checked){
+			alert("펫타입을 입력해 주세요.");
+			return false;
+		}else if(!frm.upetSize[0].checked && !frm.upetSize[1].checked && !frm.upetSize[2].checked){
+			alert("펫타입을 입력해 주세요.");
 			return false;
 		}
 			return true;
 	}
+
 	function changePwd() {
 		location.href = "/petmily/views/mypage/changePwd.jsp";
 	}
@@ -399,7 +568,7 @@ window.onload = function(){
 
 			<div id="tab-1" class="tab-content current">
 				<div style="position: absolute; background-color: white; left: 5%;z-index:2;">
-					<form action="/petmily/peten" method="post"
+					<form action="/petmily/peten" method="post" name="form1"
 						enctype="multipart/form-data" onsubmit="return checkinputpet();">
 						<table
 							style="border-radius: 12px; box-shadow: 0px 0px 7px black; font-size: 15px; "
@@ -418,7 +587,7 @@ window.onload = function(){
 							</tr>
 							<tr class="petintr" style="width: 200px; display: block;">
 								<td class="petintd-radio"><input type="radio"
-									name="petType" id="petType" value="0" checked>고양이</td>
+									name="petType" id="petType" value="0">고양이</td>
 								<td class="petintd-radio"><input type="radio"
 									name="petType" id="petType" value="1">강아지</td>
 								<td class="petintd-radio"><input type="radio"
@@ -426,7 +595,7 @@ window.onload = function(){
 							</tr>
 							<tr class="petintr">
 								<td class="petintd-radio"><input type="radio"
-									name="petSize" id="petSize" value="소형" checked>소형(10kg 미만)</td>
+									name="petSize" id="petSize" value="소형">소형(10kg 미만)</td>
 								<td class="petintd-radio"><input type="radio"
 									name="petSize" id="petSize" value="중형">중형(10~25kg 미만)</td>
 								<td class="petintd-radio"><input type="radio"
@@ -472,7 +641,7 @@ window.onload = function(){
 						크기:<%=p.getPetSize()%><br>
 
 					</div>
-					<div class="updateBtn">
+					<div class="updateBtn" style="display: inline-flex;">
 
 						
 						<input type="hidden" name="UpetSeq<%=p.getPetSeq()%>"
@@ -488,12 +657,12 @@ window.onload = function(){
 						<button id="fixBtn" value="<%=p.getPetSeq()%>"
 							onclick="getValue(this.value);openNewPostForm();">수정하기</button>
 
-						<form action="/petmily/petdel" method="post">
+						<form action="/petmily/petdel" method="post"  style="margin-left:15px;">
 							<input type="hidden" name="dmemberSeq" id="deletePet"
 								value="<%=p.getMemberSeq()%>"> <input type="hidden"
 								name="deletePet" id="deletePet" value="<%=p.getPetSeq()%>">
 								<input type="hidden" name="deleteImg" id="deleteImg" value="<%=p.getPetImg()%>">
-							<input type="submit" value="삭제">
+							<input type="submit" id="deleteOk" value="삭제">
 						</form>
 					</div>
 				</div>
@@ -506,7 +675,7 @@ window.onload = function(){
 				<div class="update1" id="update1">
 					<div class="update" id="update"
 						style="position: absolute; background-color: white; left: 5%; top: 186px; z-index: 3; display: none;border-radius: 20px; width:210px;">
-						<form action="/petmily/petup" method="post"
+						<form action="/petmily/petup" method="post" name="form2"
 							enctype="multipart/form-data"onsubmit="return ucheckinputpet();">
 							<input type="hidden" name="duImg" id="duImg">
 							<input type="hidden" name="memberSeq" id="memberSeq"
@@ -555,7 +724,7 @@ window.onload = function(){
 										onchange="ureadImage(this);" style="width: 200px;"></td>
 								</tr>
 								<tr class="petintr">
-									<td colspan="2" style="width: 100px;"><input type="submit"
+									<td colspan="2" style="width: 100px;"><input type="submit" id="uEdit"
 										value="수정완료" style="width: 80px;"></td>
 									<td><input type="reset" value="모두 지우기" style="width: 80px;"></td>
 								</tr>
@@ -596,12 +765,12 @@ window.onload = function(){
 						
 							<input type="button" value="비밀번호 변경" id="pwdChange" onclick="changePwd();" 
 							style="margin-bottom:15px; width:150px; height:30px; 
-							border-radius:5px; border:1px solid black;
+							border-radius:5px;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">
 							&nbsp; 
 							<input type="submit" value="변경하기" id="changeSubmit"
 							style="margin-bottom:15px; width:150px; height:30px; 
-							border-radius:5px; border:1px solid black;
+							border-radius:5px;
 							box-shadow:1px 1px 0px 1px #cfcfcf;">
 						
 						</div>

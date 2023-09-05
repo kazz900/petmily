@@ -61,7 +61,7 @@ img#new-post-file-upload{
     width: 50px;
     height: 50px;
     position: relative;
-    right: -250px;
+    right: -200px;
     bottom: 70px;
 }
 
@@ -97,6 +97,10 @@ textarea#post-content-textarea {
     outline-color: #fda90d;
     text-align: center;
     color: #fda90d;
+}
+
+table{
+    table-layout: fixed;
 }
 
 table#standard-post tr td#posteditdate {
@@ -265,11 +269,21 @@ button#postsubmit {
     right: -145px;
 }
 
+button#postedit{
+    position: relative;
+    right: -170px;
+}
+
+button#postdelete{
+    position: relative;
+    right: -200px;
+    bottom: 74px;
+}
 
 div.snsbuttonswrap{
     position: fixed;
     padding: 10px;
-    top: 85px;
+    top: 100px;
     width: 700px;
     align-items: center;
     justify-content: center;
@@ -282,7 +296,7 @@ select.pl{
     text-align: center;
     position: relative;
     bottom: 86px;
-    right: -240px;
+    right: -190px;
     width: 150px;
     height: 40px;
     box-sizing: border-box;
@@ -331,7 +345,7 @@ div.newPostformBox{
 }
 
 /* The popup form - hidden by default */
-.new-post-form-popup {
+div.new-post-form-popup {
     position: fixed;
     top: 480px;
     left: 50%;
@@ -346,7 +360,7 @@ div.newPostformBox{
 }
 
 /* Add styles to the form container */
-.form-container {
+form.form-container {
     position: relative;
     max-width: 100%;
     max-height: 100%;
@@ -354,4 +368,40 @@ div.newPostformBox{
     padding: 10px;
     background-color: white;
     text-align: center;
+}
+
+div.post-edit-form-wrap{
+    position: fixed;
+    padding: 10px;
+    top: 85px;
+    width: 700px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Edit Form popup wrap */
+div.editPostformBox{
+    display: none;
+    position: fixed;
+    width: 700px;
+    align-items: center;
+    text-align: center;
+}
+
+/* The popup form - hidden by default */
+.edit-post-form-popup {
+    position: fixed;
+    top: 480px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    width: 700px;
+    height: 500px;
+    text-align: center;
+    z-index: 9;
+    border-radius: 45px;
 }
