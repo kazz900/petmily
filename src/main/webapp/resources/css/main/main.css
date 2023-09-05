@@ -242,4 +242,5 @@ input[id="menuicon"]:checked ~ .menu-container .sidebar {
     list-style: none;
     padding: 0;
     z-index: 1;
+    border-radius:20px;
 }

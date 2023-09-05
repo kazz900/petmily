@@ -38,12 +38,48 @@ input[type=text] {
 }
 }
 
-#prev:hover {
-	background-color:#dfdfdf;
+input[type=submit]#submit {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
 }
 
-#submit:hover {
-	background-color:#dfdfdf;
+input[type=submit]#submit:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=button]#prev {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:250px; 
+	height:35px; 
+	border-radius:5px; 
+	border:0px solid rgba(200,124,25,0.1);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=button]#prev:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
 }
 
 </style>
@@ -136,12 +172,12 @@ function toMyPage(){
 			
 				<input type="button" value="이전으로" id="prev"
 				style="margin-bottom:15px; width:150px; height:30px; 
-				border-radius:5px; border:1px solid black;
+				border-radius:5px;
 				box-shadow:1px 1px 0px 1px #cfcfcf;" onclick="history.go(-1)">
 				&nbsp; 
 				<input type="submit" value="변경하기" id="submit"
 				style="margin-bottom:15px; width:150px; height:30px; 
-				border-radius:5px; border:1px solid black;
+				border-radius:5px;
 				box-shadow:1px 1px 0px 1px #cfcfcf;">
 			
 			</div>
