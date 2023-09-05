@@ -103,13 +103,14 @@ function toggleDropdown() {
 					<% }else if(member.getMemberGrade().equals("0")){ %>
 					<li class="sidebarmenutitle">더보기</li>
 					<li><a href="#" class="sidebarmenu">마이페이지</a></li>
-					<li><a href="/petmily/plist?memberseq=<%= member.getMemberSeq() %>" method="post">커뮤니티</a></li>
+					<li><a href="/petmily/plist?memberseq=<%= member.getMemberSeq() %>" method="post" class="sidebarmenu">커뮤니티</a></li>
 					<li><a href="/petmily/adminmain" class="sidebarmenu">업체등록</a></li>
 					<li><a href="/petmily/srtd" class="sidebarmenu">업체삭제</a></li>
 					<li><a href="/petmily/memli" class="sidebarmenu">회원등급변경</a></li>
-					<li><a href="#" class="sidebarmenu">일반게시판관리</a></li>
-					<li><a href="#" class="sidebarmenu">거래게시판관리</a></li>
-					<li><a href="/petmily/suggestAdmin?mseq=<%=member.getMemberSeq()%>, mGrade=<%=member.getMemberGrade()%>" class="sidebarmenu">관리자 고객센터</a></li>
+
+					<li><a href="/petmily/adsp" class="sidebarmenu">일반게시판관리</a></li>
+					<li><a href="/petmily/adtp" class="sidebarmenu">거래게시판관리</a></li>
+
 					<% }else if(member.getMemberGrade().equals("2")){ %>
 					
 					<% } %>

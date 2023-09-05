@@ -34,13 +34,14 @@ div#main {
 
 div#top {
 	width: 100%;
-	height: 100px;
+	height: 120px;
 }
 
 div#searchname {
 	width: 50%;
 	height: 100%;
 	float: left;
+	text-align : center;
 }
 
 div#searchcheck {
@@ -62,10 +63,11 @@ div#map {
 }
 
 div#info {
-	width: 30%;
+	width: 29%;
 	height: 100%;
 	float: right;
 	overflow: auto;
+	margin-left : 3px;
 }
 
 .markerDeptName {
@@ -82,7 +84,7 @@ img#searchImg {
 
 .checkbox-container {
 	display: inline-block;
-    margin-right: 10px; /* 체크박스 간격 조절을 위해 마진 추가 */
+    margin-right: 3px; /* 체크박스 간격 조절을 위해 마진 추가 */
 }
         
 </style>					
@@ -95,6 +97,46 @@ img#searchImg {
 		lng = position.coords.longitude;
 
 	});
+
+
+	function typeAllCheck() {
+
+		var typecheck = document.getElementsByName("type");
+		var selectAll = document.getElementById("typeAll");
+
+		for (var i = 0; i < typecheck.length; i++) {
+			typecheck[i].checked = selectAll.checked;
+		}
+	}
+
+	function sizeAllCheck() {
+
+		var typecheck = document.getElementsByName("size");
+		var selectAll = document.getElementById("sizeAll");
+
+		for (var i = 0; i < typecheck.length; i++) {
+			typecheck[i].checked = selectAll.checked;
+		}
+	}
+	
+	function validate() {
+		
+		var typecheck = document.getElementsByName("type");
+		var sizecheck = document.getElementsByName("size");
+
+		
+		if(typecheck < 1){
+			alert("반려동물 종류를 선택하세요");
+			return false;
+		}
+		
+		if(sizecheck < 1) {
+			alert("반려동물 크기를 선택하세요");
+			return false;
+		}
+		
+	}
+	
 </script>
 </head>
 <body>
@@ -109,21 +151,47 @@ img#searchImg {
 				</h1>
 			</div>
 			<div id="searchcheck">
-			    <!-- 체크박스 항목들 -->
-			    <div class="checkbox-container">
-			        <input type="checkbox" id="item1" name="items" value="아이템1">
-			        <label for="item1">아이템 1</label>
-			    </div>
-			
-			    <div class="checkbox-container">
-			        <input type="checkbox" id="item2" name="items" value="아이템2">
-			        <label for="item2">아이템 2</label>
-			    </div>
-			
-			    <div class="checkbox-container">
-			        <input type="checkbox" id="item3" name="items" value="아이템3">
-			        <label for="item3">아이템 3</label>
-			    </div>
+			    <form action="/petmily/deptcheck" onsubmit="return validate();">
+			    	<fieldset>
+				    <h4 style ="margin: 0";> 검색 조건 입력 </h4>	    	
+			    	<label>반려동물종류 : </label>
+			    		<div class="checkbox-container">
+					        <input type="checkbox" id="typeAll" name="type" value="typeAll" onclick="typeAllCheck()">
+					        <label> 전체</label>
+					    </div>
+			    	 	<div class="checkbox-container">
+					        <input type="checkbox" id="cat" name="type" value="cat">
+					        <label>고양이</label>
+					    </div>					
+					    <div class="checkbox-container">
+					        <input type="checkbox" id="dog" name="type" value="dog">
+					        <label>강아지</label>
+					    </div>
+					
+					    <div class="checkbox-container">
+					        <input type="checkbox" id="etc" name="type" value="etc">
+					        <label>기타</label>
+					    </div><br>
+				    <label>반려동물사이즈 : </label>
+			    		<div class="checkbox-container">
+					        <input type="checkbox" id="sizeAll" name="size" value="sizeAll" onclick="sizeAllCheck()">
+					        <label>전체</label>
+					    </div>
+			    	 	<div class="checkbox-container">
+					        <input type="checkbox" name="size" value="small">
+					        <label>소형(10kg 미만)</label>
+					    </div>					
+					    <div class="checkbox-container">
+					        <input type="checkbox" name="size" value="regular">
+					        <label>중형(10~25kg 미만)</label>
+					    </div>
+					    <div class="checkbox-container">
+					        <input type="checkbox" name="size" value="big">
+					        <label>대형(25kg 이상)</label>
+					    </div>
+					    <input type="submit" value="검색">
+			    	</fieldset>
+			    </form>
 		    </div>
 			<hr>
 		</div>

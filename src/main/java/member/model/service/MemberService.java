@@ -140,4 +140,28 @@ public class MemberService {
 		return list;
 	}
 
+	public ArrayList<Member> againList(String memberId) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.againList(conn, memberId);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Member> selectSearchContent(String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchContent(conn, keyword);
+		close(conn);
+		return list;
+	}
+
+	public ArrayList<Member> selectSearchMemberGrade(String keyword) {
+		Connection conn = getConnection();
+		ArrayList<Member> list = mdao.selectSearchMemberGrade(conn, keyword);
+		close(conn);
+		return list;
+	}
+
+	
+
+
 }
