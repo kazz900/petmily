@@ -298,7 +298,6 @@ public class PostDao {
 				pstmt.setInt(2, post.getPostSeq());
 			}
 			result = pstmt.executeUpdate();
-			System.out.println("RESULT = " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

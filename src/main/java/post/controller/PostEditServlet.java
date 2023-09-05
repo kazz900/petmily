@@ -75,7 +75,6 @@ public class PostEditServlet extends HttpServlet {
 			p.setOriginalFileName(null);
 			p.setChangedFileName(null);
 			if(originalFileName != null) {
-				System.out.println("일반게시글 파일 변경 하고 있음");
 				pService.deleteImage(p);
 				String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
 				p.setOriginalFileName(originalFileName);
@@ -100,7 +99,6 @@ public class PostEditServlet extends HttpServlet {
 
 		if (result > 0) {
 			// insert successful
-			System.out.println(8);
 			String path = "/petmily/plist?memberseq=" + String.valueOf(memberSeq);
 			response.sendRedirect(path);
 		} else {

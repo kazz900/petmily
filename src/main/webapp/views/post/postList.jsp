@@ -99,6 +99,7 @@
 								}
 
 								function showEditForm(postSeq, memberSeq, postContent, changedFileName, originalFileName, postType) {
+									console.log("열기");
 									document.querySelector("div.editPostformBox").style.display = "block";
 									$("div.edit-post-form-popup form textarea").val(postContent);
 									$("div.edit-post-form-popup form select").val(postType);
@@ -124,7 +125,7 @@
 								// 	console.log(path);
 								// 	// location.href = path;
 								// }
-
+								
 							</script>
 						</head>
 
@@ -216,6 +217,7 @@
 									<!-- 게시글 전체 띄우기 -->
 									<% for(Post p : list) { %>
 										<% if(p instanceof StandardPost){ %>
+											
 											<!-- 일반게시글 -->
 											<div id="standard-post" style="width: 700px; padding: 10px;">
 												<table id="standardpost"
@@ -259,14 +261,15 @@
 																<button id="postEditButton" onclick="showEditForm('<%= p.getPostSeq() %>', '<%= p.getMemberSeq() %>', '<%= p.getPostContent() %>', '<%= p.getChangedFileName() %>', '<%= p.getOriginalFileName() %>', 'standardpost');">수정</button>
 															</td>
 														</tr>
+														
 														<% } %>
 															<!-- 댓글달기 Row -->
 															<tr id="replyrow">
-																<td colspan="2"><input type="text" id="replyinputfield"
+																<td colspan="2"><button style="display: none;"></button><input type="text" id="replyinputfield"
 																		placeholder="댓글을 달아보세요"> <!-- 댓글달기 버튼 --> <img
 																		id="replybutton"
 																		src="/petmily/resources/images/post/reply.png"
-																		alt="댓글달기"></td>
+																		alt="댓글달기" onclick="postReply()"></td>
 															</tr>
 															<!-- 게시글에 댓글이 있을 경우 댓글 띄우기 -->
 															<% if(p.getReplyNO() !=0) { %>
@@ -339,7 +342,7 @@
 																	<tr id="postbottom" style="height: 50px; align-items: center;">
 																		<td colspan="2" id="posteditbutton"
 																			style="text-align: right; padding-right: 20px;">
-																			<button id="postEditButton" onclick="showEditForm('<%= p.getPostSeq() %>', '<%= p.getMemberSeq() %>', '<%= p.getPostContent() %>', '<%= p.getChangedFileName() %>', '<%= p.getOriginalFileName() %>', 'tradepost');">수정</button>
+																			<button id="postEditButton" onclick="showEditForm('<%= p.getPostSeq() %>', '<%= p.getMemberSeq() %>', '<%= p.getPostContent()  %>', '<%= p.getChangedFileName() %>', '<%= p.getOriginalFileName() %>', 'tradepost');">수정</button>
 																		</td>
 																	</tr>
 																	<% } %>

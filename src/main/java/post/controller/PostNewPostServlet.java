@@ -142,7 +142,8 @@ public class PostNewPostServlet extends HttpServlet {
 		System.out.println(memberSeq);
 		String postType = mrequest.getParameter("post-type");
 		String postContent = mrequest.getParameter("post-content");
-	
+		postContent = postContent.replace('\n', ' ').replace('\r', ' ');
+		
 		
 		// 일반게시글일떄
 		if (postType.equals("standardpost")) {
