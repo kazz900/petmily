@@ -1,8 +1,7 @@
 package member.controller;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -44,6 +40,8 @@ public class ChangeNicknameServlet extends HttpServlet {
 		String nickname = request.getParameter("nickname");
 		String memail = request.getParameter("email");
 
+		String message = "성공적으로 변경되었습니다.";
+
 		int result = new MemberService().updateMemberInfo(userid, nickname);
 
 		if (result > 0) {//
@@ -51,8 +49,11 @@ public class ChangeNicknameServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setMaxInactiveInterval(30 * 60);
 			session.setAttribute("member", member);
+		
+			response.sendRedirect("/petmily/mypet?memberSeq=" + member.getMemberSeq() + "&message=" + URLEncoder.encode(message, "UTF-8"));
+		} else {
+			System.out.println("ChangeNicknameServlet 실패");
 
-			response.sendRedirect("/petmily/views/servicecenter/dCommon/updateSucceed.jsp");
 		}
 
 	}

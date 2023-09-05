@@ -50,7 +50,7 @@ function toggleDropdown() {
                </form>
 				</li>
         
-				<li class="sub-link" onclick="toggleDropdown()"><a href="#">내주변</a>
+				<li class="sub-link" onclick="toggleDropdown()" style="margin-left:150px;"><a href="#">내주변</a>
 				<ul class="dropdown" id="dropdown">
 				<li><a href="/petmily/selectdepttype?selecttype=1&typename=의료" style="color : hsl(30.46deg 58.9% 45.68%)">의료</a></li>
 				<li><a href="/petmily/selectdepttype?selecttype=2&typename=미용" style="color : hsl(30.46deg 58.9% 45.68%)">미용</a></li>
@@ -64,25 +64,26 @@ function toggleDropdown() {
 				</li>
 
 
-				<%if(member != null){ %>
-				<li><a class="sub-link" href="/petmily/plist?memberseq=<%= member.getMemberSeq() %>" method="post">커뮤니티</a></li>
-				<% } %>
 				
+			
+			
+				
+				<li style="width:15px;"></li>
 				<%if(member == null){ %>
 				<li><a class="sub-link" href="/petmily/views/member/login.jsp">로그인</a></li>
 				<% }else{ %>
-				
 				<li
-					style="display: inline-block; font-size: 15px; width: 90px; height: 20px; position: absolute; top: 25px; margin-left: 20px;"><%= member.getMemberNick() %>님</li>
+					style="display: inline-block; font-size: 15px; width: 90px; height: 20px; position: absolute; top: 25px;"><%= member.getMemberNick() %>님</li>
 				<li
 					style="display: inline-block; font-size: 15px; width: 90px; height: 20px;"><a
 					href="/petmily/logout"
-					style="padding-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; margin-left: 45px; position: relative; top: 12px;">logout</a></li>
-				<% } %>
+					style="padding-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px;  position: relative; top: 12px;">logout</a></li>
+					
 			</ul>
 			<label for="menuicon" class="menubtn"> <span></span> <span></span>
 				<span></span>
 			</label>
+				<% } %>
 		</div>
 	</header>
 	<div class="menu-container">
@@ -95,19 +96,21 @@ function toggleDropdown() {
 					<li><a href="/petmily/suggest" class="sidebarmenu">고객센터</a></li>
 					<% }else if(member.getMemberGrade().equals("1")){ %>
 					<li class="sidebarmenutitle">더보기</li>
-
 					<li><a href="/petmily/mypet?memberSeq=<%=member.getMemberSeq()%>" class="sidebarmenu">마이페이지</a></li>
+					<li><a href="/petmily/plist?memberseq=<%= member.getMemberSeq() %>" method="post" class="sidebarmenu">커뮤니티</a></li>
 					<li><a href="/petmily/suggest?mseq=<%=member.getMemberSeq()%>" class="sidebarmenu">고객센터</a></li>
 					<%-- mseq를 들고가야됩니다. --%>
 					<% }else if(member.getMemberGrade().equals("0")){ %>
 					<li class="sidebarmenutitle">더보기</li>
 					<li><a href="#" class="sidebarmenu">마이페이지</a></li>
+					<li><a href="/petmily/plist?memberseq=<%= member.getMemberSeq() %>" method="post" class="sidebarmenu">커뮤니티</a></li>
 					<li><a href="/petmily/adminmain" class="sidebarmenu">업체등록</a></li>
 					<li><a href="/petmily/srtd" class="sidebarmenu">업체삭제</a></li>
 					<li><a href="/petmily/memli" class="sidebarmenu">회원등급변경</a></li>
-					<li><a href="#" class="sidebarmenu">일반게시판관리</a></li>
-					<li><a href="#" class="sidebarmenu">거래게시판관리</a></li>
-					<li><a href="/petmily/suggestAdmin?mseq=<%=member.getMemberSeq()%>, mGrade=<%=member.getMemberGrade()%>" class="sidebarmenu">관리자 고객센터</a></li>
+
+					<li><a href="/petmily/adsp" class="sidebarmenu">일반게시판관리</a></li>
+					<li><a href="/petmily/adtp" class="sidebarmenu">거래게시판관리</a></li>
+
 					<% }else if(member.getMemberGrade().equals("2")){ %>
 					
 					<% } %>
