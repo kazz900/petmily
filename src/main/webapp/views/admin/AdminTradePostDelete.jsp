@@ -26,7 +26,7 @@ $(function(){
 		console.log("??");
 		$('input[name=item]').each(function(index){
 			if($(this).is(':checked')){
-				$('form.sform').eq(index).css('display', 'block');
+				$('form.sform').eq(index).css('display', 'inline-block');
 			}else{
 				$('form.sform').eq(index).css('display', 'none');
 			}
@@ -36,7 +36,7 @@ $(function(){
 $(function(){
 	$('input[name=item]').each(function(index){
 		if($(this).is(':checked')){
-			$('form.sform').eq(index).css('display', 'block');
+			$('form.sform').eq(index).css('display', 'inline-block');
 		}else{
 			$('form.sform').eq(index).css('display', 'none');
 		}
@@ -46,7 +46,7 @@ $(function(){
 $(function(){
 	$('input[name=item]').each(function(index){
 		if($(this).is(':checked')){
-			$('form.sform').eq(index).css('display', 'block');
+			$('form.sform').eq(index).css('display', 'inline-block');
 		}else{
 			$('form.sform').eq(index).css('display', 'none');
 		}
@@ -87,10 +87,21 @@ form#tab-1 {
 
 }
 form.sform {
-	background: lightgray;
 	width: 630px;
 	left: 400px;
 	display: none;  
+}
+body{
+	background: url('resources/images/admin/0905bg.png') left top fixed;
+	background-size : cover;
+}
+#csssearch{
+  background-color: hsl(36deg 70.37% 68.61%);
+  font-family: 'Surround';
+}
+#csssearch:hover{
+  background-color: hsl(30.46deg 58.9% 45.68%);
+  color: #fff;
 }
 </style>
 <link rel="stylesheet" href="/petmily/resources/css/admin/adminmain.css">
@@ -101,7 +112,7 @@ form.sform {
 	
 	<%@ include file="../common/main.jsp"%>
 	<p>
-	<div class="block" align="center">
+	<div class="block" align="center" style="text-align: center;">
 		 <fieldset id="ss">
 			<legend>검색할 항목을 선택하세요.</legend>
 			<input type="radio" name="item" id="memberid"> 회원 아이디 &nbsp; 
@@ -138,12 +149,10 @@ form.sform {
 			</fieldset>
 		</form>
 	</div>
-	<br>
-	<hr>
 	</p>
-	<h1 align="center">거래 게시글 관리</h1>
+	<h1 align="center" style="text-align: center; margin-top: 0;">거래 게시글 관리</h1>
 	<h4 align="center">게시물 <%= list.size()%> 개 조회</h5>
-	<form id="tab-1" class="block">
+	<form id="tab-1" class="block" style="text-align: center; margin-top: 0;">
 		<table id="outer" align="center" border="1" cellspacing="0"
 			cellpadding="3">
 			<tr>
