@@ -38,9 +38,9 @@ public class EditMySuggestServlet extends HttpServlet {
 		String result = request.getParameter("result");
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-
-		int eResult = new BoardService().updateMySuggest(userid, title, content, boardNo, result);
 		
+		int eResult = new BoardService().updateMySuggest(userid, title, content, boardNo, result);
+		System.out.println(eResult);
 //		RequestDispatcher view = null;
 
 		if (eResult > 0) {
