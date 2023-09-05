@@ -420,7 +420,7 @@ public class DepartmentDao implements Serializable {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from department where dept_delete_ok = 'y' or dept_name like ?";
+		String query = "select * from department where dept_name like ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -472,7 +472,7 @@ public class DepartmentDao implements Serializable {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from department where dept_delete_ok = 'y' or dept_name like ?";
+		String query = "select * from department where dept_name like ?";
 
 		try {
 			pstmt = conn.prepareStatement(query);
