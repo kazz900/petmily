@@ -28,6 +28,7 @@ div button#newpost {
     outline: none;
 }
 
+
 div button#newpost:hover {
     background-color: #fda90d;
     box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
@@ -63,6 +64,11 @@ img#new-post-file-upload{
     position: relative;
     right: -200px;
     bottom: 70px;
+    cursor: pointer;
+}
+
+img#replybutton{
+    cursor: pointer;
 }
 
 div#post-content-editor{
@@ -114,7 +120,7 @@ table tr td#postdeletebutton {
     right: -380px;
 }
 
-img#likeButton{
+img.likeimg{
     position: relative;
     bottom: -7px;
     cursor: pointer;
@@ -124,7 +130,7 @@ img#likeButton{
     /* padding-bottom: 20px; */
 }
 
-img#likeButton:hover {
+img.likeimg:hover {
     box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
     transform: translateY(-7px);
 }
@@ -154,9 +160,6 @@ td.likeNo{
 
 tr#replyrow{
     border: 1px solid #fda90d;
-}
-
-tr#replyrow{
     padding: 10px;
 }
 
@@ -169,19 +172,30 @@ tr#postcontent td{
     padding: 30px;
 }
 
-tr.replies{
-    border: 1px solid #fda90d;
+td.replyinfo{
+    text-align: left;
+    padding-left: 20px;
 }
 
-tr.replies td{
-    border: 1px solid #fda90d;
+tr.replies{
+    height: 45px;
+    border-top: 1px solid #fda90d;
+    border-bottom: 1px solid #fda90d;
+    border-left: 1px solid #fda90d;
+    border-right: 1px solid #fda90d;
+}
+
+button.replydelete{
+    position: relative;
+    text-align: right;
+    right: -50px;
 }
 
 input#replyinputfield{
     position: relative;
-    width: 90%;
-    height: 35px;
-    bottom: 5px;
+    width: 85%;
+    height: 45px;
+    left: -15px;
     border-style: none;
     outline: none;
     font-weight: bold;
@@ -278,6 +292,11 @@ button#postdelete{
     position: relative;
     right: -200px;
     bottom: 74px;
+}
+
+button#postreply{
+    position: relative;
+    right: 1px;
 }
 
 div.snsbuttonswrap{

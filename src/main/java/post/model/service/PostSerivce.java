@@ -20,7 +20,6 @@ public class PostSerivce {
 	public int getPostListCount() {
 		int count = 0;
 		Connection conn = getConnection();
-		// TODO Auto-generated method stub
 
 		count = pdao.getPostListCount(conn);
 		close(conn);
