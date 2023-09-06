@@ -17,14 +17,26 @@ public class ReplyDao {
 
 	public ReplyDao() {}
 
-	public int insertReply(Connection conn, int postSeq, StandardReply standardReply) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int deleteReply(Connection conn, int postSeq, int replySeq) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int insertReply(Connection conn, Reply reply) {
+		int result = 0;
+		String query = "INSERT INTO REPLY (REPLY_SEQ, POST_SEQ, MEMBER_SEQ, REPLY_CONTENT)"
+				+ " VALUES(REPLY_SEQ.NEXTVAL, ?, ?, ?)";
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, reply.getPostSeq());
+			pstmt.setInt(2, reply.getMemberSeq());
+			pstmt.setString(3, reply.getReplyContent());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 
 	public ArrayList<Reply> getReplyList(Connection conn) {
@@ -32,13 +44,15 @@ public class ReplyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String query = "SELECT \r\n"
-				+ "REPLY_SEQ,\r\n"
-				+ "POST_SEQ,\r\n"
-				+ "MEMBER_SEQ,\r\n"
-				+ "REPLY_CONTENT,\r\n"
-				+ "REPLY_DATE\r\n"
-				+ "FROM REPLY";
+		String query = "SELECT "
+				+ "REPLY_SEQ, "
+				+ "POST_SEQ, "
+				+ "MEMBER_SEQ, "
+				+ "MEMBER_ID, "
+				+ "REPLY_CONTENT, "
+				+ "REPLY_DATE "
+				+ "FROM REPLY "
+				+ "JOIN MEMBER USING (MEMBER_SEQ)";
 		
 		try {
 			// Get all StandardPost from DB
@@ -50,6 +64,7 @@ public class ReplyDao {
 				r.setReplySeq(rset.getInt("REPLY_SEQ"));
 				r.setPostSeq(rset.getInt("POST_SEQ"));
 				r.setMemberSeq(rset.getInt("MEMBER_SEQ"));
+				r.setMemberId(rset.getString("MEMBER_ID"));
 				r.setReplyContent(rset.getString("REPLY_CONTENT"));
 				r.setReplyDate(rset.getDate("REPLY_DATE"));
 				rList.add(r);
@@ -65,5 +80,25 @@ public class ReplyDao {
 		}
 		
 		return rList;
+	}
+
+	public int deleteReply(Connection conn, int replySeq) {
+		int result = 0;
+		String query = "DELETE FROM REPLY "
+				+ "WHERE REPLY_SEQ = ?";
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, replySeq);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 }

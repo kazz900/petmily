@@ -1,0 +1,60 @@
+package like.model.dao;
+
+import static common.JDBCTemplate.close;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import like.model.vo.Like;
+
+public class LikeDao {
+
+	public int updateLike(Connection conn, Like l, String postType) {
+		int result = 0;
+		String query = "INSERT INTO LIKES "
+				+ " VALUES(?, ?, ?)";
+		PreparedStatement pstmt = null;
+		
+		
+		try {
+			// LIKES TABLE에 이미 똑같은 게시글을 좋아요 한적이 있는지 확인
+			// 그냥 INSERT해서 확인함
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, l.getLikeKey());
+			pstmt.setInt(2, l.getPostSeq());
+			pstmt.setInt(3, l.getMemberSeq());
+			result = pstmt.executeUpdate();
+			
+			// 만약 이미 좋아한적이 있다면
+			if(result > 0) {
+				pstmt = null;
+				// 좋아한 게시글이 일반 게시글이라면
+				if(postType.equals("standardpost")) {
+					query = "UPDATE STANDARD_POST "
+							+ "SET LIKE_NO = LIKE_NO + 1"
+							+ "WHERE POST_SEQ = ? ";
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1, l.getPostSeq());
+					pstmt.executeUpdate();
+				} else {
+					// 좋아한 게시글이 중고거래글이라면
+					query = "UPDATE TRADE_POST "
+							+ "SET LIKE_NO = LIKE_NO + 1"
+							+ "WHERE POST_SEQ = ? ";
+					pstmt = conn.prepareStatement(query);
+					pstmt.setInt(1, l.getPostSeq());
+					pstmt.executeUpdate();
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	
+}
