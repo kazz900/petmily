@@ -25,9 +25,9 @@ public class BoardService implements Serializable {
 		return result;
 	}
 
-	public ArrayList<Board> selectAllSuggest(int mseq) {
+	public ArrayList<Board> selectAllSuggest(int mseq, int startRow, int endRow) {
 		Connection conn = getConnection();
-		ArrayList<Board> list = bdao.selectAllSuggest(conn, mseq);
+		ArrayList<Board> list = bdao.selectAllSuggest(conn, mseq, startRow, endRow);
 		close(conn);
 		return list;
 	}
@@ -51,9 +51,9 @@ public class BoardService implements Serializable {
 		return eResult;
 	}
 
-	public ArrayList<Board> allSuggestAdmin() {
+	public ArrayList<Board> allSuggestAdmin(int startRow, int endRow) {
 		Connection conn = getConnection();
-		ArrayList<Board> list = bdao.allSuggestAdmin(conn);
+		ArrayList<Board> list = bdao.allSuggestAdmin(conn, startRow, endRow);
 		close(conn);
 		return list;
 	}
@@ -68,6 +68,20 @@ public class BoardService implements Serializable {
 		}
 		close(conn);
 		return eResult;
+	}
+
+	public int getListCount(int mseq) {
+		Connection conn = getConnection();
+		int listCount = bdao.getListCount(conn, mseq);
+		close(conn);
+		return listCount;
+	}
+
+	public int getListCountAdmin() {
+		Connection conn = getConnection();
+		int listCount = bdao.getListCountAdmin(conn);
+		close(conn);
+		return listCount;
 	}
 
 }

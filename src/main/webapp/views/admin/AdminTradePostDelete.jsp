@@ -68,6 +68,7 @@ function testbtn(seq, keyword){
 		width: 1050px;
 		margin: 98px auto 0 auto;
 		word-wrap: break-word;
+		font-family: 'Surround';
 	}
 }
 div#tab-0 {
@@ -87,6 +88,7 @@ form#tab-1 {
 
 }
 form.sform {
+	font-family: 'Surround';
 	width: 630px;
 	left: 400px;
 	display: none;  
@@ -95,14 +97,48 @@ body{
 	background: url('resources/images/admin/0905bg.png') left top fixed;
 	background-size : cover;
 }
-#csssearch{
-  background-color: hsl(36deg 70.37% 68.61%);
-  font-family: 'Surround';
+#csssearch {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:100px; 
+	height:35px; 
+	border-radius:5px; 
+	border:none;
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
 }
-#csssearch:hover{
-  background-color: hsl(30.46deg 58.9% 45.68%);
-  color: #fff;
+
+#csssearch:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
 }
+#chggrade {
+	margin-top:0px;
+	margin-bottom:0px; 
+	width:50px; 
+	height:20px; 
+	border-radius:5px; 
+	border:none;
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+#chggrade:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+	}
 </style>
 <link rel="stylesheet" href="/petmily/resources/css/admin/adminmain.css">
 	src="/petmily/resources/js/info/infotap.js"></script>
@@ -145,7 +181,7 @@ body{
 				<legend>회원 등급을 입력하세요.</legend>
 				<input type="radio" name="keyword" value="1"> 일반회원 &nbsp;
 				<input type="radio" name="keyword" value="2"> 정지회원 &nbsp;
-				<input type="submit" value="검색">
+				<input type="submit" id="csssearch" value="검색">
 			</fieldset>
 		</form>
 	</div>
