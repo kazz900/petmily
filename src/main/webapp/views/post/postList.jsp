@@ -269,7 +269,7 @@
 															일반게시글</td>
 														<td
 															style="width: 180px; font-weight: bold; color: white; padding-right: 20px;">
-															<%= p.getLastModifiedDate() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= p.getMemberId() %>
+															<%= p.getLastModifiedDate() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= p.getMemberNick() %>
 														</td>
 													</tr>
 													<!-- 게시글 내용 -->
@@ -322,7 +322,7 @@
 																	<% if(p.getPostSeq()==r.getPostSeq()) { %>
 																		<tr class="replies">
 																			<td class="replyinfo">
-																				<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
+																				<%= r.getMemberNick() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
 																			</td>
 																			<td>
 																				<% if(m.getMemberSeq() == r.getMemberSeq()) { %>
@@ -346,7 +346,7 @@
 															<td
 																style="width: 180px; font-weight: bold; color: white; padding-right: 20px;">
 																<%= p.getLastModifiedDate() %>&nbsp;&nbsp;&nbsp;&nbsp;
-																	<%=p.getMemberId() %>
+																	<%= p.getMemberNick() %>
 															</td>
 														</tr>
 														<!-- 게시글 내용 -->
@@ -406,7 +406,7 @@
 																<% if(p.getPostSeq()==r.getPostSeq()) { %>
 																	<tr class="replies">
 																		<td class="replyinfo">
-																			<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
+																			<%= r.getMemberNick() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
 																		</td>
 																		<td>
 																			<% if(m.getMemberSeq() == r.getMemberSeq()) { %>
