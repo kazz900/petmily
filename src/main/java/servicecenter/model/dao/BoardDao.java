@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import static common.JDBCTemplate.*;
@@ -41,22 +42,27 @@ public class BoardDao implements Serializable {
 		return result;
 	}
 
-	public ArrayList<Board> selectAllSuggest(Connection conn, int mseq) {
+	public ArrayList<Board> selectAllSuggest(Connection conn, int mseq, int startRow, int endRow) {
 		ArrayList<Board> list = new ArrayList<Board>();
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		String query = "SELECT * "
-					 + "FROM SERV_CENTER "
-					 + "WHERE MEMBER_SEQ = ? "
-					 + "ORDER BY SERV_SEQ DESC";
+					 + "FROM (SELECT ROWNUM RNUM, SERV_SEQ, "
+					 + "MEMBER_SEQ, TITLE, CONTENT, UPLOAD_DATE, "
+					 + "RESULT, REPLY "
+					 + "FROM (SELECT * FROM SERV_CENTER WHERE MEMBER_SEQ = ? "
+					 + "ORDER BY SERV_SEQ DESC)) "
+					 + "WHERE RNUM >= ? AND RNUM <= ?";
 
 		try {
 
 			pstmt = conn.prepareStatement(query);
 
 			pstmt.setInt(1, mseq);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
 			
 			rset = pstmt.executeQuery();
 
@@ -156,19 +162,26 @@ public class BoardDao implements Serializable {
 		return eResult;
 	}
 
-	public ArrayList<Board> allSuggestAdmin(Connection conn) {
+	public ArrayList<Board> allSuggestAdmin(Connection conn, int startRow, int endRow) {
 		ArrayList<Board> list = new ArrayList<Board>();
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		String query = "SELECT * "
-					 + "FROM SERV_CENTER "
-					 + "ORDER BY SERV_SEQ DESC";
+				 + "FROM (SELECT ROWNUM RNUM, SERV_SEQ, "
+				 + "MEMBER_SEQ, TITLE, CONTENT, UPLOAD_DATE, "
+				 + "RESULT, REPLY "
+				 + "FROM (SELECT * FROM SERV_CENTER "
+				 + "ORDER BY SERV_SEQ DESC)) "
+				 + "WHERE RNUM >= ? AND RNUM <= ?";
 
 		try {
 
 			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 
@@ -222,6 +235,61 @@ public class BoardDao implements Serializable {
 			close(pstmt);
 		}
 		return eResult;
+	}
+
+	public int getListCount(Connection conn, int mseq) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "SELECT COUNT(*) "
+					 + "FROM SERV_CENTER "
+					 + "WHERE MEMBER_SEQ = ?";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, mseq);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}		
+		
+		return listCount;
+	}
+
+	public int getListCountAdmin(Connection conn) {
+		int listCount = 0;
+		Statement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "SELECT COUNT(*) "
+					 + "FROM SERV_CENTER";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}		
+		
+		return listCount;
 	}
 
 }
