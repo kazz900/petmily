@@ -203,17 +203,17 @@ input[type=submit]#changeSubmit {
 	border:none;
 	box-shadow:2px 2px 3px 1px #cfcfcf;
 	cursor:pointer;
-	
+
 
 	font-family: OhsquareAir;
 	color:white;
 	transition: all 0.3s ease;
-	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+	background: linear-gradient(0deg, rgba(255,184,75,0.7) 0%, rgba(218,131,0,0.7) 100%);
 }
 
 input[type=submit]#changeSubmit:hover {
 	background: transparent;
-	background: rgba(230,154,55,1);
+	background: rgba(230,154,55,0.8);
 }
 
 input[type=submit]#addpetsub {
@@ -252,12 +252,12 @@ input[type=button]#pwdChange {
 	font-family: OhsquareAir;
 	color:white;
 	transition: all 0.3s ease;
-	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+	background: linear-gradient(0deg, rgba(255,184,75,0.7) 0%, rgba(218,131,0,0.7) 100%);
 }
 
 input[type=button]#pwdChange:hover {
 	background: transparent;
-	background: rgba(230,154,55,1);
+	background: rgba(230,154,55,0.8);
 }
 
 button#fixBtn {
