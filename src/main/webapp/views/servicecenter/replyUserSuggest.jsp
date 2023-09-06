@@ -24,6 +24,50 @@ div.content p textarea {
 	font-family: OhsquareAir;
 }
 
+input[type=submit] {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:100px; 
+	height:30px; 
+	border-radius:5px; 
+	border:1px solid rgba(200,124,25,0.2);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=submit]:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
+input[type=button] {
+	margin-top:5px;
+	margin-bottom:15px; 
+	width:100px; 
+	height:30px; 
+	border-radius:5px; 
+	border:1px solid rgba(200,124,25,0.2);
+	box-shadow:2px 2px 3px 1px #cfcfcf;
+	cursor:pointer;
+	
+	
+	font-family: OhsquareAir;
+	color:white;
+	transition: all 0.3s ease;
+	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+}
+
+input[type=button]:hover {
+	background: transparent;
+	background: rgba(230,154,55,1);
+}
+
 </style>
 
 </head>

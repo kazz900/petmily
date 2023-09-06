@@ -28,6 +28,7 @@ div button#newpost {
     outline: none;
 }
 
+
 div button#newpost:hover {
     background-color: #fda90d;
     box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
@@ -61,8 +62,13 @@ img#new-post-file-upload{
     width: 50px;
     height: 50px;
     position: relative;
-    right: -250px;
+    right: -200px;
     bottom: 70px;
+    cursor: pointer;
+}
+
+img#replybutton{
+    cursor: pointer;
 }
 
 div#post-content-editor{
@@ -99,6 +105,10 @@ textarea#post-content-textarea {
     color: #fda90d;
 }
 
+table{
+    table-layout: fixed;
+}
+
 table#standard-post tr td#posteditdate {
     text-align: left;
     padding-left: 20px;
@@ -110,7 +120,7 @@ table tr td#postdeletebutton {
     right: -380px;
 }
 
-img#likeButton{
+img.likeimg{
     position: relative;
     bottom: -7px;
     cursor: pointer;
@@ -120,7 +130,7 @@ img#likeButton{
     /* padding-bottom: 20px; */
 }
 
-img#likeButton:hover {
+img.likeimg:hover {
     box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
     transform: translateY(-7px);
 }
@@ -148,11 +158,18 @@ td.likeNo{
     padding-bottom: 20px;
 }
 
-tr#replyrow{
-    border: 1px solid #fda90d;
+td.likenotext{
+    position: relative;
+    font-weight: bold;
+    color: #fda90d;
+    font-size: 20px;
+    left: -425px;
+    padding-bottom: 15px;
+    text-align: left;
 }
 
 tr#replyrow{
+    border: 1px solid #fda90d;
     padding: 10px;
 }
 
@@ -165,19 +182,30 @@ tr#postcontent td{
     padding: 30px;
 }
 
-tr.replies{
-    border: 1px solid #fda90d;
+td.replyinfo{
+    text-align: left;
+    padding-left: 20px;
 }
 
-tr.replies td{
-    border: 1px solid #fda90d;
+tr.replies{
+    height: 45px;
+    border-top: 1px solid #fda90d;
+    border-bottom: 1px solid #fda90d;
+    border-left: 1px solid #fda90d;
+    border-right: 1px solid #fda90d;
+}
+
+button.replydelete{
+    position: relative;
+    text-align: right;
+    right: -50px;
 }
 
 input#replyinputfield{
     position: relative;
-    width: 90%;
-    height: 35px;
-    bottom: 5px;
+    width: 85%;
+    height: 45px;
+    left: -15px;
     border-style: none;
     outline: none;
     font-weight: bold;
@@ -265,11 +293,26 @@ button#postsubmit {
     right: -145px;
 }
 
+button#postedit{
+    position: relative;
+    right: -170px;
+}
+
+button#postdelete{
+    position: relative;
+    right: -200px;
+    bottom: 74px;
+}
+
+button#postreply{
+    position: relative;
+    right: 1px;
+}
 
 div.snsbuttonswrap{
     position: fixed;
     padding: 10px;
-    top: 85px;
+    top: 100px;
     width: 700px;
     align-items: center;
     justify-content: center;
@@ -282,7 +325,7 @@ select.pl{
     text-align: center;
     position: relative;
     bottom: 86px;
-    right: -240px;
+    right: -190px;
     width: 150px;
     height: 40px;
     box-sizing: border-box;
@@ -331,7 +374,7 @@ div.newPostformBox{
 }
 
 /* The popup form - hidden by default */
-.new-post-form-popup {
+div.new-post-form-popup {
     position: fixed;
     top: 480px;
     left: 50%;
@@ -346,7 +389,7 @@ div.newPostformBox{
 }
 
 /* Add styles to the form container */
-.form-container {
+form.form-container {
     position: relative;
     max-width: 100%;
     max-height: 100%;
@@ -354,4 +397,40 @@ div.newPostformBox{
     padding: 10px;
     background-color: white;
     text-align: center;
+}
+
+div.post-edit-form-wrap{
+    position: fixed;
+    padding: 10px;
+    top: 85px;
+    width: 700px;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    text-align: center;
+    z-index: 1;
+}
+
+/* Edit Form popup wrap */
+div.editPostformBox{
+    display: none;
+    position: fixed;
+    width: 700px;
+    align-items: center;
+    text-align: center;
+}
+
+/* The popup form - hidden by default */
+.edit-post-form-popup {
+    position: fixed;
+    top: 480px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
+    width: 700px;
+    height: 500px;
+    text-align: center;
+    z-index: 9;
+    border-radius: 45px;
 }
