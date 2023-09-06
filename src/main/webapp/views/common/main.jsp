@@ -38,7 +38,7 @@ Member member = (Member) session.getAttribute("member");
 <body>
 	<input type="checkbox" id="menuicon">
 
-	<header style="left: 0px;">
+	<header style="left: 0px; z-index: 2;">
 		<div>
 			<ul class="navi">
 				<!-- style="top: 50px; right: 77px;" -->
