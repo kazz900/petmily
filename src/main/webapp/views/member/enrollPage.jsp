@@ -53,7 +53,7 @@ form {
 	width: 350px; /* 폼의 너비 설정 */
 	height: auto;
 	background-color: #FFE4B5;
-	border: 3px solid hsl(30.5, 77.6%, 29.8%);
+	border: 2px solid hsl(30.5, 77.6%, 29.8%);
 	border-radius: 15px;
 	justify-content: center;
 }
@@ -68,13 +68,18 @@ justify-content: space-between; */
 }
 
 td input {
-	font-family: 'forgedm', sans-serif;
+	font-family: 'forgedl', sans-serif;
 	font-size: 16px;
 	color: hsl(30.5, 77.6%, 29.8%);
 	width: 250px;
 	height: 30px;
 	border-radius: 7px;
 	background-color: #FFE4B5;
+	border: 1px solid #c90;
+}
+
+td input:focus {
+	outline: none;
 }
 
 td input#dupcheck {
@@ -84,6 +89,11 @@ td input#dupcheck {
 	border-radius: 7px;
 	color: hsl(30.5, 77.6%, 29.8%);
 	background-color: hsl(36deg 70.37% 68.61%);
+		border: 2px solid hsl(30.5, 77.6%, 29.8%);
+}
+td input#dupcheck:hover {
+	background-color: hsl(30.5, 77.6%, 29.8%);
+	color: hsl(36deg 70.37% 68.61%);
 }
 
 td input#dupcheck2 {
@@ -93,8 +103,12 @@ td input#dupcheck2 {
 	border-radius: 7px;
 	color: hsl(30.5, 77.6%, 29.8%);
 	background-color: hsl(36deg 70.37% 68.61%);
+	border: 2px solid hsl(30.5, 77.6%, 29.8%);
 }
-
+td input#dupcheck2:hover {
+	background-color: hsl(30.5, 77.6%, 29.8%);
+	color: hsl(36deg 70.37% 68.61%);
+}
 hr {
 	width: 100%;
 }
