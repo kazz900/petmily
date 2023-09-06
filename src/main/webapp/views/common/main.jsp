@@ -139,7 +139,7 @@ Member member = (Member) session.getAttribute("member");
 					<li><a
 						href="/petmily/plist?memberseq=<%=member.getMemberSeq()%>"
 						method="post" class="sidebarmenu">커뮤니티</a></li>
-					<li><a href="/petmily/suggest?mseq=<%=member.getMemberSeq()%>"
+					<li><a href="/petmily/suggest?mseq=<%=member.getMemberSeq()%>&page=1"
 						class="sidebarmenu">고객센터</a></li>
 					<%-- mseq를 들고가야됩니다. --%>
 					<%
