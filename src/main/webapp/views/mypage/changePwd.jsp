@@ -52,12 +52,12 @@ input[type=submit]#submit {
 	font-family: OhsquareAir;
 	color:white;
 	transition: all 0.3s ease;
-	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+	background: linear-gradient(0deg, rgba(255,184,75,0.7) 0%, rgba(218,131,0,0.7) 100%);
 }
 
 input[type=submit]#submit:hover {
 	background: transparent;
-	background: rgba(230,154,55,1);
+	background: rgba(230,154,55,0.8);
 }
 
 input[type=button]#prev {
@@ -74,12 +74,12 @@ input[type=button]#prev {
 	font-family: OhsquareAir;
 	color:white;
 	transition: all 0.3s ease;
-	background: linear-gradient(0deg, rgba(255,184,75,1) 0%, rgba(218,131,0,1) 100%);
+	background: linear-gradient(0deg, rgba(255,184,75,0.7) 0%, rgba(218,131,0,0.7) 100%);
 }
 
 input[type=button]#prev:hover {
 	background: transparent;
-	background: rgba(230,154,55,1);
+	background: rgba(230,154,55,0.8);
 }
 
 </style>
@@ -161,7 +161,7 @@ function toMyPage(){
 					<td><input type="password" name="mpwd" id="userpwd1" required>
 					</td>
 				</tr>
-				
+
 				<tr>
 					<th width="140">비밀번호 확인</th>
 					<td><input type="password" id="userpwd2" required>

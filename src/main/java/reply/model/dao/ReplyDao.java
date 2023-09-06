@@ -49,6 +49,7 @@ public class ReplyDao {
 				+ "POST_SEQ, "
 				+ "MEMBER_SEQ, "
 				+ "MEMBER_ID, "
+				+ "MEMBER_NICK, "
 				+ "REPLY_CONTENT, "
 				+ "REPLY_DATE "
 				+ "FROM REPLY "
@@ -64,6 +65,7 @@ public class ReplyDao {
 				r.setReplySeq(rset.getInt("REPLY_SEQ"));
 				r.setPostSeq(rset.getInt("POST_SEQ"));
 				r.setMemberSeq(rset.getInt("MEMBER_SEQ"));
+				r.setMemberNick(rset.getString("MEMBER_NICK"));
 				r.setMemberId(rset.getString("MEMBER_ID"));
 				r.setReplyContent(rset.getString("REPLY_CONTENT"));
 				r.setReplyDate(rset.getDate("REPLY_DATE"));
