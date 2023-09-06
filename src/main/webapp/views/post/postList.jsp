@@ -9,7 +9,6 @@
 						%>
 						<!DOCTYPE html>
 						<html>
-
 						<head>
 							<meta charset="UTF-8">
 							<title>Community</title>
@@ -22,6 +21,34 @@
 								rel="stylesheet">
 							<script type="text/javascript">
 								$(function () {
+									$('.likeimg').on('click', function(){
+										var parent = $(this).parent().parent().parent().parent().parent('#standard-post');
+										var data_post_seq = parent.attr('data-post-seq');
+										var data_member_seq = parent.attr('data-member-seq');
+										var data_post_type = parent.attr('data-post-type');
+										var likeNo = parent.find('.likenotext');
+										var val = Number(likeNo.text());
+
+										console.log('data_post_seq : ' + data_post_seq);
+										console.log('data-member-seq : ' + data_member_seq);
+										$.ajax({
+											url : '/petmily/lcs',
+											type : 'post',
+											dataType : 'json',
+											data : {
+												post_seq : data_post_seq,
+												member_seq : data_member_seq,
+												post_type : data_post_type
+											},
+											success : function(){
+												likeNo.text(val+1);
+											},
+											error : function (error) {
+												alert("이미 좋아요한 게시글 입니다");
+											}
+										})
+									});
+
 									// 새 게시글 폼 바깥쪽 클릭하면 사라지게 하기
 									$('html').click(function (e) {
 										// If clcicked outside of new post form div
@@ -112,6 +139,17 @@
 									console.log($("input#dinputpostseq").val() + ", " + $("input#dinputposttype").val());
 								}
 
+								function postReply(memberSeq, postSeq) {
+									$("input#replymemberseq").val(memberSeq);
+									$("input#replypostseq").val(postSeq);
+									$("button#postreply").click();
+								}
+
+								function deleteReply(replySeq, memberSeq) {
+									var path = "/petmily/rdelete?replyseq=" + replySeq + "&memberseq=" + memberSeq;
+									location.href = path;
+								}
+
 								// function deletePost() {
 								// 	console.log("clicked");
 								// 	var postSeq = $("input#inputpostseq").val();
@@ -125,6 +163,8 @@
 								// 	console.log(path);
 								// 	// location.href = path;
 								// }
+
+								
 								
 							</script>
 						</head>
@@ -219,7 +259,7 @@
 										<% if(p instanceof StandardPost){ %>
 											
 											<!-- 일반게시글 -->
-											<div id="standard-post" style="width: 700px; padding: 10px;">
+											<div id="standard-post" style="width: 700px; padding: 10px;" data-post-seq="<%= p.getPostSeq() %>" data-member-seq="<%= m.getMemberSeq() %>" data-post-type="standardpost">
 												<table id="standardpost"
 													style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid #fda90d; top: 50px;">
 													<tr id="postmemberid"
@@ -246,11 +286,11 @@
 													</tr>
 													<!-- 좋아요 숫자 표시 -->
 													<tr>
-														<td colspan="2" class="likeNo">
-															<!-- 좋아요 기능 추가 해야됨 --> <img
-																src="/petmily/resources/images/post/love.png"
-																id="likeButton">
-															&nbsp;&nbsp;<%= p.getLikeNo() %>
+														<td class="likeNo">
+															<img src="/petmily/resources/images/post/love.png" class="likeimg">
+														</td>
+														<td class="likenotext">
+															<%= p.getLikeNo() %>
 														</td>
 													</tr>
 													<!-- 자기 게시글일 경우 수정버튼 표시 -->
@@ -265,31 +305,37 @@
 														<% } %>
 															<!-- 댓글달기 Row -->
 															<tr id="replyrow">
-																<td colspan="2"><button style="display: none;"></button><input type="text" id="replyinputfield"
-																		placeholder="댓글을 달아보세요"> <!-- 댓글달기 버튼 --> <img
-																		id="replybutton"
-																		src="/petmily/resources/images/post/reply.png"
-																		alt="댓글달기" onclick="postReply()"></td>
+																<td colspan="2">
+																	<form action="/petmily/rnr" method="post">
+																		<input type="text" name="reply-content" id="replyinputfield"
+																		placeholder="댓글을 달아보세요" required> 
+																		<!-- 댓글달기 버튼 -->
+																		<input type="hidden" name="reply-memberseq" id="replymemberseq" value="<%= m.getMemberSeq() %>">
+																		<input type="hidden" name="reply-postseq" id="replypostseq" value="<%= p.getPostSeq() %>">
+																		<button id="postreply" type="submit">댓글</button>
+																	</form>
+																	</td>
 															</tr>
 															<!-- 게시글에 댓글이 있을 경우 댓글 띄우기 -->
-															<% if(p.getReplyNO() !=0) { %>
 																<% for (Reply r : rList) { %>
 																	<!-- 댓글 띄우기 -->
 																	<% if(p.getPostSeq()==r.getPostSeq()) { %>
 																		<tr class="replies">
-																			<td>
-																				<%= r.getReplyContent() %>
+																			<td class="replyinfo">
+																				<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
 																			</td>
 																			<td>
-																				<%= r.getReplyDate() %>
+																				<% if(m.getMemberSeq() == r.getMemberSeq()) { %>
+																				<button class="replydelete" onclick="deleteReply(<%= r.getReplySeq() %>, <%= m.getMemberSeq() %>)">삭제</button>
+																				<% } %>
 																			</td>
 																		</tr>
-																		<% }}} %>
+																		<% }} %>
 												</table>
 											</div>
 											<% } else if (p instanceof TradePost) { %>
 												<!-- 중고거래게시글 -->
-												<div id="trade-post" style="width: 700px; padding: 10px;">
+												<div id="trade-post" style="width: 700px; padding: 10px;" data-post-seq="<%= p.getPostSeq() %>" data-member-seq="<%= m.getMemberSeq() %>" data-post-type="tradepost">
 													<table id="standardpost"
 														style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid #fda90d; top: 50px;">
 														<tr id="postmemberid"
@@ -355,19 +401,20 @@
 																		alt="댓글달기"></td>
 															</tr>
 															<!-- 게시글에 댓글이 있을 경우 댓글 띄우기 -->
-															<% if(p.getReplyNO() !=0) { %>
-																<% for (Reply r : rList) { %>
-																	<!-- 댓글 띄우기 -->
-																	<% if(p.getPostSeq()==r.getPostSeq()) { %>
-																		<tr class="replies">
-																			<td>
-																				<%= r.getReplyContent() %>
-																			</td>
-																			<td>
-																				<%= r.getReplyDate() %>
-																			</td>
-																		</tr>
-																		<% }}} %>
+															<% for (Reply r : rList) { %>
+																<!-- 댓글 띄우기 -->
+																<% if(p.getPostSeq()==r.getPostSeq()) { %>
+																	<tr class="replies">
+																		<td class="replyinfo">
+																			<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
+																		</td>
+																		<td>
+																			<% if(m.getMemberSeq() == r.getMemberSeq()) { %>
+																			<button class="replydelete" onclick="deleteReply(<%= r.getReplySeq() %>, <%= m.getMemberSeq() %>)">삭제</button>
+																			<% } %>
+																		</td>
+																	</tr>
+																	<% }} %>
 													</table>
 
 												</div>
