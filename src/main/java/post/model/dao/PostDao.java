@@ -30,6 +30,7 @@ public class PostDao {
 				+ "MEMBER_ID, "
 				+ "POST_SEQ, "
 				+ "MEMBER_SEQ, "
+				+ "MEMBER_NICK, "
 				+ "POST_CONTENT, "
 				+ "POST_IMG, "
 				+ "LIKE_NO, "
@@ -46,6 +47,7 @@ public class PostDao {
 				+ "MEMBER_ID, "
 				+ "POST_SEQ, "
 				+ "MEMBER_SEQ, "
+				+ "MEMBER_NICK, "
 				+ "POST_CONTENT, "
 				+ "POST_IMG, "
 				+ "LIKE_NO, "
@@ -68,6 +70,7 @@ public class PostDao {
 				sp.setMemberId(rset.getString("MEMBER_ID"));
 				sp.setPostSeq(rset.getInt("POST_SEQ"));
 				sp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
+				sp.setMemberNick(rset.getString("MEMBER_NICK"));
 				sp.setPostContent(rset.getString("POST_CONTENT"));
 				sp.setPostImg(rset.getString("POST_IMG"));
 				sp.setLikeNo(rset.getInt("LIKE_NO"));
@@ -92,6 +95,7 @@ public class PostDao {
 				tp.setMemberId(rset.getString("MEMBER_ID"));
 				tp.setPostSeq(rset.getInt("POST_SEQ"));
 				tp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
+				tp.setMemberNick(rset.getString("MEMBER_NICK"));
 				tp.setPostContent(rset.getString("POST_CONTENT"));
 				tp.setPostImg(rset.getString("POST_IMG"));
 				tp.setLikeNo(rset.getInt("LIKE_NO"));
@@ -127,6 +131,7 @@ public class PostDao {
 				+ "MEMBER_ID, "
 				+ "POST_SEQ, "
 				+ "MEMBER_SEQ, "
+				+ "MEMBER_NICK, "
 				+ "POST_CONTENT, "
 				+ "POST_IMG, "
 				+ "LIKE_NO, "
@@ -144,6 +149,7 @@ public class PostDao {
 				+ "MEMBER_ID, "
 				+ "POST_SEQ, "
 				+ "MEMBER_SEQ, "
+				+ "MEMBER_NICK, "
 				+ "POST_CONTENT, "
 				+ "POST_IMG, "
 				+ "LIKE_NO, "
@@ -168,6 +174,7 @@ public class PostDao {
 				sp.setMemberId(rset.getString("MEMBER_ID"));
 				sp.setPostSeq(rset.getInt("POST_SEQ"));
 				sp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
+				sp.setMemberNick(rset.getString("MEMBER_NICK"));
 				sp.setPostContent(rset.getString("POST_CONTENT"));
 				sp.setPostImg(rset.getString("POST_IMG"));
 				sp.setLikeNo(rset.getInt("LIKE_NO"));
@@ -191,6 +198,7 @@ public class PostDao {
 			while(rset.next()) {
 				TradePost tp = new TradePost();
 				tp.setMemberId(rset.getString("MEMBER_ID"));
+				tp.setMemberNick(rset.getString("MEMBER_NICK"));
 				tp.setPostSeq(rset.getInt("POST_SEQ"));
 				tp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
 				tp.setPostContent(rset.getString("POST_CONTENT"));
@@ -330,6 +338,7 @@ public class PostDao {
 		if(postType.equals("standardpost")) {
 			query = "SELECT "
 					+ "MEMBER_ID, "
+					+ "MEMBER_NICK, "
 					+ "POST_SEQ, "
 					+ "MEMBER_SEQ, "
 					+ "POST_CONTENT, "
@@ -346,6 +355,7 @@ public class PostDao {
 		}else {
 			query = "SELECT "
 					+ "MEMBER_ID, "
+					+ "MEMBER_NICK, "
 					+ "POST_SEQ, "
 					+ "MEMBER_SEQ, "
 					+ "POST_CONTENT, "
@@ -370,6 +380,7 @@ public class PostDao {
 				while(rset.next()) {
 					StandardPost sp = new StandardPost();
 					sp.setMemberId(rset.getString("MEMBER_ID"));
+					sp.setMemberNick(rset.getString("MEMBER_NICK"));
 					sp.setPostSeq(rset.getInt("POST_SEQ"));
 					sp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
 					sp.setPostContent(rset.getString("POST_CONTENT"));
@@ -387,6 +398,7 @@ public class PostDao {
 				while(rset.next()) {
 					TradePost tp = new TradePost();
 					tp.setMemberId(rset.getString("MEMBER_ID"));
+					tp.setMemberNick(rset.getString("MEMBER_NICK"));
 					tp.setPostSeq(rset.getInt("POST_SEQ"));
 					tp.setMemberSeq(rset.getInt("MEMBER_SEQ"));
 					tp.setPostContent(rset.getString("POST_CONTENT"));

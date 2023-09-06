@@ -56,6 +56,11 @@ div#map {
 	z-index:0;
 }
 
+
+div#searchInfo {
+	margin-left : 20px;
+}
+
 div#info {
 	width: 30%;
 	height: 100%;

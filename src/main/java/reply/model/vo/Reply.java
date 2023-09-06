@@ -9,6 +9,7 @@ public class Reply implements java.io.Serializable {
 	private int postSeq;
 	private int memberSeq;
 	private String memberId;
+	private String memberNick;
 	private String replyContent;
 	private Date replyDate;
 	public Reply() {
@@ -27,6 +28,13 @@ public class Reply implements java.io.Serializable {
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+	
+	public String getMemberNick() {
+		return memberNick;
+	}
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
 	}
 	public int getReplySeq() {
 		return replySeq;
