@@ -33,6 +33,7 @@ String keyword = (String)request.getAttribute("keyword");
 		width: 1050px;
 		margin: 98px auto 0 auto;
 		word-wrap: break-word;
+		font-family: 'Surround';
 	}
 #chggrade {
 	border-radius:5px;

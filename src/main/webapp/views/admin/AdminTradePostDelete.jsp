@@ -68,6 +68,7 @@ function testbtn(seq, keyword){
 		width: 1050px;
 		margin: 98px auto 0 auto;
 		word-wrap: break-word;
+		font-family: 'Surround';
 	}
 }
 div#tab-0 {
@@ -87,6 +88,7 @@ form#tab-1 {
 
 }
 form.sform {
+	font-family: 'Surround';
 	width: 630px;
 	left: 400px;
 	display: none;  
@@ -179,7 +181,7 @@ body{
 				<legend>회원 등급을 입력하세요.</legend>
 				<input type="radio" name="keyword" value="1"> 일반회원 &nbsp;
 				<input type="radio" name="keyword" value="2"> 정지회원 &nbsp;
-				<input type="submit" value="검색">
+				<input type="submit" id="csssearch" value="검색">
 			</fieldset>
 		</form>
 	</div>
