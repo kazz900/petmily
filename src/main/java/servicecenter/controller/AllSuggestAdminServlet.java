@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.Paging;
 import servicecenter.model.service.BoardService;
 import servicecenter.model.vo.Board;
 
@@ -32,17 +33,39 @@ public class AllSuggestAdminServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		request.setCharacterEncoding("UTF-8");
+//
+//		BoardService bserv = new BoardService();
+//		ArrayList<Board> list = null;
+//		list = bserv.allSuggestAdmin();
+
 		request.setCharacterEncoding("UTF-8");
+		
+		int currentPage = 1;
+		
+		if (request.getParameter("page") != null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
 
+		int limit = 10;
+		
 		BoardService bserv = new BoardService();
-		ArrayList<Board> list = null;
-		list = bserv.allSuggestAdmin();
+		
+		int listCount = bserv.getListCountAdmin();
+		
+		Paging paging = new Paging(listCount, currentPage, limit, "suggestAdmin");
+		paging.calculator();
+		
 
+		ArrayList<Board> list = new BoardService().allSuggestAdmin(paging.getStartRow(), paging.getEndRow());
+		
 		RequestDispatcher view = null;
 
 		view = request.getRequestDispatcher("views/admin/AdminReply.jsp");
 		request.setAttribute("list", list);
-
+		request.setAttribute("paging", paging);
+		request.setAttribute("currentPage", currentPage);
+		System.out.println(paging.toString());
 		view.forward(request, response);
 	}
 

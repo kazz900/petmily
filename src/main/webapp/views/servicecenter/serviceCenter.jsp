@@ -5,6 +5,11 @@
 <%
 	ArrayList<Board> list = (ArrayList<Board>) request.getAttribute("list");
 	Board board = (Board)request.getAttribute("board");
+	
+	int nowpage = 1;
+	if (request.getAttribute("currentPage") != null) {
+		nowpage = ((Integer)request.getAttribute("currentPage")).intValue();
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -43,8 +48,6 @@
 
 			<hr style="opacity: 0.5; margin: 0px;">
 
-
-
 			<div id="tab-1" class="tab-content current">
 				<% if (list != null) { %>
 				<table id="outer" align="center" cellspacing="5" cellpadding="0">
@@ -66,7 +69,7 @@
 						<% if (b.getBrdReply() != null) { %>
 						&nbsp; &nbsp; (답변완료)
 						<% } %>
-						<a href="/petmily/bdetail?bnum=<%=b.getBrdNo()%>">
+						<a href="/petmily/bdetail?bnum=<%=b.getBrdNo()%>&page=<%=nowpage%>">
 						<%=b.getBrdContent()%></a></td>
 						
 						<td style="font-size:12px;">
@@ -86,6 +89,7 @@
 					<% } else { %>
 					    <h1>아직 문의사항이 없습니다.</h1>
 					<% } %>
+					<%@ include file="../common/pagingView.jsp" %>
 			</div>
 
 
