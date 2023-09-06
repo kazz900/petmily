@@ -64,7 +64,6 @@ public class DeptTypeServlet extends HttpServlet {
 		  //내보내기 
 		  view.forward(request, response);
 		 
-		 
 	}
 
 	/**
