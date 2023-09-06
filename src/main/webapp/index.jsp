@@ -19,8 +19,8 @@
 <div style="display: flex;
     justify-content: center;
     
-    height: 740px;">
-<div class="banner-container" style="height: 670px; margin-top:85px">
+    height: 670px;">
+<div class="banner-container" style="height: 500px; margin-top:85px">
   <div class="banner">
     <div data-index=1><img src="/petmily/resources/images/mainbanner/882.jpg"></div>
     <div data-index=2><img src="/petmily/resources/images/mainbanner/miho.jpg"></div>
@@ -28,7 +28,7 @@
     <div data-index=4><img src="/petmily/resources/images/mainbanner/885.jpg"></div>
   </div>
 </div>
-<div class="list-button" style="margin-bottom: 28px;">
+<div class="list-button" style="margin-bottom: 28px; margin-top: 540px;">
   <span class="list-button-item active"></span> 
   <span class="list-button-item"></span> 
   <span class="list-button-item"></span> 
@@ -39,7 +39,7 @@
 <ul style="display: flex;
     justify-content: center;
     align-items: center;">
-<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=1&typename=의료"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/veterinary.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">병원</li></ul></a></span>
+<span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=1&typename=의료"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/veterinary.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">의료</li></ul></a></span>
 <span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=2&typename=미용"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/miyong.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">미용</li></ul></a></span>
 <span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=3&typename=용품"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/shop.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">용품</li></ul></a></span>
 <span style="margin-right:50px;"><a href="/petmily/selectdepttype?selecttype=4&typename=위탁"><ul style="display:inline-block"><li><img src="/petmily/resources/images/mainicon/witac.png" style="height:100px; width:100px;"></li><li class="main-icon" style="text-align: center">위탁</li></ul></a></span>
