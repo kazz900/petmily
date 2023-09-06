@@ -11,6 +11,7 @@ public class Post {
 	private int postSeq;
 	private int memberSeq;
 	private String memberId;
+	private String memberNick;
 	private String postContent;
 	private String postImg;
 	private int likeNo;
@@ -58,6 +59,13 @@ public class Post {
 	}
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
+	}
+
+	public String getMemberNick() {
+		return memberNick;
+	}
+	public void setMemberNick(String memberNick) {
+		this.memberNick = memberNick;
 	}
 	public String getPostContent() {
 		return postContent;
@@ -113,6 +121,8 @@ public class Post {
 	public void setChangedFileName(String changedFileName) {
 		this.changedFileName = changedFileName;
 	}
+	
+	
 	
 	
 }
