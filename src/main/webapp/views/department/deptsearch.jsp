@@ -23,6 +23,7 @@ String type = (String)request.getAttribute("type");
 		margin: 98px auto 0 auto;
 		word-wrap: break-word;
 	}
+	
 }
 
 html, body {
