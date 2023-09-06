@@ -35,6 +35,10 @@ public class AdminDeptFindServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
+		int currentPage = ((Integer)request.getAttribute("currentPage")).intValue();
+		
+		
+		
 		String action = request.getParameter("action");
 		String keyword = request.getParameter("keyword");
 		if(keyword == null) {
