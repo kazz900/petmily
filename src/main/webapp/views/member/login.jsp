@@ -35,100 +35,124 @@
  %>
 <style type="text/css">
 @font-face {
-   font-family: 'Surround';
-   src: url('/petmily/resources/font/surround.woff2') format('woff2');
-   font-weight: normal;
-   font-style: normal;
+	font-family: 'Surround';
+	src: url('/petmily/resources/font/surround.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
 }
+
+@font-face {
+	font-family: 'forgedm';
+	src: url('/petmily/resources/font/forged-Medium.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'forgedl';
+	src: url('/petmily/resources/font/forged-Light.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
-      font-family: 'Surround', sans-serif;
-      padding: 20px 50px;
-font-size: 25px;
-font-weight: 900;
-color: hsl(30.5, 77.6%, 29.8%);
-    }
+	padding: 20px 50px;
+	font-size: 25px;
+	font-weight: 900;
+	color: hsl(30.5, 77.6%, 29.8%);
+}
+
 body h1 a {
-      font-family: 'Surround', sans-serif;
-      padding: 20px 50px;
-font-size: 35px;
-font-weight: 900;
-border: none;
-color: hsl(30.46deg 58.9% 45.68%);
-text-decoration: none;
-    }
-    body h2 {
-      font-family: 'Surround', sans-serif;
-      padding: 20px 50px;
-color: hsl(30.5, 77.6%, 29.8%);
-    }
-    body h2 {
-      font-family: 'Surround', sans-serif;
-      padding: 20px 50px;
-color: hsl(30.5, 77.6%, 29.8%);
-    }
-    form {
-   text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
-   margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
-   width: 350px; /* 폼의 너비 설정 */
-   height: auto;
-/*    border: 1px solid black;  */
-    }
+	font-family: 'Surround', sans-serif;
+	padding: 20px 50px;
+	font-size: 35px;
+	font-weight: 900;
+	border: none;
+	color: hsl(30.46deg 58.9% 45.68%);
+	text-decoration: none;
+}
+
+body h2 {
+	font-family: 'Surround', sans-serif;
+	padding: 20px 50px;
+	color: hsl(30.5, 77.6%, 29.8%);
+}
+
+form {
+	text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
+	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
+	width: 350px; /* 폼의 너비 설정 */
+	height: auto;
+	/*    border: 1px solid black;  */
+}
 /* td {
 border: 1px solid red; 
 }  */
- td input[type=text]{
-   width: 250px;
-    height: 30px;
-    border-radius: 7px;
-    background-color: beige;
-    font-family: 'Surround';
-    border: solid;
- }
- td input[type=password]{
-   width: 250px;
-    height: 30px;
-    border-radius: 7px;
-    background-color: beige;
-    font-family: 'Surround';
-    border: solid;
- }
+td input[type=text] {
+	font-family: 'forgedl', sans-serif;
+	width: 250px;
+	height: 30px;
+	border-radius: 7px;
+	background-color: beige;
+	border: 1px solid #c90;
+}
+td input[type=text]:focus {
+	outline: none;
+}
+
+td input[type=password] {
+	font-family: 'forgedl', sans-serif;
+	width: 250px;
+	height: 30px;
+	border-radius: 7px;
+	background-color: beige;
+	border: 1px solid #c90;
+}
+td input[type=password]:focus {
+	outline: none;
+}
+
 #logincheck {
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
-    color: hsl(30.5, 77.6%, 29.8%);
-    background-color: hsl(36deg 70.37% 68.61%);
-    font-family: 'Surround';
+	font-family: 'Surround';
+	width: 80px;
+	height: 80px;
+	border-radius: 10px;
+	color: hsl(30.5, 77.6%, 29.8%);
+	background-color: hsl(36deg 70.37% 68.61%);
 }
+
 #findinfo {
-text-align: center;
-    margin: 0 auto;
-    width: 165px;
-    height: 30px;
-    border-radius: 7px;
-    color: hsl(30.5, 77.6%, 29.8%);
-    background-color: hsl(36deg 70.37% 68.61%);
-    font-family: 'Surround';
+	font-family: 'Surround';
+	text-align: center;
+	margin: 0 auto;
+	width: 165px;
+	height: 30px;
+	border-radius: 7px;
+	color: hsl(30.5, 77.6%, 29.8%);
+	background-color: hsl(36deg 70.37% 68.61%);
 }
+
 #enroll {
-text-align: center;
-    margin: 0 auto;
-    width: 165px;
-    height: 30px;
-    border-radius: 7px;
-    color: hsl(30.5, 77.6%, 29.8%);
-    background-color: hsl(36deg 70.37% 68.61%);
-    font-family: 'Surround';
+	font-family: 'Surround';
+	text-align: center;
+	margin: 0 auto;
+	width: 165px;
+	height: 30px;
+	border-radius: 7px;
+	color: hsl(30.5, 77.6%, 29.8%);
+	background-color: hsl(36deg 70.37% 68.61%);
 }
+
 td a {
-left: 0px;
+	left: 0px;
 }
+
 .social {
-   display: flex;
-   justify-content: center;
-   align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
-      </style>
+</style>
 </head>
 <body>
 <header>
