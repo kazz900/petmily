@@ -35,12 +35,12 @@ public class PostSerivce {
 		return list;
 	}
 
-	public ArrayList<Post> getPostListFilter() {
+	public ArrayList<Post> getPostListSortByPopularity() {
 		ArrayList<Post> list = null;
 		Connection conn = getConnection();
 		// TODO Auto-generated method stub
 
-		list = pdao.getPostListFilter(conn);
+		list = pdao.getPostListSortByPopularity(conn);
 		close(conn);
 		return list;
 	}

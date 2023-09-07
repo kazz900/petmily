@@ -116,7 +116,8 @@
 								}
 
 								function sortByPopularity() {
-									var path = "/petmily/plistfilter"
+									var path = "/petmily/plistsortbypopularity";
+									location.href = path;
 								}
 
 								function sortByPostType() {
