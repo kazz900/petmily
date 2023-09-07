@@ -56,6 +56,7 @@ request.setCharacterEncoding("utf-8");
 				
 		RequestDispatcher view = null;
 		
+
 		view = request.getRequestDispatcher("views/admin/AdminTradePostDelete.jsp");
 		request.setAttribute("list", list);
 		request.setAttribute("keyword", keyword);
