@@ -43,10 +43,7 @@ public class LikeServlet extends HttpServlet {
 		l.setMemberSeq(memberSeq);
 		l.setPostSeq(postSeq);
 		l.setLikeKey(likeKey);
-		
-		System.out.println(memberSeq + ", " + postSeq + ", " + likeKey + ", " + postType);
-		
-		System.out.println(memberSeq + ", " + postSeq);
+
 		result = lService.updateLike(l, postType);
 		if(result > 0) {
 			JSONObject sendJson = new JSONObject();

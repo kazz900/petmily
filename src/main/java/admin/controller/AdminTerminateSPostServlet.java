@@ -34,8 +34,6 @@ public class AdminTerminateSPostServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		String action = request.getParameter("action");
 		
-		System.out.println("atss keyword : " + keyword);
-		System.out.println("atss  action : " + action);
 		
 		
 		int result = new AdminPostService().terminatePost(value);
