@@ -267,9 +267,9 @@
 											<!-- 일반게시글 -->
 											<div id="standard-post" style="width: 700px; padding: 10px;" data-post-seq="<%= p.getPostSeq() %>" data-member-seq="<%= m.getMemberSeq() %>" data-post-type="standardpost">
 												<table id="standardpost"
-													style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid #fda90d; top: 50px;">
+													style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid hsl(36deg 70.37% 68.61%); top: 50px;">
 													<tr id="postmemberid"
-														style="padding-left: 20px; background-color: #fda90d;">
+														style="padding-left: 20px; background-color: hsl(36deg 70.37% 68.61%);">
 														<td
 															style="text-align: left; height: 30px; padding-left: 20px; font-weight: bold; color: white;">
 															일반게시글</td>
@@ -343,9 +343,9 @@
 												<!-- 중고거래게시글 -->
 												<div id="trade-post" style="width: 700px; padding: 10px;" data-post-seq="<%= p.getPostSeq() %>" data-member-seq="<%= m.getMemberSeq() %>" data-post-type="tradepost">
 													<table id="standardpost"
-														style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid #fda90d; top: 50px;">
+														style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid hsl(36deg 70.37% 68.61%); top: 50px;">
 														<tr id="postmemberid"
-															style="padding-left: 20px; background-color: #fda90d;">
+															style="padding-left: 20px; background-color: hsl(36deg 70.37% 68.61%);">
 															<td
 																style="text-align: left; height: 30px; padding-left: 20px; font-weight: bold; color: white;">
 																중고거래글</td>
@@ -375,19 +375,6 @@
 																<%= p.getLikeNo() %>
 															</td>
 														</tr>
-														<% if(m.getMemberSeq() !=p.getMemberSeq()) { %>
-															<!-- 중고거래글이면서 자기 게시글이 아닐 경우 채팅요청 할 수 있음 -->
-															<!-- 중고거래 채팅 -->
-															<tr id="chatrow"
-																style="border-style: none; text-align: right;">
-																<td id="chatbutton" colspan="2"
-																	style="border-style: none;"><img
-																		src="/petmily/resources/images/post/chat.png"
-																		alt="채팅시작"
-																		style="position: relative; right: 20px; width: 35px; height: 35px;">
-																</td>
-															</tr>
-															<% } %>
 																<!-- 자기 게시글일 경우 수정버튼 표시 -->
 																<% if (m.getMemberSeq()==p.getMemberSeq()){ %>
 																	<tr id="postbottom" style="height: 50px; align-items: center;">
