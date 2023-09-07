@@ -23,7 +23,6 @@ public class ReplyNewReplyServlet extends HttpServlet {
      */
     public ReplyNewReplyServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
