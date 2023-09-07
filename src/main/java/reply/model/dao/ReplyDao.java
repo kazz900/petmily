@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import post.model.vo.Post;
 import reply.model.vo.Reply;
 import standardpost.model.vo.StandardPost;
-import standardreply.model.vo.StandardReply;
 import tradepost.model.vo.TradePost;
 
 public class ReplyDao {
