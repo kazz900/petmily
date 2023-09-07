@@ -71,20 +71,23 @@ public class petUpdateServlet extends HttpServlet {
 		pet.setPetName(mrequest.getParameter("upetName"));
 		pet.setPetType(mrequest.getParameter("upetType"));
 		pet.setPetSize(mrequest.getParameter("upetSize"));
-
+		int result = 0;
 		if (mrequest.getFilesystemName("uinput-image") != null) {
+			
+			if(!mrequest.getParameter("duImg").equals("882.jpg")) {
 			String deletFileName = mrequest.getParameter("duImg");
-			
 			new File(savePath + "\\" + deletFileName).delete(); 
-			
+			}
 			String originalFileName = mrequest.getFilesystemName("uinput-image");
 
 			String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
 
 			pet.setPetImg(renameFileName);
+			result = new PetService().updatePet(pet);
+		}else {
+			result = new PetService().updatePetNoneImg(pet);
 		}
 
-		int result = new PetService().updatePet(pet);
 
 		if (result > 0) {
 			String link = "/petmily/mypet?memberSeq=" + member.getMemberSeq();

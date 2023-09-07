@@ -216,4 +216,31 @@ public class PetDao {
 		}
 		return result;
 	}
+
+	public int updatePetNoneImg(Connection conn, Pet pet) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String query = null;
+		
+		query = "update pet set pet_name = ?, pet_type = ?, pet_size = ? where member_seq = ? and pet_seq = ?";	
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+				pstmt.setString(1, pet.getPetName());
+				pstmt.setString(2, pet.getPetType());
+				pstmt.setString(3, pet.getPetSize());
+				pstmt.setInt(4, pet.getMemberSeq());
+				pstmt.setInt(5, pet.getPetSeq());
+			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
 }
