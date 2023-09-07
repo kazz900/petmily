@@ -54,8 +54,6 @@ public class LikeServlet extends HttpServlet {
 			out.print(sendJson.toJSONString());
 			out.flush();
 			out.close();
-		}else {
-			
 		}
 	}
 
