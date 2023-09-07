@@ -17,11 +17,6 @@ public class PostDao {
 		super();
 	}
 
-	public int getPostListCount(Connection conn) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	public ArrayList<Post> getPostList(Connection conn) {
 		ArrayList<Post> list = new ArrayList<Post>();
 		PreparedStatement pstmt = null;
@@ -114,7 +109,6 @@ public class PostDao {
 		} finally {
 			close(rset, pstmt);
 		}
-		
 		return list;
 	}
 
@@ -209,7 +203,7 @@ public class PostDao {
 				list.add(tp);
 			}
 			
-			list.sort((p1 , p2) -> p2.getPostDate().compareTo(p1.getPostDate()) );
+			list.sort((p1 , p2) -> p2.getPostDate().compareTo(p1.getPostDate()));
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -309,16 +303,6 @@ public class PostDao {
 		}
 		
 		return result;
-	}
-
-	public int updatePostLikeNo(Connection conn, int memberSeq, int postSeq) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int getPostLikeNo(Connection conn, int postSeq) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	public ArrayList<Post> getPostListByType(Connection conn, String postType) {
