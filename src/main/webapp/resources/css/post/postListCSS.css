@@ -18,7 +18,7 @@ div button#newpost {
     height: 50px;
     font-size: 20px;
     background-color: #fff;
-    color: #fda90d;
+    color: hsl(36deg 70.37% 68.61%);
     align-items: center;
     border: none;
     border-radius: 45px;
@@ -30,7 +30,7 @@ div button#newpost {
 
 
 div button#newpost:hover {
-    background-color: #fda90d;
+    background-color: hsl(30.46deg 58.9% 45.68%);;
     box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
     color: #fff;
     transform: translateY(-7px);
@@ -100,9 +100,8 @@ textarea#post-content-textarea {
     border: 2px solid #777777;
     font-weight: bold;
     font-size: 20px;
-    outline-color: #fda90d;
+    outline-color: hsl(30.46deg 58.9% 45.68%);;
     text-align: center;
-    color: #fda90d;
 }
 
 table{
@@ -146,14 +145,14 @@ img#replybutton{
 
 :root {
     --button-color: #ffffff;
-    --button-bg-color: #fda90d;
+    --button-bg-color: hsl(36deg 70.37% 68.61%);
 }
 
 td.likeNo{
     text-align: left;
     padding-left: 20px;
     font-weight: bold;
-    color: #fda90d;
+    color: hsl(36deg 70.37% 68.61%);
     font-size: 20px;
     padding-bottom: 20px;
 }
@@ -161,7 +160,7 @@ td.likeNo{
 td.likenotext{
     position: relative;
     font-weight: bold;
-    color: #fda90d;
+    color: hsl(36deg 70.37% 68.61%);
     font-size: 20px;
     left: -425px;
     padding-bottom: 15px;
@@ -169,7 +168,7 @@ td.likenotext{
 }
 
 tr#replyrow{
-    border: 1px solid #fda90d;
+    border: 1px solid hsl(36deg 70.37% 68.61%);
     padding: 10px;
 }
 
@@ -272,6 +271,10 @@ button {
     transition: 0.5s;
 }
 
+button:hover {
+    background-color: hsl(30.46deg 58.9% 45.68%);
+}
+
 button#show-my-post{
     position: relative;
     left: -155px;
@@ -330,7 +333,7 @@ select.pl{
     height: 40px;
     box-sizing: border-box;
     border-radius: 10px;
-    background-color: #fda90d;
+    background-color: hsl(36deg 70.37% 68.61%);
     color: white;
     font-weight: bold;
     border-style: none;
@@ -349,18 +352,22 @@ select.pl:focus{
 select#sortbytype{
     text-align: center;
     position: relative;
-    bottom: 0px;
+    bottom: 2px;
     right: 0px;
     width: 150px;
     height: 40px;
     box-sizing: border-box;
     border-radius: 5px;
-    background-color: #fda90d;
+    background-color: hsl(36deg 70.37% 68.61%);
     color: white;
     font-weight: bold;
     border-style: none;
     font-size: 1rem;
     font-weight: bold;
+}
+
+select#sortbytype:focus{
+    background-color: hsl(30.46deg 58.9% 45.68%);
 }
 
 
