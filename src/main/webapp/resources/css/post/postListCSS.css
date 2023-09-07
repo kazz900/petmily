@@ -18,7 +18,7 @@ div button#newpost {
     height: 50px;
     font-size: 20px;
     background-color: #fff;
-    color: #fda90d;
+    color: hsl(36deg 70.37% 68.61%);
     align-items: center;
     border: none;
     border-radius: 45px;
@@ -30,7 +30,7 @@ div button#newpost {
 
 
 div button#newpost:hover {
-    background-color: #fda90d;
+    background-color: hsl(30.46deg 58.9% 45.68%);;
     box-shadow: 0px 15px 20px rgba(255, 194, 63, 0.4);
     color: #fff;
     transform: translateY(-7px);
@@ -100,7 +100,7 @@ textarea#post-content-textarea {
     border: 2px solid #777777;
     font-weight: bold;
     font-size: 20px;
-    outline-color: #fda90d;
+    outline-color: hsl(30.46deg 58.9% 45.68%);;
     text-align: center;
 }
 
