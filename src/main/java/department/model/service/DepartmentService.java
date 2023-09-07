@@ -80,9 +80,9 @@ public class DepartmentService implements Serializable{
 		
 		
 	}
-	public ArrayList<Department> selectRequestTerminateDept() {
+	public ArrayList<Department> selectRequestTerminateDept(int startRow, int endRow) {
 		Connection conn = getConnection();
-		ArrayList<Department> list = ddao.selectRequestTerminateDept(conn);
+		ArrayList<Department> list = ddao.selectRequestTerminateDept(conn, startRow, endRow);
 		close(conn);
 		return list;
 	}
@@ -117,6 +117,14 @@ public class DepartmentService implements Serializable{
 		ArrayList<Department> list = ddao.reDeptList(conn, keyword);
 		close(conn);
 		return list;
+	}
+
+
+	public int getDeleteDeptListCount() {	
+		Connection conn = getConnection();
+		int listCount = ddao.getDeleteDeptListCount(conn);
+		close(conn);
+		return listCount;
 	}
 
 

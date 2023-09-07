@@ -293,17 +293,23 @@ public class DepartmentDao implements Serializable {
 
 	}
 
-	public ArrayList<Department> selectRequestTerminateDept(Connection conn) {
+	public ArrayList<Department> selectRequestTerminateDept(Connection conn, int startRow, int endRow) {
 		ArrayList<Department> list = new ArrayList<Department>();
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-		String query = "select * from department where dept_delete_ok = 'y'";
+		String query = "select * from  (select rownum rnum, dept_seq, dept_type, dept_name, dept_address, dept_phone, dept_latitude, dept_longitude, dept_time, dept_parking, dept_entrance_fee, dept_sizerestrict, dept_restrict, dept_withpetfee, dept_url, dept_pic, dept_insert_ok, dept_delete_ok   "
+				+ "from department "
+				+ "where dept_delete_ok = 'y' order by dept_seq asc) "
+				+ "where rnum >= ? and rnum <= ?";
 
+		
 		try {
 			pstmt = conn.prepareStatement(query);
-
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
@@ -509,6 +515,33 @@ public class DepartmentDao implements Serializable {
 		}
 
 		return list;
+	}
+
+	public int getDeleteDeptListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = "select count(*) from department where dept_delete_ok = 'y'";
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery(query);
+			
+			if(rset.next()) {
+				listCount = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}		
+		
+		return listCount;
+		
 	}
 
 }

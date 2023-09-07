@@ -52,6 +52,7 @@ public class EnrollServlet extends HttpServlet {
 			// 암호화된 byte[] 을 String으로 변경시킴 : 암호문 상태가 됨
 			cryptoUserpwd = Base64.getEncoder().encodeToString(pwdValues);
 			// 확인하기
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
