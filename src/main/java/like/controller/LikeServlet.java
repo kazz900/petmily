@@ -26,7 +26,6 @@ public class LikeServlet extends HttpServlet {
      */
     public LikeServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -44,6 +43,8 @@ public class LikeServlet extends HttpServlet {
 		l.setMemberSeq(memberSeq);
 		l.setPostSeq(postSeq);
 		l.setLikeKey(likeKey);
+		
+		System.out.println(memberSeq + ", " + postSeq + ", " + likeKey + ", " + postType);
 		
 		System.out.println(memberSeq + ", " + postSeq);
 		result = lService.updateLike(l, postType);

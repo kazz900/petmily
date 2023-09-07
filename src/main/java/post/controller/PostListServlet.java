@@ -47,7 +47,9 @@ public class PostListServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("rList", rList);
 		} else {
-			view = request.getRequestDispatcher("views/common/waiting.jsp");
+			view = request.getRequestDispatcher("views/post/postList.jsp");
+			request.setAttribute("list", list);
+			request.setAttribute("rList", rList);
 		}
 		
 		view.forward(request, response);
@@ -57,7 +59,6 @@ public class PostListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 }
