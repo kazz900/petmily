@@ -88,16 +88,6 @@ public class PostSerivce {
 		return result;
 	}
 	
-	public StandardPost selectPost(int postSeq) {
-		// TODO Auto-generated method stub
-		StandardPost sp = null;
-		Connection conn = getConnection();
-
-		sp = pdao.selectPost(conn, postSeq);
-		close(conn);
-		return sp;
-	}
-	
 	public int updatePostLikeNo(int memberSeq, int postSeq) {
 		// TODO Auto-generated method stub
 		int result = 0;
@@ -157,5 +147,26 @@ public class PostSerivce {
 		
 		close(conn);
 		return result;
+	}
+
+
+	public int checkIfTypeChanged(int postSeq, String postType) {
+		int result = 0;
+		Connection conn = getConnection();
+
+		result = pdao.checkIfTypeChanged(conn, postSeq, postType);
+		
+		close(conn);
+		return result;
+	}
+
+	public Post selectPost(int postSeq, String postType) {
+		// TODO Auto-generated method stub
+		Post p = null;
+		Connection conn = getConnection();
+
+		p = pdao.selectPost(conn, postSeq, postType);
+		close(conn);
+		return p;
 	}
 }
