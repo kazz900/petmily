@@ -142,6 +142,7 @@ public class PostNewPostServlet extends HttpServlet {
 		System.out.println(memberSeq);
 		String postType = mrequest.getParameter("post-type");
 		String postContent = mrequest.getParameter("post-content");
+		String memberNick = mrequest.getParameter("membernick");
 		postContent = postContent.replace('\n', ' ').replace('\r', ' ');
 		
 		
@@ -151,6 +152,7 @@ public class PostNewPostServlet extends HttpServlet {
 			p.setMemberSeq(memberSeq);
 			p.setPostContent(postContent);
 			p.setOriginalFileName(originalFileName);
+			p.setMemberNick(memberNick);
 			if(originalFileName != null) {
 				String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
 				p.setChangedFileName(renameFileName);
@@ -160,6 +162,7 @@ public class PostNewPostServlet extends HttpServlet {
 			p.setMemberSeq(memberSeq);
 			p.setPostContent(postContent);
 			p.setOriginalFileName(originalFileName);
+			p.setMemberNick(memberNick);
 			if(originalFileName != null) {
 				String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
 				p.setChangedFileName(renameFileName);
