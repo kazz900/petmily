@@ -60,9 +60,6 @@ public class SelectRequestTerminateDept extends HttpServlet {
 		
 		ArrayList<Department> list = dservice.selectRequestTerminateDept(paging.getStartRow(), paging.getEndRow());
 		String keyword = (String)request.getParameter("keyword");
-
-		System.out.println("list count : " + listCount);
-		System.out.println("list size : " + list.size());
 		
 		if(keyword == null) {
 			keyword = "";

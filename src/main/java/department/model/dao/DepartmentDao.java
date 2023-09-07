@@ -304,7 +304,6 @@ public class DepartmentDao implements Serializable {
 				+ "where dept_delete_ok = 'y' order by dept_seq asc) "
 				+ "where rnum >= ? and rnum <= ?";
 
-		System.out.println(query);
 		
 		try {
 			pstmt = conn.prepareStatement(query);
@@ -431,11 +430,9 @@ public class DepartmentDao implements Serializable {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + keyword + "%");
-			System.out.println(keyword);
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				System.out.println("ㅎㅇ");
 
 				Department dept = new Department();
 
@@ -460,7 +457,6 @@ public class DepartmentDao implements Serializable {
 				dept.typeSelect();
 
 				list.add(dept);
-				System.out.println("ㅎㅇ");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -483,7 +479,6 @@ public class DepartmentDao implements Serializable {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, "%" + keyword + "%");
-			System.out.println(keyword);
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {

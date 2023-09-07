@@ -41,7 +41,6 @@ public class LoadMyPetPictureServlet extends HttpServlet {
 		ArrayList<Pet> list = psv.selectPet(memberSeq);
 
 		RequestDispatcher view = null;
-		System.out.println(list.size());
 		if(list.size() > 0) {
 			request.setAttribute("list", list);
 		}

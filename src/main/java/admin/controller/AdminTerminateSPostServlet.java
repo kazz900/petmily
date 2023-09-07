@@ -32,11 +32,7 @@ public class AdminTerminateSPostServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String value = request.getParameter("postSeq");
 		String keyword = request.getParameter("keyword");
-		String action = request.getParameter("action");
-		
-		System.out.println("atss keyword : " + keyword);
-		System.out.println("atss  action : " + action);
-		
+		String action = request.getParameter("action");				
 		
 		int result = new AdminPostService().terminatePost(value);
 		if(action != null) {

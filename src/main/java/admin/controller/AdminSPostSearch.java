@@ -60,8 +60,6 @@ public class AdminSPostSearch extends HttpServlet {
 				
 		RequestDispatcher view = null;
 		
-		System.out.println(list.size());
-
 		view = request.getRequestDispatcher("views/admin/AdminStandardPostDelete.jsp");
 		request.setAttribute("list", list);
 		request.setAttribute("keyword", keyword);

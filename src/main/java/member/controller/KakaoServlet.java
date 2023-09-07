@@ -54,7 +54,6 @@ public class KakaoServlet extends HttpServlet {
 			sb.append(line);
 		}
 		String responseBody = sb.toString();
-//        System.out.println(responseBody);
 		try {
 			Object obj = parsing.parse(responseBody);
 			jsonObj = (JSONObject) obj;

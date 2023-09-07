@@ -35,7 +35,7 @@ public class DeptTerminateServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String value = request.getParameter("deptSeq");
 		String keyword = request.getParameter("keyword");
-		System.out.println("deptter keyword : " + keyword);
+		
 		int result = new DepartmentService().terminateDept(value);
 		response.sendRedirect("/petmily/srtd?keyword="+URLEncoder.encode(keyword, "UTF-8"));
 	}

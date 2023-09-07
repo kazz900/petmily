@@ -39,7 +39,6 @@ public class PetDelete extends HttpServlet {
 		
 		
 		int result = new PetService().petDelete(pet);
-		System.out.println(result);
 		if (result > 0) {
 			String renameFileName = request.getParameter("deleteImg");
 			String savePath = request.getSession().getServletContext().getRealPath("/resources/images/petImg");

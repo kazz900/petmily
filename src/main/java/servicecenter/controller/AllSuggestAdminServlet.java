@@ -65,7 +65,6 @@ public class AllSuggestAdminServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("paging", paging);
 		request.setAttribute("currentPage", currentPage);
-		System.out.println(paging.toString());
 		view.forward(request, response);
 	}
 
