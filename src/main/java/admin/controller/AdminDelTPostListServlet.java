@@ -37,7 +37,6 @@ public class AdminDelTPostListServlet extends HttpServlet {
 		ArrayList<AdminPost> list = null;
 		AdminPostService apservice = new AdminPostService();
 		String keyword = request.getParameter("keyword");
-		System.out.println(keyword);
 		String action = request.getParameter("action");
 		if (keyword == null || keyword == "") {
 			list = new AdminPostService().showTradePostList();
