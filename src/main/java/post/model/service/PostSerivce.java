@@ -16,15 +16,6 @@ public class PostSerivce {
 	PostDao pdao = new PostDao();
 	
 	public PostSerivce() {}
-	
-	public int getPostListCount() {
-		int count = 0;
-		Connection conn = getConnection();
-
-		count = pdao.getPostListCount(conn);
-		close(conn);
-		return count;
-	}
 
 	public ArrayList<Post> getPostList() {
 		ArrayList<Post> list = null;
@@ -86,26 +77,6 @@ public class PostSerivce {
 		
 		close(conn);
 		return result;
-	}
-	
-	public int updatePostLikeNo(int memberSeq, int postSeq) {
-		// TODO Auto-generated method stub
-		int result = 0;
-		Connection conn = getConnection();
-
-		result = pdao.updatePostLikeNo(conn, memberSeq, postSeq);
-		close(conn);
-		return result;
-	}
-	
-	public int getPostLikeNo(int postSeq){
-		// TODO Auto-generated method stub
-		int tradePostLikeNo = 0;
-		Connection conn = getConnection();
-		tradePostLikeNo = pdao.getPostLikeNo(conn, postSeq);
-		
-		close(conn);
-		return tradePostLikeNo;
 	}
 
 	public ArrayList<Post> getPostListByType(String postType) {
