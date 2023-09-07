@@ -135,12 +135,14 @@ public class BoardDao implements Serializable {
    }
 
    public int updateMySuggest(Connection conn, Board board) {
-      int eResult = 0;
+      
+	  int eResult = 0;
       
       PreparedStatement pstmt = null;
       
       String query = "UPDATE SERV_CENTER "
-                + "SET TITLE = ?, CONTENT = ?, UPLOAD_DATE = SYSDATE, RESULT = ? "
+                + "SET TITLE = ?, CONTENT = ?, "
+                + "UPLOAD_DATE = SYSDATE, RESULT = ? "
                 + "WHERE MEMBER_SEQ = ? AND SERV_SEQ = ?";
 
       try {
