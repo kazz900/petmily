@@ -39,8 +39,6 @@ public class AdminDelSPostListServlet extends HttpServlet {
 		String keyword = request.getParameter("keyword");
 		String action = request.getParameter("action");
 
-		System.out.println("adsp  action : "+ action);
-		System.out.println("adsp  keyword : " +keyword);
 		if (keyword == null || keyword == "") {
 			list = new AdminPostService().selectPostList();
 			keyword = "";

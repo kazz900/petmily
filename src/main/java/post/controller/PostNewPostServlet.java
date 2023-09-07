@@ -139,7 +139,6 @@ public class PostNewPostServlet extends HttpServlet {
 		
 		// GET POST INFORMATIONS
 		int memberSeq = Integer.parseInt(mrequest.getParameter("memberseq"));
-		System.out.println(memberSeq);
 		String postType = mrequest.getParameter("post-type");
 		String postContent = mrequest.getParameter("post-content");
 		postContent = postContent.replace('\n', ' ').replace('\r', ' ');

@@ -44,17 +44,12 @@ public class PostDeleteServlet extends HttpServlet {
 		int postSeq = Integer.parseInt(request.getParameter("dpostseq"));
 		int memberSeq = Integer.parseInt(request.getParameter("dmemberseq"));
 		String postType = request.getParameter("dposttype");
-		System.out.println(postSeq + ", " + memberSeq + ", " + postType);
 		int result = 0;
 		Post p = null;
-		System.out.println(postSeq + ", " + postType);
-		System.out.println(postType);
 		if(postType.equals("standardpost")) {
-			System.out.println("일반게시글");
 			p = new StandardPost();
 			p.setPostSeq(postSeq);
 		}else {
-			System.out.println("중고거래글");
 			p = new TradePost();
 			p.setPostSeq(postSeq);
 		}
