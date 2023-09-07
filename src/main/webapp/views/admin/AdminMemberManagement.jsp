@@ -105,7 +105,6 @@ body{
 	</script>
 <body>
 	<%@ include file="../common/main.jsp"%>
-<form id="tab-0">
 <br>
 <div class="block" style="text-align: center;">
 <form id="idform" class="block" action="/petmily/amss" method="post">
@@ -115,7 +114,6 @@ body{
 	<input type="hidden" name="action" value="id">
 	<input type="submit" id="csssearch" value="검색">
 </fieldset>
-</form>
 <br>
 
 </form>
