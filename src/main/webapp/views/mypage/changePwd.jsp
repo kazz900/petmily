@@ -99,7 +99,6 @@ $(function(){
 	submitBtn.disabled = true;
 	
 
-	
 	pwdValue1.addEventListener("keyup", function(){
 		if (!reg.test(pwdValue1.value)) {
 			notice.hidden = false;
@@ -119,9 +118,11 @@ $(function(){
 			submitBtn.disabled = true;
 		} else {
 			notice.hidden = true;
-			submitBtn.disabled = true;
 			if(pwdValue1.value == pwdValue2.value){
 				submitBtn.disabled = false;
+				notice2.hidden = true;
+			} else {
+				notice2.hidden = false;
 			}
 		}
 	});

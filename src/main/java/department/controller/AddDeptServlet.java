@@ -31,9 +31,6 @@ public class AddDeptServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
-//		String time = request.getParameter("time");
-//		String open = null, close = null;
 
 		Department dept = new Department();
 		
