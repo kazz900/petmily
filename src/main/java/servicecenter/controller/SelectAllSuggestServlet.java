@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.Paging;
 import servicecenter.model.service.BoardService;
 import servicecenter.model.vo.Board;
 
@@ -35,17 +36,33 @@ public class SelectAllSuggestServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
+		int currentPage = 1;
+		
 		int mseq = Integer.parseInt(request.getParameter("mseq"));
-
+		
+		if (request.getParameter("page") != null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		int limit = 10;
+		
 		BoardService bserv = new BoardService();
-		ArrayList<Board> list = null;
-		list = bserv.selectAllSuggest(mseq);
+		
+		int listCount = bserv.getListCount(mseq);
+		
+		Paging paging = new Paging(listCount, currentPage, limit, "suggest");
+		paging.calculator();
+		
+		ArrayList<Board> list = bserv.selectAllSuggest(mseq, paging.getStartRow(), paging.getEndRow());
 
 		RequestDispatcher view = null;
 
 		view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
 		request.setAttribute("list", list);
+		request.setAttribute("paging", paging);
+		request.setAttribute("currentPage", currentPage);
 
+		
 		view.forward(request, response);
 	}
 	/**

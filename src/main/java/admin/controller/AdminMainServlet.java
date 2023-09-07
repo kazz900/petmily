@@ -43,7 +43,6 @@ public class AdminMainServlet extends HttpServlet {
 		ArrayList<Department> list = new DepartmentService().selectNotInsertedDept();
 		
 		
-		System.out.println("adminmain size =" + list.size());
 		RequestDispatcher view = request.getRequestDispatcher("views/admin/AdminDeptInsert.jsp");
 		
 		if (keyword == null) {
@@ -53,7 +52,6 @@ public class AdminMainServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("keyword", keyword);
 		
-		System.out.println(keyword);
 		
 
 		view.forward(request, response);

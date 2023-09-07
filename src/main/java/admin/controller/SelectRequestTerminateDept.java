@@ -36,10 +36,8 @@ public class SelectRequestTerminateDept extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
-		System.out.println("srtd 아직안터짐");
 		ArrayList<Department> list = new DepartmentService().selectRequestTerminateDept();
 		String keyword = (String)request.getParameter("keyword");
-		System.out.println("srtd keyword : " + keyword);
 		if(keyword == null) {
 			keyword = "";
 			RequestDispatcher view = null;

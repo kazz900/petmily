@@ -70,10 +70,9 @@ public class ReplyDao {
 				r.setReplyContent(rset.getString("REPLY_CONTENT"));
 				r.setReplyDate(rset.getDate("REPLY_DATE"));
 				rList.add(r);
-				System.out.println(r.toString());
 			}
 			
-			rList.sort((p1 , p2) -> p2.getReplyDate().compareTo(p1.getReplyDate()));
+			rList.sort((p1 , p2) -> p1.getReplyDate().compareTo(p2.getReplyDate()));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

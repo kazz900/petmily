@@ -35,7 +35,6 @@ public class AdminMemberList extends HttpServlet {
 		
 		ArrayList<Member> list = new MemberService().selectList();
 		String keyword = "";
-//		System.out.println("size =" + list.size());
 		RequestDispatcher view = null;
 
 		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");

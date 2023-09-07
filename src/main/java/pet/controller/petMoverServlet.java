@@ -43,7 +43,6 @@ public class petMoverServlet extends HttpServlet {
 		//4. 받은 결과로 성공/실패 페이지 내보내기
 		
 		RequestDispatcher view = null;
-		System.out.println(pet);
 		if(pet != null) {
 			view = request.getRequestDispatcher("views/mypage/PetUpdate.jsp");
 			request.setAttribute("pet", pet);

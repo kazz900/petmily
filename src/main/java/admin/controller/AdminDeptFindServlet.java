@@ -40,7 +40,6 @@ public class AdminDeptFindServlet extends HttpServlet {
 		if(keyword == null) {
 			keyword = "";
 		}
-		System.out.println("adf keyword : " + keyword);
 	
 	    DepartmentService dservice = new DepartmentService();
 		ArrayList<Department> list = dservice.reDeptList(keyword);

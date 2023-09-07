@@ -37,7 +37,6 @@ public class ReplyNewReplyServlet extends HttpServlet {
 		String replyContent = request.getParameter("reply-content");
 		int memberSeq = Integer.parseInt(request.getParameter("reply-memberseq"));
 		int postSeq = Integer.parseInt(request.getParameter("reply-postseq"));
-		System.out.println(replyContent + ", " + memberSeq + ", " + postSeq);
 		r.setMemberSeq(memberSeq);
 		r.setPostSeq(postSeq);
 		r.setReplyContent(replyContent);
