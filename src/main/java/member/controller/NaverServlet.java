@@ -108,7 +108,6 @@ public class NaverServlet extends HttpServlet {
 					Object obj = parsing.parse(responseBody);
 					jsonObj = (JSONObject) obj;
 					JSONObject resObj = (JSONObject) jsonObj.get("response");
-					// System.out.println(resObj);
 
 					Nname = (String) resObj.get("name");
 					Nemail = checkNaveremail + (String) resObj.get("email");

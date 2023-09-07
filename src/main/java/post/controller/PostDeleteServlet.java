@@ -46,6 +46,7 @@ public class PostDeleteServlet extends HttpServlet {
 		String postType = request.getParameter("dposttype");
 		int result = 0;
 		Post p = null;
+
 		if(postType.equals("standardpost")) {
 			p = new StandardPost();
 			p.setPostSeq(postSeq);

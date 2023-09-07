@@ -46,6 +46,7 @@ public class LoginServlet extends HttpServlet {
 			byte[] pwdValues = mpwd.getBytes(Charset.forName("UTF-8"));
 			md.update(pwdValues);
 			cryptoUserpwd = Base64.getEncoder().encodeToString(pwdValues);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

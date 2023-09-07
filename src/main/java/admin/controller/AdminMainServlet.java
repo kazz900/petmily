@@ -51,8 +51,6 @@ public class AdminMainServlet extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		request.setAttribute("keyword", keyword);
-		
-		
 
 		view.forward(request, response);
 	}

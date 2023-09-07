@@ -304,7 +304,6 @@ public class DepartmentDao implements Serializable {
 				+ "where dept_delete_ok = 'y' order by dept_seq asc) "
 				+ "where rnum >= ? and rnum <= ?";
 
-		System.out.println(query);
 		
 		try {
 			pstmt = conn.prepareStatement(query);

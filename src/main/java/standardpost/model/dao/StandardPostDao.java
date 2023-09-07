@@ -53,6 +53,7 @@ public class StandardPostDao {
 				sp.setReplyNO(rset.getInt("REPLY_NO"));
 				sp.setPostDate(rset.getDate("POST_DATE"));
 				sp.setLastModifiedDate(rset.getDate("LAST_MODIFIED_DATE"));
+
 				list.add(sp);
 			}
 			
