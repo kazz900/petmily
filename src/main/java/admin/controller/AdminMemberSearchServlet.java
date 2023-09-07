@@ -37,10 +37,12 @@ public class AdminMemberSearchServlet extends HttpServlet {
 		String action = request.getParameter("action");
 		String keyword = request.getParameter("keyword");
 
+	
 		MemberService mservice = new MemberService();
 		ArrayList<Member> list = mservice.selectSearchMemberId(keyword);
 		
-		RequestDispatcher view = null;		
+		RequestDispatcher view = null;
+		
 
 		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
 		request.setAttribute("list", list);

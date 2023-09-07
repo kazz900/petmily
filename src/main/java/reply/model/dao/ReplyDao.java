@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import post.model.vo.Post;
 import reply.model.vo.Reply;
 import standardpost.model.vo.StandardPost;
-import standardreply.model.vo.StandardReply;
 import tradepost.model.vo.TradePost;
 
 public class ReplyDao {
@@ -70,7 +69,6 @@ public class ReplyDao {
 				r.setReplyContent(rset.getString("REPLY_CONTENT"));
 				r.setReplyDate(rset.getDate("REPLY_DATE"));
 				rList.add(r);
-				System.out.println(r.toString());
 			}
 			
 			rList.sort((p1 , p2) -> p1.getReplyDate().compareTo(p2.getReplyDate()));

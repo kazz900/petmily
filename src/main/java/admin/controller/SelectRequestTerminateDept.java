@@ -57,10 +57,10 @@ public class SelectRequestTerminateDept extends HttpServlet {
 		paging.calculator();
 		
 		request.setCharacterEncoding("utf-8");
-		
-		ArrayList<Department> list = dservice.selectRequestTerminateDept(paging.getStartRow(), paging.getEndRow());
+
+		ArrayList<Department> list = new DepartmentService().selectRequestTerminateDept();
 		String keyword = (String)request.getParameter("keyword");
-		
+
 		if(keyword == null) {
 			keyword = "";
 			

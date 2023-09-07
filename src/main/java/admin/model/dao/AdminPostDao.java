@@ -91,6 +91,7 @@ public class AdminPostDao {
 			pstmt.setString(1, "%" + keyword + "%");
 			
 			rset = pstmt.executeQuery();
+
 			
 			while (rset.next()) {
 				AdminPost adm = new AdminPost();

@@ -117,7 +117,6 @@ public class NaverServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 		}
 
 		member = mservice.snsLogin(Nemail);
