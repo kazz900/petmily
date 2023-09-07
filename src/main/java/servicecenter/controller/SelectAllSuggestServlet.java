@@ -51,9 +51,11 @@ public class SelectAllSuggestServlet extends HttpServlet {
 		int listCount = bserv.getListCount(mseq);
 		
 		Paging paging = new Paging(listCount, currentPage, limit, "suggest");
+		
 		paging.calculator();
 		
-		ArrayList<Board> list = bserv.selectAllSuggest(mseq, paging.getStartRow(), paging.getEndRow());
+		ArrayList<Board> list = bserv.selectAllSuggest(
+				mseq, paging.getStartRow(), paging.getEndRow());
 
 		RequestDispatcher view = null;
 
@@ -61,7 +63,6 @@ public class SelectAllSuggestServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("paging", paging);
 		request.setAttribute("currentPage", currentPage);
-
 		
 		view.forward(request, response);
 	}
