@@ -121,8 +121,4 @@ public class Post {
 	public void setChangedFileName(String changedFileName) {
 		this.changedFileName = changedFileName;
 	}
-	
-	
-	
-	
 }

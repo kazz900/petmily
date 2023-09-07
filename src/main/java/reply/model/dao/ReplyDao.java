@@ -72,7 +72,7 @@ public class ReplyDao {
 				rList.add(r);
 			}
 			
-			rList.sort((p1 , p2) -> p2.getReplyDate().compareTo(p1.getReplyDate()));
+			rList.sort((p1 , p2) -> p1.getReplyDate().compareTo(p2.getReplyDate()));
 			
 		} catch (Exception e) {
 			e.printStackTrace();

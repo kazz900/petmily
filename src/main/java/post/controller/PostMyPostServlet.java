@@ -43,6 +43,7 @@ public class PostMyPostServlet extends HttpServlet {
 		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
 		list = pSerivce.getMyPostList(memberSeq);
 		rList = rService.getReplyList();
+
 		RequestDispatcher view = null;
 
 		view = request.getRequestDispatcher("views/post/postList.jsp");
