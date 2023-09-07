@@ -5,6 +5,7 @@ import static common.JDBCTemplate.close;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import post.model.vo.Post;
@@ -310,11 +311,6 @@ public class PostDao {
 		return result;
 	}
 
-	public StandardPost selectPost(Connection conn, int postSeq) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public int updatePostLikeNo(Connection conn, int memberSeq, int postSeq) {
 		// TODO Auto-generated method stub
 		return 0;
@@ -571,5 +567,134 @@ public class PostDao {
 		}
 		
 		return list;
+	}
+
+	public int checkIfTypeChanged(Connection conn, int postSeq, String postType) {
+		int result = 0;
+		String query = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		// post type이 일반 게시글이라면 
+		// 일반게시글 테이블에 postSeq 존재하는지 확인
+		if(postType.equals("standardpost")) {
+			query = "SELECT * FROM TRADE_POST WHERE POST_SEQ = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, postSeq);
+				rset = pstmt.executeQuery();
+				// POST TYPE이 standardpost이면 TRADE POST table에 post seq가 존재하는지 확인
+				// TRADE POST TABLE에 POST SEQ가 존재한다면 타입이 변경되지 않았음을 의미
+				// result가 1이면 타입이 변경되지 않은것이고 0이면 타입이 변경되었다는 의미
+				if(rset.next()) {
+					result = 1;
+				}else {
+					result = 0;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset, pstmt);
+			}
+		}else {
+			query = "SELECT * FROM STANDARD_POST WHERE POST_SEQ = ?";
+			try {
+				pstmt = conn.prepareStatement(query);
+				pstmt.setInt(1, postSeq);
+				rset = pstmt.executeQuery();
+				// POST TYPE이 tradepost이면 STANDARD POST table에 post seq가 존재하는지 확인
+				// STANARD_POST TABLE에 POST SEQ가 있다면 타입이 변경되지 않았음을 의미
+				// result가 1이면 타입이 변경되지 않은것이고 0이면 타입이 변경되었다는 의미
+				if(rset.next()) {
+					result = 1;
+				}else {
+					result = 0;
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close(rset, pstmt);
+			}
+		}
+		return result;
+	}
+
+	public Post selectPost(Connection conn, int postSeq, String postType) {
+		Post p = new Post();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "";
+		
+		if(postType.equals("standardpost")) {
+			query = "SELECT "
+					+ "MEMBER_ID, "
+					+ "POST_SEQ, "
+					+ "MEMBER_SEQ, "
+					+ "MEMBER_NICK, "
+					+ "POST_CONTENT, "
+					+ "POST_IMG, "
+					+ "LIKE_NO, "
+					+ "REPLY_NO, "
+					+ "POST_DATE, "
+					+ "LAST_MODIFIED_DATE, "
+					+ "TRADE_RESULT, "
+					+ "ORIGINAL_FILE_NAME,  "
+					+ "RENAME_FILE_NAME  "
+					+ "FROM TRADE_POST "
+					+ "JOIN MEMBER USING (MEMBER_SEQ) "
+					+ "WHERE POST_SEQ = ? ";
+		}else {
+			query = "SELECT "
+					+ "MEMBER_ID, "
+					+ "POST_SEQ, "
+					+ "MEMBER_SEQ, "
+					+ "MEMBER_NICK, "
+					+ "POST_CONTENT, "
+					+ "POST_IMG, "
+					+ "LIKE_NO, "
+					+ "REPLY_NO, "
+					+ "POST_DATE, "
+					+ "LAST_MODIFIED_DATE, "
+					+ "TRADE_RESULT, "
+					+ "ORIGINAL_FILE_NAME,  "
+					+ "RENAME_FILE_NAME  "
+					+ "FROM STANDARD_POST "
+					+ "JOIN MEMBER USING (MEMBER_SEQ)"
+					+ "WHERE POST_SEQ = ? ";
+		}
+		
+		try {
+
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, postSeq);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				if(postType.equals("standardpost")) {
+					p = new StandardPost();
+				}else {
+					p = new TradePost();
+				}
+				p.setMemberId(rset.getString("MEMBER_ID"));
+				p.setPostSeq(rset.getInt("POST_SEQ"));
+				p.setMemberSeq(rset.getInt("MEMBER_SEQ"));
+				p.setMemberNick(rset.getString("MEMBER_NICK"));
+				p.setPostContent(rset.getString("POST_CONTENT"));
+				p.setPostImg(rset.getString("POST_IMG"));
+				p.setLikeNo(rset.getInt("LIKE_NO"));
+				p.setReplyNO(rset.getInt("REPLY_NO"));
+				p.setPostDate(rset.getDate("POST_DATE"));
+				p.setLastModifiedDate(rset.getDate("LAST_MODIFIED_DATE"));
+				p.setTradeResult(rset.getString("TRADE_RESULT"));
+				p.setOriginalFileName(rset.getString("ORIGINAL_FILE_NAME"));
+				p.setChangedFileName(rset.getString("RENAME_FILE_NAME"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close(rset, pstmt);
+		}
+		
+		return p;
 	}
 }

@@ -128,16 +128,19 @@
 
 								function showEditForm(postSeq, memberSeq, postContent, changedFileName, originalFileName, postType) {
 									console.log("열기");
-									document.querySelector("div.editPostformBox").style.display = "block";
-									$("div.edit-post-form-popup form textarea").val(postContent);
-									$("div.edit-post-form-popup form select").val(postType);
+									$("div.editPostformBox").css("display", "block");
+									// 수정폼
+									$("input#inputpostseq").val(postSeq);
 									$("input#inputmemberseq").val(memberSeq);
+									$("textarea#post-content-textarea").val(postContent);
+									$("select#editformposttype").val(postType);
 									$("input#inputoriginalfilename").val(originalFileName);
 									$("input#inputchangedfilename").val(changedFileName);
+
+									// 삭제폼
 									$("input#dinputpostseq").val(postSeq);
 									$("input#dinputposttype").val(postType);
 									$("input#dinputmemberseq").val(memberSeq);
-									console.log($("input#dinputpostseq").val() + ", " + $("input#dinputposttype").val());
 								}
 
 								function postReply(memberSeq, postSeq) {
@@ -226,7 +229,7 @@
 														rows="10" autofocus required
 														oninvalid="this.setCustomValidity('내용을 입력해주세요');"
 														oninput="setCustomValidity('')"></textarea>
-													<select name="post-type" class="pl" required
+													<select name="post-type" id="editformposttype" class="pl" required
 														oninvalid="this.setCustomValidity('게시물 종류를 선택 해주세요')"
 														oninput="setCustomValidity('')">
 														<option value="" selected>게시글종류</option>
@@ -237,10 +240,10 @@
 														onchange="loadFile(event);"> <img id="new-post-file-upload"
 														src="/petmily/resources/images/post/image-upload.png"
 														alt="사진 업로드" onclick="fileUpload2();">
-													<input type="hidden" name="memberseq" id="inputmemberseq">
+														<input type="hidden" name="postseq" id="inputpostseq">
+														<input type="hidden" name="memberseq" id="inputmemberseq">
 													<input type="hidden" name="originalfilename" id="inputoriginalfilename">
 													<input type="hidden" name="changedfilename" id="inputchangedfilename">
-													<input type="hidden" name="postseq" id="inputpostseq">
 													<button type="submit" id="postedit">수정</button>
 												</form>
 												<form action="/petmily/pdelete">
