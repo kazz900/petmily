@@ -40,7 +40,6 @@ public class EditMySuggestServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		
 		int eResult = new BoardService().updateMySuggest(userid, title, content, boardNo, result);
-		System.out.println(eResult);
 //		RequestDispatcher view = null;
 
 		if (eResult > 0) {

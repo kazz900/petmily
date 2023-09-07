@@ -62,9 +62,6 @@ public class SelectAllSuggestServlet extends HttpServlet {
 		request.setAttribute("paging", paging);
 		request.setAttribute("currentPage", currentPage);
 
-//		System.out.println(paging.toString());
-//		System.out.println(currentPage);
-//		System.out.println(listCount);
 		
 		view.forward(request, response);
 	}

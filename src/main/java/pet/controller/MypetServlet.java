@@ -39,11 +39,9 @@ public class MypetServlet extends HttpServlet {
 		if(message == null) {
 			message = "";
 		}
-		System.out.println(message);
 		ArrayList<Pet> list = new PetService().selectPet(memberSeq);		
 		
 		RequestDispatcher view = null;
-		System.out.println(list.size());
 		
 		if(list.size() > 0) {
 			request.setAttribute("list", list);			

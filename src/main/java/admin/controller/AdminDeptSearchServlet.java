@@ -45,7 +45,6 @@ public class AdminDeptSearchServlet extends HttpServlet {
 			
 			RequestDispatcher view = null;
 			
-			System.out.println(list.size());
 
 			view = request.getRequestDispatcher("views/admin/AdminDeptInsert.jsp");
 			request.setAttribute("list", list);
