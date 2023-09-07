@@ -1,6 +1,7 @@
 package servicecenter.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import servicecenter.model.service.BoardService;
+import servicecenter.model.vo.Board;
 
 /**
  * Servlet implementation class AdminReplyServlet
@@ -30,11 +32,13 @@ public class AdminReplyServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		String reply = request.getParameter("reply");
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		String result = request.getParameter("result");
+		Board board = new Board();
+		
+		board.setBrdReply(request.getParameter("reply"));
+		board.setBrdNo(Integer.parseInt(request.getParameter("boardNo")));
+		board.setBrdResult(request.getParameter("result"));
 
-		int eResult = new BoardService().addAdminReply(reply, boardNo, result);
+		int eResult = new BoardService().adminEditReply(board);
 		System.out.println(eResult);
 		if (eResult > 0) {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/updateSucceed3.jsp");
