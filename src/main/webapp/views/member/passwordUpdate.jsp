@@ -76,14 +76,17 @@ td input {
 	color: hsl(30.5, 77.6%, 29.8%);
 	width: 250px;
 	height: 30px;
-	border-radius: 7px;
+	border-radius: 13px;
 	background-color: #FFE4B5;
 	border:none;
 }
 
 #mpwd, #mpwd2 {
-	border: 2px solid hsl(30.5, 77.6%, 29.8%);
+	border: 2px solid #FFE4B5;
 	background-color: beige;
+}
+#mpwd, #mpwd2:focus {
+	outline: none;
 }
 
 #checkenroll {
@@ -109,6 +112,10 @@ td input {
 #chpwd {
 	border: 2px solid hsl(30.5, 77.6%, 29.8%);
 	background-color: beige;
+}
+#chpwd:hover {
+	background-color: hsl(30.5, 77.6%, 29.8%);
+	color: hsl(36deg 70.37% 68.61%);
 }
 
 </style>

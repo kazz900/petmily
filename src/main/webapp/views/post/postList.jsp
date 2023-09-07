@@ -22,7 +22,7 @@
 							<script type="text/javascript">
 								$(function () {
 									$('.likeimg').on('click', function(){
-										var parent = $(this).parent().parent().parent().parent().parent('#standard-post');
+										var parent = $(this).parent().parent().parent().parent().parent();
 										var data_post_seq = parent.attr('data-post-seq');
 										var data_member_seq = parent.attr('data-member-seq');
 										var data_post_type = parent.attr('data-post-type');
@@ -116,7 +116,8 @@
 								}
 
 								function sortByPopularity() {
-									var path = "/petmily/plistfilter"
+									var path = "/petmily/plistsortbypopularity";
+									location.href = path;
 								}
 
 								function sortByPostType() {
@@ -127,16 +128,19 @@
 
 								function showEditForm(postSeq, memberSeq, postContent, changedFileName, originalFileName, postType) {
 									console.log("열기");
-									document.querySelector("div.editPostformBox").style.display = "block";
-									$("div.edit-post-form-popup form textarea").val(postContent);
-									$("div.edit-post-form-popup form select").val(postType);
+									$("div.editPostformBox").css("display", "block");
+									// 수정폼
+									$("input#inputpostseq").val(postSeq);
 									$("input#inputmemberseq").val(memberSeq);
+									$("textarea#post-content-textarea").val(postContent);
+									$("select#editformposttype").val(postType);
 									$("input#inputoriginalfilename").val(originalFileName);
 									$("input#inputchangedfilename").val(changedFileName);
+
+									// 삭제폼
 									$("input#dinputpostseq").val(postSeq);
 									$("input#dinputposttype").val(postType);
 									$("input#dinputmemberseq").val(memberSeq);
-									console.log($("input#dinputpostseq").val() + ", " + $("input#dinputposttype").val());
 								}
 
 								function postReply(memberSeq, postSeq) {
@@ -190,7 +194,7 @@
 										<!-- 새 게시글 생성 폼 -->
 										<div class="newPostformBox">
 											<div class="new-post-form-popup" id="newPostForm">
-												<form action="/petmily/pnewpost?memberseq=<%= m.getMemberSeq() %>"
+												<form action="/petmily/pnewpost?memberseq=<%= m.getMemberSeq() %>&membernick=<%= m.getMemberNick() %>"
 													class="form-container" method="post" enctype="multipart/form-data">
 													<textarea name="post-content" id="post-content-textarea" cols="30"
 														rows="10" autofocus required
@@ -225,7 +229,7 @@
 														rows="10" autofocus required
 														oninvalid="this.setCustomValidity('내용을 입력해주세요');"
 														oninput="setCustomValidity('')"></textarea>
-													<select name="post-type" class="pl" required
+													<select name="post-type" id="editformposttype" class="pl" required
 														oninvalid="this.setCustomValidity('게시물 종류를 선택 해주세요')"
 														oninput="setCustomValidity('')">
 														<option value="" selected>게시글종류</option>
@@ -236,10 +240,10 @@
 														onchange="loadFile(event);"> <img id="new-post-file-upload"
 														src="/petmily/resources/images/post/image-upload.png"
 														alt="사진 업로드" onclick="fileUpload2();">
-													<input type="hidden" name="memberseq" id="inputmemberseq">
+														<input type="hidden" name="postseq" id="inputpostseq">
+														<input type="hidden" name="memberseq" id="inputmemberseq">
 													<input type="hidden" name="originalfilename" id="inputoriginalfilename">
 													<input type="hidden" name="changedfilename" id="inputchangedfilename">
-													<input type="hidden" name="postseq" id="inputpostseq">
 													<button type="submit" id="postedit">수정</button>
 												</form>
 												<form action="/petmily/pdelete">
@@ -251,25 +255,27 @@
 											</div>
 										</div>
 									</div>
+									</div>
 									<br>
 									<br>
 									<br>
+									<% if(list.size() > 0) { %>
 									<!-- 게시글 전체 띄우기 -->
+									<div class="block">
 									<% for(Post p : list) { %>
 										<% if(p instanceof StandardPost){ %>
-											
 											<!-- 일반게시글 -->
 											<div id="standard-post" style="width: 700px; padding: 10px;" data-post-seq="<%= p.getPostSeq() %>" data-member-seq="<%= m.getMemberSeq() %>" data-post-type="standardpost">
 												<table id="standardpost"
-													style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid #fda90d; top: 50px;">
+													style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid hsl(36deg 70.37% 68.61%); top: 50px;">
 													<tr id="postmemberid"
-														style="padding-left: 20px; background-color: #fda90d;">
+														style="padding-left: 20px; background-color: hsl(36deg 70.37% 68.61%);">
 														<td
 															style="text-align: left; height: 30px; padding-left: 20px; font-weight: bold; color: white;">
 															일반게시글</td>
 														<td
 															style="width: 180px; font-weight: bold; color: white; padding-right: 20px;">
-															<%= p.getLastModifiedDate() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= p.getMemberId() %>
+															<%= p.getLastModifiedDate() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= p.getMemberNick() %>
 														</td>
 													</tr>
 													<!-- 게시글 내용 -->
@@ -322,7 +328,7 @@
 																	<% if(p.getPostSeq()==r.getPostSeq()) { %>
 																		<tr class="replies">
 																			<td class="replyinfo">
-																				<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
+																				<%= r.getMemberNick() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
 																			</td>
 																			<td>
 																				<% if(m.getMemberSeq() == r.getMemberSeq()) { %>
@@ -337,16 +343,15 @@
 												<!-- 중고거래게시글 -->
 												<div id="trade-post" style="width: 700px; padding: 10px;" data-post-seq="<%= p.getPostSeq() %>" data-member-seq="<%= m.getMemberSeq() %>" data-post-type="tradepost">
 													<table id="standardpost"
-														style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid #fda90d; top: 50px;">
+														style="position: relative; width: 100%; border-collapse: collapse; border: 1px solid hsl(36deg 70.37% 68.61%); top: 50px;">
 														<tr id="postmemberid"
-															style="padding-left: 20px; background-color: #fda90d;">
+															style="padding-left: 20px; background-color: hsl(36deg 70.37% 68.61%);">
 															<td
 																style="text-align: left; height: 30px; padding-left: 20px; font-weight: bold; color: white;">
 																중고거래글</td>
 															<td
 																style="width: 180px; font-weight: bold; color: white; padding-right: 20px;">
-																<%= p.getLastModifiedDate() %>&nbsp;&nbsp;&nbsp;&nbsp;
-																	<%=p.getMemberId() %>
+																<%= p.getLastModifiedDate() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= p.getMemberNick() %>
 															</td>
 														</tr>
 														<!-- 게시글 내용 -->
@@ -363,26 +368,13 @@
 														</tr>
 														<!-- 좋아요 숫자 표시 -->
 														<tr>
-															<td colspan="2" class="likeNo">
-																<!-- 좋아요 기능 추가 해야됨 --> <img
-																	src="/petmily/resources/images/post/love.png"
-																	id="likeButton">
-																&nbsp;&nbsp;<%= p.getLikeNo() %>
+															<td class="likeNo">
+																<img src="/petmily/resources/images/post/love.png" class="likeimg">
+															</td>
+															<td class="likenotext">
+																<%= p.getLikeNo() %>
 															</td>
 														</tr>
-														<% if(m.getMemberSeq() !=p.getMemberSeq()) { %>
-															<!-- 중고거래글이면서 자기 게시글이 아닐 경우 채팅요청 할 수 있음 -->
-															<!-- 중고거래 채팅 -->
-															<tr id="chatrow"
-																style="border-style: none; text-align: right;">
-																<td id="chatbutton" colspan="2"
-																	style="border-style: none;"><img
-																		src="/petmily/resources/images/post/chat.png"
-																		alt="채팅시작"
-																		style="position: relative; right: 20px; width: 35px; height: 35px;">
-																</td>
-															</tr>
-															<% } %>
 																<!-- 자기 게시글일 경우 수정버튼 표시 -->
 																<% if (m.getMemberSeq()==p.getMemberSeq()){ %>
 																	<tr id="postbottom" style="height: 50px; align-items: center;">
@@ -394,11 +386,16 @@
 																	<% } %>
 															<!-- 댓글달기 Row -->
 															<tr id="replyrow">
-																<td colspan="2"><input type="text" id="replyinputfield"
-																		placeholder="댓글을 달아보세요"> <!-- 댓글달기 버튼 --> <img
-																		id="replybutton"
-																		src="/petmily/resources/images/post/reply.png"
-																		alt="댓글달기"></td>
+																<td colspan="2">
+																	<form action="/petmily/rnr" method="post">
+																		<input type="text" name="reply-content" id="replyinputfield"
+																		placeholder="댓글을 달아보세요" required> 
+																		<!-- 댓글달기 버튼 -->
+																		<input type="hidden" name="reply-memberseq" id="replymemberseq" value="<%= m.getMemberSeq() %>">
+																		<input type="hidden" name="reply-postseq" id="replypostseq" value="<%= p.getPostSeq() %>">
+																		<button id="postreply" type="submit">댓글</button>
+																	</form>
+																	</td>
 															</tr>
 															<!-- 게시글에 댓글이 있을 경우 댓글 띄우기 -->
 															<% for (Reply r : rList) { %>
@@ -406,7 +403,7 @@
 																<% if(p.getPostSeq()==r.getPostSeq()) { %>
 																	<tr class="replies">
 																		<td class="replyinfo">
-																			<%= r.getMemberId() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
+																			<%= r.getMemberNick() %>&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyDate() %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= r.getReplyContent() %>
 																		</td>
 																		<td>
 																			<% if(m.getMemberSeq() == r.getMemberSeq()) { %>
@@ -419,7 +416,15 @@
 
 												</div>
 												<% }} %>
-								</div>
+											</div>
+											<% } else { %>
+											<div class="block">
+												<div id="postnotfound">
+													게시물이 없습니다 게시물을 등록해보세요.
+												</div>
+											</div>
+											
+											<% }%>
 						</body>
 
 						</html>

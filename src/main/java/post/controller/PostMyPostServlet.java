@@ -21,19 +21,21 @@ import reply.model.vo.Reply;
 @WebServlet("/pmypost")
 public class PostMyPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PostMyPostServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public PostMyPostServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		PostSerivce pSerivce = new PostSerivce();
 		ReplyService rService = new ReplyService();
 		ArrayList<Post> list = new ArrayList<Post>();
@@ -41,24 +43,23 @@ public class PostMyPostServlet extends HttpServlet {
 		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
 		list = pSerivce.getMyPostList(memberSeq);
 		rList = rService.getReplyList();
-		System.out.println(list.size());
+
 		RequestDispatcher view = null;
-		
-		if(list.size() > 0) {
-			view = request.getRequestDispatcher("views/post/postList.jsp");
-			
-			request.setAttribute("list", list);
-			request.setAttribute("rList", rList);
-		} else {
-			view = request.getRequestDispatcher("views/common/waiting.jsp");
-		}
-		
+
+		view = request.getRequestDispatcher("views/post/postList.jsp");
+
+		request.setAttribute("list", list);
+		request.setAttribute("rList", rList);
+
 		view.forward(request, response);
 	}
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

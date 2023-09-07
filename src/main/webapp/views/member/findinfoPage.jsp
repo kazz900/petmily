@@ -24,6 +24,19 @@
 	font-weight: normal;
 	font-style: normal;
 }
+@font-face {
+	font-family: 'forgedm';
+	src: url('/petmily/resources/font/forged-Medium.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'forgedl';
+	src: url('/petmily/resources/font/forged-Light.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
 
 body {
 	font-family: 'Surround', sans-serif;
@@ -60,7 +73,7 @@ form {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	border: solid;
+	border: 2px solid hsl(30.5, 77.6%, 29.8%);
 }
 
 .find-all {
@@ -85,16 +98,32 @@ ul {
 }
 
 input[type="submit"] {
-	height: 33px;
-	width: 222px;
-	margin-top: 28px;
-	border-radius: 13px;
 	font-family: 'Surround', sans-serif;
 	font-size: 16px;
+	height: 39px;
+	width: 230px;
+	margin-top: 28px;
+	border-radius: 13px;
+	border: none;
+	background-color: #DEB887;
+	color:hsl(30.5, 77.6%, 29.8%);
 }
-
+input[type="submit"]:hover {
+	background-color: hsl(30.5, 77.6%, 29.8%);
+	color: hsl(36deg 70.37% 68.61%);
+}
+input[type=text] {
+	font-family: 'forgedl', sans-serif;
+	font-size: 13px;
+	width: 222px;
+	height: 33px;
+	border-radius: 13px;
+	background-color: beige;
+	border: 1px solid #FFE4B5;
+	margin-top: 28px;
+}
 input[type="text"]:focus {
-	outline: 3px solid #DAA520;
+	outline: none;
 }
 </style>
 </head>
@@ -106,18 +135,17 @@ input[type="text"]:focus {
 	</header>
 	<h2 align="center">
 		아이디/패스워드 찾기
-		</h1>
+		</h2>
 		<div class="find-all">
 			<div class="find">
 				<form action="/petmily/idfind" method="post">
 					<ul style="padding: 0px;">
-						<li style="margin-top: 17px; color: black;">아이디 찾기</li>
+						<li style="margin-top: 17px;">아이디 찾기</li>
 
 						<li><input type="text" name="memail" placeholder="회원가입시 입력한 Email 입력"
-							required
-							style="height: 33px; width: 222px; margin-top: 28px; border-radius: 13px; font-family: 'Surround', sans-serif; font-size: 16px; border: solid 3px black;"></li>
+							required></li>
 						<li><input type="submit" value="아이디 조회"
-							style="margin-top: 7px; height: 39px; border: none; background-color: #DEB887; font-family: 'Surround', sans-serif; font-size: 16px;"></li>
+							style="margin-top: 7px;"></li>
 
 					</ul>
 				</form>
@@ -126,14 +154,14 @@ input[type="text"]:focus {
 			<div class="find">
 				<form action="/petmily/pwdfind" method="post">
 					<ul style="padding: 0px;">
-						<li style="margin-top: 17px; color: black;">비밀번호 찾기</li>
+						<li style="margin-top: 17px;">비밀번호 찾기</li>
 						<li><input type="text" name="pmid" placeholder="아이디 입력" required
-							style="height: 33px; width: 222px; margin-top: 15px; border-radius: 13px; font-family: 'Surround', sans-serif; font-size: 16px; border: solid 3px;"></li>
+							style="margin-top: 15px;"></li>
 						<li><input type="text" name="pmemail" placeholder="회원가입시 입력한 Email 입력"
 							required
-							style="height: 33px; width: 222px; margin-top: 5px; border-radius: 13px; font-family: 'Surround', sans-serif; font-size: 16px; border: solid 3px;"></li>
+							style="margin-top: 5px;"></li>
 						<li><input type="submit" value="비밀번호 찾기"
-							style="margin-top: 7px; height: 39px; border: none; background-color: #DEB887; font-family: 'Surround', sans-serif; font-size: 16px; width: 230px; border-radius: 13px;"></li>
+							style="margin-top: 7px;"></li>
 					</ul>
 				</form>
 			</div>

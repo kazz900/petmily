@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import common.Paging;
 import servicecenter.model.service.BoardService;
 import servicecenter.model.vo.Board;
 
@@ -35,27 +36,33 @@ public class SelectAllSuggestServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		
+		int currentPage = 1;
+		
 		int mseq = Integer.parseInt(request.getParameter("mseq"));
 		
-//		String message = request.getParameter("message");
+		if (request.getParameter("page") != null) {
+			currentPage = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		int limit = 10;
 		
 		BoardService bserv = new BoardService();
-		ArrayList<Board> list = null;
-		list = bserv.selectAllSuggest(mseq);
+		
+		int listCount = bserv.getListCount(mseq);
+		
+		Paging paging = new Paging(listCount, currentPage, limit, "suggest");
+		paging.calculator();
+		
+		ArrayList<Board> list = bserv.selectAllSuggest(mseq, paging.getStartRow(), paging.getEndRow());
 
 		RequestDispatcher view = null;
 
 		view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
 		request.setAttribute("list", list);
-		
-//		if (list.size() > 0) {
-//			view = request.getRequestDispatcher("views/servicecenter/serviceCenter.jsp");
-//			request.setAttribute("list", list);
-//		} else {
-//			System.out.println("여기로옴");
-//			response.sendRedirect("views/servicecenter/dCommon/addFailed.jsp");
-//		}
+		request.setAttribute("paging", paging);
+		request.setAttribute("currentPage", currentPage);
 
+		
 		view.forward(request, response);
 	}
 	/**
