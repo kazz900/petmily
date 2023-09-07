@@ -33,7 +33,7 @@ public class EditMySuggestServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		Board board = new Board();
-		
+
 		board.setMemberNo(Integer.parseInt(request.getParameter("userid")));
 		board.setBrdNo(Integer.parseInt(request.getParameter("boardNo")));
 		board.setResult(request.getParameter("result"));
@@ -41,7 +41,7 @@ public class EditMySuggestServlet extends HttpServlet {
 		board.setBrdContent(request.getParameter("content"));
 		
 		int eResult = new BoardService().updateMySuggest(board);
-		System.out.println(eResult);
+
 //		RequestDispatcher view = null;
 
 		if (eResult > 0) {

@@ -39,7 +39,7 @@ public class AdminReplyServlet extends HttpServlet {
 		board.setBrdResult(request.getParameter("result"));
 
 		int eResult = new BoardService().adminEditReply(board);
-		System.out.println(eResult);
+
 		if (eResult > 0) {
 			response.sendRedirect("/petmily/views/servicecenter/dCommon/updateSucceed3.jsp");
 		} else {

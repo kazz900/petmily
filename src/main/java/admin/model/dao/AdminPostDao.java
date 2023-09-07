@@ -84,7 +84,6 @@ public class AdminPostDao {
 		ArrayList<AdminPost> list = new ArrayList<AdminPost>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		System.out.println(keyword);
 		String query = "select * from (select A.post_seq, A.member_seq, A.post_content, B.member_id, B.member_nick, B.member_grade from standard_post A LEFT JOIN member  B on A.member_seq = B.member_seq order by 1 desc) where member_id like ?";
 
 		try {
@@ -93,7 +92,6 @@ public class AdminPostDao {
 			
 			rset = pstmt.executeQuery();
 
-			System.out.println(query);
 			
 			while (rset.next()) {
 				AdminPost adm = new AdminPost();
@@ -108,7 +106,6 @@ public class AdminPostDao {
 				list.add(adm);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -211,7 +208,6 @@ public class AdminPostDao {
 		ArrayList<AdminPost> list = new ArrayList<AdminPost>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		System.out.println(keyword);
 		String query = "select * from (select A.post_seq, A.member_seq, A.post_content, B.member_id, B.member_nick, B.member_grade from trade_post A LEFT JOIN member  B on A.member_seq = B.member_seq order by 1 desc) where member_id like ?";
 
 		try {
@@ -220,7 +216,6 @@ public class AdminPostDao {
 			
 			rset = pstmt.executeQuery();
 
-			System.out.println(query);
 			
 			while (rset.next()) {
 				AdminPost adm = new AdminPost();
@@ -235,7 +230,6 @@ public class AdminPostDao {
 				list.add(adm);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 		} finally {
 			close(rset);
 			close(pstmt);
@@ -247,7 +241,6 @@ public class AdminPostDao {
 		ArrayList<AdminPost> list = new ArrayList<AdminPost>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		System.out.println(keyword);
 		String query = "select * from (select A.post_seq, A.member_seq, A.post_content, B.member_id, B.member_nick, B.member_grade from trade_post A LEFT JOIN member  B on A.member_seq = B.member_seq order by 1 desc) where post_content like ?";
 
 		try {
@@ -256,7 +249,6 @@ public class AdminPostDao {
 			
 			rset = pstmt.executeQuery();
 
-			System.out.println(query);
 			
 			while (rset.next()) {
 				AdminPost adm = new AdminPost();
@@ -271,7 +263,6 @@ public class AdminPostDao {
 				list.add(adm);
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 		} finally {
 			close(rset);
 			close(pstmt);

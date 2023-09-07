@@ -26,76 +26,150 @@ import tradepost.model.vo.TradePost;
 @WebServlet("/pedit")
 public class PostEditServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public PostEditServlet() {
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public PostEditServlet() {
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		int result = 0;
+		int checkIfTypeChanged = 0;
 		RequestDispatcher view = null;
 		Post p = null;
 		PostSerivce pService = new PostSerivce();
 
-		//1. multipart 방식으로 인코딩되어서 전송왔는지 확인
+		// 1. multipart 방식으로 인코딩되어서 전송왔는지 확인
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			view = request.getRequestDispatcher("views/common/error.jsp");
 			request.setAttribute("message", "form의 enctype='multipart/form-data' 속성 누락됨.");
 			view.forward(request, response);
 		}
-		
-		//2. 업로드할 파일의 용량 제한 설정 : 10메가바이트로 제한한다면
-		int maxSize = 1024 * 1024 * 10;
-		
-		//3. 업로드되는 파일의 저장 폴더 지정
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/postupfiles");
-		//request.getSession().getServletContext()  => "/first"  + 뒤에 하위 폴더 경로 추가함
-		
 
-		//4. request 를 MultipartRequest 로 변환해야 함
-		//MultipartRequest 클래스는 외부 라이브러리를 사용해야 함 : cos.jar 사용한 경우
-		//MultipartRequest 객체가 생성되면, 자동으로 지정 폴더에 업로드된 파일이 저장됨
-		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8", new DefaultFileRenamePolicy());
+		// 2. 업로드할 파일의 용량 제한 설정 : 10메가바이트로 제한한다면
+		int maxSize = 1024 * 1024 * 10;
+
+		// 3. 업로드되는 파일의 저장 폴더 지정
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/postupfiles");
+		// request.getSession().getServletContext() => "/first" + 뒤에 하위 폴더 경로 추가함
+
+		// 4. request 를 MultipartRequest 로 변환해야 함
+		// MultipartRequest 클래스는 외부 라이브러리를 사용해야 함 : cos.jar 사용한 경우
+		// MultipartRequest 객체가 생성되면, 자동으로 지정 폴더에 업로드된 파일이 저장됨
+		MultipartRequest mrequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
+				new DefaultFileRenamePolicy());
 		String originalFileName = mrequest.getFilesystemName("upfile");
 		int postSeq = Integer.parseInt(mrequest.getParameter("postseq"));
 		String postType = mrequest.getParameter("post-type");
 		String postContent = mrequest.getParameter("post-content");
 		int memberSeq = Integer.parseInt(mrequest.getParameter("memberseq"));
-		
-		if(postType.equals("standardpost")) {
-			p = new StandardPost();
-			p.setPostSeq(postSeq);
-			p.setMemberSeq(memberSeq);
-			p.setPostContent(postContent);
-			p.setOriginalFileName(null);
-			p.setChangedFileName(null);
-			if(originalFileName != null) {
-				pService.deleteImage(p);
-				String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
-				p.setOriginalFileName(originalFileName);
-				p.setChangedFileName(renameFileName);
+
+		checkIfTypeChanged = pService.checkIfTypeChanged(postSeq, postType);
+		System.out.println(checkIfTypeChanged);
+
+//		checkIfTypeChanged 가 0보다 높다면 포스트 타입이 변경되었음을 의미
+		if (checkIfTypeChanged > 0) {
+			System.out.println("타입 변경");
+			//기존 테이블에서 post 가져옴
+			p = pService.selectPost(postSeq, postType);
+			System.out.println(p.toString());
+			// 기존 테이블에 있던 POST를 DELETE하고
+			// 다른 테이블에 똑같은 POST를 생성함
+			if (postType.equals("standardpost")) {
+				StandardPost sp = new StandardPost();
+				sp.setMemberId(p.getMemberId());
+				sp.setPostSeq(p.getPostSeq());
+				sp.setMemberSeq(p.getMemberSeq());
+				sp.setMemberNick(p.getMemberNick());
+				sp.setPostContent(postContent);
+				sp.setPostImg(p.getPostImg());
+				sp.setLikeNo(p.getLikeNo());
+				sp.setReplyNO(p.getReplyNO());
+				sp.setPostDate(p.getPostDate());
+				sp.setLastModifiedDate(p.getLastModifiedDate());
+				sp.setTradeResult(p.getTradeResult());
+				sp.setOriginalFileName(p.getOriginalFileName());
+				sp.setChangedFileName(p.getChangedFileName());
+				// 만약 사진 파일이 변경된다면 originalfilename, changedfilename 변경함
+				if (originalFileName != null) {
+					pService.deleteImage(p);
+					String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
+					p.setOriginalFileName(originalFileName);
+					p.setChangedFileName(renameFileName);
+				}
+				//기존 포스트 삭제
+				pService.deletePost(p);
+				//다른 테이블에 포스트 인서트
+				result = pService.insertPost(memberSeq, sp);
+			} else {
+				TradePost tp = new TradePost();
+				tp.setMemberId(p.getMemberId());
+				tp.setPostSeq(p.getPostSeq());
+				tp.setMemberSeq(p.getMemberSeq());
+				tp.setMemberNick(p.getMemberNick());
+				tp.setPostContent(postContent);
+				tp.setPostImg(p.getPostImg());
+				tp.setLikeNo(p.getLikeNo());
+				tp.setReplyNO(p.getReplyNO());
+				tp.setPostDate(p.getPostDate());
+				tp.setLastModifiedDate(p.getLastModifiedDate());
+				tp.setTradeResult(p.getTradeResult());
+				tp.setOriginalFileName(p.getOriginalFileName());
+				tp.setChangedFileName(p.getChangedFileName());
+				// 만약 사진 파일이 변경된다면 originalfilename, changedfilename 변경함
+				if (mrequest.getFilesystemName("upfile") != null) {
+					pService.deleteImage(p);
+					String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
+					p.setOriginalFileName(originalFileName);
+					p.setChangedFileName(renameFileName);
+				}
+				//기존 포스트 삭제
+				pService.deletePost(p);
+				//다른 테이블에 포스트 인서트
+				result = pService.insertPost(memberSeq, tp);
 			}
+			
+			
 		} else {
-			p = new TradePost();
-			p.setPostSeq(postSeq);
-			p.setMemberSeq(memberSeq);
-			p.setPostContent(postContent);
-			p.setOriginalFileName(null);
-			p.setChangedFileName(null);
-			if(mrequest.getFilesystemName("upfile") != null) {
-				pService.deleteImage(p);
-				String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
-				p.setOriginalFileName(originalFileName);
-				p.setChangedFileName(renameFileName);
+			System.out.println("타입 변경 안됨");
+			// 타입이 변경되지 않았으므로 그냥 해당 테이블에서 UPDATE함
+			if (postType.equals("standardpost")) {
+				p = new StandardPost();
+				p.setPostSeq(postSeq);
+				p.setMemberSeq(memberSeq);
+				p.setPostContent(postContent);
+				p.setOriginalFileName(null);
+				p.setChangedFileName(null);
+				if (originalFileName != null) {
+					pService.deleteImage(p);
+					String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
+					p.setOriginalFileName(originalFileName);
+					p.setChangedFileName(renameFileName);
+				}
+			} else {
+				p = new TradePost();
+				p.setPostSeq(postSeq);
+				p.setMemberSeq(memberSeq);
+				p.setPostContent(postContent);
+				p.setOriginalFileName(null);
+				p.setChangedFileName(null);
+				if (mrequest.getFilesystemName("upfile") != null) {
+					pService.deleteImage(p);
+					String renameFileName = FileNameChange.change(originalFileName, savePath, "yyyyMMddHHmmss");
+					p.setOriginalFileName(originalFileName);
+					p.setChangedFileName(renameFileName);
+				}
 			}
+			
+			result = pService.updatePost(p.getMemberSeq(), p);
 		}
-		
-		result = pService.updatePost(p.getMemberSeq(), p);
+
 
 		if (result > 0) {
 			// insert successful
@@ -106,11 +180,13 @@ public class PostEditServlet extends HttpServlet {
 			response.sendRedirect(path);
 		}
 	}
-	
+
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

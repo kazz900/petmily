@@ -76,5 +76,16 @@ public class PetService {
 		return result;
 	}
 
+	public int updatePetNoneImg(Pet pet) {
+		Connection conn = getConnection();
+		int result = pdao.updatePetNoneImg(conn, pet);
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		close(conn);
+		return result;
+	}
+
 	
 }

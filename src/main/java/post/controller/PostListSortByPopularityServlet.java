@@ -1,6 +1,7 @@
-package pet.controller;
+package post.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,20 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pet.model.service.PetService;
-import pet.model.vo.Pet;
+import post.model.service.PostSerivce;
+import post.model.vo.Post;
+import reply.model.service.ReplyService;
+import reply.model.vo.Reply;
 
 /**
- * Servlet implementation class petMoverServlet
+ * Servlet implementation class StandardPostFilterListServlet
  */
-@WebServlet("/moveup")
-public class petMoverServlet extends HttpServlet {
+@WebServlet("/plistsortbypopularity")
+public class PostListSortByPopularityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public petMoverServlet() {
+    public PostListSortByPopularityServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,28 +34,19 @@ public class petMoverServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("utf-8");
-		
-		int memberSeq = Integer.parseInt(request.getParameter("memberseq"));
-		int petSeq = Integer.parseInt(request.getParameter("petseq"));
-		//ArrayList<Pet> list = new PetService().selectPet(memberSeq);		
-		
-		Pet pet = new PetService().selectPetmily(petSeq, memberSeq);
-				
-		//4. 받은 결과로 성공/실패 페이지 내보내기
+		PostSerivce pService = new PostSerivce();
+		ReplyService rService = new ReplyService();
+		ArrayList<Post> list = pService.getPostListSortByPopularity();
+		ArrayList<Reply> rList = rService.getReplyList();
 		
 		RequestDispatcher view = null;
-		if(pet != null) {
-			view = request.getRequestDispatcher("views/mypage/PetUpdate.jsp");
-			request.setAttribute("pet", pet);
-		}else {
-			view = request.getRequestDispatcher("views/common/error.jsp");
-			request.setAttribute("message", "펫밀리 전체 조회 실패!");
-		}
+		view = request.getRequestDispatcher("views/post/postList.jsp");
+
+		request.setAttribute("list", list);
+		request.setAttribute("rList", rList);
+
 		view.forward(request, response);
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -60,5 +54,4 @@ public class petMoverServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
