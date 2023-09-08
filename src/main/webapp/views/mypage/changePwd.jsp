@@ -97,7 +97,7 @@ $(function(){
 	notice.hidden = true;
 	notice2.hidden = true;
 	submitBtn.disabled = true;
-	
+	submitBtn.style.background = "#dfdfdf";
 
 	pwdValue1.addEventListener("keyup", function(){
 		if (!reg.test(pwdValue1.value)) {
@@ -125,6 +125,7 @@ $(function(){
 			if(pwdValue1.value == pwdValue2.value){
 				submitBtn.disabled = false;
 				notice2.hidden = true;
+				submitBtn.style.removeProperty('background');
 			} else {
 				notice2.hidden = false;
 			}
