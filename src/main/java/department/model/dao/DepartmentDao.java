@@ -69,11 +69,12 @@ public class DepartmentDao implements Serializable {
       ResultSet rset = null;
 
       String query = null;
-
+     
+      //관리자에서 삭제요청만 조회시 9
       if (value.equals("9")) {
          query = "select * from department where dept_insert_ok = 'y'";
       } else {
-         query = "select * from department where dept_insert_ok = 'y' and dept_type like ?";
+         query = "select * from department where dept_insert_ok = 'y' and dept_type like ? ";
       }
 
       try {

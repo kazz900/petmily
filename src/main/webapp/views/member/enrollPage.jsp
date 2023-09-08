@@ -8,21 +8,21 @@
 <script type="text/javascript"
 	src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <style type="text/css">
-@font-face {
+@font-face { /*폰트추가*/
 	font-family: 'Surround';
 	src: url('/petmily/resources/font/surround.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 }
 
-@font-face {
+@font-face { /*폰트추가*/
 	font-family: 'forgedm';
 	src: url('/petmily/resources/font/forged-Medium.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
 
-@font-face {
+@font-face { /*폰트추가*/
 	font-family: 'forgedl';
 	src: url('/petmily/resources/font/forged-Light.ttf') format('truetype');
 	font-weight: normal;
@@ -37,7 +37,7 @@ body {
 	color: hsl(30.5, 77.6%, 29.8%);
 }
 
-body h1 a {
+body h1 a { /*좌상단 Petmily 문구*/
 	font-family: 'Surround', sans-serif;
 	padding: 20px 50px;
 	font-size: 35px;
@@ -47,7 +47,7 @@ body h1 a {
 	text-decoration: none;
 }
 
-form {
+form { /*회원가입정보 입력공간*/
 	text-align: center; /* form 요소 내부의 내용을 가운데 정렬 */
 	margin: 0 auto; /* 가운데 정렬을 위한 외부 여백 조정 */
 	width: 350px; /* 폼의 너비 설정 */
@@ -58,45 +58,22 @@ form {
 	justify-content: center;
 }
 
-td input:not(#checkpassword) {
+td input:not(#checkpassword) { /*패스워드 입력칸을 제외한 입력칸*/
 	width: 250px;
 	height: 30px;
 	border-radius: 7px;
 	background-color: beige;
-	/* display: flex;
-justify-content: space-between; */
-}
-
-td input {
 	font-family: 'forgedl', sans-serif;
 	font-size: 16px;
 	color: hsl(30.5, 77.6%, 29.8%);
-	width: 250px;
-	height: 30px;
-	border-radius: 7px;
-	background-color: #FFE4B5;
 	border: 1px solid #c90;
 }
 
-td input:focus {
+td input:focus { /*입력칸 포커스되어도 테두리 강조 x*/
 	outline: none;
 }
 
-td input#dupcheck {
-	font-family: 'Surround', sans-serif;
-	width: 80px;
-	height: 34px;
-	border-radius: 7px;
-	color: hsl(30.5, 77.6%, 29.8%);
-	background-color: hsl(36deg 70.37% 68.61%);
-		border: 2px solid hsl(30.5, 77.6%, 29.8%);
-}
-td input#dupcheck:hover {
-	background-color: hsl(30.5, 77.6%, 29.8%);
-	color: hsl(36deg 70.37% 68.61%);
-}
-
-td input#dupcheck2 {
+td input#dupcheck { /*아이디 중복확인 버튼*/
 	font-family: 'Surround', sans-serif;
 	width: 80px;
 	height: 34px;
@@ -105,15 +82,32 @@ td input#dupcheck2 {
 	background-color: hsl(36deg 70.37% 68.61%);
 	border: 2px solid hsl(30.5, 77.6%, 29.8%);
 }
-td input#dupcheck2:hover {
+
+td input#dupcheck:hover { /*중복확인 버튼 마우스 오버되면 색 변화*/
 	background-color: hsl(30.5, 77.6%, 29.8%);
 	color: hsl(36deg 70.37% 68.61%);
 }
+
+td input#dupcheck2 { /*이메일 중복확인 버튼*/
+	font-family: 'Surround', sans-serif;
+	width: 80px;
+	height: 34px;
+	border-radius: 7px;
+	color: hsl(30.5, 77.6%, 29.8%);
+	background-color: hsl(36deg 70.37% 68.61%);
+	border: 2px solid hsl(30.5, 77.6%, 29.8%);
+}
+
+td input#dupcheck2:hover { /*중복확인 버튼 마우스 오버되면 색 변화*/
+	background-color: hsl(30.5, 77.6%, 29.8%);
+	color: hsl(36deg 70.37% 68.61%);
+}
+
 hr {
 	width: 100%;
 }
 
-input[type=submit] {
+input[type=submit] { /*회원가입 버튼*/
 	font-family: 'Surround', sans-serif;
 	width: 340px;
 	height: 34px;
@@ -123,7 +117,7 @@ input[type=submit] {
 	background-color: hsl(36deg 70.37% 68.61%);
 }
 
-input[type=password] {
+input[type=password] { /*패스워드 입력칸*/
 	width: 400px;
 	height: 30px;
 	border-radius: 7px;
@@ -132,7 +126,7 @@ input[type=password] {
 justify-content: space-between; */
 }
 
-#checkenroll {
+#checkenroll { /*유효성검사이후 문구 출력공간*/
 	font-family: 'forgedl', sans-serif;
 	font-size: 10pt;
 	width: 300px;
@@ -145,9 +139,9 @@ justify-content: space-between; */
 }
 </style>
 <script type="text/javascript">
-	//버그 잡아[줘]
-	var idc = 1;
-	var emc = 1;
+	//중복체크 실행시에만 회원가입 가능하도록 함
+	var idc = 0;
+	var emc = 0;
 	//회원가입 페이지 입력값 가져오기
 	window.onload = function() {
 		var mid = document.getElementById('mid');
@@ -177,8 +171,7 @@ justify-content: space-between; */
 			}
 		});
 
-		mpwd
-				.addEventListener(
+		mpwd.addEventListener(
 						'keyup',
 						function() {
 							if (!cpwd.test(mpwd.value)) {
@@ -395,8 +388,6 @@ justify-content: space-between; */
 		</table>
 		<input type="submit" id="submit" value="가입하기"> &nbsp;
 	</form>
-	<br>
-	<%@ include file="../common/footer.jsp"%>
 
 </body>
 </html>
