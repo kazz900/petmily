@@ -1,7 +1,6 @@
-package admin.controller;
+package post.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -11,20 +10,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import department.model.service.DepartmentService;
-import department.model.vo.Department;
+import post.model.service.PostSerivce;
+import post.model.vo.Post;
+import reply.model.service.ReplyService;
+import reply.model.vo.Reply;
 
 /**
- * Servlet implementation class AdminDeptFindServlet
+ * Servlet implementation class StandardPostFilterListServlet
  */
-@WebServlet("/adf")
-public class AdminDeptFindServlet extends HttpServlet {
+@WebServlet("/plistsortbypopularity")
+public class PostListSortByPopularityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminDeptFindServlet() {
+    public PostListSortByPopularityServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,26 +34,19 @@ public class AdminDeptFindServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
+		PostSerivce pService = new PostSerivce();
+		ReplyService rService = new ReplyService();
+		ArrayList<Post> list = pService.getPostListSortByPopularity();
+		ArrayList<Reply> rList = rService.getReplyList();
 		
-		String action = request.getParameter("action");
-		String keyword = request.getParameter("keyword");
-		if(keyword == null) {
-			keyword = "";
-		}
-	
-	    DepartmentService dservice = new DepartmentService();
-		ArrayList<Department> list = dservice.reDeptList(keyword);
-		
-		RequestDispatcher view = null;		
+		RequestDispatcher view = null;
+		view = request.getRequestDispatcher("views/post/postList.jsp");
 
-		view = request.getRequestDispatcher("views/admin/AdminDeptTerminate.jsp");
 		request.setAttribute("list", list);
-		request.setAttribute("keyword", keyword);
+		request.setAttribute("rList", rList);
 
 		view.forward(request, response);
-}
-
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -60,5 +54,4 @@ public class AdminDeptFindServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

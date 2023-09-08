@@ -31,9 +31,6 @@ public class AddDeptServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		
-//		String time = request.getParameter("time");
-//		String open = null, close = null;
 
 		Department dept = new Department();
 		
@@ -47,7 +44,7 @@ public class AddDeptServlet extends HttpServlet {
 		dept.setDeptEntrancefee(request.getParameter("entFee"));
 		dept.setDeptWithpetfee(request.getParameter("petFee"));
 		dept.setDeptRestrict(request.getParameter("restrict"));
-		dept.setDeptInsertOk(request.getParameter("loginOk"));
+		dept.setDeptInsertOk(request.getParameter("insertOk"));
 		dept.setDeptDeleteOk(request.getParameter("deleteOk"));
 		
 		int result = new DepartmentService().insertDepartment(dept);

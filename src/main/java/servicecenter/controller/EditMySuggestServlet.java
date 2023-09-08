@@ -1,9 +1,7 @@
 package servicecenter.controller;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import servicecenter.model.service.BoardService;
+import servicecenter.model.vo.Board;
 
 /**
  * Servlet implementation class EditMySuggestServlet
@@ -33,14 +32,16 @@ public class EditMySuggestServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		
-		int userid = Integer.parseInt(request.getParameter("userid"));
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		String result = request.getParameter("result");
-		String title = request.getParameter("title");
-		String content = request.getParameter("content");
+		Board board = new Board();
+
+		board.setMemberNo(Integer.parseInt(request.getParameter("userid")));
+		board.setBrdNo(Integer.parseInt(request.getParameter("boardNo")));
+		board.setResult(request.getParameter("result"));
+		board.setBrdTitle(request.getParameter("title"));
+		board.setBrdContent(request.getParameter("content"));
 		
-		int eResult = new BoardService().updateMySuggest(userid, title, content, boardNo, result);
-		System.out.println(eResult);
+		int eResult = new BoardService().updateMySuggest(board);
+
 //		RequestDispatcher view = null;
 
 		if (eResult > 0) {

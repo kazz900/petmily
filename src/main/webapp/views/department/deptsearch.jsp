@@ -133,13 +133,12 @@ h1#mainsearch {
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=47b2dcffee9e1b18c1d5105786e522b7&libraries=clusterer"></script>
  	<script>
 				
-				const divElement = document.getElementById("info");
+				const divElement = document.getElementById("info");	
 				const div = document.createElement("div");
 		        div.id = "searchInfo";
 		        const hr = document.createElement("hr");
 		        
 				var dept =<%=new Gson().toJson(list)%>;
-					console.log(dept);
 
 					if (<%=list.size()%> > 0) {
 						lat = dept[0].deptLatitude;
@@ -148,7 +147,7 @@ h1#mainsearch {
 
 				
 					//위치정보 동의가 있으면	 
-					//0이 메인페이지에서 버튼 처눌렀을때
+					//0이 메인페이지에서 버튼 눌렀을때
 					if(<%= type %> == "0") {																
 						if (navigator.geolocation) {
 							navigator.geolocation.getCurrentPosition(function(position) {
@@ -291,17 +290,13 @@ h1#mainsearch {
 							            minLevel: 10 // 클러스터 할 최소 지도 레벨 
 							        });							
 							        
-
 									var imageSrc = null;
 						            var imageSize = new kakao.maps.Size(24, 35);
 							        
 							        if("<%= searchInfo %>" === "의료") {
 							        	$.get("/petmily/resources/json/hospital.json", function (data) {
-								            // 데이터에서 좌표 값을 가지고 마커를 표시합니다
-								            // 마커 클러스터러로 관리할 마커 객체는 생성할 때 지도 객체를 설정하지 않습니다
 								            imageSrc = "/petmily/resources/images/marker/hospital.png";
 								            
-								         // 마커 이미지를 생성합니다    
 											var markerImage = new kakao.maps.MarkerImage(imageSrc,
 													imageSize);
 								            
@@ -327,11 +322,9 @@ h1#mainsearch {
 											        infowindow.close();
 											    });
 								
-								                return maks;
-								
-								            });
-								
-								            // 클러스터러에 마커들을 추가합니다
+								                return maks;							
+								            });								
+								            // 클러스터러에 마커들을 추가
 								            clusterer.addMarkers(markers);
 								
 								        });
@@ -631,7 +624,7 @@ h1#mainsearch {
  					var container = document.getElementById('map');
 					var options = {
 						center : new kakao.maps.LatLng(lat, lng),
-						level : 5,
+						level : 10,
 						marker : marker
 					};
 
@@ -674,7 +667,7 @@ h1#mainsearch {
 							imageSrc = "/petmily/resources/images/marker/culture.png";
 						}
 
-						var imageSize = new kakao.maps.Size(34, 45);
+						var imageSize = new kakao.maps.Size(24, 35);
 
 						// 마커 이미지를 생성합니다    
 						var markerImage = new kakao.maps.MarkerImage(imageSrc,

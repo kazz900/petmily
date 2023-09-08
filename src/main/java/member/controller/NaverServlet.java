@@ -104,6 +104,7 @@ public class NaverServlet extends HttpServlet {
 					String responseBody = get(apiUrl, requestHeaders);
 				
 					jsonObj = (JSONObject) parsing.parse(responseBody);
+
 					JSONObject resObj = (JSONObject) jsonObj.get("response");
 
 					Nname = (String) resObj.get("name");
@@ -114,7 +115,6 @@ public class NaverServlet extends HttpServlet {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e);
 		}
 
 		member = mservice.snsLogin(Nemail);

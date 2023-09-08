@@ -63,24 +63,39 @@ button:hover {
 	<h5 style="margin:5px auto">처리현황 : <%=board.getBrdResult() %></h5>
 	<hr>
 	<% if (board.getBrdReply() != null) { %>
-	<div class="content" style=" height:300px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px; text-align:left;">
+	<div class="content" 
+	style="height:300px; border:2px solid #cfcfcf; 
+	padding:5px 15px 5px 15px; text-align:left;">
 		<p><%=board.getBrdContent()%></p>
 	</div>
-	<div class="reply" style=" height:200px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px; text-align:left;">
+	
+	<div class="reply" 
+	style="height:200px; border:2px solid #cfcfcf; 
+	padding:5px 15px 5px 15px; text-align:left;">
 		<p><%=board.getBrdReply()%></p>
 	</div>
+	
 	<% } else { %>
-		<div class="content" style=" height:500px; border:2px solid #cfcfcf; padding:5px 15px 5px 15px; text-align:left;">
+		<div class="content" 
+		style="height:500px; border:2px solid #cfcfcf; 
+		padding:5px 15px 5px 15px; text-align:left;">
 		<p><%=board.getBrdContent()%></p>
 	</div>
 	<% } %>
 	
 	<% if (member.getMemberGrade().equals("1")) { %>
-	<button class="toListBtn" onclick="history.go(-1);" style="margin-top:20px;">목록으로</button>
-	<button class="editText" style="margin-top:20px;" onclick="toEdit();">수정하기</button>
+	<button class="toListBtn" onclick="history.go(-1);" 
+	style="margin-top:20px;">목록으로</button>
+	
+	<button class="editText" style="margin-top:20px;" 
+	onclick="toEdit();">수정하기</button>
+	
 	<% } else if (member.getMemberGrade().equals("0")) { %>
-	<button class="toListBtn" onclick="history.go(-1);" style="margin-top:20px;">목록으로</button>
-	<button class="addReply" style="margin-top:20px;" onclick="toAddReply();">답변하기</button>
+	<button class="toListBtn" onclick="history.go(-1);" 
+	style="margin-top:20px;">목록으로</button>
+	
+	<button class="addReply" style="margin-top:20px;" 
+	onclick="toAddReply();">답변하기</button>
 	<% } %>
 </div>
 

@@ -744,7 +744,7 @@ window.onload = function(){
 					<form action="/petmily/myinfo" method="post">
 						<table id="outer" align="center" width="500" cellspacing="5"
 							cellpadding="0">
-							
+
 							<tr>
 								<th width="140">아이디</th>
 								<td><input type="text" name="userid" value="<%=member.getMemberId()%>"

@@ -283,14 +283,11 @@ public class MemberDao {
 		String query = "UPDATE MEMBER SET MEMBER_NICK = ? " + "WHERE MEMBER_ID = ?";
 		try {
 			pstmt = conn.prepareStatement(query);
-			System.out.println("nickname : " + nickname);
-			System.out.println("userid : " + userid);
 
 			pstmt.setString(1, nickname);
 			pstmt.setString(2, userid);
 
 			result = pstmt.executeUpdate();
-			System.out.println(result);
 
 		} catch (Exception e) {
 			e.printStackTrace();
