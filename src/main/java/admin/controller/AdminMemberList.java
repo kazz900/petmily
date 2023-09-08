@@ -37,6 +37,8 @@ public class AdminMemberList extends HttpServlet {
 		String keyword = "";
 		RequestDispatcher view = null;
 
+		System.out.println(list.size());
+		
 		view = request.getRequestDispatcher("views/admin/AdminMemberManagement.jsp");
 		request.setAttribute("list", list);
 		request.setAttribute("keyword", keyword);

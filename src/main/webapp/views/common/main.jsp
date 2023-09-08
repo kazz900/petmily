@@ -24,6 +24,19 @@ Member member = (Member) session.getAttribute("member");
 .dropdown>li {
 	padding: 10px;
 }
+
+hr#dropdowonhr {
+	border-color: rgba(0, 0, 0, 0.1);
+	width: 75%; 
+	margin-top:0;
+	margin-bottom:0;
+}
+
+a#drowpdowna {
+	color: hsl(30.46deg 58.9% 45.68%);
+}
+
+
 </style>
 <script type="text/javascript" src="/petmily/resources/js/main/main.js"></script>
 <script>
@@ -58,37 +71,29 @@ Member member = (Member) session.getAttribute("member");
 				<li class="sub-link" onclick="toggleDropdown()"
 					style="margin-left: 150px;"><a href="#">내주변</a>
 					<ul class="dropdown" id="dropdown">
-						<li><a
-							href="/petmily/selectdepttype?selecttype=1&typename=의료"
-							style="color: hsl(30.46deg 58.9% 45.68%);">의료</a></li>
-						<hr style="border-color: rgba(0, 0, 0, 0.1); width: 75%; margin-top:0;margin-bottom:0;">
-						<li><a
-							href="/petmily/selectdepttype?selecttype=2&typename=미용"
-							style="color: hsl(30.46deg 58.9% 45.68%);">미용</a></li>
-						<hr style="border-color: rgba(0, 0, 0, 0.1); width: 75%;margin-top:0;margin-bottom:0;">
-						<li><a
-							href="/petmily/selectdepttype?selecttype=3&typename=용품"
-							style="color: hsl(30.46deg 58.9% 45.68%);">용품</a></li>
-						<hr style="border-color: rgba(0, 0, 0, 0.1); width: 75%;margin-top:0;margin-bottom:0;">
-						<li><a
-							href="/petmily/selectdepttype?selecttype=4&typename=위탁"
-							style="color: hsl(30.46deg 58.9% 45.68%);">위탁</a></li>
-						<hr style="border-color: rgba(0, 0, 0, 0.1); width: 75%;margin-top:0;margin-bottom:0;">
-						<li><a
-							href="/petmily/selectdepttype?selecttype=6&typename=카페/식당"
-							style="color: hsl(30.46deg 58.9% 45.68%);">카페/식당</a></li>
-						<hr style="border-color: rgba(0, 0, 0, 0.1); width: 75%;margin-top:0;margin-bottom:0;">
-						<li><a
-							href="/petmily/selectdepttype?selecttype=7&typename=호텔"
-							style="color: hsl(30.46deg 58.9% 45.68%);">호텔</a></li>
-						<hr style="border-color: rgba(0, 0, 0, 0.1); width: 75%;margin-top:0;margin-bottom:0;">
-						<li><a
-							href="/petmily/selectdepttype?selecttype=8&typename=문화"
-							style="color: hsl(30.46deg 58.9% 45.68%);">문화</a></li>
-						<hr style="border-color: rgba(0, 0, 0, 0.1); width: 75%;margin-top:0;margin-bottom:0;">
-						<li><a
-							href="/petmily/selectdepttype?selecttype=5&typename=장묘"
-							style="color: hsl(30.46deg 58.9% 45.68%);">장묘</a></li>
+						<li><a id="drowpdowna"
+							href="/petmily/selectdepttype?selecttype=1&typename=의료">의료</a></li>
+						<hr id="dropdowonhr">
+						<li><a id="drowpdowna"
+							href="/petmily/selectdepttype?selecttype=2&typename=미용">미용</a></li>
+						<hr id="dropdowonhr">
+						<li><a id="drowpdowna"
+							href="/petmily/selectdepttype?selecttype=3&typename=용품">용품</a></li>
+						<hr id="dropdowonhr">
+						<li><a id="drowpdowna"
+							href="/petmily/selectdepttype?selecttype=4&typename=위탁">위탁</a></li>
+						<hr id="dropdowonhr">
+						<li><a id="drowpdowna"
+							href="/petmily/selectdepttype?selecttype=6&typename=카페/식당">카페/식당</a></li>
+						<hr id="dropdowonhr">
+						<li><a id="drowpdowna"
+							href="/petmily/selectdepttype?selecttype=7&typename=호텔">호텔</a></li>
+						<hr id="dropdowonhr">
+						<li><a id="drowpdowna"
+							href="/petmily/selectdepttype?selecttype=8&typename=문화">문화</a></li>
+						<hr id="dropdowonhr">
+						<li><a id="drowpdowna"
+							href="/petmily/selectdepttype?selecttype=5&typename=장묘">장묘</a></li>
 					</ul></li>
 
 				<li style="width: 15px;"></li>
