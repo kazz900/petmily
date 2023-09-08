@@ -350,18 +350,7 @@ input[type=submit]#deleteOk:hover {
 
 </style>
 <script>
-	/*  function setThumbnail(event) {
-	 var reader = new FileReader();
 
-	 reader.onload = function(event) {
-	 var img = document.createElement("img");
-	 img.setAttribute("src", event.target.result);
-	 document.querySelector("td#image_container").appendChild(img);
-	 };
-
-	 reader.readAsDataURL(event.target.files[0]);
-	 } 
-	 */
 	function readImage(input) {
 		if (input.files && input.files[0]) {
 			const reader = new FileReader();
@@ -395,21 +384,6 @@ input[type=submit]#deleteOk:hover {
 	});
 </script>
 <script type="text/javascript">
-/* 	window.onload = function(){
-		var petname = document.getElementById('petName');
-		var addpetsub = document.getElementById('addpetsub');
-		var checkpname = /^{1,5}$/;
-		addpetsub.disabled = true;
-		petname.addEventListener('keyup', function(){
-			if(checkpname.test(petname.value)){
-			addpetsub.disabled = false;
-			} else {
-			addpetsub.disabled = true;
-			}
-			
-		})
-	};
- */
  
 	function checkinputpet() {
 	 var frm = document.form1;
@@ -531,6 +505,7 @@ window.onload = function(){
 	const unchangedNick = nickname.value;
 	
 	submitBtn.disabled = true;
+	submitBtn.style.background = "#dfdfdf";
 	
 	nickname.addEventListener("keyup", function(){
 		var changedNick = nickname.value;
@@ -538,6 +513,7 @@ window.onload = function(){
 		if (changedNick !== unchangedNick) {
 			
 			submitBtn.disabled = false;
+			submitBtn.style.removeProperty("background");
 			
 		} else if (changedNick === unchangedNick) {
 			
