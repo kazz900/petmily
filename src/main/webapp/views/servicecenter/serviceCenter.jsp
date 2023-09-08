@@ -120,7 +120,7 @@
 
 			<div id="tab-3" class="tab-content">
 				<form action="/petmily/adddept" method="get" id="form">
-					<input type="hidden" name="loginOk" value="n">
+					<input type="hidden" name="insertOk" value="n">
 					<input type="hidden" name="deleteOk" value="n">
 					<table width="500" align="center" cellspacing="5">
 
@@ -210,7 +210,6 @@
 
 						<th colspan="2"><input type="submit" value="등록요청하기"
 							id="submitBtn" class="w-btn-neon2"></th>
-
 
 					</table>
 				</form>
