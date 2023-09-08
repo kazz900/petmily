@@ -66,6 +66,7 @@ public class KakaoServlet extends HttpServlet {
 		}
 
 		member = mservice.snsLogin(Kemail);
+		
 		if (member == null) {
 			Member newMember = new Member();
 			String generatedId = "k@";

@@ -53,18 +53,18 @@ public class LoginServlet extends HttpServlet {
 
 		Member member = new MemberService().commonLogin(mid, cryptoUserpwd);
 		if (member.getMemberGrade() != null) { // 값 있음, 로그인 성공시
-			if (Integer.parseInt(member.getMemberGrade()) != 2) {// 회원이 밴당한 회원이 아닌경우
+			if (Integer.parseInt(member.getMemberGrade()) != 2) {// 정지당한 회원이 아닌경우
 				// 로그인 상태 확인용 세션 객체 생성함
 				HttpSession session = request.getSession();
 				session.setMaxInactiveInterval(30 * 60);
 				session.setAttribute("member", member);
 				response.sendRedirect("index.jsp");
-			} else {
+			} else {	// 정지당한 회원의 경우
 				RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
 				request.setAttribute("message", "정지처리된 회원입니다. 관리자에게 문의해주세요.");
 				view.forward(request, response);
 			}
-		} else {
+		} else {	//회원정보를 잘못 입력한 경우
 			RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
 			request.setAttribute("message", "아이디 혹은 패스워드를 다시 확인해주세요.");
 			view.forward(request, response);

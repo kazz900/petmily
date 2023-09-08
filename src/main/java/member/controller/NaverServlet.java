@@ -89,9 +89,7 @@ public class NaverServlet extends HttpServlet {
 			br.close();
 			if (responseCode == 200) {
 
-				Object obj = parsing.parse(res.toString());
-				jsonObj = (JSONObject) obj;
-//        	JSONObject jsonObj = (JSONObject)(new JSONParser().parse(res.toString()));
+				jsonObj = (JSONObject) (parsing.parse(res.toString()));
 
 				access_token = (String) jsonObj.get("access_token");
 				// refresh_token = (String) jsonObj.get("refresh_token");
@@ -104,9 +102,9 @@ public class NaverServlet extends HttpServlet {
 					Map<String, String> requestHeaders = new HashMap<>();
 					requestHeaders.put("Authorization", header);
 					String responseBody = get(apiUrl, requestHeaders);
+				
+					jsonObj = (JSONObject) parsing.parse(responseBody);
 
-					Object obj = parsing.parse(responseBody);
-					jsonObj = (JSONObject) obj;
 					JSONObject resObj = (JSONObject) jsonObj.get("response");
 
 					Nname = (String) resObj.get("name");

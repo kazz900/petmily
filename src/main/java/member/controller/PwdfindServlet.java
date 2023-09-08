@@ -41,9 +41,8 @@ public class PwdfindServlet extends HttpServlet {
 		RequestDispatcher view = null;
 
 		if (member.getMemberGrade() != null) {
-			// 값 있으면
+			// 회원정보 있으면
 			request.setAttribute("member", member);
-
 			view = request.getRequestDispatcher("views/member/passwordUpdate.jsp");
 		} else {
 			request.setAttribute("message", "해당 정보로 가입된 회원 없음.");
