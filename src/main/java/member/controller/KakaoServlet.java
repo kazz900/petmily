@@ -54,7 +54,6 @@ public class KakaoServlet extends HttpServlet {
 			sb.append(line);
 		}
 		String responseBody = sb.toString();
-//        System.out.println(responseBody);
 		try {
 			Object obj = parsing.parse(responseBody);
 			jsonObj = (JSONObject) obj;
@@ -67,6 +66,7 @@ public class KakaoServlet extends HttpServlet {
 		}
 
 		member = mservice.snsLogin(Kemail);
+		
 		if (member == null) {
 			Member newMember = new Member();
 			String generatedId = "k@";

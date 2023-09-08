@@ -52,8 +52,6 @@ public class EnrollServlet extends HttpServlet {
 			// 암호화된 byte[] 을 String으로 변경시킴 : 암호문 상태가 됨
 			cryptoUserpwd = Base64.getEncoder().encodeToString(pwdValues);
 			// 확인하기
-			// System.out.println("암호화된 패스워드 : " + cryptoUserpwd);
-			// System.out.println("글자길이 : " + cryptoUserpwd.length());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -67,7 +65,6 @@ public class EnrollServlet extends HttpServlet {
 		}
 		RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
 		view.forward(request, response);
-
 	}
 
 	/**

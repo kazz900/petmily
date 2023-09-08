@@ -77,7 +77,6 @@ public class NaverServlet extends HttpServlet {
 			con.setRequestMethod("GET");
 			int responseCode = con.getResponseCode();
 			BufferedReader br;
-			// System.out.print("responseCode=" + responseCode);
 			if (responseCode == 200) { // 정상 호출
 				br = new BufferedReader(new InputStreamReader(con.getInputStream()));
 			} else { // 에러 발생
@@ -89,11 +88,8 @@ public class NaverServlet extends HttpServlet {
 			}
 			br.close();
 			if (responseCode == 200) {
-				// System.out.println(res.toString());
 
-				Object obj = parsing.parse(res.toString());
-				jsonObj = (JSONObject) obj;
-//        	JSONObject jsonObj = (JSONObject)(new JSONParser().parse(res.toString()));
+				jsonObj = (JSONObject) (parsing.parse(res.toString()));
 
 				access_token = (String) jsonObj.get("access_token");
 				// refresh_token = (String) jsonObj.get("refresh_token");
@@ -106,19 +102,13 @@ public class NaverServlet extends HttpServlet {
 					Map<String, String> requestHeaders = new HashMap<>();
 					requestHeaders.put("Authorization", header);
 					String responseBody = get(apiUrl, requestHeaders);
-					// System.out.println(responseBody);
-
-					Object obj = parsing.parse(responseBody);
-					jsonObj = (JSONObject) obj;
+				
+					jsonObj = (JSONObject) parsing.parse(responseBody);
 					JSONObject resObj = (JSONObject) jsonObj.get("response");
-					// System.out.println(resObj);
 
 					Nname = (String) resObj.get("name");
 					Nemail = checkNaveremail + (String) resObj.get("email");
-//					System.out.println("회원의 이름은? " + Nname);
-//					System.out.println("네이버 이메일은? " + Nemail);
 
-					// System.out.println("complete!");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
