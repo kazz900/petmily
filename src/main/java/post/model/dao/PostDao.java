@@ -430,6 +430,10 @@ public class PostDao {
 		
 		return result;
 	}
+	
+	public void syso () {
+		System.out.println();
+	}
 
 	public int deletePost(Connection conn, Post post) {
 		int result = 0;
