@@ -433,6 +433,8 @@ public class PostDao {
 	
 	public void syso () {
 		System.out.println();
+		//asdf
+		//asdfasdfasdf
 	}
 
 	public int deletePost(Connection conn, Post post) {
