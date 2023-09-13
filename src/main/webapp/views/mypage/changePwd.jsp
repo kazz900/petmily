@@ -97,7 +97,7 @@ $(function(){
 	notice.hidden = true;
 	notice2.hidden = true;
 	submitBtn.disabled = true;
-	
+	submitBtn.style.background = "#dfdfdf";
 
 	pwdValue1.addEventListener("keyup", function(){
 		if (!reg.test(pwdValue1.value)) {
@@ -115,12 +115,17 @@ $(function(){
 	pwdValue2.addEventListener("keyup", function(){
 		if (!reg.test(pwdValue2.value)) {
 			notice.hidden = false;
+			notice2.hidden = false;
 			submitBtn.disabled = true;
+			if (pwdValue1.value == pwdValue2.value){
+				notice2.hidden = true;
+			}
 		} else {
 			notice.hidden = true;
 			if(pwdValue1.value == pwdValue2.value){
 				submitBtn.disabled = false;
 				notice2.hidden = true;
+				submitBtn.style.removeProperty('background');
 			} else {
 				notice2.hidden = false;
 			}
@@ -143,11 +148,15 @@ function toMyPage(){
 	<div class="wrapper" style="margin-top:100px;">
 	<div style="text-align:center;">
 		<p style="margin-bottom:10px; font-size:24px; font-weight:bold;">비밀번호 변경 페이지</p>
-		<!-- <p style="margin-bottom:10px; font-size:16px;">비밀번호를 정확히 입력하면 변경하기 버튼이 생깁니다.</p> -->
-	</div>
+		
 		<form action="/petmily/pwdupdate" method="post" onsubmit="return validate();">
-		<p style="font-size:14px;" id="notice">비밀번호는 영어 대/소문자, 특수문자, 숫자를 포함하여 최소 6자리 이상으로 설정해주세요.</p>
-		<p style="font-size:14px;" id="notice2">비밀번호가 일치하지 않습니다.<br>확인 후 다시 입력해주세요.</p>
+		<p style="font-size:14px;" id="notice">
+			비밀번호는 영어 대/소문자, 특수문자, 숫자를 포함하여 최소 6자리 이상으로 설정해주세요.
+		</p>
+		
+		<p style="font-size:14px;" id="notice2">
+			비밀번호가 일치하지 않습니다.<br>확인 후 다시 입력해주세요.
+		</p>
 		
 		<input type="hidden" name="memail" value="<%=member.getMemberEmail()%>">
 		

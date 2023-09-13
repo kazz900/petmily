@@ -69,11 +69,12 @@ public class DepartmentDao implements Serializable {
       ResultSet rset = null;
 
       String query = null;
-
+     
+      //관리자에서 삭제요청만 조회시 9
       if (value.equals("9")) {
          query = "select * from department where dept_insert_ok = 'y'";
       } else {
-         query = "select * from department where dept_insert_ok = 'y' and dept_type like ?";
+         query = "select * from department where dept_insert_ok = 'y' and dept_type like ? ";
       }
 
       try {
@@ -125,8 +126,10 @@ public class DepartmentDao implements Serializable {
 
       PreparedStatement pstmt = null;
 
-      String query = "INSERT INTO DEPARTMENT " + "VALUES (TO_CHAR(DEPT_SEQ.NEXTVAL), "
-            + "?, ?, ?, ?, NULL, NULL, ?, ?, ?, " + "?, ?, ?, NULL, NULL, ?, ?)";
+      String query = "INSERT INTO DEPARTMENT " 
+    		  	   + "VALUES (TO_CHAR(DEPT_SEQ.NEXTVAL), "
+    		  	   + "?, ?, ?, ?, NULL, NULL, ?, ?, ?, " 
+    		  	   + "?, ?, ?, NULL, NULL, ?, ?)";
 
       try {
          pstmt = conn.prepareStatement(query);
@@ -202,7 +205,10 @@ public class DepartmentDao implements Serializable {
 
       PreparedStatement pstmt = null;
 
-      String query = "UPDATE DEPARTMENT " + "SET DEPT_DELETE_OK = ? " + "WHERE DEPT_NAME = ? AND DEPT_ADDRESS = ?";
+      String query = "UPDATE DEPARTMENT " 
+    		  	   + "SET DEPT_DELETE_OK = ? " 
+    		  	   + "WHERE DEPT_NAME = ? "
+    		  	   + "AND DEPT_ADDRESS = ?";
 
       try {
          pstmt = conn.prepareStatement(query);

@@ -5,7 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Petmily</title>
-<script type="text/javascript" src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
+<script type="text/javascript"
+	src="/petmily/resources/js/common/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
   <% String message = (String) request.getAttribute("message"); %>
   <% if (message != null && message.equals("성공메세지보냄")) { %>
@@ -18,20 +19,19 @@
   <% } %>
 </script>
 <style type="text/css">
-@font-face {
+@font-face { /*폰트추가*/
 	font-family: 'Surround';
 	src: url('/petmily/resources/font/surround.woff2') format('woff2');
 	font-weight: normal;
 	font-style: normal;
 }
-@font-face {
+@font-face { /*폰트추가*/
 	font-family: 'forgedm';
 	src: url('/petmily/resources/font/forged-Medium.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
-
-@font-face {
+@font-face { /*폰트추가*/
 	font-family: 'forgedl';
 	src: url('/petmily/resources/font/forged-Light.ttf') format('truetype');
 	font-weight: normal;
@@ -46,7 +46,7 @@ body {
 	color: hsl(30.5, 77.6%, 29.8%);
 }
 
-body h1 a {
+body h1 a {	/*좌상단 Petmily 문구*/
 	font-family: 'Surround', sans-serif;
 	padding: 20px 50px;
 	font-size: 35px;
@@ -64,9 +64,9 @@ body h2 {
 }
 
 form {
-	text-align: center; 
-	margin: 0 auto; 
-	width: 350px; 
+	text-align: center;
+	margin: 0 auto;
+	width: 350px;
 	height: auto;
 	background-color: #FFE4B5;
 	border-radius: 25px;
@@ -106,12 +106,14 @@ input[type="submit"] {
 	border-radius: 13px;
 	border: none;
 	background-color: #DEB887;
-	color:hsl(30.5, 77.6%, 29.8%);
+	color: hsl(30.5, 77.6%, 29.8%);
 }
+
 input[type="submit"]:hover {
 	background-color: hsl(30.5, 77.6%, 29.8%);
 	color: hsl(36deg 70.37% 68.61%);
 }
+
 input[type=text] {
 	font-family: 'forgedl', sans-serif;
 	font-size: 13px;
@@ -122,6 +124,7 @@ input[type=text] {
 	border: 1px solid #FFE4B5;
 	margin-top: 28px;
 }
+
 input[type="text"]:focus {
 	outline: none;
 }
@@ -133,38 +136,35 @@ input[type="text"]:focus {
 			<a href="/petmily/index.jsp">Petmily</a>
 		</h1>
 	</header>
-	<h2 align="center">
-		아이디/패스워드 찾기
-		</h2>
-		<div class="find-all">
-			<div class="find">
-				<form action="/petmily/idfind" method="post">
-					<ul style="padding: 0px;">
-						<li style="margin-top: 17px;">아이디 찾기</li>
+	<h2 align="center">아이디/패스워드 찾기</h2>
+	<div class="find-all">
+		<div class="find">
+			<form action="/petmily/idfind" method="post">
+				<ul style="padding: 0px;">
+					<li style="margin-top: 17px;">아이디 찾기</li>
 
-						<li><input type="text" name="memail" placeholder="회원가입시 입력한 Email 입력"
-							required></li>
-						<li><input type="submit" value="아이디 조회"
-							style="margin-top: 7px;"></li>
+					<li><input type="text" name="memail"
+						placeholder="회원가입시 입력한 Email 입력" required></li>
+					<li><input type="submit" value="아이디 조회"
+						style="margin-top: 7px;"></li>
 
-					</ul>
-				</form>
-			</div>
-			<div style="margin: 50px;"></div>
-			<div class="find">
-				<form action="/petmily/pwdfind" method="post">
-					<ul style="padding: 0px;">
-						<li style="margin-top: 17px;">비밀번호 찾기</li>
-						<li><input type="text" name="pmid" placeholder="아이디 입력" required
-							style="margin-top: 15px;"></li>
-						<li><input type="text" name="pmemail" placeholder="회원가입시 입력한 Email 입력"
-							required
-							style="margin-top: 5px;"></li>
-						<li><input type="submit" value="비밀번호 찾기"
-							style="margin-top: 7px;"></li>
-					</ul>
-				</form>
-			</div>
+				</ul>
+			</form>
 		</div>
+		<div style="margin: 50px;"></div>
+		<div class="find">
+			<form action="/petmily/pwdfind" method="post">
+				<ul style="padding: 0px;">
+					<li style="margin-top: 17px;">비밀번호 찾기</li>
+					<li><input type="text" name="pmid" placeholder="아이디 입력"
+						required style="margin-top: 15px;"></li>
+					<li><input type="text" name="pmemail"
+						placeholder="회원가입시 입력한 Email 입력" required style="margin-top: 5px;"></li>
+					<li><input type="submit" value="비밀번호 찾기"
+						style="margin-top: 7px;"></li>
+				</ul>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

@@ -66,7 +66,6 @@ public class EnrollServlet extends HttpServlet {
 		}
 		RequestDispatcher view = request.getRequestDispatcher("views/member/login.jsp");
 		view.forward(request, response);
-
 	}
 
 	/**

@@ -106,7 +106,7 @@ public class BoardDao implements Serializable {
          pstmt = conn.prepareStatement(query);
 
          pstmt.setInt(1, bnum);
-         
+
          rset = pstmt.executeQuery();
 
          if (rset.next()) {
@@ -135,12 +135,14 @@ public class BoardDao implements Serializable {
    }
 
    public int updateMySuggest(Connection conn, Board board) {
-      int eResult = 0;
+      
+	  int eResult = 0;
       
       PreparedStatement pstmt = null;
-      
+
       String query = "UPDATE SERV_CENTER "
-                + "SET TITLE = ?, CONTENT = ?, UPLOAD_DATE = SYSDATE, RESULT = ? "
+                + "SET TITLE = ?, CONTENT = ?, "
+                + "UPLOAD_DATE = SYSDATE, RESULT = ? "
                 + "WHERE MEMBER_SEQ = ? AND SERV_SEQ = ?";
 
       try {
@@ -245,7 +247,7 @@ public class BoardDao implements Serializable {
       String query = "SELECT COUNT(*) "
                 + "FROM SERV_CENTER "
                 + "WHERE MEMBER_SEQ = ?";
-      
+
       try {
          pstmt = conn.prepareStatement(query);
          
@@ -262,7 +264,7 @@ public class BoardDao implements Serializable {
          close(rset);
          close(pstmt);
       }      
-      
+
       return listCount;
    }
 
